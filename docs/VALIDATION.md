@@ -51,6 +51,10 @@ The Node installer passed **16 tests in two batches on Windows**, with no skips.
 
 Node 安装器在 Windows 上分两批通过 **16 项测试**，无跳过：实际 npm 打包与两版离线 npx 执行、全部 1,911 个文件哈希一致和 27 个模块入口、项目搬移、项目/用户/自定义范围、旧 Python 安装兼容、重复安装、切换语言、dry-run、安装锁、其他文件保全，以及拒绝修改过或不完整的源文件、库和入口。本地包测试使用显式 `--package <archive> pivotui` 调用及隔离的临时目录，没有安装到用户实际的 Agent 目录。
 
+After publication, `npx --yes github:Getaway-Wuji/PivotUI --agent codex --language zh` was also executed from a clean temporary project on Windows, with a separate npm cache. It fetched the public repository and completed the installation. An independent check verified the generated entry and manifest, its relative library path, all 1,911 installed resource hashes and all 27 module entrypoints. This confirms the documented public GitHub command performs file installation; it does not test Agent-side discovery or task execution.
+
+发布后，还在 Windows 的全新临时项目中实际执行了 `npx --yes github:Getaway-Wuji/PivotUI --agent codex --language zh`，并使用独立 npm 缓存。命令成功获取公开仓库并完成安装；独立检查确认了生成的入口和清单、相对资源路径、全部 1,911 个资源哈希及 27 个模块入口。这证明文档中的公开 GitHub 命令能够完成文件安装，不代表已测试 Agent 内的发现与任务执行。
+
 Both project ZIPs contain **1,914 files**: the unchanged complete edition, native entry, installation manifest and localized copy guide. Two builds produced identical archive bytes. Each archive was extracted into a temporary project, moved to a path with spaces and Chinese characters, and checked against all 1,911 resource hashes. The same entry was also copied to `.claude/skills/pivotui/`, where its relative resource path still resolved correctly. These checks do not execute an Agent model or generate an interface.
 
 两份项目 ZIP 均含 **1,914 个文件**：未修改的完整语言版本、原生入口、安装清单和本地化复制说明。两次构建的压缩包字节一致。两份压缩包均已实际解压到临时项目、移动到带中文与空格的路径，并逐项核对 1,911 个资源哈希；同一入口复制到 `.claude/skills/pivotui/` 后，相对资源路径仍正确。这些检查未运行 Agent 模型或生成界面。
