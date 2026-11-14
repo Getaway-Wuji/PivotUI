@@ -1,0 +1,12 @@
+Use PivotUI for this interface task.
+Complete edition directory: <edition-root>
+Task: <describe the interface or change you want>
+
+Read <edition-root>/orchestration/design-orchestrator/SKILL.md first.
+Use that edition's README.md to locate capabilities, then read only the selected
+entries and necessary resources. Use one language edition for this task.
+Keep the existing product theme, components, and one authoritative token source.
+Assign one lead per region and honor external skills' invocation restrictions.
+Complete the requested output, including relevant interaction, responsive behavior,
+and verification. Report only checks actually performed.
+If you cannot access these files, explain the missing access and do not claim to have used PivotUI.

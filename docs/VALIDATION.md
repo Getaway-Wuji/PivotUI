@@ -16,3 +16,13 @@ Checked on 2026-11-14 for the first PivotUI v0.4.0 publication.
 The unchanged MCP implementation also passed the authoring suite: 24 passing tests and one Windows symlink-creation skip. The local test file is excluded from the public distribution. These checks establish packaging and selected protocol behavior, not measured productivity gains, full browser/device coverage, visual quality of a generated product, or successful execution of every upstream image and service integration.
 
 未修改的 MCP 实现还通过原作者工作区测试：24 项通过，1 项因 Windows 不允许创建符号链接而跳过；该本地测试文件不随公开发行版上传。上述结果证明打包与限定协议行为，不代表已测量效率提升、完成所有浏览器和设备覆盖、验证生成产品的视觉质量，或执行全部外源图像和服务工作流。
+
+## Agent quickstart documentation / Agent 快速开始说明
+
+On 2026-11-14, the repository README, installation guides and reusable starter prompts were updated for Codex, Claude Code, DSH (DeepSeek Harness), and other file-capable or local-stdio-MCP Agents. Official host documentation was checked, and Codex CLI registration syntax was also checked against the installed CLI help. The bilingual additions received independent semantic review. JSON, TOML and YAML examples parsed successfully; command parity, local links, explicit anchors and actual edition entry paths were checked.
+
+2026-11-14，仓库 README、安装指南和可复用入口提示词增加了 Codex、Claude Code、DSH（DeepSeek Harness）及其他支持文件读取或本地 stdio MCP 的 Agent 接入说明。已核实宿主官方资料，并用本机 Codex CLI 帮助核对注册语法。新增中英文内容经过独立语义审阅；JSON、TOML、YAML 示例通过解析，命令对应、本地链接、显式锚点和实际入口路径均已检查。
+
+This update changes repository documentation only. The 1,911-pair edition baseline and both existing v0.4.0 archives were revalidated without changing their contents. New starter files live in the repository's `prompts/` directory; they are not additions to the existing ZIPs. No new end-to-end host connection test was performed for Codex, Claude Code, DSH or Cursor.
+
+本次只更新仓库使用文档。1,911 对版本文件基线和现有两份 v0.4.0 压缩包均重新校验通过，内容保持不变。新增提示词位于仓库的 `prompts/` 目录，不属于现有 ZIP 的新增内容。本次没有在 Codex、Claude Code、DSH 或 Cursor 中重新执行端到端连接测试。

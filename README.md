@@ -14,6 +14,40 @@ PivotUI 是一套面向 UI 设计与实现的 **Skill 集群**，把任务分配
 
 当前版本 **0.4.0** 包含 **23 个包：9 个内源模块、14 个外源包**；计入交互模块的 4 个子入口，共有 **27 个标准 `SKILL.md` 入口**。中文与英文版均可独立使用；外源包在两版中保留上游原语言和声明。
 
+## 快速开始
+
+支持 **Codex、Claude Code、DSH（DeepSeek Harness）以及其他 Agent 工具**。宿主需要能读取本地文件，或连接本地 MCP 服务。
+
+### 方式一：复制提示词
+
+先下载并解压**一套完整版本**：[中文版 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip) 或 [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip)，保留内部目录结构。把下面的 `<edition-root>` 换成解压后 `Chinese/` 或 `English/` 文件夹的绝对路径，再粘贴到 Agent 的对话中：
+
+```text
+这次界面任务使用 PivotUI。
+先读取 <edition-root>/orchestration/design-orchestrator/SKILL.md，
+再按任务需要选择 Skill 和相关资源。
+做一个订单管理列表，包含搜索、状态筛选、分页和批量导出。
+沿用当前主题和应用框架；从详情返回时保留已应用的筛选和页码。
+请完成页面实现并检查主要操作流程。
+```
+
+可复用提示词：[简体中文](prompts/pivotui-starter.zh-CN.txt) · [English](prompts/pivotui-starter.en.txt)。这种方式只需要文件读取能力，无须配置 MCP。提示词用于引导 Agent 读取集群；无法访问这些文件的助手，仅粘贴提示词不能加载整套 Skill。
+
+### 方式二：安装集群，长期使用
+
+将一套完整版本放在稳定位置，按照[安装配置指南](docs/INSTALL.zh-CN.md)接入。使用 MCP 时，先准备 Python 3.11 或更高版本并安装随包服务，再选择你的工具：
+
+| Agent 工具 | 接入方式 | 入口约定放在哪里 |
+| --- | --- | --- |
+| **Codex** | [`codex mcp add` 或 `config.toml`](docs/INSTALL.zh-CN.md#codex) | 项目 `AGENTS.md` |
+| **Claude Code** | [`claude mcp add`](docs/INSTALL.zh-CN.md#claude-code) | 项目 `CLAUDE.md` |
+| **DSH / DeepSeek Harness** | [官方 MCP 客户端插件](docs/INSTALL.zh-CN.md#deepseek-harness) | 项目 `AGENTS.md` |
+| **其他 Agent 工具** | [本地 stdio MCP 或直接读文件](docs/INSTALL.zh-CN.md#other-agents) | 宿主的项目规则或会话开场提示词 |
+
+连接后，把[长期入口约定](docs/INSTALL.zh-CN.md#entry-rule)加入项目指令，日常就可以直接描述任务。首次让 Agent 列出 PivotUI 的能力目录并加载 `design-orchestrator`，确认接入成功；完整 0.4.0 版本应有 **27 个入口**。
+
+集群内的模块共享资源并使用相对链接，请保留完整语言目录，不要只复制零散的 `SKILL.md` 或打平分类。每次连接一套语言版本即可。这里提供的是接入方法，[验证记录](docs/VALIDATION.md)区分了协议检查与各宿主实际测试。
+
 ## 什么是 Skill 集群？
 
 一个 Skill 是针对某类工作的可复用方法与指令，通常配有参考资料、脚本、模板或数据。Skill 集群在多个独立 Skill 之间建立明确的协作机制：
@@ -74,32 +108,6 @@ English/ 或 Chinese/
 内源与外源包按功能放在同一分类下，来源在文档中明确标注。目录名与 Skill 的 YAML 名称有时不同，例如 `taste-skill` 是 `design-taste-frontend` 的包目录，二者属于同一个能力。
 
 [全部 Skill 详解](docs/SKILLS.zh-CN.md)逐项介绍**全部内源和外源包**的用途、触发条件、产出、依赖和边界；每个语言版本内还附有独立清单与来源记录。
-
-## 下载与开始使用
-
-选择**一个**语言版本：
-
-- [下载 PivotUI 中文版 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip)
-- [下载 PivotUI 英文版 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip)
-- [查看全部版本](https://github.com/Getaway-Wuji/PivotUI/releases)
-
-每个压缩包包含完整的单语言集群、本地 MCP 源码、参考资料、必要运行资源和许可声明。解压后保留内部目录结构。
-
-1. 将所选版本解压到稳定位置。
-2. 按[安装配置指南](docs/INSTALL.zh-CN.md)连接本地 MCP，或通过宿主支持的 Skill 机制暴露文件。
-3. 将 `design-orchestrator` 设为界面任务入口。自动分配需要这一入口约定，仅下载压缩包不会自动生效。
-4. 用自然语言说明目标、范围、参考和已有项目约束。
-
-示例：
-
-```text
-这次界面任务使用 PivotUI，从 design-orchestrator 开始，按需选择 Skill。
-做一个订单管理列表，包含搜索、状态筛选、分页和批量导出。
-沿用当前主题和应用框架；从订单详情返回时保留已应用的筛选和页码。
-请完成页面实现并检查主要操作流程。
-```
-
-将入口约定写入项目指令后，日常只需要描述工作内容。对于已经明确分配的局部任务，也可以直接进入对应模块。
 
 ## 自动选择的范围与工具条件
 

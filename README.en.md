@@ -14,6 +14,40 @@ The management layer interprets the requested result, assigns a lead for each re
 
 Release **0.4.0** includes **23 packages: 9 authored modules and 14 external packages**, with **27 standard `SKILL.md` entrypoints** including four interaction submodules. The English and Chinese editions are independently usable. External packages retain their original language and notices in both editions.
 
+## Quick start
+
+Use PivotUI with **Codex, Claude Code, DSH (DeepSeek Harness), or another Agent tool** that can read local files or connect to a local MCP server.
+
+### Option 1: Paste a starter prompt
+
+Download and extract **one complete edition**: [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip) or [Chinese ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip). Keep its directory structure intact. Replace `<edition-root>` below with the absolute path to the extracted `English/` or `Chinese/` folder, then paste the prompt into your Agent:
+
+```text
+Use PivotUI for this interface task.
+First read <edition-root>/orchestration/design-orchestrator/SKILL.md,
+then load only the skills and resources needed for the task.
+Build an order list with search, status filters, pagination, and bulk export.
+Keep the existing theme and shell. Returning from detail must preserve
+the applied filters and page number. Implement and check the main flow.
+```
+
+Reusable prompt files: [English](prompts/pivotui-starter.en.txt) · [简体中文](prompts/pivotui-starter.zh-CN.txt). This route needs local file access and no MCP setup. The prompt points to the cluster; an assistant without access to those files cannot load it from the prompt alone.
+
+### Option 2: Install once for ongoing use
+
+Keep one complete edition in a stable location and follow the [installation guide](docs/INSTALL.en.md). For MCP, install Python 3.11+, set up the included server, and choose your host's connection instructions:
+
+| Agent tool | Connection | Where to keep the entry rule |
+| --- | --- | --- |
+| **Codex** | [`codex mcp add` or `config.toml`](docs/INSTALL.en.md#codex) | Project `AGENTS.md` |
+| **Claude Code** | [`claude mcp add`](docs/INSTALL.en.md#claude-code) | Project `CLAUDE.md` |
+| **DSH / DeepSeek Harness** | [Official MCP client plugin](docs/INSTALL.en.md#deepseek-harness) | Project `AGENTS.md` |
+| **Other Agent tools** | [Local stdio MCP or direct file access](docs/INSTALL.en.md#other-agents) | The host's project rules or a task-start prompt |
+
+After connecting, copy the [standing entry rule](docs/INSTALL.en.md#entry-rule) into your project's instructions. Everyday requests can then describe the work directly. Confirm setup by asking the Agent to list PivotUI's catalog and load `design-orchestrator`; the complete 0.4.0 edition exposes **27 entrypoints**.
+
+The cluster's modules share resources and relative links. Preserve the complete edition instead of copying isolated `SKILL.md` files or flattening its categories. Choose one edition per connection. These are documented connection routes; the [verification record](docs/VALIDATION.md) distinguishes protocol checks from host-specific testing.
+
 ## What is a Skill cluster?
 
 A Skill is a reusable set of instructions for a particular kind of work, often accompanied by references, scripts, templates, or data. A Skill cluster adds an explicit collaboration system around several such packages:
@@ -74,33 +108,6 @@ English/ or Chinese/
 Internal and external packages share functional categories. Their origin is documented explicitly rather than encoded in a separate directory hierarchy. Folder names and YAML skill names sometimes differ: `taste-skill` is the folder for `design-taste-frontend`, for example.
 
 The [complete skill guide](docs/SKILLS.en.md) describes **every internal and external package**, its purpose, selection conditions, outputs, dependencies, and boundaries. Each edition also contains its own inventory and provenance links.
-
-## Download and start
-
-Choose **one** edition:
-
-- [PivotUI English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip)
-- [PivotUI Chinese ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip)
-- [All releases](https://github.com/Getaway-Wuji/PivotUI/releases)
-
-Each archive contains a complete edition with its local MCP source, references, necessary runtime resources, and license notices. Keep its internal directory structure intact.
-
-1. Extract the chosen edition into a stable directory.
-2. Follow the [installation guide](docs/INSTALL.en.md): connect its local MCP server or expose its files through your host's supported Skill mechanism.
-3. Set `design-orchestrator` as the entry for interface tasks. This entry rule is what enables automatic routing; merely downloading a ZIP does not activate it.
-4. Describe the result, scope, references, and existing project constraints in ordinary language.
-
-Example:
-
-```text
-Use PivotUI for this interface task. Start with design-orchestrator and
-select only the skills needed. Build an order-management list with search,
-status filters, pagination, and bulk export. Keep our existing theme and
-application shell. Returning from an order's detail must preserve the
-applied filters and page number. Implement the page and check the main flow.
-```
-
-After the entry rule is saved in your project's instructions, everyday requests can simply describe the work. You can still enter a module directly for a clearly assigned local task.
 
 ## Selection rules and tool requirements
 

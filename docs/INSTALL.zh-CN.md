@@ -4,6 +4,10 @@
 
 选择**一套完整语言版本**，让能够读取本地文件或连接本地 MCP 的 AI 助手使用它。完成首次配置后，直接描述设计任务即可。PivotUI 的 `design-orchestrator` 会选择相关 Skill，不需要每次都由你手动挑选一组 Skill。
 
+按工具跳转：[Codex](#codex) · [Claude Code](#claude-code) · [DSH / DeepSeek Harness](#deepseek-harness) · [Cursor 和其他 Agent](#other-agents)。
+
+首次尝试可以不配置 MCP：解压一套版本，复制[入口提示词](../prompts/pivotui-starter.zh-CN.txt)，替换其中的目录和任务占位符。Agent 必须能够读取该目录。长期使用时，按下方步骤配置，并保存[入口约定](#entry-rule)。
+
 ## 1. 获取一套版本
 
 从 [Releases](https://github.com/Getaway-Wuji/PivotUI/releases/latest) 下载中文版或英文版压缩包，也可以克隆本仓库，使用其中的 `Chinese/` 或 `English/` 目录。压缩包包含完整语言版本、本地 MCP 服务和各包所需的资源。
@@ -79,11 +83,95 @@ python3 -m venv .venv
 }
 ```
 
-macOS/Linux 将 `command` 改成 `.venv/bin/python` 对应的完整路径。Windows JSON 路径使用正斜杠比较方便；如果使用反斜杠，需要写成 `\\`。不同宿主的设置格式可能不同，请按它支持的格式填写同一个启动程序和独立参数。将该条目合并到已有配置，保留其他服务连接。
+macOS/Linux 将 `command` 改成 `<edition-root>/mcp/skill-cluster/.venv/bin/python`。Windows JSON 路径使用正斜杠比较方便；如果使用反斜杠，需要写成 `\\`。不同宿主的设置格式可能不同，请按它支持的格式填写同一个启动程序和独立参数。将该条目合并到已有配置，保留其他服务连接。
 
 版本内的服务根据自身位置发现对应版本，工作目录不会决定语言。它在协议中报告的服务名称是 `design-skill-cluster`，可以与设置中的连接名称 `pivotui` 不同。
 
 通常不需要指定根目录。如需明确指定，在 `args` 后追加 `--skill-root` 及根目录绝对路径。只有确实需要额外暴露其他兼容库时，才重复追加这一对参数。一旦指定根目录，默认目录会被替换，而不会自动追加。不要再注册一份与已收录包同名的副本。
+
+### 选择你的 Agent
+
+安装上方依赖后，选择以下**一种**注册方式。所有示例都使用同一个语言版本内的服务。终端命令为包含空格的路径加了引号；执行前请替换每一处 `<edition-root>`。
+
+<a id="codex"></a>
+
+#### Codex
+
+已安装 Codex CLI 时，运行以下命令注册服务：
+
+```sh
+# Windows：PowerShell 或其他能够找到 codex 命令的终端
+codex mcp add pivotui -- "<edition-root>/mcp/skill-cluster/.venv/Scripts/python.exe" -X utf8 "<edition-root>/mcp/skill-cluster/server.py"
+
+# macOS / Linux
+codex mcp add pivotui -- "<edition-root>/mcp/skill-cluster/.venv/bin/python" -X utf8 "<edition-root>/mcp/skill-cluster/server.py"
+```
+
+也可以将以下配置段合并到 `~/.codex/config.toml`，或已信任项目中的 `.codex/config.toml`。没有 CLI、直接配置桌面应用时，可以使用这种方式：
+
+```toml
+[mcp_servers.pivotui]
+command = "<edition-root>/mcp/skill-cluster/.venv/Scripts/python.exe"
+args = ["-X", "utf8", "<edition-root>/mcp/skill-cluster/server.py"]
+```
+
+macOS/Linux 使用 `<edition-root>/mcp/skill-cluster/.venv/bin/python`。运行 `codex mcp list` 查看注册情况，随后刷新客户端并完成下方工具检查。将[入口约定](#entry-rule)追加到目标项目的 `AGENTS.md`，保留原有指令。参考官方 [MCP 指南](https://developers.openai.com/codex/mcp)和 [AGENTS.md 指南](https://developers.openai.com/codex/guides/agents-md)。
+
+<a id="claude-code"></a>
+
+#### Claude Code
+
+在用户范围注册本地服务，使其可用于你的不同项目：
+
+```sh
+# Windows
+claude mcp add --transport stdio --scope user pivotui -- "<edition-root>/mcp/skill-cluster/.venv/Scripts/python.exe" -X utf8 "<edition-root>/mcp/skill-cluster/server.py"
+
+# macOS / Linux
+claude mcp add --transport stdio --scope user pivotui -- "<edition-root>/mcp/skill-cluster/.venv/bin/python" -X utf8 "<edition-root>/mcp/skill-cluster/server.py"
+```
+
+运行 `claude mcp list`，随后在 Claude Code 中使用 `/mcp` 查看连接状态，并完成下方工具检查。将[入口约定](#entry-rule)追加到目标项目的 `CLAUDE.md`。参考官方 [MCP 指南](https://code.claude.com/docs/en/mcp)和[项目记忆指南](https://code.claude.com/docs/en/memory)。
+
+<a id="deepseek-harness"></a>
+
+#### DSH / DeepSeek Harness
+
+[DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 使用官方 `@deepseek-ai/dsh-mcp-client` 插件接入。它使用 Cordis YAML 补丁，不使用 `mcpServers` JSON 格式。替换路径后，将以下内容保存为 `pivotui.cordis.yml`：
+
+```yaml
+- insert:
+    - id: mcp-pivotui
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: pivotui
+        transport: stdio
+        command: '<edition-root>/mcp/skill-cluster/.venv/Scripts/python.exe'
+        args:
+          - '-X'
+          - 'utf8'
+          - '<edition-root>/mcp/skill-cluster/server.py'
+```
+
+macOS/Linux 将 `command` 中的 Python 路径改为 `<edition-root>/mcp/skill-cluster/.venv/bin/python`。使用该补丁启动 web 配置：
+
+```sh
+dsh web --patch "<absolute-path-to-pivotui.cordis.yml>"
+```
+
+需要长期生效时，将这条 `insert` 操作合并到 web 配置的 `$DSH_HOME/profiles/web/cordis.patch.yml`，保留已有操作。同一服务选择长期配置或 `--patch` 其中一种方式，避免重复添加。默认主目录为 `~/.dsh`。将[入口约定](#entry-rule)追加到目标项目的 `AGENTS.md`，并将该项目作为 DSH 工作区。插件会提供 `mcp__pivotui__catalog_skills` 等工具。
+
+DSH 目前处于开发者预览阶段；以上步骤依据其已公开的插件接口。参考官方 [MCP 配置指南](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/mcp-memory.md)、[插件参考](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/mcp/mcp-client/README.md)和 [CLI 参考](https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/reference/README.md)。
+
+<a id="other-agents"></a>
+
+#### Cursor 和其他 Agent 工具
+
+使用 **Cursor** 时，将上方 `mcpServers` JSON 示例合并到目标项目的 `.cursor/mcp.json`，或用户级 `~/.cursor/mcp.json`。刷新 MCP 连接后完成下方检查。参考 [Cursor 官方 MCP 指南](https://cursor.com/docs/mcp)。
+
+其他支持**本地 stdio MCP** 的宿主，按其支持的格式填写同一个 Python 启动程序和参数列表。仅接受远程 HTTP 服务的宿主无法直接启动这个本地 stdio 服务。如果 Agent 能读取本地文件，可以使用[直接读取文件](#direct-files)方式。将入口约定保存到该宿主的项目指令中，或在每次任务开始时粘贴。
+
+这些是依据文档提供的配置方式。[验证记录](VALIDATION.md)说明了实际完成的检查，不代表每种宿主都已经过端到端测试。
 
 ### 验证连接
 
@@ -99,6 +187,8 @@ macOS/Linux 将 `command` 改成 `.venv/bin/python` 对应的完整路径。Wind
 
 如果直接运行 `server.py` 且不加 `--help`，它会通过标准输入等待 MCP 请求，不会打开网页或显示图形菜单。正常使用时，由宿主启动和停止这个进程。
 
+<a id="direct-files"></a>
+
 ## 3B. 配置直接读取文件
 
 将选定版本放在助手能够访问的稳定位置。如果宿主支持原生 Skill 注册，按其机制注册实际包路径。不同宿主扫描的目录层级不同，不能默认认为将扫描器指向 `English/` 或 `Chinese/` 就能发现所有功能分类和嵌套入口。
@@ -110,6 +200,8 @@ macOS/Linux 将 `command` 改成 `.venv/bin/python` 对应的完整路径。Wind
 ```
 
 助手可以通过版本内的 `README.md` 定位选中的包，只读取需要的入口和资源。必须手动注册时，注册实际包目录；嵌套交互入口应与父包放在一起。只复制 `SKILL.md` 会丢失资源，并可能破坏相对链接。尽量保持整套版本完整。
+
+<a id="entry-rule"></a>
 
 ## 4. 让管理层成为默认入口
 
