@@ -2,6 +2,11 @@
   <img src="assets/pivotui-brand-loop1.gif" alt="PivotUI 品牌动图：A Skill Cluster for UI" width="1200">
 </p>
 
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://github.com/Getaway-Wuji/PivotUI/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome"></a>
+</p>
+
 # PivotUI
 
 **你描述要做的界面，Skill 集群负责选择和协作。**

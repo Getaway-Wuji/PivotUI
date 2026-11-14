@@ -2,6 +2,11 @@
   <img src="assets/pivotui-brand-loop1.gif" alt="PivotUI brand animation — A Skill Cluster for UI" width="1200">
 </p>
 
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://github.com/Getaway-Wuji/PivotUI/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome"></a>
+</p>
+
 # PivotUI
 
 **Describe the interface you want. Let the cluster choose the skills it needs.**
