@@ -11,7 +11,7 @@
 
 **你描述要做的界面，Skill 集群负责选择和协作。**
 
-简体中文 · [English](README.en.md) · [安装配置](docs/INSTALL.zh-CN.md) · [全部 Skill 详解](docs/SKILLS.zh-CN.md) · [架构与任务分配](docs/ARCHITECTURE.zh-CN.md)
+简体中文 · [English](README.en.md) · [安装配置](docs/INSTALL.zh-CN.md) · [全部 Skill 详解](#skills) · [架构与任务分配](docs/ARCHITECTURE.zh-CN.md)
 
 PivotUI 是一套面向 UI 设计与实现的 **Skill 集群**，把任务分配、全局风格、页面设计、组件、交互、响应式、设计研究和外源工作流组织成可协作的系统。它的核心想法是：**用户只需要说明要完成什么，不必每次翻找 Skill、判断该选哪一个，再逐一交代它们如何配合。**
 
@@ -78,7 +78,147 @@ English/ 或 Chinese/
 
 内源与外源包按功能放在同一分类下，来源在文档中明确标注。目录名与 Skill 的 YAML 名称有时不同，例如 `taste-skill` 是 `design-taste-frontend` 的包目录，二者属于同一个能力。
 
-[全部 Skill 详解](docs/SKILLS.zh-CN.md)逐项介绍**全部内源和外源包**的用途、触发条件、产出、依赖和边界；每个语言版本内还附有独立清单与来源记录。
+<a id="skills"></a>
+
+## 每一个 Skill 分别用来做什么？
+
+下面逐项介绍全部 **27 个入口**：**9 个内源包、14 个外源包，以及随交互父包提供的 4 个子模块**。内源模块由 PivotUI 编写；外源模块逐项标注上游作者，并保留 MIT 声明。安装时创建的原生 `pivotui` 入口负责引导读取这套库，不另计为第 28 个设计 Skill。入口链接指向中文版，英文版使用相同的标识和目录结构。
+
+### 管理层与全局视觉方向
+
+#### `design-orchestrator` — 理解需求、分配工作、整合结果
+
+**内源 · [Skill 入口](Chinese/orchestration/design-orchestrator/SKILL.md)。** 集群的统一入口，先判断你要的是建议、审查、设计图、设计变量还是可运行代码，再选择足够完成任务的最小能力组合。它为每个区域指定一位负责人，传递参考与已有产品决策，整合各专项模块的成果。例如，带新筛选表单的 Dashboard 可以由 Dashboard 模块主导页面，表单交互模块补充提交行为。产出是任务分工与整合后的交付物；实际工作由宿主 AI 按这些规则完成。
+
+#### `global-style-skill` — 建立和维护产品视觉系统
+
+**内源 · [Skill 入口](Chinese/orchestration/global-style-skill/SKILL.md)。** 负责比较视觉方向，以及管理颜色、字体、间距、形状等设计变量。包含 40 张风格参考卡，只在需要探索方向时加载。例如品牌升级时，它可以比较候选、更新已采用的主题，并检查非法值、缺失引用、重名和实际使用情况。根据任务交付方向建议、变量修改或具体检查结果。最终采用的主题在目标产品中只有一份权威来源，页面组织和组件实现由各自负责人完成。
+
+### 页面设计
+
+#### `dashboard-design` — 将业务问题变成有用的概览与分析页面
+
+**内源 · [Skill 入口](Chinese/page-design/dashboard-design/SKILL.md)。** 用于业务概览、分析、监控、工作台和账户资源汇总。围绕用户需要做出的判断，安排指标、图表、对比周期、信息优先级和下钻操作。例如运营看板既要呈现当前业绩，也要解释变化并提供后续处理入口。产出可以是设计规格或可运行页面，包含加载、空结果、错误和数据过期等状态。复用已有应用框架和主题，完整记录管理列表交给数据列表模块。
+
+#### `data-list-design` — 把查找记录与处理记录串成完整流程
+
+**内源 · [Skill 入口](Chinese/page-design/data-list-design/SKILL.md)。** 负责完整业务列表页，包括搜索、已应用筛选、排序、分页、列与视图设置、选择、批量操作、导出和详情返回。例如订单列表需要明确操作影响哪些记录，区分“选择当前页”与“选择全部匹配结果”，并在编辑返回后恢复筛选条件和页码。它交付连贯的列表设计规格或实现。可复用 Table 与控件由组件系统实现；本模块决定这些控件的业务含义及周围的工作流程。
+
+#### `app-shell-design` — 搭建多个页面共用的应用框架
+
+**内源 · [Skill 入口](Chinese/page-design/app-shell-design/SKILL.md)。** 组织持续存在的导航、面包屑、页面标题与操作区、内容宽度、固定区域和滚动。适用于多个后台页面需要统一框架，或列表、详情、编辑之间切换时容易丢失上下文的情况。产出包括框架设计或实现，明确路由元数据和页面插槽，并检查嵌套路由、长标签、折叠、键盘操作及窄屏、短屏表现。各页面模块继续负责业务内容，已有路由和有效导航模式按需保留。
+
+#### `design-taste-frontend` — 设计和实现公开网站
+
+**外源 · Leonxlnx · [上游项目](https://github.com/Leonxlnx/taste-skill) · [Skill 入口](Chinese/page-design/taste-skill/SKILL.md)。** 现行 taste 工作流，用于适合其方法的公司、产品、服务、场所、作品集和公开营销网站，也包含改版与审查。它将页面结构、文案、照片或产品图、字体、布局、动效和浏览器检查组织起来，例如从公司需求简介推进到可运行官网。选用前会核对上游较强的默认要求是否兼容已有产品及任务范围；它不主导业务 Dashboard。需要 Node.js 22+ 和 Chrome、Edge 或 Chromium，ffmpeg 可选。
+
+### 交互与反馈
+
+#### `interaction-design` — 协调状态变化、操作结果与失败恢复
+
+**内源 · [Skill 入口](Chinese/interaction/interaction-design/SKILL.md)。** 定义什么触发操作、状态如何变化、用户看到什么反馈，以及如何退出或恢复。负责防重复执行、过时响应、结果未知、失败后保留上下文等共用异步行为。例如批量更新时，明确处理中、已确认、部分完成和失败的结果。产出行为规格或实现修改，并只读取下面实际需要的子模块。需要时加入动效，但动画播放结束不能作为请求成功的依据。
+
+#### `button-interaction` — 让命令按钮的行为清晰可靠
+
+**内源交互子模块 · [Skill 入口](Chinese/interaction/interaction-design/sub-skills/button-interaction/SKILL.md)。** 规定按钮的 hover、focus、pressed、disabled、pending、结果与恢复行为。例如保存按钮需要保持点击区域稳定、防止重复执行，并区分短暂反馈和真实操作状态。覆盖原生语义、键盘激活、可访问名称，以及长按、滑动手势的等价可访问操作。交付可实现的按钮行为约定或局部修复。整表校验与导航交给对应模块；错误保留在相关位置或 Alert 中。
+
+#### `form-interaction` — 保留用户输入，让提交过程可靠
+
+**内源交互子模块 · [Skill 入口](Chinese/interaction/interaction-design/sub-skills/form-interaction/SKILL.md)。** 负责字段、选择器、开关、滑块、校验、筛选控件和提交反馈。可修复“保存失败后草稿丢失”“慢请求覆盖了后来修改”等问题。规则区分已提交快照与当前输入，关联字段错误、安排合理焦点、尊重输入法组合输入，并保持已应用筛选与结果一致。产出范围明确的字段和请求行为，保留原页面结构与既定业务校验规则。
+
+#### `navigation-interaction` — 保持当前位置和焦点清晰
+
+**内源交互子模块 · [Skill 入口](Chinese/interaction/interaction-design/sub-skills/navigation-interaction/SKILL.md)。** 为侧栏、面包屑、Tabs 和命令菜单定义当前位置、分组展开、键盘操作和焦点连续性。例如可折叠侧栏需要区分当前路由、hover、focus 与展开状态，导航失败时不能错误地改变当前位置。也处理条目消失或重排后的焦点恢复。产出导航行为约定或实现修复；原生链接保留导航语义，信息架构与布局仍由框架或页面负责人决定。
+
+#### `floating-components` — 选择合适的浮层与反馈组件
+
+**内源交互子模块 · [Skill 入口](Chinese/interaction/interaction-design/sub-skills/floating-components/SKILL.md)。** 选择并规定 Tooltip、Toast、Alert、Modal、Popconfirm 和 Drawer 的行为。例如不可逆删除使用 Modal 确认，持续错误使用 Alert，需要保留周围上下文的编辑可以使用 Drawer；本集群约定 Toast 不承载错误。它定义打开、关闭、焦点、背景访问、异步恢复和窄屏替代方案。Drawer 排除简单表单和全屏任务。产出是有依据的组件选择与完整交互行为。
+
+### 可复用组件
+
+#### `component-system` — 实现共享控件，明确组件接口
+
+**内源 · [Skill 入口](Chinese/components/component-system/SKILL.md)。** 建立或适配共享组件，统一结构、变体、尺寸、状态归属、事件和无障碍行为。例如统一 Dashboard 与订单列表共用的状态控件，或适配现有 Table 接口。优先复用、配置、组合已安装的组件库，仅为已经确认的缺口新建组件。产出可复用实现及经过检查的使用示例。页面负责人决定业务内容如何组织，一次性区块不必自动抽成公共组件。
+
+### 响应式适配
+
+#### `responsive-design` — 在不同屏幕和输入条件下保持任务可用
+
+**内源 · [Skill 入口](Chinese/responsive/responsive-design/SKILL.md)。** 根据可用宽度、高度和输入方式，调整布局、导航、图表、表格、固定区域与控件。例如订单表格在窄屏溢出时，它会确定必须保留的信息、重排方式，以及用户如何继续筛选和处理记录。产出局部布局与行为修改，并检查相关变化边界。保留阅读顺序、键盘操作、选择、草稿和关键业务字段，继承产品视觉系统，避免用全局裁切掩盖溢出或无关地重做整个页面。
+
+### 设计研究
+
+#### `design-reference-research` — 有来源地研究具体产品案例
+
+**内源 · [Skill 入口](Chinese/design-research/design-reference-research/SKILL.md)。** 查找与比较具体产品参考，区分来源观察和设计建议。包含署名的 [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) 元数据：84 条来源记录，其中 8 张案例卡经过文档审阅，另外 76 条仅有索引。例如用户希望借鉴某款产品时，它会选择相关案例，说明哪些关系可迁移、哪些需要适配、哪些尚未检查。研究结果交给指定负责人；文档审阅不代表验证了当前网站行为，也不自动授权更换产品主题。
+
+#### `ui-ux-pro-max` — 检索设计指南，比较候选方案
+
+**外源 · nextlevelbuilder · [上游项目](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) · [Skill 入口](Chinese/design-research/ui-ux-pro-max/SKILL.md)。** 从本地数据集检索风格、配色、字体、UX、图标、动效、图表和技术栈建议。例如针对一个业务问题比较图表类型，或寻找适合无障碍要求的配色候选。可以返回专项结果或较完整的设计系统建议，由当前负责人判断是否采用。在 PivotUI 中，它负责研究与建议；页面实现和已经采用的设计变量保留原有归属。搜索需要 Python 3.x，无额外依赖。
+
+### 可选视觉风格
+
+下面四个上游工作流都需要**明确选择**。管理层可以推荐合适方向，仅仅安装它们不会自动启用，也不会自动改变产品主题。
+
+#### `gpt-taste` — 表现力鲜明的公开营销页面
+
+**外源 · Leonxlnx · [上游项目](https://github.com/Leonxlnx/taste-skill-classics) · [Skill 入口](Chinese/visual-styles/gpt-tasteskill/SKILL.md)。** 为明确选定的营销方向提供变化的 Hero 构图、AIDA 页面推进、素材主导分区和 GSAP 滚动动效。例如制作开场鲜明、转化路径清晰的产品发布页面。按约定交付设计或实现，并核对真实可用的代码与动效依赖。**仅用于公开营销，绝不分配给 Dashboard 或业务工具。** 使用范围与已有产品决策继续有效。
+
+#### `high-end-visual-design` — 柔和精致的视觉方向
+
+**外源 · Leonxlnx · [上游项目](https://github.com/Leonxlnx/taste-skill-classics) · [Skill 入口](Chinese/visual-styles/soft-skill/SKILL.md)。** 提供柔和对比、大留白、特色字体、触感层次与弹性动效，包含玻璃、编辑式奢华、柔和结构等方向及移动端变化。适合明确希望采用这类表达的品牌体验，或需要相应视觉语言的局部区域。产出方向建议或实现，并与实际字体、依赖、无障碍要求及已采用变量协调。这些是可选的上游方法，不是所有 PivotUI 项目的默认风格。
+
+#### `minimalist-ui` — 克制的编辑式与产品布局
+
+**外源 · Leonxlnx · [上游项目](https://github.com/Leonxlnx/taste-skill-classics) · [Skill 入口](Chinese/visual-styles/minimalist-skill/SKILL.md)。** 采用暖色单色表面、排版主导的信息层级、平面结构化网格和少量柔和强调色。需求明确适合这种克制表达时选用，例如以清晰字体层级和简洁控件呈现产品内容。交付限定范围内的视觉方向或实现。具体的字体、图标、形状和配色规则先与目标产品核对，采用后整合到已约定的设计来源中。
+
+#### `industrial-brutalist-ui` — 结构鲜明的工业视觉语言
+
+**外源 · Leonxlnx · [上游项目](https://github.com/Leonxlnx/taste-skill-classics) · [Skill 入口](Chinese/visual-styles/brutalist-skill/SKILL.md)。** 使用严格模块网格、瑞士风格排版、强烈尺度对比、功能性颜色和可选的模拟显示器处理。浅色工业印刷与深色遥测/终端是需要刻意选择的不同方向。产品或区域明确需要这类表达时调用，交付约定的风格处理或实现。页面负责人继续掌握业务结构与可读性，视觉方向不能成为虚构数据、遗漏关键操作或更改无关全局主题的理由。
+
+### 图像设计
+
+下面四个图像工作流均需要实际可用的图像生成工具。集群提供方法与指令，不自行提供图像生成服务。
+
+#### `imagegen-frontend-web` — 生成网站分区设计参考图
+
+**外源 · Leonxlnx · [上游项目](https://github.com/Leonxlnx/imagegen-skills) · [Skill 入口](Chinese/image-design/imagegen-frontend-web/SKILL.md)。** 为落地页、营销页和产品页分区创作视觉概念。默认每个分区生成一张独立横向图片，在保持配色一致的同时变化构图。例如分别提供 Hero、功能介绍和价格区的设计图供审阅，并遵循用户要求的数量与格式。产出是设计参考图片；转换为可运行前端是后续实现任务，还需要落实交互与响应式行为。
+
+#### `imagegen-frontend-mobile` — 生成移动端屏幕与流程概念图
+
+**外源 · Leonxlnx · [上游项目](https://github.com/Leonxlnx/imagegen-skills) · [Skill 入口](Chinese/image-design/imagegen-frontend-mobile/SKILL.md)。** 创作引导、登录、首页、电商、个人页、设置等移动应用屏幕及相关流程。多屏之间保持清晰层级、平台特征、一致展示方式和共同视觉语言，例如生成从引导到首页的一组连贯概念图。上游默认使用轻量手机外框，可根据用户要求调整。交付屏幕图片，不等同于应用代码、桌面布局或已经实现的响应式行为。
+
+#### `brandkit` — 展示连贯的品牌视觉形象
+
+**外源 · Leonxlnx · [上游项目](https://github.com/Leonxlnx/imagegen-skills) · [Skill 入口](Chinese/image-design/brandkit/SKILL.md)。** 生成品牌规范板、Logo 系统概念、视觉世界展示和品牌应用，用符号、简洁排版、协调图像与样机呈现统一想法。例如为新产品展示候选标志、配色和应用效果。产出支持品牌探索与审阅，不自动等同于获批 Logo、矢量母版、可用字体文件或产品权威设计变量。需要落地时，可由全局风格模块实现已经采用的设计值。
+
+#### `image-to-code` — 从新视觉概念推进到网站实现
+
+**外源 · Leonxlnx · [上游项目](https://github.com/Leonxlnx/imagegen-skills) · [Skill 入口](Chinese/image-design/image-to-code/SKILL.md)。** 先生成新的设计图，分析构图和视觉关系，再实现前端，用清晰的分区参考衔接概念创作与代码交付。用户同时需要这两个阶段，且图像生成与编码能力都可用时选择。忠实还原用户已经提供的图片，应继续以原图为目标，不必先生成新概念。最终实现仍需检查真实交互与响应式表现，静态图片无法证明这些行为已经可用。
+
+### 工具集成
+
+#### `stitch-design-taste` — 为 Google Stitch 编写设计约定
+
+**外源 · Leonxlnx · [上游项目](https://github.com/Leonxlnx/taste-skill-classics) · [Skill 入口](Chinese/tool-integrations/stitch-skill/SKILL.md)。** 需要**明确选择**，产出面向 Stitch 的 `DESIGN.md`，说明氛围、颜色、字体、组件行为、布局、响应式与动效。例如把已经确定的产品方向整理成一致的屏幕生成指令。入口声明需要实际 Stitch 访问，Stitch MCP 连接可选。文档关联产品已采用的设计来源；编写文档、生成屏幕和实现前端代码属于不同交付阶段，需要各自对应的工具和任务范围。
+
+### 历史工作流
+
+下面三个包保留特定旧版本行为，需要**明确指定历史版本**，不会自动作为当前 Skill 的备用方案。
+
+#### `design-taste-frontend-v1` — 保留原版 taste 工作流
+
+**外源 · Leonxlnx · [上游项目](https://github.com/Leonxlnx/taste-skill-classics) · [Skill 入口](Chinese/legacy/taste-skill-v1/SKILL.md)。** 保留原版通过设计变化程度、动效强度和信息密度等参数驱动的工作流，以及 React/Next.js、Tailwind、组件与依赖约定。维护或复现明确依赖此版本的项目时按名称选用，检查真实技术栈后，按该历史规则交付所需设计或实现。保留的默认值不会替代现行 taste 包，也不会覆盖集群中专门的业务页面方法。
+
+#### `design-taste-frontend-v2-experimental` — 保留实验版 taste 工作流
+
+**外源 · Leonxlnx · [上游项目](https://github.com/Leonxlnx/taste-skill-classics) · [Skill 入口](Chinese/legacy/taste-skill-v2-experimental/SKILL.md)。** 保留先读取页面类型、受众、参考、素材与约束，再应用设计参数的实验流程。用于明确选定的历史落地页、作品集和改版工作；其自身范围排除 Dashboard、数据表格和多步骤产品界面。产出遵循固定版本，并根据项目检查依赖。需要这些特定历史行为时选用，不把它当作当前 taste 的别名。
+
+#### `redesign-existing-projects` — 保留早期局部改版方法
+
+**外源 · Leonxlnx · [上游版本](https://github.com/Leonxlnx/taste-skill/tree/e04409a461022e1b9d0e898eac6b9224e2b9dc4e/skills/redesign-skill) · [Skill 入口](Chinese/legacy/redesign-skill/SKILL.md)。** 保留针对现有网站或应用的“扫描 → 诊断 → 修复”流程。检查排版、颜色、表面和布局，再在当前技术栈内提出或执行针对性改进。仅在明确需要早期方法时选用；现行 taste 已包含改版能力，不会因为需求中出现“改版”就自动选择此包。业务页面的负责人和产品共用设计来源继续保留。
+
+版本、完整选择条件、依赖、相似能力对比与来源记录，见[完整 Skill 指南](docs/SKILLS.zh-CN.md)、[架构与任务分配](docs/ARCHITECTURE.zh-CN.md)及[第三方声明](THIRD_PARTY_NOTICES.md)。
 
 ## 快速开始
 
