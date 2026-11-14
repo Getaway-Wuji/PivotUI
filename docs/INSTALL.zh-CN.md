@@ -2,13 +2,94 @@
 
 [English](INSTALL.en.md) · [项目介绍](../README.md) · [Skill 详细说明](SKILLS.zh-CN.md)
 
-选择**一套完整语言版本**，让能够读取本地文件或连接本地 MCP 的 AI 助手使用它。完成首次配置后，直接描述设计任务即可。PivotUI 的 `design-orchestrator` 会选择相关 Skill，不需要每次都由你手动挑选一组 Skill。
+为 Agent 安装一套完整中文版或英文版，以及原生 **pivotui** Skill 入口。该入口从 `design-orchestrator` 开始，按任务读取需要的模块。
 
-按工具跳转：[Codex](#codex) · [Claude Code](#claude-code) · [DSH / DeepSeek Harness](#deepseek-harness) · [Cursor 和其他 Agent](#other-agents)。
+[命令安装](#command-install) · [可选的手动/MCP 接入](#manual-setup) · MCP：[Codex](#codex) / [Claude Code](#claude-code) / [DSH](#deepseek-harness) / [其他 Agent](#other-agents)。
 
-首次尝试可以不配置 MCP：解压一套版本，复制[入口提示词](../prompts/pivotui-starter.zh-CN.txt)，替换其中的目录和任务占位符。Agent 必须能够读取该目录。长期使用时，按下方步骤配置，并保存[入口约定](#entry-rule)。
+<a id="command-install"></a>
 
-## 1. 获取一套版本
+## 用命令安装（推荐）
+
+需要 **Git 和 Python 3.11 或更高版本**。安装器只使用 Python 标准库，无需额外 Python 包或 MCP 服务。请在 Agent 运行的环境中安装；本机安装的文件不会自动出现在远程机器或云端会话中。
+
+### 1. 获取安装器和完整集群
+
+```sh
+git clone https://github.com/Getaway-Wuji/PivotUI.git
+cd PivotUI
+```
+
+安装时保留完整仓库：脚本需要读取所选语言版本、模板和发布基线。现有单语言版本 ZIP 可用于下方的手动接入方式，不包含这个仓库级安装器。
+
+### 2. 为你的 Agent 安装
+
+选择一条命令即可。以下示例在 Windows 上安装中文版：
+
+```sh
+# Codex
+python scripts/install.py --agent codex --language zh
+# Claude Code
+python scripts/install.py --agent claude-code --language zh
+# DSH / DeepSeek Harness
+python scripts/install.py --agent dsh --language zh
+# Cursor
+python scripts/install.py --agent cursor --language zh
+```
+
+macOS/Linux 使用 `python3`，例如：
+
+```sh
+python3 scripts/install.py --agent codex --language zh
+```
+
+英文版将 `--language zh` 改为 `--language en`。这个参数选择内源指令的语言；外源包仍保留上游原语言。
+
+| Agent | 安装的入口 |
+| --- | --- |
+| Codex | `~/.agents/skills/pivotui/SKILL.md` |
+| Claude Code | `~/.claude/skills/pivotui/SKILL.md`；设置 `CLAUDE_CONFIG_DIR` 时，它替代 `~/.claude` |
+| DSH | `~/.agents/skills/pivotui/SKILL.md`；设置 `DSH_AGENTS_HOME` 时，它替代 `~/.agents` |
+| Cursor | `~/.agents/skills/pivotui/SKILL.md` |
+
+Codex、DSH 和 Cursor 可以使用同一个默认入口，安装一次即可；重复执行相同参数不会改变已安装内容。宿主使用自定义目录时，通过 `--skills-dir` 指定。部分宿主也会读取其他工具的兼容目录，请让同一宿主只看到一个所选语言版本的入口。
+
+官方发现机制：[Codex Skills](https://developers.openai.com/codex/skills)、[Claude Code Skills](https://code.claude.com/docs/en/skills)及[配置目录](https://code.claude.com/docs/en/claude-directory.md)、[DSH Skills](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.md)、[Cursor Skills](https://cursor.com/docs/skills)。
+
+### 3. 打开新的 Agent 会话
+
+选择 **pivotui** Skill，再描述任务。安装好的入口已经会引导 Agent 读取管理层，完成安装不需要往项目规则里粘贴提示词。宿主发现的是**一个原生入口**，由它按需读取完整集群中的 **27 个模块入口**。
+
+安装器会输出入口和集群路径，按发布基线校验复制文件，并保留完整目录、嵌套模块和许可声明。集群位于原生 skills 目录外的 `~/.pivotui/libraries/<edition-and-content-id>/`，请确保 Agent 能够访问。文件安装检查不代表每个宿主都已执行完整工作流，见[实际验证记录](VALIDATION.md)。
+
+### 其他 Agent、预览与自定义目录
+
+其他支持本地 `SKILL.md` 包的 Agent，可以指定它实际使用的 skills 目录。安装器会追加 `pivotui/`：
+
+```sh
+python scripts/install.py --agent generic --language zh --skills-dir "<your-agent-skills-directory>"
+```
+
+只预览目标位置并验证源文件，不写入文件：
+
+```sh
+python scripts/install.py --agent codex --language zh --dry-run
+```
+
+指定集群存储位置和入口目录：
+
+```sh
+python scripts/install.py --agent codex --language zh --install-dir "<library-storage-directory>" --skills-dir "<your-agent-skills-directory>"
+```
+
+将占位符替换为实际路径，含空格的路径保留引号。macOS/Linux 使用 `python3`。安装器保留其他 Skill、项目指令和 MCP 配置；已有不属于该安装器的 `pivotui` 目录，或被手动编辑过的入口，不会被覆盖。切换语言时重新运行并改变 `--language`；入口更新为新语言，旧集群副本保留在磁盘上。
+
+<a id="manual-setup"></a>
+
+## 可选：手动文件与 MCP 接入
+
+上面的命令安装已经足够使用原生 Skill。以下章节适用于需要 MCP 或手动读取文件的宿主，是替代方式，不是额外安装要求。
+
+### 获取一套版本
 
 从 [Releases](https://github.com/Getaway-Wuji/PivotUI/releases/latest) 下载中文版或英文版压缩包，也可以克隆本仓库，使用其中的 `Chinese/` 或 `English/` 目录。压缩包包含完整语言版本、本地 MCP 服务和各包所需的资源。
 
@@ -19,7 +100,7 @@
 
 本文的 **`<edition-root>` 表示直接包含 `orchestration/`、`page-design/`、`design-system/` 和 `mcp/` 的目录的绝对路径**。它不是仓库根目录、ZIP 文件或 `mcp/` 目录。执行命令前，将所有尖括号占位符替换成实际路径。解压后的外层文件夹可以重命名。
 
-## 2. 选择接入方式
+### 选择手动接入方式
 
 | 方式 | 需要什么 | 适用情况 |
 | --- | --- | --- |
@@ -28,7 +109,7 @@
 
 两种方式使用相同的 Skill 和路由规则。MCP 提供受约束的文件读取能力，由连接它的助手应用指令并完成任务。MCP 本身不会执行 Markdown、启动其他智能体或调用模型 API。
 
-## 3A. 配置本地 MCP
+## 配置本地 MCP（可选）
 
 ### 安装服务依赖
 
@@ -189,7 +270,7 @@ DSH 目前处于开发者预览阶段；以上步骤依据其已公开的插件�
 
 <a id="direct-files"></a>
 
-## 3B. 配置直接读取文件
+## 手动直接读取文件（可选）
 
 将选定版本放在助手能够访问的稳定位置。如果宿主支持原生 Skill 注册，按其机制注册实际包路径。不同宿主扫描的目录层级不同，不能默认认为将扫描器指向 `English/` 或 `Chinese/` 就能发现所有功能分类和嵌套入口。
 
@@ -203,9 +284,9 @@ DSH 目前处于开发者预览阶段；以上步骤依据其已公开的插件�
 
 <a id="entry-rule"></a>
 
-## 4. 让管理层成为默认入口
+## 手动接入的入口约定
 
-将下面的指令加入目标项目的助手工作规则，或在任务开始时发送一次。直接读文件时，替换其中的路径：
+手动文件或 MCP 接入时，将下面的指令加入目标项目的助手工作规则，或在任务开始时发送一次。使用已安装的原生 **pivotui** Skill 时，跳过这一步。直接读文件时，替换其中的路径：
 
 ```text
 本项目的界面工作使用 PivotUI，从 design-orchestrator 开始。
@@ -216,9 +297,9 @@ DSH 目前处于开发者预览阶段；以上步骤依据其已公开的插件�
 并包含相关交互、响应式行为和验证。
 ```
 
-这条简短的常驻指令会让日常任务进入管理层。仅安装文件或连接目录，并不能保证所有宿主都会在每个界面任务中自动选择主控。
+手动接入时，这条常驻指令会让任务进入管理层。安装器创建的原生 **pivotui** 入口已经包含这种分配规则，选择已安装的 Skill 即可，无须另加这段指令。
 
-## 5. 用自然语言提交任务
+## 用自然语言提交任务
 
 配置后，可以直接描述希望得到的结果，例如：
 
@@ -240,7 +321,7 @@ DSH 目前处于开发者预览阶段；以上步骤依据其已公开的插件�
 
 如果任务范围已经明确，也可以直接点名某个 Skill。要求显式选择的外源 classics 和历史工作流仍然保留该规则，自动分配不会取消它们的调用限制。
 
-## 6. 可选能力的依赖
+## 可选能力的依赖
 
 | 能力 | 还需要什么 |
 | --- | --- |
@@ -256,7 +337,9 @@ MCP 读取器提供 UTF-8 文本资源，不执行脚本，也不提供二进制
 
 | 现象 | 检查方法 |
 | --- | --- |
-| `ModuleNotFoundError` | 确认配置使用的 Python 就是安装了 `requirements.txt` 的虚拟环境 |
+| 找不到原生 `pivotui` 入口 | 打开新会话，核对脚本输出的入口路径与宿主实际 skills 目录；自定义位置使用 `--skills-dir` |
+| 安装器提示入口已修改 | 重装前先保留自己的修改；脚本不会覆盖自定义过的 `SKILL.md` |
+| MCP 报 `ModuleNotFoundError` | 确认配置使用的 Python 就是安装了 `requirements.txt` 的虚拟环境 |
 | 服务无法启动 | 使用绝对路径；终端命令中给包含空格的路径加引号；MCP 参数分别填写 |
 | 目录为空 | 根目录需要包含包或功能分类目录；检查是否显式配置了错误的 `--skill-root` |
 | Skill 重名或含糊 | 移除第二套语言版本或重复库，或有意选择准确的目录 `id` |
@@ -267,4 +350,13 @@ MCP 读取器提供 UTF-8 文本资源，不执行脚本，也不提供二进制
 
 ## 更新版本
 
-下载完整的新版本，阅读发布说明和许可声明。整体替换选定版本；路径或依赖改变时重建虚拟环境，更新宿主内的绝对启动路径，并重新验证目录和选定文件读取。产品专属 Token 和设计决策保留在目标项目中，使集群更新不会替换产品设置。[架构说明](ARCHITECTURE.zh-CN.md)介绍了各模块如何分工及协调共享决策。
+通过命令安装的用户，更新仓库后使用相同的目标位置参数重新安装（macOS/Linux 使用 `python3`）：
+
+```sh
+git pull --ff-only
+python scripts/install.py --agent codex --language zh
+```
+
+使用你实际的 Agent、语言，以及此前指定的 `--install-dir` 或 `--skills-dir`。安装器校验新的源文件并更新它管理的入口，保留此前的集群副本。如果入口被手动修改，或目标位置的已有集群副本与源文件不一致，脚本会停止并报告冲突，不会丢弃这些修改。
+
+手动/MCP 安装的用户，下载完整的新版本，阅读发布说明和许可声明。整体替换选定版本；路径或依赖改变时重建虚拟环境，更新宿主内的绝对启动路径，并重新验证目录和选定文件读取。产品专属 Token 和设计决策保留在目标项目中，使集群更新不会替换产品设置。[架构说明](ARCHITECTURE.zh-CN.md)介绍了各模块如何分工及协调共享决策。

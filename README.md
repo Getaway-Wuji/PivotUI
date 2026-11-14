@@ -14,40 +14,6 @@ PivotUI 是一套面向 UI 设计与实现的 **Skill 集群**，把任务分配
 
 当前版本 **0.4.0** 包含 **23 个包：9 个内源模块、14 个外源包**；计入交互模块的 4 个子入口，共有 **27 个标准 `SKILL.md` 入口**。中文与英文版均可独立使用；外源包在两版中保留上游原语言和声明。
 
-## 快速开始
-
-支持 **Codex、Claude Code、DSH（DeepSeek Harness）以及其他 Agent 工具**。宿主需要能读取本地文件，或连接本地 MCP 服务。
-
-### 方式一：复制提示词
-
-先下载并解压**一套完整版本**：[中文版 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip) 或 [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip)，保留内部目录结构。把下面的 `<edition-root>` 换成解压后 `Chinese/` 或 `English/` 文件夹的绝对路径，再粘贴到 Agent 的对话中：
-
-```text
-这次界面任务使用 PivotUI。
-先读取 <edition-root>/orchestration/design-orchestrator/SKILL.md，
-再按任务需要选择 Skill 和相关资源。
-做一个订单管理列表，包含搜索、状态筛选、分页和批量导出。
-沿用当前主题和应用框架；从详情返回时保留已应用的筛选和页码。
-请完成页面实现并检查主要操作流程。
-```
-
-可复用提示词：[简体中文](prompts/pivotui-starter.zh-CN.txt) · [English](prompts/pivotui-starter.en.txt)。这种方式只需要文件读取能力，无须配置 MCP。提示词用于引导 Agent 读取集群；无法访问这些文件的助手，仅粘贴提示词不能加载整套 Skill。
-
-### 方式二：安装集群，长期使用
-
-将一套完整版本放在稳定位置，按照[安装配置指南](docs/INSTALL.zh-CN.md)接入。使用 MCP 时，先准备 Python 3.11 或更高版本并安装随包服务，再选择你的工具：
-
-| Agent 工具 | 接入方式 | 入口约定放在哪里 |
-| --- | --- | --- |
-| **Codex** | [`codex mcp add` 或 `config.toml`](docs/INSTALL.zh-CN.md#codex) | 项目 `AGENTS.md` |
-| **Claude Code** | [`claude mcp add`](docs/INSTALL.zh-CN.md#claude-code) | 项目 `CLAUDE.md` |
-| **DSH / DeepSeek Harness** | [官方 MCP 客户端插件](docs/INSTALL.zh-CN.md#deepseek-harness) | 项目 `AGENTS.md` |
-| **其他 Agent 工具** | [本地 stdio MCP 或直接读文件](docs/INSTALL.zh-CN.md#other-agents) | 宿主的项目规则或会话开场提示词 |
-
-连接后，把[长期入口约定](docs/INSTALL.zh-CN.md#entry-rule)加入项目指令，日常就可以直接描述任务。首次让 Agent 列出 PivotUI 的能力目录并加载 `design-orchestrator`，确认接入成功；完整 0.4.0 版本应有 **27 个入口**。
-
-集群内的模块共享资源并使用相对链接，请保留完整语言目录，不要只复制零散的 `SKILL.md` 或打平分类。每次连接一套语言版本即可。这里提供的是接入方法，[验证记录](docs/VALIDATION.md)区分了协议检查与各宿主实际测试。
-
 ## 什么是 Skill 集群？
 
 一个 Skill 是针对某类工作的可复用方法与指令，通常配有参考资料、脚本、模板或数据。Skill 集群在多个独立 Skill 之间建立明确的协作机制：
@@ -108,6 +74,56 @@ English/ 或 Chinese/
 内源与外源包按功能放在同一分类下，来源在文档中明确标注。目录名与 Skill 的 YAML 名称有时不同，例如 `taste-skill` 是 `design-taste-frontend` 的包目录，二者属于同一个能力。
 
 [全部 Skill 详解](docs/SKILLS.zh-CN.md)逐项介绍**全部内源和外源包**的用途、触发条件、产出、依赖和边界；每个语言版本内还附有独立清单与来源记录。
+
+## 快速开始
+
+通过命令将 PivotUI 安装为本地 Skill，支持 **Codex、Claude Code、DSH（DeepSeek Harness）、Cursor 和其他兼容 Agent**。需要 Git 和 Python 3.11 或更高版本。请在 Agent 实际运行的机器上执行安装。
+
+### 用命令安装
+
+先下载仓库，再为你的 Agent 安装。以 **Windows 上的 Codex** 为例：
+
+```sh
+git clone https://github.com/Getaway-Wuji/PivotUI.git
+cd PivotUI
+python scripts/install.py --agent codex --language zh
+```
+
+**macOS/Linux** 的安装命令使用 `python3`：
+
+```sh
+python3 scripts/install.py --agent codex --language zh
+```
+
+其他 Agent 选择对应命令即可（macOS/Linux 使用 `python3`）：
+
+```sh
+# Claude Code
+python scripts/install.py --agent claude-code --language zh
+# DSH / DeepSeek Harness
+python scripts/install.py --agent dsh --language zh
+# Cursor
+python scripts/install.py --agent cursor --language zh
+# 其他支持本地 SKILL.md 的 Agent
+python scripts/install.py --agent generic --language zh --skills-dir "<your-agent-skills-directory>"
+```
+
+英文版使用 `--language en`。选择 `generic` 时，将占位符替换为该宿主实际使用的 skills 目录；安装器会在其中创建 `pivotui/` 子目录。
+
+### 安装器会做什么
+
+脚本会校验并复制**完整的所选语言版本**到 `~/.pivotui/libraries/`，再向 Agent 的 skills 目录写入原生 `pivotui` 入口。该入口按任务读取集群内的 **27 个模块入口**，保留参考资源和许可声明。无需配置 MCP，也无需手动编辑项目指令。
+
+| Agent | 默认入口位置 |
+| --- | --- |
+| Codex / Cursor | `~/.agents/skills/pivotui/SKILL.md` |
+| DSH / DeepSeek Harness | `~/.agents/skills/pivotui/SKILL.md`，支持 `DSH_AGENTS_HOME` |
+| Claude Code | `~/.claude/skills/pivotui/SKILL.md`，支持 `CLAUDE_CONFIG_DIR` |
+| 其他兼容 Agent | `<your-agent-skills-directory>/pivotui/SKILL.md` |
+
+安装后打开新的 Agent 会话，选择 **pivotui**，直接描述你要完成的界面。Codex、DSH 和 Cursor 共用默认入口，不必分别复制一套。重复执行相同安装不会改变已安装内容；切换 `--language` 会将该入口更新为所选版本。
+
+预览安装（`--dry-run`）、自定义目录、更新和可选 MCP 接入，见[安装指南](docs/INSTALL.zh-CN.md#command-install)。实际检查及其范围见[验证记录](docs/VALIDATION.md)。
 
 ## 自动选择的范围与工具条件
 

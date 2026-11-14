@@ -26,3 +26,17 @@ On 2026-11-14, the repository README, installation guides and reusable starter p
 This update changes repository documentation only. The 1,911-pair edition baseline and both existing v0.4.0 archives were revalidated without changing their contents. New starter files live in the repository's `prompts/` directory; they are not additions to the existing ZIPs. No new end-to-end host connection test was performed for Codex, Claude Code, DSH or Cursor.
 
 本次只更新仓库使用文档。1,911 对版本文件基线和现有两份 v0.4.0 压缩包均重新校验通过，内容保持不变。新增提示词位于仓库的 `prompts/` 目录，不属于现有 ZIP 的新增内容。本次没有在 Codex、Claude Code、DSH 或 Cursor 中重新执行端到端连接测试。
+
+## Native command installer / 原生 Skill 命令安装器
+
+A subsequent 2026-11-14 update moves quickstart after the cluster introduction and makes `python scripts/install.py` the primary installation route. It copies a complete edition and creates one native `pivotui` entry for Codex, Claude Code, DSH, Cursor, or a supplied compatible skills directory. MCP remains optional. Host discovery paths were checked against official documentation; both generated-entry templates were reviewed for equivalent behavior and valid metadata/resource targets.
+
+2026-11-14 的后续更新将快速开始移到集群介绍之后，并以 `python scripts/install.py` 作为主要安装方式。安装器复制完整语言版本，为 Codex、Claude Code、DSH、Cursor 或指定的兼容技能目录创建一个原生 `pivotui` 入口，MCP 保持可选。已依据官方资料核实宿主发现路径，并检查两版入口模板的语义、元数据和资源目标。
+
+The installer passed **11 actual CLI tests on Windows** using temporary directories: complete edition byte equality and 27 preserved module entrypoints; spaces and Chinese characters in paths; repeat installation; language switching with the previous library retained; dry-run without writes; required generic-host directory; unrelated-file preservation; refusal to overwrite unmanaged or edited entries and edited libraries; destination protection for both source editions; and an existing installation lock. No tests wrote to the user's actual Agent directories. These are file-installation tests, not end-to-end host discovery or generated-interface tests.
+
+安装器在 Windows 临时目录中通过 **11 项实际 CLI 测试**：完整版本逐文件一致、保留 27 个模块入口、中文与空格路径、重复安装、切换语言并保留旧库、dry-run 不写入、通用宿主目录必填、其他文件保全、拒绝覆盖非托管或修改过的入口与库、两套源版本目录保护、已有安装锁处理。测试没有写入用户实际的 Agent 目录。这些属于文件安装验证，不代表宿主发现或生成界面的端到端测试。
+
+The existing 1,911-pair edition baseline still validates. The installer and its templates are repository-level additions; the v0.4.0 edition ZIPs are unchanged and remain usable through manual files or MCP setup.
+
+现有 1,911 对版本文件基线仍通过校验。安装器和模板属于仓库级新增内容，v0.4.0 语言版 ZIP 保持不变，仍可通过手动文件或 MCP 方式使用。

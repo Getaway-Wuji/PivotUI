@@ -14,40 +14,6 @@ The management layer interprets the requested result, assigns a lead for each re
 
 Release **0.4.0** includes **23 packages: 9 authored modules and 14 external packages**, with **27 standard `SKILL.md` entrypoints** including four interaction submodules. The English and Chinese editions are independently usable. External packages retain their original language and notices in both editions.
 
-## Quick start
-
-Use PivotUI with **Codex, Claude Code, DSH (DeepSeek Harness), or another Agent tool** that can read local files or connect to a local MCP server.
-
-### Option 1: Paste a starter prompt
-
-Download and extract **one complete edition**: [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip) or [Chinese ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip). Keep its directory structure intact. Replace `<edition-root>` below with the absolute path to the extracted `English/` or `Chinese/` folder, then paste the prompt into your Agent:
-
-```text
-Use PivotUI for this interface task.
-First read <edition-root>/orchestration/design-orchestrator/SKILL.md,
-then load only the skills and resources needed for the task.
-Build an order list with search, status filters, pagination, and bulk export.
-Keep the existing theme and shell. Returning from detail must preserve
-the applied filters and page number. Implement and check the main flow.
-```
-
-Reusable prompt files: [English](prompts/pivotui-starter.en.txt) · [简体中文](prompts/pivotui-starter.zh-CN.txt). This route needs local file access and no MCP setup. The prompt points to the cluster; an assistant without access to those files cannot load it from the prompt alone.
-
-### Option 2: Install once for ongoing use
-
-Keep one complete edition in a stable location and follow the [installation guide](docs/INSTALL.en.md). For MCP, install Python 3.11+, set up the included server, and choose your host's connection instructions:
-
-| Agent tool | Connection | Where to keep the entry rule |
-| --- | --- | --- |
-| **Codex** | [`codex mcp add` or `config.toml`](docs/INSTALL.en.md#codex) | Project `AGENTS.md` |
-| **Claude Code** | [`claude mcp add`](docs/INSTALL.en.md#claude-code) | Project `CLAUDE.md` |
-| **DSH / DeepSeek Harness** | [Official MCP client plugin](docs/INSTALL.en.md#deepseek-harness) | Project `AGENTS.md` |
-| **Other Agent tools** | [Local stdio MCP or direct file access](docs/INSTALL.en.md#other-agents) | The host's project rules or a task-start prompt |
-
-After connecting, copy the [standing entry rule](docs/INSTALL.en.md#entry-rule) into your project's instructions. Everyday requests can then describe the work directly. Confirm setup by asking the Agent to list PivotUI's catalog and load `design-orchestrator`; the complete 0.4.0 edition exposes **27 entrypoints**.
-
-The cluster's modules share resources and relative links. Preserve the complete edition instead of copying isolated `SKILL.md` files or flattening its categories. Choose one edition per connection. These are documented connection routes; the [verification record](docs/VALIDATION.md) distinguishes protocol checks from host-specific testing.
-
 ## What is a Skill cluster?
 
 A Skill is a reusable set of instructions for a particular kind of work, often accompanied by references, scripts, templates, or data. A Skill cluster adds an explicit collaboration system around several such packages:
@@ -108,6 +74,56 @@ English/ or Chinese/
 Internal and external packages share functional categories. Their origin is documented explicitly rather than encoded in a separate directory hierarchy. Folder names and YAML skill names sometimes differ: `taste-skill` is the folder for `design-taste-frontend`, for example.
 
 The [complete skill guide](docs/SKILLS.en.md) describes **every internal and external package**, its purpose, selection conditions, outputs, dependencies, and boundaries. Each edition also contains its own inventory and provenance links.
+
+## Quick start
+
+Install PivotUI as a local Skill with **Codex, Claude Code, DSH (DeepSeek Harness), Cursor, or another compatible Agent**. You need Git and Python 3.11+. Run the installer on the machine where your Agent runs.
+
+### Install with commands
+
+Download the repository, then install for your Agent. For **Codex on Windows**:
+
+```sh
+git clone https://github.com/Getaway-Wuji/PivotUI.git
+cd PivotUI
+python scripts/install.py --agent codex --language en
+```
+
+On **macOS/Linux**, use `python3` for the install command:
+
+```sh
+python3 scripts/install.py --agent codex --language en
+```
+
+For another Agent, choose the corresponding install command below (`python3` on macOS/Linux):
+
+```sh
+# Claude Code
+python scripts/install.py --agent claude-code --language en
+# DSH / DeepSeek Harness
+python scripts/install.py --agent dsh --language en
+# Cursor
+python scripts/install.py --agent cursor --language en
+# Another Agent that supports local SKILL.md files
+python scripts/install.py --agent generic --language en --skills-dir "<your-agent-skills-directory>"
+```
+
+Use `--language zh` for the Chinese edition. For `generic`, replace the placeholder with the host's actual skills directory; the installer creates its `pivotui/` subdirectory.
+
+### What the installer does
+
+It verifies and copies the **complete selected edition** into `~/.pivotui/libraries/`, then writes a native `pivotui` Skill entry into the Agent's skills directory. The entry routes tasks to the library's **27 module entrypoints** as needed, preserving their references and licenses. No MCP setup or manual project-instruction edit is required.
+
+| Agent | Default entry location |
+| --- | --- |
+| Codex / Cursor | `~/.agents/skills/pivotui/SKILL.md` |
+| DSH / DeepSeek Harness | `~/.agents/skills/pivotui/SKILL.md`; respects `DSH_AGENTS_HOME` |
+| Claude Code | `~/.claude/skills/pivotui/SKILL.md`; respects `CLAUDE_CONFIG_DIR` |
+| Other compatible Agents | `<your-agent-skills-directory>/pivotui/SKILL.md` |
+
+Start a new Agent session, select **pivotui**, and describe the interface you want. Codex, DSH and Cursor share the default entry, so you do not need separate copies for each. Rerunning the same install is safe; switching `--language` updates that entry to the chosen edition.
+
+See the [installation guide](docs/INSTALL.en.md#command-install) for `--dry-run`, custom directories, updating, and optional MCP setup. Current checks and their scope are in the [verification record](docs/VALIDATION.md).
 
 ## Selection rules and tool requirements
 

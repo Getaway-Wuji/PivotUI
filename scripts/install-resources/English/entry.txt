@@ -1,0 +1,15 @@
+---
+name: pivotui
+description: Design and implement interfaces with PivotUI. Use for websites, dashboards, application shells, data lists, components, interaction, responsive layout, or design-reference research; select only the relevant installed modules.
+---
+
+# PivotUI
+
+This entry connects to the complete installed English edition at `{{EDITION_ROOT}}`.
+
+1. Read [design-orchestrator](<{{EDITION_ROOT}}/orchestration/design-orchestrator/SKILL.md>) and follow it for this task.
+2. Locate capabilities in the [edition inventory](<{{EDITION_ROOT}}/README.md>). Read only selected entries and necessary resources, resolving their relative paths from each file's actual location. A clearly assigned local task may enter its module directly.
+3. Keep one language edition per task. Use the existing product theme, components, and authoritative token source; honor each external module's invocation restrictions and tool requirements.
+4. Complete the requested deliverable and relevant verification. This file uses direct local access; MCP is optional. If an installed file cannot be read, report the missing access instead of claiming the module ran.
+
+The full edition includes shared methods, nested modules, references, runtime resources and license notices. Do not flatten it or move individual entry files away from their resources.

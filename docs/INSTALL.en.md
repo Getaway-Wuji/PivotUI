@@ -2,13 +2,94 @@
 
 [中文](INSTALL.zh-CN.md) · [Project overview](../README.en.md) · [Skill guide](SKILLS.en.md)
 
-Choose **one complete edition** and connect it to an AI assistant that can read local files or use local MCP tools. After the initial setup, give the assistant the design task. PivotUI's `design-orchestrator` chooses the relevant skills; you do not need to select a list of skills for every request.
+Install a complete English or Chinese edition and a native **pivotui** Skill entry for your Agent. The entry starts with `design-orchestrator` and reads only the modules needed for your task.
 
-Jump to your tool: [Codex](#codex) · [Claude Code](#claude-code) · [DSH / DeepSeek Harness](#deepseek-harness) · [Cursor and other Agents](#other-agents).
+[Command installation](#command-install) · [Optional manual/MCP setup](#manual-setup) · MCP: [Codex](#codex) / [Claude Code](#claude-code) / [DSH](#deepseek-harness) / [other Agents](#other-agents).
 
-For a first task without MCP, extract an edition and paste the [starter prompt](../prompts/pivotui-starter.en.txt), replacing its directory and task placeholders. The Agent must be able to read that directory. For ongoing use, follow the setup below and save the [entry rule](#entry-rule).
+<a id="command-install"></a>
 
-## 1. Get one edition
+## Install with commands (recommended)
+
+Requires **Git and Python 3.11+**. The installer uses Python's standard library and needs no extra Python packages or MCP server. Install it in the environment where the Agent runs; a local installation is not automatically available inside a remote machine or cloud session.
+
+### 1. Get the installer and complete library
+
+```sh
+git clone https://github.com/Getaway-Wuji/PivotUI.git
+cd PivotUI
+```
+
+Keep the full checkout while installing: the script reads its selected edition, templates and release baseline. The existing single-edition release ZIPs support the manual setup below; they do not include this repository-level installer.
+
+### 2. Install for your Agent
+
+Choose one command. These examples install the English edition on Windows:
+
+```sh
+# Codex
+python scripts/install.py --agent codex --language en
+# Claude Code
+python scripts/install.py --agent claude-code --language en
+# DSH / DeepSeek Harness
+python scripts/install.py --agent dsh --language en
+# Cursor
+python scripts/install.py --agent cursor --language en
+```
+
+On macOS/Linux, use `python3`, for example:
+
+```sh
+python3 scripts/install.py --agent codex --language en
+```
+
+Change `--language en` to `--language zh` for Chinese. This selects the language of the authored library instructions; upstream packages retain their original language.
+
+| Agent | Installed entry |
+| --- | --- |
+| Codex | `~/.agents/skills/pivotui/SKILL.md` |
+| Claude Code | `~/.claude/skills/pivotui/SKILL.md`; `CLAUDE_CONFIG_DIR` replaces `~/.claude` when set |
+| DSH | `~/.agents/skills/pivotui/SKILL.md`; `DSH_AGENTS_HOME` replaces `~/.agents` when set |
+| Cursor | `~/.agents/skills/pivotui/SKILL.md` |
+
+Codex, DSH and Cursor can use the same default entry. Install it once; repeated installs with the same arguments leave it unchanged. If a host uses custom directories, use `--skills-dir`. Some hosts also discover other tools' compatibility directories; keep one chosen language entry visible to that host.
+
+Official discovery references: [Codex Skills](https://developers.openai.com/codex/skills), [Claude Code Skills](https://code.claude.com/docs/en/skills) and [configuration directory](https://code.claude.com/docs/en/claude-directory.md), [DSH Skills](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.md), and [Cursor Skills](https://cursor.com/docs/skills).
+
+### 3. Open a new Agent session
+
+Select the **pivotui** skill and describe your task. The installed entry already directs the Agent to the orchestrator; no prompt needs to be pasted into project instructions to finish installation. The host discovers **one native entry**, which reads the complete library's **27 module entrypoints** as needed.
+
+The installer prints the entry and library paths, verifies copied files against the release baseline, and preserves the full directory structure, nested modules and license notices. The library lives under `~/.pivotui/libraries/<edition-and-content-id>/`, outside the native skills directory. Keep it accessible to the Agent. File installation checks do not establish that every host has executed the workflow; see [actual verification](VALIDATION.md).
+
+### Other Agents, preview and custom locations
+
+For another Agent that supports local `SKILL.md` packages, supply its actual skills directory. The installer appends `pivotui/`:
+
+```sh
+python scripts/install.py --agent generic --language en --skills-dir "<your-agent-skills-directory>"
+```
+
+Preview the destinations and validate the source without writing files:
+
+```sh
+python scripts/install.py --agent codex --language en --dry-run
+```
+
+Override the library storage and/or entry directory:
+
+```sh
+python scripts/install.py --agent codex --language en --install-dir "<library-storage-directory>" --skills-dir "<your-agent-skills-directory>"
+```
+
+Replace all placeholders with real paths; retain quotes around paths with spaces. Use `python3` on macOS/Linux. The installer leaves other skills, project instructions and MCP settings alone. It refuses to overwrite an unrelated `pivotui` directory or an entry you have edited. To change an installed language, rerun with the new `--language`; the entry is updated and the previous library remains on disk.
+
+<a id="manual-setup"></a>
+
+## Optional: manual files and MCP
+
+The command installer above is enough for native Skill use. The following sections are alternatives for hosts that need MCP or manual file access; they are not additional installation requirements.
+
+### Get one edition
 
 Download the Chinese or English archive from [Releases](https://github.com/Getaway-Wuji/PivotUI/releases/latest), or clone this repository and use its `Chinese/` or `English/` directory. The archives contain complete editions, including their local MCP server and required package resources.
 
@@ -19,7 +100,7 @@ Download the Chinese or English archive from [Releases](https://github.com/Getaw
 
 In this guide, **`<edition-root>` means the absolute path to the directory that contains `orchestration/`, `page-design/`, `design-system/`, and `mcp/`**. It is not the repository root, the ZIP file, or the `mcp/` directory. Replace every angle-bracket placeholder with a real path before running a command. The extracted outer folder may be renamed.
 
-## 2. Choose a connection method
+### Choose a manual connection method
 
 | Method | Requirements | Best use |
 | --- | --- | --- |
@@ -28,7 +109,7 @@ In this guide, **`<edition-root>` means the absolute path to the directory that 
 
 Both methods use the same skills and routing rules. MCP provides a controlled reader; the connected assistant applies the instructions and performs the work. It does not execute Markdown, start other agents, or call a model API by itself.
 
-## 3A. Set up local MCP
+## Set up local MCP (optional)
 
 ### Install the server dependencies
 
@@ -189,7 +270,7 @@ If you launch `server.py` directly without `--help`, it waits for MCP requests o
 
 <a id="direct-files"></a>
 
-## 3B. Set up direct file access
+## Manual direct file access (optional)
 
 Keep the selected edition in a stable location the assistant can access. Register its package paths using the host's skill mechanism, if supported. Hosts differ in how many directory levels they scan: do not assume that pointing a native skill scanner at `English/` or `Chinese/` will discover all functional categories and nested skills.
 
@@ -203,9 +284,9 @@ It can use the edition's `README.md` to locate the selected packages and read on
 
 <a id="entry-rule"></a>
 
-## 4. Make the management layer the default entry
+## Entry rule for manual setup
 
-Put the following instruction in the target project's assistant instructions, or send it at the start of the task. Replace the path for direct-file use:
+For manual file or MCP setup, put the following instruction in the target project's assistant instructions, or send it at the start of the task. Skip this step when using the installed native **pivotui** Skill. Replace the path for direct-file use:
 
 ```text
 Use PivotUI for this project's interface work. Start with design-orchestrator.
@@ -218,9 +299,9 @@ Honor external skills' invocation restrictions. Complete the requested output,
 including the relevant interaction, responsive behavior, and verification.
 ```
 
-This small standing instruction is what makes ordinary task requests enter the management layer. Installing files or connecting a catalog does not, by itself, guarantee that every host will select the orchestrator for every UI request.
+For manual setup, this standing instruction directs tasks to the management layer. The native **pivotui** entry created by the installer already contains that routing. Selecting the installed Skill is sufficient; you do not need to add this instruction separately.
 
-## 5. Give tasks in ordinary language
+## Give tasks in ordinary language
 
 You can now describe the result you want, for example:
 
@@ -242,7 +323,7 @@ Other useful requests:
 
 You can still name a skill directly for a deliberately scoped task. External classics and legacy workflows that require explicit selection retain that rule; automatic routing does not remove their invocation restrictions.
 
-## 6. Optional capabilities
+## Optional capabilities
 
 | Capability | What else is needed |
 | --- | --- |
@@ -258,7 +339,9 @@ The MCP reader exposes UTF-8 text resources. It does not execute scripts or serv
 
 | Symptom | What to check |
 | --- | --- |
-| `ModuleNotFoundError` | The configured executable must be the virtual environment where `requirements.txt` was installed |
+| Native `pivotui` entry is missing | Start a new session; check the printed entry path and the host's actual skills directory; use `--skills-dir` for a custom location |
+| Installer reports an edited entry | Preserve your edits before reinstalling; it will not overwrite a customized `SKILL.md` |
+| `ModuleNotFoundError` with MCP | The configured executable must be the virtual environment where `requirements.txt` was installed |
 | Server cannot start | Use absolute paths; quote spaces in shell commands; keep each MCP argument separate |
 | Empty catalog | The selected root must contain packages or functional category folders; check any explicit `--skill-root` |
 | Duplicate or ambiguous skill name | Remove the second edition/duplicate library, or choose an exact catalog `id` intentionally |
@@ -269,4 +352,13 @@ The MCP reader exposes UTF-8 text resources. It does not execute scripts or serv
 
 ## Updating
 
-Download a complete newer edition and review its release notes and notices. Replace the selected edition as a unit, recreate its virtual environment if the path or dependencies change, update the host's absolute launch paths, and repeat the catalog/selected-file checks. Keep product-specific tokens and design decisions in the target project so a library update does not replace them. The [architecture guide](ARCHITECTURE.en.md) explains how responsibility and shared decisions are coordinated.
+For command installations, update the repository and rerun the installer with the same destination options (use `python3` on macOS/Linux):
+
+```sh
+git pull --ff-only
+python scripts/install.py --agent codex --language en
+```
+
+Use your actual Agent, language and any previously supplied `--install-dir` or `--skills-dir`. The installer verifies the new source and updates its managed entry; prior library copies are retained. If the entry was edited, or an existing library at the destination differs from the source, it stops and reports the conflict instead of discarding those edits.
+
+For manual/MCP installations, download a complete newer edition and review its release notes and notices. Replace the selected edition as a unit, recreate its virtual environment if the path or dependencies change, update the host's absolute launch paths, and repeat the catalog/selected-file checks. Keep product-specific tokens and design decisions in the target project so a library update does not replace them. The [architecture guide](ARCHITECTURE.en.md) explains how responsibility and shared decisions are coordinated.
