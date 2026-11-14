@@ -1,0 +1,6 @@
+interface:
+  display_name: "产品设计参考研究"
+  short_description: "按真实页面范围检索具名产品案例，核对来源并提出适配建议"
+  default_prompt: "使用 $design-reference-research 查找相关产品设计案例，为当前项目推荐范围明确的适配做法。"
+policy:
+  allow_implicit_invocation: true

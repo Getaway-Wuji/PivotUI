@@ -1,0 +1,4 @@
+interface:
+  display_name: "Global Style and Design Tokens"
+  short_description: "Choose visual direction and maintain one project token source"
+  default_prompt: "Use $global-style-skill to select or compare a visual direction from my references and current theme, then generate or validate tokens only within the requested scope."

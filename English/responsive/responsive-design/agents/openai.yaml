@@ -1,0 +1,4 @@
+interface:
+  display_name: "Responsive Design"
+  short_description: "Adapt layouts while keeping content and actions reachable"
+  default_prompt: "Use $responsive-design to adapt this page or component to its available space and input capabilities, preserving the project's style, key content, and operations, then verify the affected layouts."

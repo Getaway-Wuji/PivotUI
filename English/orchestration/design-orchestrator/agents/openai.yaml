@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Orchestrator"
+  short_description: "Route design tasks and consolidate project tokens"
+  default_prompt: "Use $design-orchestrator to load only the skills my request needs, consolidate project design tokens, and complete the task."

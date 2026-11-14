@@ -1,0 +1,4 @@
+interface:
+  display_name: "Application Shell Design"
+  short_description: "Design navigation, page frames, and scrolling continuity"
+  default_prompt: "Use $app-shell-design to build or improve a coherent application shell across list, detail, and edit pages using the product's existing routes and theme."

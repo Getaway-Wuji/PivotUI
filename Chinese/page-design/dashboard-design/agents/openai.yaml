@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dashboard 设计"
+  short_description: "按业务任务选择仪表盘结构、图表与视觉方案，结合参考图完成设计和优化"
+  default_prompt: "使用 $dashboard-design，根据我的业务角色、数据和现有界面规范选择合适的 Dashboard 方案并完成设计。"

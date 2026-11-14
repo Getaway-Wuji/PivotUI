@@ -1,0 +1,4 @@
+interface:
+  display_name: "应用外壳设计"
+  short_description: "设计跨列表、详情与编辑页的导航、页面框架及滚动连续性"
+  default_prompt: "使用 $app-shell-design，沿用产品已有路由和主题，构建或改进列表、详情与编辑页之间一致的应用外壳。"

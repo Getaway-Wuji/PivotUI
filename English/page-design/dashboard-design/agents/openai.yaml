@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dashboard Design"
+  short_description: "Choose dashboard structures, charts, and visual styles"
+  default_prompt: "Use $dashboard-design to choose and implement a suitable Dashboard from my business role, data, and existing interface standards."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data List Design"
+  short_description: "Build complete admin lists with clear scope and return state"
+  default_prompt: "Use $data-list-design to build a complete data list page using my product's shell, components and tokens, with explicit action scope and preserved detail-return state."

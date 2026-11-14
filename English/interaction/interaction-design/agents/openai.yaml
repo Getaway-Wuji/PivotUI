@@ -1,0 +1,4 @@
+interface:
+  display_name: "Detailed Interaction"
+  short_description: "Refine interaction, focus, recovery, and motion performance"
+  default_prompt: "Use $interaction-design to select relevant submodules, preserve existing styles, define triggers, states, feedback, and recovery, and choose React Bits motion within performance needs."

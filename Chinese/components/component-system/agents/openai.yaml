@@ -1,0 +1,4 @@
+interface:
+  display_name: "组件系统"
+  short_description: "复用与构建公共组件，统一接口、用途变体及跨页面体验，沿用项目主题"
+  default_prompt: "使用 $component-system 复用或适配本项目组件，定义用途明确的变体，并验证跨页面一致性。"

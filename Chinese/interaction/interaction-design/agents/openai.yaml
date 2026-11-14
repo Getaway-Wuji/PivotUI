@@ -1,0 +1,4 @@
+interface:
+  display_name: "精细交互"
+  short_description: "按需处理浮层、按钮、表单与导航，完善焦点和失败恢复，并控制动画性能成本"
+  default_prompt: "使用 $interaction-design 选择适合这项任务的交互子模块，沿用现有样式，明确触发、状态、反馈与恢复，再按性能需求选择 React Bits 动画。"

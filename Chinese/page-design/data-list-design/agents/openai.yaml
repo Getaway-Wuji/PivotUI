@@ -1,0 +1,4 @@
+interface:
+  display_name: "完整数据列表页设计"
+  short_description: "设计完整后台列表，明确操作范围并保留详情返回时的查询与位置"
+  default_prompt: "使用 $data-list-design 沿用我的产品应用框架、组件和 Token 制作完整数据列表页，明确操作范围并保留详情返回状态。"

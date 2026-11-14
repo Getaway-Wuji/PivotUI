@@ -1,0 +1,4 @@
+interface:
+  display_name: "全局风格与设计 Token"
+  short_description: "选择或比较视觉方向，按需生成和校验项目 Token，保持单一来源"
+  default_prompt: "使用 $global-style-skill，依据我的参考和现有主题选择或比较视觉方向，再按本次范围生成或校验 token。"

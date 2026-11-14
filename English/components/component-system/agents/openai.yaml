@@ -1,0 +1,4 @@
+interface:
+  display_name: "Component System"
+  short_description: "Reuse and build coherent shared UI components"
+  default_prompt: "Use $component-system to reuse or adapt this project's components, define purposeful variants, and verify cross-page consistency."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "响应式设计"
+  short_description: "根据内容和任务适配页面与组件布局，保持关键信息与操作可达"
+  default_prompt: "使用 $responsive-design，根据页面或组件的可用空间和输入能力进行适配，保留项目风格、关键内容与操作，并验证受影响的布局。"

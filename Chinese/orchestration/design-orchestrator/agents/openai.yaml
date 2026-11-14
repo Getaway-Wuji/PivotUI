@@ -1,0 +1,4 @@
+interface:
+  display_name: "设计调度入口"
+  short_description: "根据场景按需选择独立子技能，汇总项目样式并安排任务交接"
+  default_prompt: "使用 $design-orchestrator，根据我的需求只加载必要的子技能，汇总项目设计 Token，并按分工完成本次任务。"

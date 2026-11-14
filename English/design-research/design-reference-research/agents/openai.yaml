@@ -1,0 +1,6 @@
+interface:
+  display_name: "Product Design References"
+  short_description: "Compare sourced product design cases within their real scope"
+  default_prompt: "Use $design-reference-research to find relevant product design cases and recommend scoped adaptations for this project."
+policy:
+  allow_implicit_invocation: true
