@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/pivotui-brand-loop1.gif" alt="PivotUI brand animation — A Skill Cluster for UI" width="1200">
+</p>
+
 # PivotUI
 
 **Describe the interface you want. Let the cluster choose the skills it needs.**

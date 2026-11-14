@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/pivotui-brand-loop1.gif" alt="PivotUI 品牌动图：A Skill Cluster for UI" width="1200">
+</p>
+
 # PivotUI
 
 **你描述要做的界面，Skill 集群负责选择和协作。**
