@@ -1,0 +1,27 @@
+{
+  "name": "@getaway-wuji/pivotui",
+  "version": "0.4.0",
+  "description": "Install the complete PivotUI design Skill cluster for your Agent.",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "pivotui": "bin/pivotui.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "bin/",
+    "English/",
+    "Chinese/",
+    "English/mcp/skill-cluster/.gitignore",
+    "Chinese/mcp/skill-cluster/.gitignore",
+    "language-sync.json",
+    "scripts/install-resources/"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Getaway-Wuji/PivotUI.git"
+  }
+}

@@ -40,3 +40,21 @@ The installer passed **11 actual CLI tests on Windows** using temporary director
 The existing 1,911-pair edition baseline still validates. The installer and its templates are repository-level additions; the v0.4.0 edition ZIPs are unchanged and remain usable through manual files or MCP setup.
 
 现有 1,911 对版本文件基线仍通过校验。安装器和模板属于仓库级新增内容，v0.4.0 语言版 ZIP 保持不变，仍可通过手动文件或 MCP 方式使用。
+
+## npx package and manual project ZIPs / npx 包与项目安装 ZIP
+
+The Node installer adds project scope, optional user scope and relative entry paths without changing the existing 1,911-file edition baseline. npm's omission of the nested MCP `.gitignore` is handled by a fixed copy of its original bytes; source hashes still have to match the baseline, and installed libraries receive the original path and full inventory checks.
+
+Node 安装器增加项目范围、可选用户范围和相对入口路径，现有每版 1,911 个文件的基线保持不变。npm 会省略的嵌套 MCP `.gitignore` 通过固定的原始字节副本恢复；源文件哈希仍须符合基线，安装后的集群使用原始路径并接受完整清单检查。
+
+The Node installer passed **16 tests in two batches on Windows**, with no skips. These cover actual npm packaging and offline npx execution for both editions, complete 1,911-file hash equality and 27 module entrypoints, project relocation, project/user/custom scope, Python-installer compatibility, repeated installs, language changes, dry-run, locking, unrelated-file preservation, and refusal of altered or incomplete sources, libraries and entries. The local package test uses explicit `--package <archive> pivotui` invocation and isolated temporary directories; it does not install into the user's actual Agent directories.
+
+Node 安装器在 Windows 上分两批通过 **16 项测试**，无跳过：实际 npm 打包与两版离线 npx 执行、全部 1,911 个文件哈希一致和 27 个模块入口、项目搬移、项目/用户/自定义范围、旧 Python 安装兼容、重复安装、切换语言、dry-run、安装锁、其他文件保全，以及拒绝修改过或不完整的源文件、库和入口。本地包测试使用显式 `--package <archive> pivotui` 调用及隔离的临时目录，没有安装到用户实际的 Agent 目录。
+
+Both project ZIPs contain **1,914 files**: the unchanged complete edition, native entry, installation manifest and localized copy guide. Two builds produced identical archive bytes. Each archive was extracted into a temporary project, moved to a path with spaces and Chinese characters, and checked against all 1,911 resource hashes. The same entry was also copied to `.claude/skills/pivotui/`, where its relative resource path still resolved correctly. These checks do not execute an Agent model or generate an interface.
+
+两份项目 ZIP 均含 **1,914 个文件**：未修改的完整语言版本、原生入口、安装清单和本地化复制说明。两次构建的压缩包字节一致。两份压缩包均已实际解压到临时项目、移动到带中文与空格的路径，并逐项核对 1,911 个资源哈希；同一入口复制到 `.claude/skills/pivotui/` 后，相对资源路径仍正确。这些检查未运行 Agent 模型或生成界面。
+
+The two project ZIPs and their separate checksum file supplement the release. All six uploaded asset digests matched the local files, including the original English/Chinese ZIPs and their unchanged checksum file. The existing download route remains available.
+
+两份项目 ZIP 和单独的校验文件作为额外附件发布。六个已上传附件的哈希均与本地文件一致，包括原来的中英文 ZIP 及其未修改的校验文件；原下载方式继续保留。

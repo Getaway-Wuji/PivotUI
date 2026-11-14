@@ -32,3 +32,25 @@ The initial PivotUI publication keeps the design behavior of the source cluster 
 The public baseline is `language-sync.json` and describes this publication tree. Authoring archives and prior release baselines remain outside the public repository. Test results should name their actual scope; a successful catalog read does not verify a complete user interface or third-party service.
 
 公开基线 `language-sync.json` 对应本仓库发布目录，作者研究档案和此前发行基线不纳入。验证记录应说明实际范围，目录读取成功不代表完整界面或第三方服务已经验证。
+
+## npx and project-copy packages / npx 与项目手动安装包
+
+The repository's single Node bin supports `npx --yes github:Getaway-Wuji/PivotUI`. It runs directly from npm's fetched package, with no Python subprocess or npm-registry publication. `package.json` allowlists both complete editions, the reviewed baseline, the bin and its templates. Check the actual `npm pack` contents against that baseline before publishing changes; npm packaging must not drop a required resource. Runtime installation defaults to the current project, with portable relative paths; `--global` explicitly selects user scope.
+
+仓库的单一 Node 入口支持 `npx --yes github:Getaway-Wuji/PivotUI`，从 npm 获取的包直接运行，不调用 Python，也不依赖发布到 npm registry。`package.json` 明确包含完整双版本、审阅基线、执行入口及模板。发布修改前，按基线核对实际 `npm pack` 内容，确保未漏掉必要资源。安装默认作用于当前项目并使用可搬移的相对路径；显式添加 `--global` 才选择用户范围。
+
+npm omits the nested MCP `.gitignore` file even when its source directory is included. The Node package therefore carries its original bytes as a fixed runtime resource. Only that missing source path may use the packaged mapping, and its hash must match the selected edition's baseline. Installed libraries retain the original filename and are checked against all 1,911 expected file hashes; missing unrelated files and edited originals still fail validation.
+
+npm 会省略嵌套 MCP 目录中的 `.gitignore`，即使已经包含该源目录。Node 包因此以固定运行资源保存其原始字节，仅允许缺失的这一源路径使用映射，并要求哈希符合所选版本基线。安装后的集群恢复原文件名，仍按全部 1,911 个文件的哈希校验；其他文件缺失或原文件被修改时仍会拒绝安装。
+
+Build the additional manual project archives with Node.js available and the existing Python builder dependencies:
+
+```sh
+python scripts/build_project_archives.py
+```
+
+在具备 Node.js 和现有 Python 构建依赖的维护环境中执行上面的命令，生成额外的项目手动安装包。下载用户只需解压和复制文件，不需要这些构建工具。
+
+The builder uses the real Node project installer, verifies unchanged edition bytes, portable entry links and exact ZIP contents, and creates `PivotUI-English-project-v0.4.0.zip`, `PivotUI-Chinese-project-v0.4.0.zip`, and `PROJECT-CHECKSUMS-v0.4.0.sha256`. Upload them as additional release assets. Preserve the original single-edition ZIPs and their checksum asset. Do not replace an existing filename with different bytes; use a new packaging version for later archive changes.
+
+构建器调用真实 Node 项目安装器，检查语言版本字节未变、入口链接可搬移及 ZIP 精确内容，生成 `PivotUI-English-project-v0.4.0.zip`、`PivotUI-Chinese-project-v0.4.0.zip` 和 `PROJECT-CHECKSUMS-v0.4.0.sha256`。将它们作为额外发布附件上传，保留原单语言 ZIP 和对应校验文件。不得用不同内容替换已有同名文件，后续压缩包变化使用新的打包版本。

@@ -2,96 +2,123 @@
 
 [English](INSTALL.en.md) · [项目介绍](../README.md) · [Skill 详细说明](SKILLS.zh-CN.md)
 
-为 Agent 安装一套完整中文版或英文版，以及原生 **pivotui** Skill 入口。该入口从 `design-orchestrator` 开始，按任务读取需要的模块。
+安装一套完整语言版本和原生 **pivotui** Skill 入口，可选[一条 npx 命令安装](#command-install)或[下载 ZIP 后自行复制](#zip-install)。两种方式都从 `design-orchestrator` 开始，按任务读取需要的模块。
 
-[命令安装](#command-install) · [可选的手动/MCP 接入](#manual-setup) · MCP：[Codex](#codex) / [Claude Code](#claude-code) / [DSH](#deepseek-harness) / [其他 Agent](#other-agents)。
+[可选的原始文件/MCP 接入](#manual-setup) · [旧版 Python 安装器](#legacy-python) · MCP：[Codex](#codex) / [Claude Code](#claude-code) / [DSH](#deepseek-harness) / [其他 Agent](#other-agents)。
 
 <a id="command-install"></a>
 
-## 用命令安装（推荐）
+## 方式一：一条 npx 命令安装
 
-需要 **Git 和 Python 3.11 或更高版本**。安装器只使用 Python 标准库，无需额外 Python 包或 MCP 服务。请在 Agent 运行的环境中安装；本机安装的文件不会自动出现在远程机器或云端会话中。
-
-### 1. 获取安装器和完整集群
+需要 **Node.js 22+、npm/npx 和 Git**。请在 Agent 实际运行的环境里，打开**目标项目根目录**并执行：
 
 ```sh
-git clone https://github.com/Getaway-Wuji/PivotUI.git
-cd PivotUI
+npx --yes github:Getaway-Wuji/PivotUI --agent codex --language zh
 ```
 
-安装时保留完整仓库：脚本需要读取所选语言版本、模板和发布基线。现有单语言版本 ZIP 可用于下方的手动接入方式，不包含这个仓库级安装器。
+npx 会从 GitHub 获取并运行安装器，无需手动克隆、运行 Python 脚本或配置 MCP。准备好所需工具后，Windows、macOS 和 Linux 终端使用同一条命令，Git 会自动获取所需的 GitHub 包。
 
-### 2. 为你的 Agent 安装
-
-选择一条命令即可。以下示例在 Windows 上安装中文版：
+选择你使用的 Agent：
 
 ```sh
-# Codex
-python scripts/install.py --agent codex --language zh
 # Claude Code
-python scripts/install.py --agent claude-code --language zh
+npx --yes github:Getaway-Wuji/PivotUI --agent claude-code --language zh
 # DSH / DeepSeek Harness
-python scripts/install.py --agent dsh --language zh
+npx --yes github:Getaway-Wuji/PivotUI --agent dsh --language zh
 # Cursor
-python scripts/install.py --agent cursor --language zh
+npx --yes github:Getaway-Wuji/PivotUI --agent cursor --language zh
+# 其他支持本地 SKILL.md 包的宿主
+npx --yes github:Getaway-Wuji/PivotUI --agent generic --language zh --skills-dir "<your-agent-skills-directory>"
 ```
 
-macOS/Linux 使用 `python3`，例如：
+英文版使用 `--language en`。该参数选择内源指令的语言，外源包仍保留上游原语言。选择 `generic` 时，需要提供宿主实际的 skills 目录，安装器会在其中创建 `pivotui/` 子目录。
 
-```sh
-python3 scripts/install.py --agent codex --language zh
-```
+### 项目范围与用户范围
 
-英文版将 `--language zh` 改为 `--language en`。这个参数选择内源指令的语言；外源包仍保留上游原语言。
+默认安装到当前项目：
 
-| Agent | 安装的入口 |
+| Agent | 项目中的原生入口 |
 | --- | --- |
-| Codex | `~/.agents/skills/pivotui/SKILL.md` |
-| Claude Code | `~/.claude/skills/pivotui/SKILL.md`；设置 `CLAUDE_CONFIG_DIR` 时，它替代 `~/.claude` |
-| DSH | `~/.agents/skills/pivotui/SKILL.md`；设置 `DSH_AGENTS_HOME` 时，它替代 `~/.agents` |
-| Cursor | `~/.agents/skills/pivotui/SKILL.md` |
+| Codex / DSH / Cursor | `.agents/skills/pivotui/SKILL.md` |
+| Claude Code | `.claude/skills/pivotui/SKILL.md` |
+| Generic | `<your-agent-skills-directory>/pivotui/SKILL.md` |
 
-Codex、DSH 和 Cursor 可以使用同一个默认入口，安装一次即可；重复执行相同参数不会改变已安装内容。宿主使用自定义目录时，通过 `--skills-dir` 指定。部分宿主也会读取其他工具的兼容目录，请让同一宿主只看到一个所选语言版本的入口。
-
-官方发现机制：[Codex Skills](https://developers.openai.com/codex/skills)、[Claude Code Skills](https://code.claude.com/docs/en/skills)及[配置目录](https://code.claude.com/docs/en/claude-directory.md)、[DSH Skills](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.md)、[Cursor Skills](https://cursor.com/docs/skills)。
-
-### 3. 打开新的 Agent 会话
-
-选择 **pivotui** Skill，再描述任务。安装好的入口已经会引导 Agent 读取管理层，完成安装不需要往项目规则里粘贴提示词。宿主发现的是**一个原生入口**，由它按需读取完整集群中的 **27 个模块入口**。
-
-安装器会输出入口和集群路径，按发布基线校验复制文件，并保留完整目录、嵌套模块和许可声明。集群位于原生 skills 目录外的 `~/.pivotui/libraries/<edition-and-content-id>/`，请确保 Agent 能够访问。文件安装检查不代表每个宿主都已执行完整工作流，见[实际验证记录](VALIDATION.md)。
-
-### 其他 Agent、预览与自定义目录
-
-其他支持本地 `SKILL.md` 包的 Agent，可以指定它实际使用的 skills 目录。安装器会追加 `pivotui/`：
+完整集群保存在 `.pivotui/libraries/`。请从项目根目录执行，也可以显式指定项目：
 
 ```sh
-python scripts/install.py --agent generic --language zh --skills-dir "<your-agent-skills-directory>"
+npx --yes github:Getaway-Wuji/PivotUI --agent codex --language zh --project "<target-project-directory>"
 ```
 
-只预览目标位置并验证源文件，不写入文件：
+若希望安装到用户范围，在多个项目之间共用，改为加上 `--global`：
 
 ```sh
-python scripts/install.py --agent codex --language zh --dry-run
+npx --yes github:Getaway-Wuji/PivotUI --agent codex --language zh --global
 ```
 
-指定集群存储位置和入口目录：
+用户范围的集群保存在 `~/.pivotui/libraries/`。Codex 和 Cursor 使用 `~/.agents/skills/pivotui/`；DSH 使用同一共享目录，并支持 `DSH_AGENTS_HOME`。Claude Code 使用 `~/.claude/skills/pivotui/`，并支持 `CLAUDE_CONFIG_DIR`。部分宿主还会读取其他工具的兼容目录，请让同一宿主只看到一个所选语言版本的入口。
+
+官方发现机制：[Codex Skills](https://developers.openai.com/codex/skills)、[Claude Code Skills](https://code.claude.com/docs/en/skills)及[配置目录](https://code.claude.com/docs/en/claude-directory.md)、[DSH Skills](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.md)、[Cursor Skills](https://cursor.com/docs/skills)。[npm 包规格](https://docs.npmjs.com/cli/v11/using-npm/package-spec)和 [npx 参考](https://docs.npmjs.com/cli/v11/commands/npx)说明了 GitHub 包的执行方式。
+
+### 预览与自定义目录
+
+只预览目标位置并验证源文件，不向项目安装文件：
 
 ```sh
-python scripts/install.py --agent codex --language zh --install-dir "<library-storage-directory>" --skills-dir "<your-agent-skills-directory>"
+npx --yes github:Getaway-Wuji/PivotUI --agent codex --language zh --dry-run
 ```
 
-将占位符替换为实际路径，含空格的路径保留引号。macOS/Linux 使用 `python3`。安装器保留其他 Skill、项目指令和 MCP 配置；已有不属于该安装器的 `pivotui` 目录，或被手动编辑过的入口，不会被覆盖。切换语言时重新运行并改变 `--language`；入口更新为新语言，旧集群副本保留在磁盘上。
+npx 仍可能将执行包下载到 npm 缓存。需要时可以指定集群存储位置和入口目录：
+
+```sh
+npx --yes github:Getaway-Wuji/PivotUI --agent codex --language zh --install-dir "<library-storage-directory>" --skills-dir "<your-agent-skills-directory>"
+```
+
+将占位符替换为实际路径，含空格的路径保留引号。完整集群需要保持可被 Agent 访问。本机安装不会自动出现在远程机器或云端会话中。
+
+安装器保留其他 Skill、项目指令和 MCP 配置，校验复制后的完整版本，并拒绝覆盖无关或手动修改过的入口。支持重复安装；切换 `--language` 时更新所选入口，并保留此前的集群副本。
+
+<a id="zip-install"></a>
+
+## 方式二：下载 ZIP，自行复制到项目
+
+这种安装方式不需要运行 npx、Git 或 Python。下载一套项目安装包：
+
+- [PivotUI 中文项目安装 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0.zip)
+- [PivotUI English 项目安装 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0.zip)
+
+解压后，打开外层 `PivotUI-Chinese/` 或 `PivotUI-English/` 文件夹，包含：
+
+```text
+PivotUI-English/ 或 PivotUI-Chinese/
+├── .agents/skills/pivotui/    原生入口及安装清单
+├── .pivotui/libraries/       完整所选版本及资源
+└── INSTALL.md               复制说明
+```
+
+点开头的文件夹和隐藏清单也必须一起复制；文件管理器未显示时，先打开隐藏文件显示。
+
+1. 将压缩包中的 `.pivotui/libraries/` 合并到 `<your-project>/.pivotui/libraries/`，保留完整语言版本目录及其内容。
+2. **Codex / DSH / Cursor**：把压缩包中完整的 `.agents/skills/pivotui/` 文件夹复制到 `<your-project>/.agents/skills/pivotui/`。
+3. **Claude Code**：改为将同一个 `pivotui/` 文件夹复制到 `<your-project>/.claude/skills/pivotui/`，不要再为同一宿主复制到 `.agents/skills/`。两种位置的目录深度相同，因此随包相对资源路径仍然有效。
+4. 在该项目中打开新的 Agent 会话，选择 **pivotui**。
+
+只合并 PivotUI 的子目录，不要替换项目整个 `.agents/`、`.claude/`、`.pivotui/` 或设置目录。已有 PivotUI 入口包含本地修改时，先保留并核对这些修改，再决定替换。复制完整入口文件夹，不要只取 `SKILL.md`；集群原目录和许可声明也要保留。
+
+外层 `PivotUI-Chinese/` 或 `PivotUI-English/` 仅用于包裹下载内容，不要把它额外放在项目与 `.agents/`、`.pivotui/` 之间。自定义宿主目录若深度不同，需要调整资源相对路径；这种情况可以用 npx 安装器的 `--skills-dir` 参数处理。
+
+### 开始使用
+
+两种安装方式都提供**一个原生 pivotui 入口**，按需读取完整集群中的 **27 个模块入口**。选中它并描述你要完成的界面即可，无须往项目规则中粘贴安装提示词。安装和文件校验与宿主完整工作流执行是不同检查，见[实际验证记录](VALIDATION.md)。
 
 <a id="manual-setup"></a>
 
 ## 可选：手动文件与 MCP 接入
 
-上面的命令安装已经足够使用原生 Skill。以下章节适用于需要 MCP 或手动读取文件的宿主，是替代方式，不是额外安装要求。
+以上任意一种安装方式都足够使用原生 Skill。以下章节适用于需要 MCP 或原始文件读取的宿主，是替代方式，不是额外安装要求。
 
 ### 获取一套版本
 
-从 [Releases](https://github.com/Getaway-Wuji/PivotUI/releases/latest) 下载中文版或英文版压缩包，也可以克隆本仓库，使用其中的 `Chinese/` 或 `English/` 目录。压缩包包含完整语言版本、本地 MCP 服务和各包所需的资源。
+原来的完整语言版压缩包继续保留：[中文版 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip)、[English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip)。其中包含原始语言目录、本地 MCP 服务和必要包资源；与上方项目安装 ZIP 的区别是，它们不包含项目级原生入口。已有仓库副本时，也可以使用其中的 `Chinese/` 或 `English/` 目录。
 
 - 选择 `Chinese/`，使用中文编写的内源指令；选择 `English/`，使用英文编写的内源指令。
 - 外源包在两个版本中均保留上游原始语言。
@@ -333,6 +360,18 @@ DSH 目前处于开发者预览阶段；以上步骤依据其已公开的插件�
 
 MCP 读取器提供 UTF-8 文本资源，不执行脚本，也不提供二进制图片读取；这些操作由宿主的一般文件、运行环境和媒体工具完成。运行选定包的脚本前，先解析其实际位置。提出交付要求时，应区分图片、设计文档和已经实现的代码。
 
+<a id="legacy-python"></a>
+
+## 旧版 Python 安装器
+
+已有完整仓库副本时，仍可使用此前的 Python 安装器。它需要 Python 3.11 或更高版本及完整仓库，npx 或 ZIP 安装不需要执行它：
+
+```sh
+python scripts/install.py --agent codex --language zh
+```
+
+macOS/Linux 使用 `python3`。旧安装器默认使用用户范围目录，与 npx 默认安装到项目的行为不同。维护旧安装时，保留此前的 `--skills-dir` 和 `--install-dir` 参数。新安装使用上面的任一主要方式即可。
+
 ## 常见问题
 
 | 现象 | 检查方法 |
@@ -350,13 +389,14 @@ MCP 读取器提供 UTF-8 文本资源，不执行脚本，也不提供二进制
 
 ## 更新版本
 
-通过命令安装的用户，更新仓库后使用相同的目标位置参数重新安装（macOS/Linux 使用 `python3`）：
+通过 npx 安装的用户，使用相同 Agent、语言和范围重新运行命令。保留此前指定的 `--project`、`--global`、`--install-dir` 或 `--skills-dir`：
 
 ```sh
-git pull --ff-only
-python scripts/install.py --agent codex --language zh
+npx --yes github:Getaway-Wuji/PivotUI --agent codex --language zh
 ```
 
-使用你实际的 Agent、语言，以及此前指定的 `--install-dir` 或 `--skills-dir`。安装器校验新的源文件并更新它管理的入口，保留此前的集群副本。如果入口被手动修改，或目标位置的已有集群副本与源文件不一致，脚本会停止并报告冲突，不会丢弃这些修改。
+安装器校验新的源文件并更新它管理的入口，保留此前的集群副本。入口已被编辑，或目标位置的已有集群副本发生冲突时，会报告问题，不会静默覆盖。
 
-手动/MCP 安装的用户，下载完整的新版本，阅读发布说明和许可声明。整体替换选定版本；路径或依赖改变时重建虚拟环境，更新宿主内的绝对启动路径，并重新验证目录和选定文件读取。产品专属 Token 和设计决策保留在目标项目中，使集群更新不会替换产品设置。[架构说明](ARCHITECTURE.zh-CN.md)介绍了各模块如何分工及协调共享决策。
+通过项目安装 ZIP 使用的用户，下载新项目 ZIP，将完整集群和所选原生入口合并到原来的位置；先核对本地 PivotUI 修改，保留其他 Skill 和项目设置。旧版 Python 安装用户则更新仓库，并用原来的目标位置参数重新运行旧命令。
+
+原始文件/MCP 安装的用户，下载完整的新版本，阅读发布说明和许可声明。整体替换选定版本；路径或依赖改变时重建虚拟环境，更新宿主内的绝对启动路径，并重新验证目录和选定文件读取。产品专属 Token 和设计决策保留在目标项目中。[架构说明](ARCHITECTURE.zh-CN.md)介绍了各模块如何分工及协调共享决策。

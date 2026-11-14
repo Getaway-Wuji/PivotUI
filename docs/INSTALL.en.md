@@ -2,96 +2,123 @@
 
 [中文](INSTALL.zh-CN.md) · [Project overview](../README.en.md) · [Skill guide](SKILLS.en.md)
 
-Install a complete English or Chinese edition and a native **pivotui** Skill entry for your Agent. The entry starts with `design-orchestrator` and reads only the modules needed for your task.
+Install one complete language edition and a native **pivotui** Skill entry. Choose [one-command npx installation](#command-install) or [download-and-copy ZIP installation](#zip-install). Both start with `design-orchestrator` and read only the modules needed for your task.
 
-[Command installation](#command-install) · [Optional manual/MCP setup](#manual-setup) · MCP: [Codex](#codex) / [Claude Code](#claude-code) / [DSH](#deepseek-harness) / [other Agents](#other-agents).
+[Optional raw files/MCP](#manual-setup) · [Legacy Python installer](#legacy-python) · MCP: [Codex](#codex) / [Claude Code](#claude-code) / [DSH](#deepseek-harness) / [other Agents](#other-agents).
 
 <a id="command-install"></a>
 
-## Install with commands (recommended)
+## Option 1: One npx command
 
-Requires **Git and Python 3.11+**. The installer uses Python's standard library and needs no extra Python packages or MCP server. Install it in the environment where the Agent runs; a local installation is not automatically available inside a remote machine or cloud session.
-
-### 1. Get the installer and complete library
+Requires **Node.js 22+, npm/npx and Git**. Run the command in the **target project's root**, in the environment where the Agent runs:
 
 ```sh
-git clone https://github.com/Getaway-Wuji/PivotUI.git
-cd PivotUI
+npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en
 ```
 
-Keep the full checkout while installing: the script reads its selected edition, templates and release baseline. The existing single-edition release ZIPs support the manual setup below; they do not include this repository-level installer.
+npx obtains the installer from GitHub and runs it. There is no manual clone step, Python script or MCP setup. The same command works in Windows, macOS and Linux terminals with the required tools installed. Git is used to obtain the GitHub package automatically.
 
-### 2. Install for your Agent
-
-Choose one command. These examples install the English edition on Windows:
+Choose the Agent you use:
 
 ```sh
-# Codex
-python scripts/install.py --agent codex --language en
 # Claude Code
-python scripts/install.py --agent claude-code --language en
+npx --yes github:Getaway-Wuji/PivotUI --agent claude-code --language en
 # DSH / DeepSeek Harness
-python scripts/install.py --agent dsh --language en
+npx --yes github:Getaway-Wuji/PivotUI --agent dsh --language en
 # Cursor
-python scripts/install.py --agent cursor --language en
+npx --yes github:Getaway-Wuji/PivotUI --agent cursor --language en
+# Another host that supports local SKILL.md packages
+npx --yes github:Getaway-Wuji/PivotUI --agent generic --language en --skills-dir "<your-agent-skills-directory>"
 ```
 
-On macOS/Linux, use `python3`, for example:
+Use `--language zh` for Chinese. This selects the authored instructions; upstream packages retain their original language. For `generic`, supply the actual host skills directory. The installer creates its `pivotui/` subdirectory.
 
-```sh
-python3 scripts/install.py --agent codex --language en
-```
+### Project scope and user scope
 
-Change `--language en` to `--language zh` for Chinese. This selects the language of the authored library instructions; upstream packages retain their original language.
+By default, installation is scoped to the current project:
 
-| Agent | Installed entry |
+| Agent | Native entry in the project |
 | --- | --- |
-| Codex | `~/.agents/skills/pivotui/SKILL.md` |
-| Claude Code | `~/.claude/skills/pivotui/SKILL.md`; `CLAUDE_CONFIG_DIR` replaces `~/.claude` when set |
-| DSH | `~/.agents/skills/pivotui/SKILL.md`; `DSH_AGENTS_HOME` replaces `~/.agents` when set |
-| Cursor | `~/.agents/skills/pivotui/SKILL.md` |
+| Codex / DSH / Cursor | `.agents/skills/pivotui/SKILL.md` |
+| Claude Code | `.claude/skills/pivotui/SKILL.md` |
+| Generic | `<your-agent-skills-directory>/pivotui/SKILL.md` |
 
-Codex, DSH and Cursor can use the same default entry. Install it once; repeated installs with the same arguments leave it unchanged. If a host uses custom directories, use `--skills-dir`. Some hosts also discover other tools' compatibility directories; keep one chosen language entry visible to that host.
-
-Official discovery references: [Codex Skills](https://developers.openai.com/codex/skills), [Claude Code Skills](https://code.claude.com/docs/en/skills) and [configuration directory](https://code.claude.com/docs/en/claude-directory.md), [DSH Skills](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.md), and [Cursor Skills](https://cursor.com/docs/skills).
-
-### 3. Open a new Agent session
-
-Select the **pivotui** skill and describe your task. The installed entry already directs the Agent to the orchestrator; no prompt needs to be pasted into project instructions to finish installation. The host discovers **one native entry**, which reads the complete library's **27 module entrypoints** as needed.
-
-The installer prints the entry and library paths, verifies copied files against the release baseline, and preserves the full directory structure, nested modules and license notices. The library lives under `~/.pivotui/libraries/<edition-and-content-id>/`, outside the native skills directory. Keep it accessible to the Agent. File installation checks do not establish that every host has executed the workflow; see [actual verification](VALIDATION.md).
-
-### Other Agents, preview and custom locations
-
-For another Agent that supports local `SKILL.md` packages, supply its actual skills directory. The installer appends `pivotui/`:
+The complete library is kept under `.pivotui/libraries/`. Run from the project root or select it explicitly:
 
 ```sh
-python scripts/install.py --agent generic --language en --skills-dir "<your-agent-skills-directory>"
+npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en --project "<target-project-directory>"
 ```
 
-Preview the destinations and validate the source without writing files:
+For a user-wide installation available across projects, add `--global` instead:
 
 ```sh
-python scripts/install.py --agent codex --language en --dry-run
+npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en --global
 ```
 
-Override the library storage and/or entry directory:
+User-wide library storage is `~/.pivotui/libraries/`. Codex and Cursor use `~/.agents/skills/pivotui/`; DSH uses the same shared directory, respecting `DSH_AGENTS_HOME`. Claude Code uses `~/.claude/skills/pivotui/`, respecting `CLAUDE_CONFIG_DIR`. Some hosts read other tools' compatibility directories too; keep one chosen language entry visible to a host.
+
+Official discovery references: [Codex Skills](https://developers.openai.com/codex/skills), [Claude Code Skills](https://code.claude.com/docs/en/skills) and [configuration directory](https://code.claude.com/docs/en/claude-directory.md), [DSH Skills](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.md), and [Cursor Skills](https://cursor.com/docs/skills). The [npm package specification](https://docs.npmjs.com/cli/v11/using-npm/package-spec) and [npx reference](https://docs.npmjs.com/cli/v11/commands/npx) describe GitHub package execution.
+
+### Preview and custom directories
+
+Preview destinations and validate the source without installing files into the project:
 
 ```sh
-python scripts/install.py --agent codex --language en --install-dir "<library-storage-directory>" --skills-dir "<your-agent-skills-directory>"
+npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en --dry-run
 ```
 
-Replace all placeholders with real paths; retain quotes around paths with spaces. Use `python3` on macOS/Linux. The installer leaves other skills, project instructions and MCP settings alone. It refuses to overwrite an unrelated `pivotui` directory or an entry you have edited. To change an installed language, rerun with the new `--language`; the entry is updated and the previous library remains on disk.
+npx may still download its package into the npm cache. Override the library store and/or entry directory when needed:
+
+```sh
+npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en --install-dir "<library-storage-directory>" --skills-dir "<your-agent-skills-directory>"
+```
+
+Replace placeholders with real paths and retain quotes around paths with spaces. Keep the complete library available to the Agent. A local install is not automatically available in a remote machine or cloud session.
+
+The installer preserves other skills, project instructions and MCP settings. It checks the full copied edition and refuses to overwrite an unrelated or manually edited entry. Repeating the same installation is supported; switching `--language` updates the selected entry while keeping previous library copies.
+
+<a id="zip-install"></a>
+
+## Option 2: Download a ZIP and copy it into your project
+
+This route requires no npx, Git or Python installation step. Download one project-ready archive:
+
+- [PivotUI English project ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0.zip)
+- [PivotUI Chinese project ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0.zip)
+
+After extraction, open its outer `PivotUI-English/` or `PivotUI-Chinese/` folder. It contains:
+
+```text
+PivotUI-English/ or PivotUI-Chinese/
+├── .agents/skills/pivotui/    Native entry and installation manifest
+├── .pivotui/libraries/       Complete selected edition and resources
+└── INSTALL.md               Copy instructions
+```
+
+Dot-prefixed folders and the hidden manifest must be copied too. Enable hidden-file display in your file manager if needed.
+
+1. Merge `.pivotui/libraries/` from the archive into `<your-project>/.pivotui/libraries/`. Keep the complete edition directory and its contents together.
+2. **Codex / DSH / Cursor:** copy the archive's complete `.agents/skills/pivotui/` folder into `<your-project>/.agents/skills/pivotui/`.
+3. **Claude Code:** instead copy that same `pivotui/` folder into `<your-project>/.claude/skills/pivotui/`. Do not also copy it into `.agents/skills/` for the same host. The two destinations have the same directory depth, so the packaged relative resource paths remain valid.
+4. Open a new Agent session in that project and select **pivotui**.
+
+Merge only PivotUI's subfolders. Do not replace the project's entire `.agents/`, `.claude/`, `.pivotui/` or settings directories. If an existing PivotUI entry has local edits, preserve and review those edits before replacing it. Copy the whole entry folder, not only `SKILL.md`, and retain the library's original structure and license notices.
+
+The outer `PivotUI-English/` or `PivotUI-Chinese/` folder is just the download wrapper; do not add that extra directory level between your project and `.agents/` or `.pivotui/`. A custom host directory at a different depth needs adjusted resource paths; use the npx installer's `--skills-dir` option for that case.
+
+### Start using PivotUI
+
+Both installation routes expose **one native pivotui entry**, which reads the complete library's **27 module entrypoints** as needed. Select it and describe the interface you want; you do not need to paste setup prompts into project rules. Installation/file checks are distinct from executing a complete host workflow; see [actual verification](VALIDATION.md).
 
 <a id="manual-setup"></a>
 
 ## Optional: manual files and MCP
 
-The command installer above is enough for native Skill use. The following sections are alternatives for hosts that need MCP or manual file access; they are not additional installation requirements.
+Either installation route above is enough for native Skill use. The following sections are alternatives for hosts that need MCP or raw file access; they are not additional installation requirements.
 
 ### Get one edition
 
-Download the Chinese or English archive from [Releases](https://github.com/Getaway-Wuji/PivotUI/releases/latest), or clone this repository and use its `Chinese/` or `English/` directory. The archives contain complete editions, including their local MCP server and required package resources.
+The original complete-edition archives remain available: [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip) and [Chinese ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip). They contain the raw language edition, local MCP server and required package resources. They differ from the project-ready ZIPs above: they do not include a project-level native entry. You can also use `English/` or `Chinese/` in a repository checkout.
 
 - Choose `Chinese/` for Chinese authored instructions, or `English/` for English authored instructions.
 - External packages retain their upstream language in both editions.
@@ -335,6 +362,18 @@ You can still name a skill directly for a deliberately scoped task. External cla
 
 The MCP reader exposes UTF-8 text resources. It does not execute scripts or serve binary images; those operations use the host's normal file, runtime and media tools. Resolve a selected package's actual location before running its scripts. Keep image output, a design document and implemented code distinct when requesting a deliverable.
 
+<a id="legacy-python"></a>
+
+## Legacy Python installer
+
+The earlier Python installer remains available for an existing repository checkout. It requires Python 3.11+ and the complete checkout; it is not required for npx or ZIP installation:
+
+```sh
+python scripts/install.py --agent codex --language en
+```
+
+Use `python3` on macOS/Linux. This older installer defaults to user-wide directories, unlike the project-scoped npx default. Keep its previous `--skills-dir` and `--install-dir` values when maintaining an existing installation. For new installations, use either main route above.
+
 ## Troubleshooting
 
 | Symptom | What to check |
@@ -352,13 +391,14 @@ The MCP reader exposes UTF-8 text resources. It does not execute scripts or serv
 
 ## Updating
 
-For command installations, update the repository and rerun the installer with the same destination options (use `python3` on macOS/Linux):
+For npx installations, rerun the same command with the same Agent, language and scope. Preserve any `--project`, `--global`, `--install-dir` or `--skills-dir` choices:
 
 ```sh
-git pull --ff-only
-python scripts/install.py --agent codex --language en
+npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en
 ```
 
-Use your actual Agent, language and any previously supplied `--install-dir` or `--skills-dir`. The installer verifies the new source and updates its managed entry; prior library copies are retained. If the entry was edited, or an existing library at the destination differs from the source, it stops and reports the conflict instead of discarding those edits.
+The installer verifies the new source and updates its managed entry while retaining previous library copies. An edited entry or a conflicting existing target library is reported rather than silently overwritten.
 
-For manual/MCP installations, download a complete newer edition and review its release notes and notices. Replace the selected edition as a unit, recreate its virtual environment if the path or dependencies change, update the host's absolute launch paths, and repeat the catalog/selected-file checks. Keep product-specific tokens and design decisions in the target project so a library update does not replace them. The [architecture guide](ARCHITECTURE.en.md) explains how responsibility and shared decisions are coordinated.
+For project-ready ZIP installations, download the newer project ZIP and merge its complete library and chosen native entry into the same locations. Review any local PivotUI edits first, and retain other skills and project settings. For legacy Python installs, update the checkout and rerun the older command with the same destinations.
+
+For raw-file/MCP installations, download a complete newer edition and review its release notes and notices. Replace the selected edition as a unit, recreate its virtual environment if the path or dependencies change, update the host's absolute launch paths, and repeat the catalog/selected-file checks. Keep product-specific tokens and design decisions in the target project. The [architecture guide](ARCHITECTURE.en.md) explains how responsibility and shared decisions are coordinated.

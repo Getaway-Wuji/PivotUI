@@ -1,0 +1,35 @@
+# Install PivotUI by copying folders
+
+This archive contains one complete edition and its native `pivotui` entry. No npm, Git, Python or MCP setup is needed to copy these files. The Agent still needs the tools required by the design task.
+
+1. Extract the archive. Include the folders whose names begin with a dot; show hidden files if your file browser hides them.
+2. Copy the extracted `.pivotui/` folder into the root of your target project. It contains the full library with its references, nested modules, MCP source and license notices. Preserve its internal structure.
+3. Copy the extracted `.agents/skills/pivotui/` folder to the appropriate location **inside that same project**:
+
+| Agent | Destination |
+| --- | --- |
+| Codex, DSH / DeepSeek Harness, Cursor | `.agents/skills/pivotui/` |
+| Claude Code | `.claude/skills/pivotui/` |
+
+Copy only the PivotUI folders; keep existing project files, other skills and settings. If that destination already contains a customized PivotUI installation, preserve it before replacing anything. For Claude Code, use the `.claude` destination and do not also install a second `.agents` entry.
+
+4. Open a new Agent session in the project and select **pivotui**. Its management entry will read only the relevant parts of the library's 27 module entrypoints.
+
+The finished Codex/DSH/Cursor layout is:
+
+```text
+your-project/
+├── .agents/skills/pivotui/
+│   ├── SKILL.md
+│   └── .pivotui-install.json
+└── .pivotui/libraries/{{LIBRARY_NAME}}/
+    ├── orchestration/
+    ├── page-design/
+    ├── design-system/
+    ├── mcp/
+    └── ...all remaining edition files
+```
+
+For Claude Code, replace `.agents` with `.claude` in this layout. The entry uses relative paths; move both folders together when moving the project. A custom skills directory with a different depth needs an adjusted entry path; use the command installer with `--skills-dir` for that case.
+
+The [edition inventory](.pivotui/libraries/{{LIBRARY_NAME}}/README.md) lists the modules. The [license](.pivotui/libraries/{{LIBRARY_NAME}}/LICENSE) and [third-party notices](.pivotui/libraries/{{LIBRARY_NAME}}/THIRD_PARTY_NOTICES.md) remain with the full edition. This package supplements the original single-edition ZIPs; it does not require them as another download.

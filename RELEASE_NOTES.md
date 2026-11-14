@@ -1,5 +1,9 @@
 # PivotUI v0.4.0
 
+安装方式补充：现在可在目标项目中运行 `npx --yes github:Getaway-Wuji/PivotUI --agent codex --language zh`。新增 `PivotUI-Chinese-project-v0.4.0.zip` 与 `PivotUI-English-project-v0.4.0.zip`，供解压后直接复制项目文件夹；对应校验文件为 `PROJECT-CHECKSUMS-v0.4.0.sha256`。原来的两份完整语言版 ZIP 与 `CHECKSUMS.sha256` 均保留，下面记录的集群内容不变。
+
+Installation update: run `npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en` in your target project, or download an additional `PivotUI-English-project-v0.4.0.zip` / `PivotUI-Chinese-project-v0.4.0.zip` and copy its project folders. Verify these new archives with `PROJECT-CHECKSUMS-v0.4.0.sha256`. The original single-edition ZIPs and `CHECKSUMS.sha256` remain available; the cluster content described below is unchanged.
+
 PivotUI 首次公开发行：通过统一管理入口按需选择设计 Skill，让使用者专注描述需求。
 
 - 23 个包：9 个内源模块、14 个明确署名的外源包，共 27 个入口。
