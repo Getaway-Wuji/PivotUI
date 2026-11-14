@@ -130,6 +130,45 @@ English/ 或 Chinese/
 
 内源与外源包按功能放在同一分类下，来源在文档中明确标注。目录名与 Skill 的 YAML 名称有时不同，例如 `taste-skill` 是 `design-taste-frontend` 的包目录，二者属于同一个能力。
 
+## 快速开始
+
+支持 **Codex、Claude Code、DSH（DeepSeek Harness）、Cursor 和其他兼容 Agent**。选择下面任意一种安装方式即可：两种方式都会提供一个原生 **pivotui** 入口，按任务读取完整集群中的 **27 个模块入口**。
+
+### 方式一：一条 npx 命令安装
+
+准备好 **Node.js 22+、npm/npx 和 Git**，在目标项目根目录打开终端，执行：
+
+```sh
+npx --yes github:Getaway-Wuji/PivotUI --agent codex --language zh
+```
+
+npx 会自动获取并运行安装器，无需自己克隆仓库，也无需运行 Python。其他 Agent 使用对应命令：
+
+```sh
+# Claude Code
+npx --yes github:Getaway-Wuji/PivotUI --agent claude-code --language zh
+# DSH / DeepSeek Harness
+npx --yes github:Getaway-Wuji/PivotUI --agent dsh --language zh
+# Cursor
+npx --yes github:Getaway-Wuji/PivotUI --agent cursor --language zh
+```
+
+英文版使用 `--language en`。默认安装到当前项目：完整集群放在 `.pivotui/libraries/`，原生入口放在 `.agents/skills/pivotui/`，Claude Code 则使用 `.claude/skills/pivotui/`。加上 `--global` 可安装到用户范围。[其他 Agent、自定义目录和预览](docs/INSTALL.zh-CN.md#command-install)。
+
+### 方式二：下载 ZIP，自行放入项目
+
+下载一套**项目安装 ZIP**：[中文版](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0.zip) · [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0.zip)。
+
+1. 解压后打开外层 `PivotUI-Chinese/` 或 `PivotUI-English/` 文件夹。文件管理器隐藏点开头的目录时，先启用隐藏文件显示。
+2. 把其中 `.pivotui/` 的内容复制到目标项目根目录下的同名位置，保留完整集群。
+3. **Codex、DSH、Cursor**：把 `.agents/skills/pivotui/` 复制到项目的 `.agents/skills/pivotui/`。**Claude Code**：将同一个 `pivotui/` 文件夹改放到 `.claude/skills/pivotui/`，保持目录深度一致。
+
+只合并 PivotUI 的文件夹，保留项目里其他 Skill 和设置。复制完整 `pivotui/` 文件夹，包括隐藏清单；不要为同一宿主同时放置两种入口。这种方式不需要运行安装命令。ZIP 内附 `INSTALL.md`，也可查看[项目手动安装步骤](docs/INSTALL.zh-CN.md#zip-install)。
+
+安装后打开新的 Agent 会话，选择 **pivotui**，直接描述要完成的界面。两种方式都不需要配置 MCP 或手动粘贴安装提示词。
+
+原来的完整语言版压缩包也保留，供原始文件或 MCP 接入使用：[中文版 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip) · [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip)。详见[安装指南](docs/INSTALL.zh-CN.md)和[验证记录](docs/VALIDATION.md)。
+
 <a id="skills"></a>
 
 ## 每一个 Skill 分别用来做什么？
@@ -271,45 +310,6 @@ English/ 或 Chinese/
 **外源 · Leonxlnx · [上游版本](https://github.com/Leonxlnx/taste-skill/tree/e04409a461022e1b9d0e898eac6b9224e2b9dc4e/skills/redesign-skill) · [Skill 入口](Chinese/legacy/redesign-skill/SKILL.md)。** 保留针对现有网站或应用的“扫描 → 诊断 → 修复”流程。检查排版、颜色、表面和布局，再在当前技术栈内提出或执行针对性改进。仅在明确需要早期方法时选用；现行 taste 已包含改版能力，不会因为需求中出现“改版”就自动选择此包。业务页面的负责人和产品共用设计来源继续保留。
 
 版本、完整选择条件、依赖、相似能力对比与来源记录，见[完整 Skill 指南](docs/SKILLS.zh-CN.md)、[架构与任务分配](docs/ARCHITECTURE.zh-CN.md)及[第三方声明](THIRD_PARTY_NOTICES.md)。
-
-## 快速开始
-
-支持 **Codex、Claude Code、DSH（DeepSeek Harness）、Cursor 和其他兼容 Agent**。选择下面任意一种安装方式即可：两种方式都会提供一个原生 **pivotui** 入口，按任务读取完整集群中的 **27 个模块入口**。
-
-### 方式一：一条 npx 命令安装
-
-准备好 **Node.js 22+、npm/npx 和 Git**，在目标项目根目录打开终端，执行：
-
-```sh
-npx --yes github:Getaway-Wuji/PivotUI --agent codex --language zh
-```
-
-npx 会自动获取并运行安装器，无需自己克隆仓库，也无需运行 Python。其他 Agent 使用对应命令：
-
-```sh
-# Claude Code
-npx --yes github:Getaway-Wuji/PivotUI --agent claude-code --language zh
-# DSH / DeepSeek Harness
-npx --yes github:Getaway-Wuji/PivotUI --agent dsh --language zh
-# Cursor
-npx --yes github:Getaway-Wuji/PivotUI --agent cursor --language zh
-```
-
-英文版使用 `--language en`。默认安装到当前项目：完整集群放在 `.pivotui/libraries/`，原生入口放在 `.agents/skills/pivotui/`，Claude Code 则使用 `.claude/skills/pivotui/`。加上 `--global` 可安装到用户范围。[其他 Agent、自定义目录和预览](docs/INSTALL.zh-CN.md#command-install)。
-
-### 方式二：下载 ZIP，自行放入项目
-
-下载一套**项目安装 ZIP**：[中文版](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0.zip) · [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0.zip)。
-
-1. 解压后打开外层 `PivotUI-Chinese/` 或 `PivotUI-English/` 文件夹。文件管理器隐藏点开头的目录时，先启用隐藏文件显示。
-2. 把其中 `.pivotui/` 的内容复制到目标项目根目录下的同名位置，保留完整集群。
-3. **Codex、DSH、Cursor**：把 `.agents/skills/pivotui/` 复制到项目的 `.agents/skills/pivotui/`。**Claude Code**：将同一个 `pivotui/` 文件夹改放到 `.claude/skills/pivotui/`，保持目录深度一致。
-
-只合并 PivotUI 的文件夹，保留项目里其他 Skill 和设置。复制完整 `pivotui/` 文件夹，包括隐藏清单；不要为同一宿主同时放置两种入口。这种方式不需要运行安装命令。ZIP 内附 `INSTALL.md`，也可查看[项目手动安装步骤](docs/INSTALL.zh-CN.md#zip-install)。
-
-安装后打开新的 Agent 会话，选择 **pivotui**，直接描述要完成的界面。两种方式都不需要配置 MCP 或手动粘贴安装提示词。
-
-原来的完整语言版压缩包也保留，供原始文件或 MCP 接入使用：[中文版 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip) · [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip)。详见[安装指南](docs/INSTALL.zh-CN.md)和[验证记录](docs/VALIDATION.md)。
 
 ## 自动选择的范围与工具条件
 
