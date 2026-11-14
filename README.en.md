@@ -11,7 +11,7 @@
 
 **Describe the interface you want. Let the cluster choose the skills it needs.**
 
-[简体中文](README.md) · English · [Installation](docs/INSTALL.en.md) · [Every skill explained](#skills) · [Architecture and routing](docs/ARCHITECTURE.en.md)
+[简体中文](README.md) · English · [Installation](docs/INSTALL.en.md) · [Architecture diagram](#architecture) · [Every skill explained](#skills) · [Architecture and routing](docs/ARCHITECTURE.en.md)
 
 PivotUI is a UI design Skill cluster that connects task routing, visual direction, page design, components, interaction, responsive behavior, design research, and selected external workflows. Its central idea is simple: **people should describe the work, without repeatedly searching a skill library, choosing modules, or explaining how those modules should cooperate.**
 
@@ -57,6 +57,58 @@ These are workflow mechanisms, not a measured percentage improvement. The practi
 | “Fix just the table overflow on mobile.” | `responsive-design` handles the specific content and operation constraints. |
 
 See the [routing guide](docs/ARCHITECTURE.en.md) for mixed projects, exact-image reproduction, optional styles, and task handoffs.
+
+<a id="architecture"></a>
+
+## How the cluster assigns and coordinates work
+
+The management layer uses `design-orchestrator` to select the lead for each region; `global-style-skill` handles visual direction and design tokens when needed. **Solid arrows show task progression. Dotted arrows show support added for a concrete gap.** A mixed project can combine branches, while a local fix can go directly to its specialist; every task loads only the selected skills and necessary resources.
+
+```mermaid
+%%{init: {"htmlLabels": true, "markdownAutoWrap": false, "flowchart": {"htmlLabels": true, "nodeSpacing": 25, "rankSpacing": 35, "wrappingWidth": 350}}}%%
+flowchart TB
+    accTitle: PivotUI task routing and module collaboration
+    accDescr: The orchestrator chooses region leads by scenario. Leads request specialists only for concrete gaps, share product decisions, integrate contributions, check the requested scope, and deliver the result.
+
+    Request["Describe the goal<br/>Deliverable · scope · references · available tools"]
+    Route["design-orchestrator<br/>Understand the scenario and constraints<br/>Select the smallest sufficient skill combination"]
+    Pages["Page construction<br/>Overview: dashboard-design<br/>Records: data-list-design<br/>App frame: app-shell-design<br/>Public site: design-taste-frontend"]
+    Local["Local changes<br/>Controls: component-system<br/>Behavior: interaction-design<br/>Screen adaptation: responsive-design"]
+    Visual["Visual and image work<br/>Direction: global-style-skill<br/>Evidence: research modules<br/>Concept images: image modules<br/>New images + code: image-to-code"]
+    Lead["One lead for each region<br/>Agree on the deliverable, references and acceptance scope"]
+    Support["Specialists as needed<br/>Components: component-system<br/>Interaction: interaction-design + selected submodules<br/>Adaptation: responsive-design<br/>Evidence: research modules"]
+    Shared["Shared product decisions<br/>One authoritative token source · reusable components<br/>global-style-skill maintains direction and tokens as needed"]
+    Integrate["Region / component owners integrate contributions<br/>design-orchestrator coordinates changes across regions"]
+    Verify["Perform checks appropriate to the requested scope"]
+    Deliver["Deliver the requested result<br/>Advice · review · images · tokens · working code"]
+
+    Request --> Route
+    Route --> Pages
+    Route --> Local
+    Route --> Visual
+    Pages --> Lead
+    Local --> Lead
+    Visual --> Lead
+    Lead --> Integrate
+    Lead -. "Concrete gap" .-> Support
+    Support -. "Return advice or implementation" .-> Integrate
+    Shared --> Integrate
+    Integrate --> Verify
+    Verify --> Deliver
+
+    classDef management fill:#E6F4FF,stroke:#3086C6,color:#123B5D,stroke-width:2px
+    classDef scenario fill:#F0F8FF,stroke:#8BBDE0,color:#123B5D
+    classDef collaboration fill:#EEF0FF,stroke:#6977CC,color:#27346B
+    classDef outcome fill:#E6F4FF,stroke:#3086C6,color:#123B5D
+    class Route,Lead management
+    class Pages,Local,Visual scenario
+    class Support,Shared,Integrate collaboration
+    class Request,Verify,Deliver outcome
+```
+
+- **Research and images:** research selects `ui-ux-pro-max` for general recommendations or `design-reference-research` for named-product evidence. Image concepts select `imagegen-frontend-web`, `imagegen-frontend-mobile`, or `brandkit`; `image-to-code` generates new references before implementation. Faithful reproduction keeps the user's original image as the target. Image workflows need an available image-generation tool.
+- **Example collaboration:** an order-management page uses `data-list-design` as the lead. If saving loses drafts, add `form-interaction`; if a shared control is missing, add `component-system`; if the narrow layout breaks, add `responsive-design`. Each contribution returns to the assigned owner for integration, using the same theme and components.
+- **Explicit choices:** optional classics styles, Stitch, and historical versions require explicit selection; `gpt-taste` remains public-marketing only. The host AI executes these roles. Optional MCP supplies the catalog and selected files, rather than scheduling or running the work.
 
 ## Structure
 

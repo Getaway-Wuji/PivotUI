@@ -11,7 +11,7 @@
 
 **你描述要做的界面，Skill 集群负责选择和协作。**
 
-简体中文 · [English](README.en.md) · [安装配置](docs/INSTALL.zh-CN.md) · [全部 Skill 详解](#skills) · [架构与任务分配](docs/ARCHITECTURE.zh-CN.md)
+简体中文 · [English](README.en.md) · [安装配置](docs/INSTALL.zh-CN.md) · [架构图](#architecture) · [全部 Skill 详解](#skills) · [架构与任务分配](docs/ARCHITECTURE.zh-CN.md)
 
 PivotUI 是一套面向 UI 设计与实现的 **Skill 集群**，把任务分配、全局风格、页面设计、组件、交互、响应式、设计研究和外源工作流组织成可协作的系统。它的核心想法是：**用户只需要说明要完成什么，不必每次翻找 Skill、判断该选哪一个，再逐一交代它们如何配合。**
 
@@ -57,6 +57,58 @@ PivotUI 是一套面向 UI 设计与实现的 **Skill 集群**，把任务分配
 | “只修复手机上表格溢出。” | `responsive-design` 处理具体内容与操作约束。 |
 
 混合项目、原图还原、可选风格和任务交接的详细示例见[架构与任务分配](docs/ARCHITECTURE.zh-CN.md)。
+
+<a id="architecture"></a>
+
+## 管理层如何分配任务、各模块如何配合？
+
+管理层由 `design-orchestrator` 为每个区域选择主负责人，`global-style-skill` 按需负责视觉方向与设计变量。**实线表示任务推进，虚线表示为具体缺口加入的辅助协作。** 混合项目可以组合多个分支，局部修复可以直接由对应专项模块负责；每次只读取选中的 Skill 和必要资源。
+
+```mermaid
+%%{init: {"htmlLabels": true, "markdownAutoWrap": false, "flowchart": {"htmlLabels": true, "nodeSpacing": 25, "rankSpacing": 35, "wrappingWidth": 350}}}%%
+flowchart TB
+    accTitle: PivotUI 任务分配与模块协作架构
+    accDescr: 管理层根据工作场景选择区域负责人，只在存在具体缺口时加入专项支持。各模块共享产品决策，由指定负责人整合，完成相关检查并交付结果。
+
+    Request["描述目标<br/>交付物 · 范围 · 参考 · 可用工具"]
+    Route["design-orchestrator<br/>判断工作场景与约束<br/>选择足够完成任务的最小 Skill 组合"]
+    Pages["页面建设<br/>业务概览：dashboard-design<br/>记录列表：data-list-design<br/>应用框架：app-shell-design<br/>公开网站：design-taste-frontend"]
+    Local["局部修改<br/>共享控件：component-system<br/>交互行为：interaction-design<br/>屏幕适配：responsive-design"]
+    Visual["视觉与图像<br/>视觉方向：global-style-skill<br/>证据与建议：研究模块<br/>概念图片：图像模块<br/>新图加代码：image-to-code"]
+    Lead["每个区域一位主负责人<br/>明确交付物、参考依据与验收范围"]
+    Support["按需加入专项支持<br/>组件：component-system<br/>交互：interaction-design 及选定子模块<br/>适配：responsive-design<br/>证据：研究模块"]
+    Shared["产品共用约定<br/>唯一设计变量来源 · 复用组件<br/>global-style-skill 按需维护视觉与变量"]
+    Integrate["区域 / 组件负责人整合成果<br/>design-orchestrator 协调跨区域改动"]
+    Verify["完成与本次任务范围相符的检查"]
+    Deliver["交付用户需要的结果<br/>建议 · 审查 · 设计图 · 变量 · 可运行代码"]
+
+    Request --> Route
+    Route --> Pages
+    Route --> Local
+    Route --> Visual
+    Pages --> Lead
+    Local --> Lead
+    Visual --> Lead
+    Lead --> Integrate
+    Lead -. "存在具体缺口" .-> Support
+    Support -. "交回建议或实现" .-> Integrate
+    Shared --> Integrate
+    Integrate --> Verify
+    Verify --> Deliver
+
+    classDef management fill:#E6F4FF,stroke:#3086C6,color:#123B5D,stroke-width:2px
+    classDef scenario fill:#F0F8FF,stroke:#8BBDE0,color:#123B5D
+    classDef collaboration fill:#EEF0FF,stroke:#6977CC,color:#27346B
+    classDef outcome fill:#E6F4FF,stroke:#3086C6,color:#123B5D
+    class Route,Lead management
+    class Pages,Local,Visual scenario
+    class Support,Shared,Integrate collaboration
+    class Request,Verify,Deliver outcome
+```
+
+- **研究与图像如何选择：** 通用建议使用 `ui-ux-pro-max`，指定产品证据使用 `design-reference-research`。概念图片按用途选择 `imagegen-frontend-web`、`imagegen-frontend-mobile` 或 `brandkit`；`image-to-code` 先生成新参考图，再实现代码。忠实还原任务保留用户原图为目标。图像流程需要实际可用的图像生成工具。
+- **协作示例：** 订单管理页由 `data-list-design` 主导；保存时丢失草稿，就加入 `form-interaction`；缺少共用控件，就加入 `component-system`；窄屏布局有问题，就加入 `responsive-design`。各模块把贡献交回指定负责人，沿用同一套主题与组件整合。
+- **明确选择的能力：** 可选 classics 风格、Stitch 和历史版本需要明确选择，`gpt-taste` 仅用于公开营销。图中的角色由宿主 AI 执行；可选 MCP 提供能力目录和选定文件，不负责调度或执行工作。
 
 ## 集群结构
 
