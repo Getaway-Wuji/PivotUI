@@ -1,24 +1,28 @@
 # PivotUI v0.4.0
 
+Codex 全局目录更新：`r3` 命令安装包把 `--agent codex --global` 的默认入口放在 `~/.codex/skills/pivotui/SKILL.md`，并支持 `CODEX_HOME`；完整资源仍放在 `~/.pivotui/libraries/`。项目安装的 `.agents/skills/pivotui/` 不变。手动全局安装时，将 ZIP 里 `.agents/skills/` 下的 `pivotui` 文件夹复制到用户的 `.codex/skills/`，再把 `.pivotui` 文件夹放到用户主目录。已有共享目录的安装不会被自动移动或删除。
+
+Codex global-directory update: the `r3` command package places `--agent codex --global` at `~/.codex/skills/pivotui/SKILL.md`, respecting `CODEX_HOME`. Complete resources remain under `~/.pivotui/libraries/`. Project installation still uses `.agents/skills/pivotui/`. For manual global installation, copy the ZIP's `pivotui` folder from `.agents/skills/` into the user's `.codex/skills/`, and put `.pivotui` in the user home folder. Existing shared-directory installations are not moved or deleted automatically.
+
 安装说明更新：Codex、DSH、Cursor 用户解压项目安装包后，**把 `.agents` 和 `.pivotui` 两个文件夹一起复制到项目文件夹，就装好了**。Claude Code 用户先在解压副本里把 `.agents` 改名成 `.claude`，再复制这两个文件夹。新的 `PivotUI-Chinese-project-v0.4.0-r2.zip` 与 `PivotUI-English-project-v0.4.0-r2.zip` 简化了包内说明，校验文件为 `PROJECT-CHECKSUMS-v0.4.0-r2.sha256`；集群文件和入口未变，已经安装好的项目不用重装。原有全部 ZIP 和校验文件继续保留。
 
 命令安装改为直接获取已发布的 npm 安装包，无需 Git 获取源码：
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language zh
 ```
 
-需要 Node.js 22+ 和 npm/npx。首次下载仍可能较慢，成功后会显示 `Installed PivotUI ...`。安装包校验文件为 `NPX-CHECKSUMS-v0.4.0-r2.sha256`。其他 Agent、英文版及排障步骤见仓库安装指南。
+需要 Node.js 22+ 和 npm/npx。首次下载仍可能较慢，成功后会显示 `Installed PivotUI ...`。安装包校验文件为 `NPX-CHECKSUMS-v0.4.0-r3.sha256`。其他 Agent、英文版及排障步骤见仓库安装指南。
 
 Installation guide update: for Codex, DSH and Cursor, **extract the project ZIP and copy both `.agents` and `.pivotui` into your project folder**. For Claude Code, rename `.agents` to `.claude` in the extracted download before copying the two folders. `PivotUI-English-project-v0.4.0-r2.zip` and `PivotUI-Chinese-project-v0.4.0-r2.zip` contain simpler copy instructions; verify them with `PROJECT-CHECKSUMS-v0.4.0-r2.sha256`. The library and entry files are unchanged, so existing installations do not need reinstalling. All earlier ZIPs and checksums remain available.
 
 Command installation now fetches the published npm package directly, without Git source fetching:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language en
 ```
 
-Requires Node.js 22+ and npm/npx. The first download can still be slow; success prints `Installed PivotUI ...`. The package checksum file is `NPX-CHECKSUMS-v0.4.0-r2.sha256`. See the repository installation guide for other Agents, the Chinese edition, and troubleshooting.
+Requires Node.js 22+ and npm/npx. The first download can still be slow; success prints `Installed PivotUI ...`. The package checksum file is `NPX-CHECKSUMS-v0.4.0-r3.sha256`. See the repository installation guide for other Agents, the Chinese edition, and troubleshooting.
 
 PivotUI 首次公开发行：通过统一管理入口按需选择设计 Skill，让使用者专注描述需求。
 

@@ -39,11 +39,15 @@ The repository's single Node bin is distributed as a fixed Release `.tgz` asset.
 
 仓库的单一 Node 入口以固定 Release `.tgz` 附件发布，首选调用为 `npx --yes --package=<asset-url> pivotui`，后接安装参数。这条路线使用 npm 的 HTTP 下载和缓存，无需在用户机器上执行 Git 克隆、SSH 回退或源码打包。`npx --yes github:Getaway-Wuji/PivotUI` 仍作为兼容的源码路线保留，需要 Git。两者运行相同安装器，不调用 Python，也不依赖发布到 npm registry。`package.json` 明确包含完整双版本、审阅基线、执行入口及模板。发布修改前，按基线核对实际 `npm pack` 内容，确保未漏掉必要资源。安装默认作用于当前项目并使用可搬移的相对路径；显式添加 `--global` 才选择用户范围。
 
-Run `npm pack --json --pack-destination <staging-directory>`, verify both edition inventories including the fixed npm filename mapping, and publish the resulting bytes as `pivotui-installer-v0.4.0-r2.tgz` with `NPX-CHECKSUMS-v0.4.0-r2.sha256`. Test the actual public URL from an isolated project before claiming it works. Use a new packaging revision for changed bytes; never replace an existing asset. The first download is still a complete package and can be slow. An exit code alone is insufficient: confirm the generated entry, manifest and all installed library hashes.
+Run `npm pack --json --pack-destination <staging-directory>`, verify both edition inventories including the fixed npm filename mapping, and publish the resulting bytes as `pivotui-installer-v0.4.0-r3.tgz` with `NPX-CHECKSUMS-v0.4.0-r3.sha256`. Test the actual public URL from an isolated project before claiming it works. Use a new packaging revision for changed bytes; never replace an existing asset. The first download is still a complete package and can be slow. An exit code alone is insufficient: confirm the generated entry, manifest and all installed library hashes.
 
-执行 `npm pack --json --pack-destination <staging-directory>`，核对两版文件清单（包括 npm 的固定文件名恢复映射），再将产物以 `pivotui-installer-v0.4.0-r2.tgz` 和 `NPX-CHECKSUMS-v0.4.0-r2.sha256` 发布。实际在隔离项目中执行公开 URL 后，才能宣称该命令已验证。内容变化使用新打包修订号，不覆盖既有附件。首次仍需下载完整包，可能较慢；不能仅根据退出码判断成功，还要确认生成的入口、清单和完整集群文件哈希。
+执行 `npm pack --json --pack-destination <staging-directory>`，核对两版文件清单（包括 npm 的固定文件名恢复映射），再将产物以 `pivotui-installer-v0.4.0-r3.tgz` 和 `NPX-CHECKSUMS-v0.4.0-r3.sha256` 发布。实际在隔离项目中执行公开 URL 后，才能宣称该命令已验证。内容变化使用新打包修订号，不覆盖既有附件。首次仍需下载完整包，可能较慢；不能仅根据退出码判断成功，还要确认生成的入口、清单和完整集群文件哈希。
 
 npm omits the nested MCP `.gitignore` file even when its source directory is included. The Node package therefore carries its original bytes as a fixed runtime resource. Only that missing source path may use the packaged mapping, and its hash must match the selected edition's baseline. Installed libraries retain the original filename and are checked against all 1,911 expected file hashes; missing unrelated files and edited originals still fail validation.
+
+Command-package revision 3 uses the Codex-specific global entry directory: `$CODEX_HOME/skills`, defaulting to `~/.codex/skills`. The explicit `--skills-dir` option still takes precedence. Codex project installation remains under `.agents/skills`; other Agents retain their own defaults. The complete library stays under `~/.pivotui/libraries`. The existing project ZIPs need no rebuild: their entry links remain valid when the complete `pivotui` entry folder is placed under `.codex/skills` at the same directory depth.
+
+命令安装包第 3 次修订使用 Codex 专属全局入口目录 `$CODEX_HOME/skills`，默认 `~/.codex/skills`，显式 `--skills-dir` 参数仍优先。Codex 项目安装保留 `.agents/skills`，其他 Agent 的默认目录保持各自规则。完整集群仍放在 `~/.pivotui/libraries`。现有项目 ZIP 不需要重打包：将完整 `pivotui` 入口文件夹放到同样深度的 `.codex/skills` 下，相对资源链接仍有效。
 
 npm 会省略嵌套 MCP 目录中的 `.gitignore`，即使已经包含该源目录。Node 包因此以固定运行资源保存其原始字节，仅允许缺失的这一源路径使用映射，并要求哈希符合所选版本基线。安装后的集群恢复原文件名，仍按全部 1,911 个文件的哈希校验；其他文件缺失或原文件被修改时仍会拒绝安装。
 

@@ -80,3 +80,17 @@ The actual public Release URL completed installation in a new temporary Windows 
 A second run of the same command against the same temporary project and npm cache also completed successfully with Git unavailable. It took 102.35 seconds, including a logged network fetch; the installer again reported all 1,911 files verified. Repeated installation is supported, but this observation is not evidence of fully offline reuse.
 
 对相同临时项目和 npm 缓存再次执行同一命令，在 Git 不可用的情况下也安装成功。耗时 102.35 秒，其中包含一次日志记录的网络获取；安装器再次确认全部 1,911 个文件通过校验。重复安装可用，但该结果不代表完全离线复用。
+
+## Codex-specific global directory / Codex 专属全局目录
+
+Command-package revision 3 aligns Codex global installation with [OpenAI's Skill installer](https://github.com/openai/skills/blob/main/skills/.system/skill-installer/SKILL.md): `$CODEX_HOME/skills`, defaulting to `~/.codex/skills`. The shared `~/.agents/skills` location is also in [Codex's discovery documentation](https://learn.chatgpt.com/docs/build-skills); this update selects the dedicated default and does not claim the shared path is unsupported. The Node and legacy Python installers respect the Codex directory while preserving explicit directory overrides and other Agents' defaults.
+
+命令安装包第 3 次修订让 Codex 全局安装与 [OpenAI 的 Skill 安装器](https://github.com/openai/skills/blob/main/skills/.system/skill-installer/SKILL.md)一致：使用 `$CODEX_HOME/skills`，默认 `~/.codex/skills`。[Codex 的发现目录文档](https://learn.chatgpt.com/docs/build-skills)也支持共享的 `~/.agents/skills`；本次选择专属默认目录，并非宣称共享路径不可用。Node 和旧 Python 安装器均支持 Codex 专属目录，显式目录覆盖和其他 Agent 的默认位置保持原有行为。
+
+Ten actual CLI checks passed in temporary user homes, with no skips: default and custom Codex home paths (including spaces and Chinese characters), explicit entry-directory precedence, unchanged project scope, other Agent defaults, legacy Python behavior and managed-entry compatibility. Full installation checks compare all 1,911 library hashes and 27 module entries. An existing shared entry was preserved. Both original revision-2 project ZIPs were also extracted into temporary homes and copied following the new Codex-specific manual steps; entry digests, resource links and complete edition inventories matched. No actual user installation was moved or modified.
+
+在临时用户目录中通过 10 项实际 CLI 检查，无跳过，覆盖默认及自定义 Codex 目录（含空格和中文）、显式入口目录优先、项目范围保持不变、其他 Agent 默认位置、旧 Python 行为及托管入口兼容。完整安装检查逐项核对全部 1,911 个资源哈希和 27 个模块入口；已有共享入口保持原样。另将两份现有第 2 版项目 ZIP 解压到临时用户目录，按新的 Codex 手动步骤复制，入口哈希、资源链接及完整语言版本清单均一致。没有移动或修改用户实际安装。
+
+The revision-3 npm tarball was checked against both complete edition inventories and the current installer/README bytes. Actual offline npx execution of that local tarball with `--agent codex --language zh --global`, a fresh npm cache and isolated user home completed in 56.0 seconds. Its entry appeared under `.codex/skills/pivotui`, its manifest recorded global scope, and independent verification matched 1,911 resource hashes, 27 module entries and the entry digest. No `.agents` entry was created in the test home or working project. This is packaged-runtime verification; the earlier live GitHub URL tests above apply to revision 2.
+
+第 3 版 npm 压缩包已核对两套完整版本清单及当前安装器、README 的字节。使用该本地压缩包，在独立 npm 缓存和临时用户目录中实际离线执行 npx，参数为 `--agent codex --language zh --global`，56.0 秒完成。入口生成在 `.codex/skills/pivotui`，清单记录全局范围；独立验证确认了 1,911 个资源哈希、27 个模块入口和入口哈希，临时用户目录与工作项目均未生成 `.agents` 入口。这属于打包后运行验证；上文通过公开 GitHub URL 的实测记录对应第 2 版。

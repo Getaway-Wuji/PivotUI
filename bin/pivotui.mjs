@@ -118,6 +118,7 @@ function pythonFingerprint(hashes) {
 function defaultSkillsDir(agent, project, global) {
   if (agent === 'generic') throw new InstallError('--agent generic requires --skills-dir pointing to the host\'s skill directory.');
   if (!global) return path.join(project, agent === 'claude-code' ? '.claude' : '.agents', 'skills');
+  if (agent === 'codex') return path.join(process.env.CODEX_HOME || path.join(os.homedir(), '.codex'), 'skills');
   if (agent === 'claude-code') return path.join(process.env.CLAUDE_CONFIG_DIR || path.join(os.homedir(), '.claude'), 'skills');
   if (agent === 'dsh') return path.join(process.env.DSH_AGENTS_HOME || path.join(os.homedir(), '.agents'), 'skills');
   return path.join(os.homedir(), '.agents', 'skills');

@@ -141,18 +141,18 @@ English/ 或 Chinese/
 准备好 **Node.js 22+ 和 npm/npx**，在目标项目根目录打开终端，执行：
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language zh
 ```
 
 npx 会下载打包好的安装包并运行，不需要 Git 或 Python。首次下载可能较慢，请等到出现 **`Installed PivotUI ...`**，才表示安装完成；转圈停止本身不代表成功。其他 Agent 使用对应命令：
 
 ```sh
 # Claude Code
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent claude-code --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent claude-code --language zh
 # DSH / DeepSeek Harness
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent dsh --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent dsh --language zh
 # Cursor
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent cursor --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent cursor --language zh
 ```
 
 英文版使用 `--language en`。默认安装到当前项目：完整集群放在 `.pivotui/libraries/`，原生入口放在 `.agents/skills/pivotui/`，Claude Code 则使用 `.claude/skills/pivotui/`。加上 `--global` 可安装到用户范围。[其他 Agent、自定义目录和预览](docs/INSTALL.zh-CN.md#command-install)。
@@ -189,29 +189,35 @@ npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0
 
 **全局指的是当前电脑上的当前用户。** 安装后，你使用的本地 Agent 可以在不同项目中使用 PivotUI，新建项目时不用再复制一遍。
 
-**用压缩包：把两个文件夹放进“用户文件夹”。** Codex、DSH 或 Cursor 用户这样做：
+**Codex 的全局 Skill 入口放在 `~/.codex/skills/pivotui/SKILL.md`。** Windows 对应的是 `%USERPROFILE%\.codex\skills\pivotui\SKILL.md`，与 [OpenAI 官方 Skill 安装器](https://github.com/openai/skills/blob/main/skills/.system/skill-installer/SKILL.md)使用的目录一致。完整集群资源另外保存在 `~/.pivotui/libraries/`。
 
-1. 解压 ZIP，打开解压出来的 `PivotUI-Chinese` 或 `PivotUI-English` 文件夹。
-2. **Windows：**打开文件资源管理器，在上方地址栏输入 **`%USERPROFILE%`**，按回车，就进入了你的用户文件夹。**macOS / Linux：**打开用户主文件夹（`~`）。
-3. 把解压出来的 **`.agents` 和 `.pivotui` 两个文件夹一起复制进去**，放成这样：
+**Codex 用压缩包全局安装，按这几步做：**
+
+1. 解压 ZIP，打开解压出来的 `PivotUI-Chinese` 或 `PivotUI-English` 文件夹，再依次打开 `.agents`、`skills`，复制里面整个 **`pivotui` 文件夹**。
+2. **Windows：**在文件资源管理器中打开 `%USERPROFILE%\.codex\skills`，把 `pivotui` 粘贴进去。如果还没有，就先创建 `.codex` 文件夹及其里面的 `skills` 文件夹。**macOS / Linux：**放到 `~/.codex/skills`。
+3. 回到解压出来的文件夹，把整个 **`.pivotui` 文件夹**复制到你的用户主文件夹：Windows 是 `%USERPROFILE%`，macOS / Linux 是 `~`。
+
+Codex 最后应该放成这样：
 
 ```text
 你的用户文件夹/
-├── .agents/
-└── .pivotui/
+├── .codex/skills/pivotui/SKILL.md
+└── .pivotui/libraries/
 ```
 
-**Claude Code 用户：**先在解压副本里把 `.agents` 改名为 `.claude`，再将 `.claude` 和 `.pivotui` 一起复制到用户文件夹。不要改已有文件夹的名字。
+`pivotui` 文件夹要完整复制，包括里面的隐藏安装清单。这样 Skill 入口在 Codex 自己的目录里，完整资源也在入口能找到的位置。
+
+**Claude Code 用户：**把解压出来的 `pivotui` 文件夹复制到 `~/.claude/skills/`，再把 `.pivotui` 复制到用户主文件夹。**DSH 或 Cursor 用户：**把解压出来的 `.agents` 和 `.pivotui` 两个文件夹复制到用户主文件夹，入口为 `~/.agents/skills/pivotui/SKILL.md`。
 
 目标位置已有同名文件夹时，合并内容，保留其他 Skill 和设置；遇到同名文件覆盖提示时，先核对自己是否改过原来的 PivotUI 文件。
 
 **用 npx：加上 `--global`。** 准备好 Node.js 22+ 和 npm/npx 后，在任意文件夹打开终端，执行：
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language zh --global
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language zh --global
 ```
 
-Claude Code 把 `codex` 换成 `claude-code`，DSH 换成 `dsh`，Cursor 换成 `cursor`。英文版使用 `--language en`。如果你设置过 `CLAUDE_CONFIG_DIR` 或 `DSH_AGENTS_HOME`，使用这条命令路线，让安装器设置对应的路径；详见[全局目录与自定义配置](docs/INSTALL.zh-CN.md#global-zip-install)。
+Claude Code 把 `codex` 换成 `claude-code`，DSH 换成 `dsh`，Cursor 换成 `cursor`。英文版使用 `--language en`。Codex 全局默认使用 `$CODEX_HOME/skills`，未设置 `CODEX_HOME` 时使用 `~/.codex/skills`。如果你设置过 `CODEX_HOME`、`CLAUDE_CONFIG_DIR` 或 `DSH_AGENTS_HOME`，使用这条命令路线，让安装器设置对应的路径；显式传入 `--skills-dir` 可以指定入口目录。详见[全局目录与自定义配置](docs/INSTALL.zh-CN.md#global-zip-install)。
 
 任意一种方式完成后，在你使用的本地 Agent 中打开一个项目，新建对话即可使用 **pivotui**。这份安装供当前用户使用；其他账号、远程机器或云端会话需要放到它们各自的安装位置。
 

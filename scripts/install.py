@@ -67,7 +67,9 @@ def source_inventory(edition: str) -> tuple[dict[str, str], str]:
 
 def default_skills_dir(agent: str) -> Path:
     home = Path.home()
-    if agent in {"codex", "cursor"}:
+    if agent == "codex":
+        return Path(os.environ.get("CODEX_HOME") or home / ".codex") / "skills"
+    if agent == "cursor":
         return home / ".agents" / "skills"
     if agent == "claude-code":
         return Path(os.environ.get("CLAUDE_CONFIG_DIR") or home / ".claude") / "skills"

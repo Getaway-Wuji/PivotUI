@@ -141,18 +141,18 @@ The steps below install into one project. To share PivotUI across your projects,
 With **Node.js 22+ and npm/npx** installed, open a terminal in your target project's root and run:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language en
 ```
 
 npx downloads the prepared installation package and runs it. This command does not need Git or Python. The first download may take a while; installation is complete when you see **`Installed PivotUI ...`**. A spinner stopping on its own does not confirm success. For another Agent, use the matching command:
 
 ```sh
 # Claude Code
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent claude-code --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent claude-code --language en
 # DSH / DeepSeek Harness
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent dsh --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent dsh --language en
 # Cursor
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent cursor --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent cursor --language en
 ```
 
 Use `--language zh` for Chinese. The default installation stays in this project: the complete library goes under `.pivotui/libraries/`, and the native entry goes under `.agents/skills/pivotui/` (or `.claude/skills/pivotui/` for Claude Code). Add `--global` for user-wide installation. [Other Agents, custom paths and preview](docs/INSTALL.en.md#command-install).
@@ -189,29 +189,35 @@ Once installed, describe the interface you want to **pivotui** in a new chat in 
 
 **Global means your user account on this computer.** It lets your chosen local Agent use PivotUI across projects, so you do not have to copy it into each new project.
 
-**With a ZIP: copy the two folders into your home folder.** For Codex, DSH or Cursor:
+**For Codex, the global Skill entry goes in `~/.codex/skills/pivotui/SKILL.md`.** On Windows, that is `%USERPROFILE%\.codex\skills\pivotui\SKILL.md`. This follows the directory used by [OpenAI's Skill installer](https://github.com/openai/skills/blob/main/skills/.system/skill-installer/SKILL.md). The complete cluster resources are stored separately under `~/.pivotui/libraries/`.
 
-1. Extract the ZIP and open the extracted `PivotUI-English` or `PivotUI-Chinese` folder.
-2. On **Windows**, open File Explorer, type **`%USERPROFILE%`** in its address bar, and press Enter. This opens your user folder. On **macOS or Linux**, open your home folder (`~`).
-3. Copy **both `.agents` and `.pivotui`** from the extracted download into that folder. Keep them together at this level:
+**Install the ZIP globally for Codex:**
+
+1. Extract the ZIP. Inside the extracted `PivotUI-English` or `PivotUI-Chinese` folder, open `.agents`, then `skills`. Copy the whole **`pivotui` folder** you find there.
+2. On **Windows**, open `%USERPROFILE%\.codex\skills` in File Explorer and paste that `pivotui` folder there. Create `.codex` and its `skills` folder if needed. On **macOS or Linux**, use `~/.codex/skills`.
+3. Go back to the extracted download and copy the whole **`.pivotui` folder** into your user home folder: `%USERPROFILE%` on Windows, or `~` on macOS/Linux.
+
+The finished Codex layout is:
 
 ```text
 your-home-folder/
-├── .agents/
-└── .pivotui/
+├── .codex/skills/pivotui/SKILL.md
+└── .pivotui/libraries/
 ```
 
-**Claude Code:** rename `.agents` to `.claude` in the extracted download first, then copy `.claude` and `.pivotui` into your home folder. Leave any existing folders' names as they are.
+Copy the whole `pivotui` folder, including its hidden installation manifest. This puts the Skill entry in Codex's own directory and keeps its complete resources at the location the entry expects.
+
+**Claude Code:** copy the extracted `pivotui` folder to `~/.claude/skills/`, and copy `.pivotui` to your home folder. **DSH or Cursor:** copy the extracted `.agents` and `.pivotui` folders into your home folder; their entry is `~/.agents/skills/pivotui/SKILL.md`.
 
 If folders already exist at the destination, merge their contents and preserve other skills and settings; review same-file overwrite prompts before replacing customized PivotUI files.
 
 **With npx: add `--global`.** With Node.js 22+ and npm/npx installed, run this from any folder:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en --global
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language en --global
 ```
 
-For Claude Code, replace `codex` with `claude-code`; use `dsh` for DSH or `cursor` for Cursor. Use `--language zh` for Chinese. If you set `CLAUDE_CONFIG_DIR` or `DSH_AGENTS_HOME`, use this command route so the installer can choose the correct paths; see [global paths and custom configuration](docs/INSTALL.en.md#global-zip-install).
+For Claude Code, replace `codex` with `claude-code`; use `dsh` for DSH or `cursor` for Cursor. Use `--language zh` for Chinese. The Codex global default is `$CODEX_HOME/skills`, or `~/.codex/skills` when `CODEX_HOME` is not set. If you set `CODEX_HOME`, `CLAUDE_CONFIG_DIR` or `DSH_AGENTS_HOME`, use this command route so the installer can choose the correct paths; an explicit `--skills-dir` overrides the entry directory. See [global paths and custom configuration](docs/INSTALL.en.md#global-zip-install).
 
 After either route, open your chosen local Agent and start a new chat in a project to use **pivotui**. This installation serves the current user; other accounts, remote machines and cloud sessions have their own installation locations.
 
