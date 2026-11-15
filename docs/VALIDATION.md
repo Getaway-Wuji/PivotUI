@@ -62,3 +62,21 @@ Both project ZIPs contain **1,914 files**: the unchanged complete edition, nativ
 The two project ZIPs and their separate checksum file supplement the release. All six uploaded asset digests matched the local files, including the original English/Chinese ZIPs and their unchanged checksum file. The existing download route remains available.
 
 两份项目 ZIP 和单独的校验文件作为额外附件发布。六个已上传附件的哈希均与本地文件一致，包括原来的中英文 ZIP 及其未修改的校验文件；原下载方式继续保留。
+
+## Clearer copy guide and direct npm package / 简化复制说明与直接 npm 安装包
+
+The copy guide now starts with copying the two complete folders into the project. README, installation-guide and packaged-guide pairs were reviewed for equivalent steps, including existing-folder merges and renaming only the extracted copy for Claude Code. The project archives use a new `-r2` filename. Each contains 1,914 files and was checked against the original project archive: only `INSTALL.md` changed. An existing user-copied English installation was independently verified against all 1,911 baseline hashes, its 27 module entrypoints, entry digest and relative resource links.
+
+复制说明改为先让用户把两个完整文件夹复制到项目。README、安装指南和包内说明的中英文步骤经过对应检查，包括合并已有目录、Claude Code 仅重命名解压副本。新项目压缩包使用 `-r2` 文件名，每份包含 1,914 个文件；与原项目包逐文件比较，只有 `INSTALL.md` 改变。另对用户实际手动复制的英文安装进行了独立检查：全部 1,911 个资源哈希、27 个模块入口、入口哈希和相对资源链接均正确。
+
+One reported source-route attempt ended with npm exit code 128. The retained log contains no detailed error, so it does not establish whether that attempt failed because of transport, Git or interruption. The preferred command now uses a fixed Release `.tgz` through explicit `--package=URL pivotui`, removing the Git fetch and local source-packaging stages. The packaged contents were checked against both complete edition baselines, including the fixed `.gitignore` mapping. This does not promise that network downloads cannot fail or that first installation is instantaneous.
+
+一次被报告的源码路线安装最终以 npm 错误码 128 退出，保留的日志没有详细错误，无法据此确定是传输、Git 还是中断造成。首选命令现在通过显式 `--package=URL pivotui` 获取固定 Release `.tgz`，移除 Git 获取和现场源码打包步骤。发布包内容已核对两套完整版本基线，包括固定 `.gitignore` 恢复映射。这不代表网络下载不会失败，也不承诺首次安装立即完成。
+
+The actual public Release URL completed installation in a new temporary Windows project with a fresh npm cache and npm's Git executable deliberately pointed at a nonexistent file. Independent output checks matched all 1,911 Chinese resource hashes, the entry digest and 27 module entrypoints. All 11 release asset digests matched local artifacts. npm still fetched the same tarball through multiple temporary GitHub asset URLs during the first run, so this verification does not claim one HTTP request or guaranteed cache reuse. It verifies file installation, not Agent-side task execution.
+
+公开 Release URL 已在 Windows 全新临时项目和独立 npm 缓存中实际安装成功，测试还故意将 npm 的 Git 可执行文件指向不存在的位置。独立输出检查确认了全部 1,911 个中文资源哈希、入口哈希及 27 个模块入口。发布页全部 11 个附件的哈希均与本地产物一致。首次运行时，npm 仍通过多个 GitHub 临时附件地址获取了相同包，因此此验证不宣称只有一次 HTTP 请求或缓存必定复用。验证范围是文件安装，不是 Agent 内的任务执行。
+
+A second run of the same command against the same temporary project and npm cache also completed successfully with Git unavailable. It took 102.35 seconds, including a logged network fetch; the installer again reported all 1,911 files verified. Repeated installation is supported, but this observation is not evidence of fully offline reuse.
+
+对相同临时项目和 npm 缓存再次执行同一命令，在 Git 不可用的情况下也安装成功。耗时 102.35 秒，其中包含一次日志记录的网络获取；安装器再次确认全部 1,911 个文件通过校验。重复安装可用，但该结果不代表完全离线复用。

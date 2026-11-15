@@ -16,6 +16,7 @@ import release
 
 
 ROOT = Path(__file__).resolve().parents[1]
+PACKAGING_REVISION = 2
 
 
 def project_files(edition: str, language: str) -> dict[str, bytes]:
@@ -66,11 +67,11 @@ def main() -> None:
         archive_root = f"PivotUI-{edition}"
         data = release.archive_bytes(archive_root, files)
         release.verify_archive(data, archive_root, files)
-        name = f"PivotUI-{edition}-project-v{release.VERSION}.zip"
+        name = f"PivotUI-{edition}-project-v{release.VERSION}-r{PACKAGING_REVISION}.zip"
         pending[ROOT / "dist" / name] = data
         print(f"Verified {name}: {len(files)} files, relative entry paths, unchanged edition resources.")
     checksums = "".join(f"{release.digest(data)}  {path.name}\n" for path, data in pending.items())
-    pending[ROOT / "dist" / f"PROJECT-CHECKSUMS-v{release.VERSION}.sha256"] = checksums.encode("utf-8")
+    pending[ROOT / "dist" / f"PROJECT-CHECKSUMS-v{release.VERSION}-r{PACKAGING_REVISION}.sha256"] = checksums.encode("utf-8")
     for path, data in pending.items():
         if path.exists() and path.read_bytes() != data:
             raise release.ReleaseError(f"Refusing to replace a different published project archive: {path.name}")

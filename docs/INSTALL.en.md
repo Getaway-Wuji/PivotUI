@@ -10,25 +10,27 @@ Install one complete language edition and a native **pivotui** Skill entry. Choo
 
 ## Option 1: One npx command
 
-Requires **Node.js 22+, npm/npx and Git**. Run the command in the **target project's root**, in the environment where the Agent runs:
+Requires **Node.js 22+ and npm/npx**. Run the command in the **target project's root**, in the environment where the Agent runs:
 
 ```sh
-npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en
 ```
 
-npx obtains the installer from GitHub and runs it. There is no manual clone step, Python script or MCP setup. The same command works in Windows, macOS and Linux terminals with the required tools installed. Git is used to obtain the GitHub package automatically.
+npx downloads a prepared release package and runs its installer. This command does not require Git, Python or MCP setup. Use the same command in Windows, macOS and Linux terminals with Node.js and npm/npx installed.
+
+The first run downloads the complete installation package and may take a while. Wait for **`Installed PivotUI ...`** to confirm installation. A spinner stopping or the terminal returning to its prompt does not by itself confirm success. If it fails, keep the displayed error and see [troubleshooting](#npx-troubleshooting).
 
 Choose the Agent you use:
 
 ```sh
 # Claude Code
-npx --yes github:Getaway-Wuji/PivotUI --agent claude-code --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent claude-code --language en
 # DSH / DeepSeek Harness
-npx --yes github:Getaway-Wuji/PivotUI --agent dsh --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent dsh --language en
 # Cursor
-npx --yes github:Getaway-Wuji/PivotUI --agent cursor --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent cursor --language en
 # Another host that supports local SKILL.md packages
-npx --yes github:Getaway-Wuji/PivotUI --agent generic --language en --skills-dir "<your-agent-skills-directory>"
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent generic --language en --skills-dir "<your-agent-skills-directory>"
 ```
 
 Use `--language zh` for Chinese. This selects the authored instructions; upstream packages retain their original language. For `generic`, supply the actual host skills directory. The installer creates its `pivotui/` subdirectory.
@@ -46,31 +48,31 @@ By default, installation is scoped to the current project:
 The complete library is kept under `.pivotui/libraries/`. Run from the project root or select it explicitly:
 
 ```sh
-npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en --project "<target-project-directory>"
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en --project "<target-project-directory>"
 ```
 
 For a user-wide installation available across projects, add `--global` instead:
 
 ```sh
-npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en --global
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en --global
 ```
 
 User-wide library storage is `~/.pivotui/libraries/`. Codex and Cursor use `~/.agents/skills/pivotui/`; DSH uses the same shared directory, respecting `DSH_AGENTS_HOME`. Claude Code uses `~/.claude/skills/pivotui/`, respecting `CLAUDE_CONFIG_DIR`. Some hosts read other tools' compatibility directories too; keep one chosen language entry visible to a host.
 
-Official discovery references: [Codex Skills](https://developers.openai.com/codex/skills), [Claude Code Skills](https://code.claude.com/docs/en/skills) and [configuration directory](https://code.claude.com/docs/en/claude-directory.md), [DSH Skills](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.md), and [Cursor Skills](https://cursor.com/docs/skills). The [npm package specification](https://docs.npmjs.com/cli/v11/using-npm/package-spec) and [npx reference](https://docs.npmjs.com/cli/v11/commands/npx) describe GitHub package execution.
+Official discovery references: [Codex Skills](https://developers.openai.com/codex/skills), [Claude Code Skills](https://code.claude.com/docs/en/skills) and [configuration directory](https://code.claude.com/docs/en/claude-directory.md), [DSH Skills](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.md), and [Cursor Skills](https://cursor.com/docs/skills). The [npm package specification](https://docs.npmjs.com/cli/v11/using-npm/package-spec) and [npx reference](https://docs.npmjs.com/cli/v11/commands/npx) describe package URLs and command execution.
 
 ### Preview and custom directories
 
 Preview destinations and validate the source without installing files into the project:
 
 ```sh
-npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en --dry-run
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en --dry-run
 ```
 
 npx may still download its package into the npm cache. Override the library store and/or entry directory when needed:
 
 ```sh
-npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en --install-dir "<library-storage-directory>" --skills-dir "<your-agent-skills-directory>"
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en --install-dir "<library-storage-directory>" --skills-dir "<your-agent-skills-directory>"
 ```
 
 Replace placeholders with real paths and retain quotes around paths with spaces. Keep the complete library available to the Agent. A local install is not automatically available in a remote machine or cloud session.
@@ -79,32 +81,44 @@ The installer preserves other skills, project instructions and MCP settings. It 
 
 <a id="zip-install"></a>
 
-## Option 2: Download a ZIP and copy it into your project
+## Option 2: Download a ZIP and copy two folders
 
-This route requires no npx, Git or Python installation step. Download one project-ready archive:
+For **Codex, DSH or Cursor**, installation means copying **`.agents` and `.pivotui` together into your project folder**. You do not need to run a command.
 
-- [PivotUI English project ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0.zip)
-- [PivotUI Chinese project ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0.zip)
+### Copy the folders
 
-After extraction, open its outer `PivotUI-English/` or `PivotUI-Chinese/` folder. It contains:
+Download one ZIP:
+
+- [PivotUI English project ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0-r2.zip)
+- [PivotUI Chinese project ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0-r2.zip)
+
+1. Extract the ZIP. Open the extracted `PivotUI-English` or `PivotUI-Chinese` folder. You will see `.agents`, `.pivotui`, and `INSTALL.md`.
+2. Select **both `.agents` and `.pivotui`**, copy them, and paste them into the folder for your project. Copy the whole folders, without opening them or picking out files inside.
+3. Open that project in your Agent, start a new chat, and select **pivotui**.
+
+Here is what you should see in your project after copying:
 
 ```text
-PivotUI-English/ or PivotUI-Chinese/
-├── .agents/skills/pivotui/    Native entry and installation manifest
-├── .pivotui/libraries/       Complete selected edition and resources
-└── INSTALL.md               Copy instructions
+your-project/
+├── .agents/
+└── .pivotui/
 ```
 
-Dot-prefixed folders and the hidden manifest must be copied too. Enable hidden-file display in your file manager if needed.
+**Which folder is my project folder?** It is the outermost folder you open in your Agent. If it already contains `src` or `package.json`, paste the two folders beside them. A new, empty project folder is fine too. Copy the two folders themselves, not the outer `PivotUI-English` or `PivotUI-Chinese` folder.
 
-1. Merge `.pivotui/libraries/` from the archive into `<your-project>/.pivotui/libraries/`. Keep the complete edition directory and its contents together.
-2. **Codex / DSH / Cursor:** copy the archive's complete `.agents/skills/pivotui/` folder into `<your-project>/.agents/skills/pivotui/`.
-3. **Claude Code:** instead copy that same `pivotui/` folder into `<your-project>/.claude/skills/pivotui/`. Do not also copy it into `.agents/skills/` for the same host. The two destinations have the same directory depth, so the packaged relative resource paths remain valid.
-4. Open a new Agent session in that project and select **pivotui**.
+That completes the file installation. PivotUI is installed for **the project you copied it into**. Keep both folders together when moving the project. You do not need to copy `INSTALL.md` or run anything inside the downloaded ZIP.
 
-Merge only PivotUI's subfolders. Do not replace the project's entire `.agents/`, `.claude/`, `.pivotui/` or settings directories. If an existing PivotUI entry has local edits, preserve and review those edits before replacing it. Copy the whole entry folder, not only `SKILL.md`, and retain the library's original structure and license notices.
+If `.agents` and `.pivotui` are not visible in the extracted folder, turn on your file manager's hidden-file display. If your project already has folders with these names, merge their contents and keep its other files. If asked to overwrite a file with the same name, check whether you have changed the existing PivotUI file before replacing it; do not replace the project's entire settings folder.
 
-The outer `PivotUI-English/` or `PivotUI-Chinese/` folder is just the download wrapper; do not add that extra directory level between your project and `.agents/` or `.pivotui/`. A custom host directory at a different depth needs adjusted resource paths; use the npx installer's `--skills-dir` option for that case.
+### If you use Claude Code
+
+1. In the **extracted download**, rename `.agents` to `.claude`.
+2. Copy **`.claude` and `.pivotui` together** into your project folder.
+3. Open that project in Claude Code, start a new chat, and select **pivotui**.
+
+Rename only the folder in the extracted download, not an existing `.agents` folder in your project. If your project already has `.claude`, merge the downloaded files into it: the PivotUI files go under `.claude/skills/pivotui/`, alongside your other skills and settings. Keep those other files. You do not need to copy another PivotUI entry into `.agents` for Claude Code.
+
+For other Agents that require a different folder location, use the [custom directory option](#command-install) so the installer can set up the correct file paths.
 
 ### Start using PivotUI
 
@@ -374,10 +388,14 @@ python scripts/install.py --agent codex --language en
 
 Use `python3` on macOS/Linux. This older installer defaults to user-wide directories, unlike the project-scoped npx default. Keep its previous `--skills-dir` and `--install-dir` values when maintaining an existing installation. For new installations, use either main route above.
 
+<a id="npx-troubleshooting"></a>
+
 ## Troubleshooting
 
 | Symptom | What to check |
 | --- | --- |
+| npx only shows a spinner | It may still be downloading. Wait for `Installed PivotUI ...`; use the verbose command below if you need to retry and capture details |
+| npx exits with code `128` | Keep the full error and log; the number alone does not identify the cause. If you used the older GitHub-source command, retry with the release-package command above |
 | Native `pivotui` entry is missing | Start a new session; check the printed entry path and the host's actual skills directory; use `--skills-dir` for a custom location |
 | Installer reports an edited entry | Preserve your edits before reinstalling; it will not overwrite a customized `SKILL.md` |
 | `ModuleNotFoundError` with MCP | The configured executable must be the virtual environment where `requirements.txt` was installed |
@@ -389,15 +407,29 @@ Use `python3` on macOS/Linux. This older installer defaults to user-wide directo
 | Host tries to load everything | Add the standing instruction above; discover metadata first and read only selected entries/resources |
 | Instructions load but images/code do not appear | Check the requested deliverable and the host's actual image, file-editing, runtime or browser capabilities |
 
-## Updating
+When retrying a failed download, this command prints more detail. Keep any Agent, language or destination options you need. npm's `--loglevel=verbose` and `--timing` options must come **before `--package`**:
 
-For npx installations, rerun the same command with the same Agent, language and scope. Preserve any `--project`, `--global`, `--install-dir` or `--skills-dir` choices:
+```sh
+npx --yes --loglevel=verbose --timing --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en
+```
+
+Verbose output shows requests and stages, not necessarily a live download percentage. There is no need to interrupt a download that is still progressing just to add logging.
+
+The older GitHub-source command remains available as an alternative. It **requires Git** and may fetch the repository more than once, so prefer the release-package command above:
 
 ```sh
 npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en
 ```
 
-The installer verifies the new source and updates its managed entry while retaining previous library copies. An edited entry or a conflicting existing target library is reported rather than silently overwritten.
+## Updating
+
+For npx installations, use the latest release-package command from this guide, keeping the same Agent, language and scope. Preserve any `--project`, `--global`, `--install-dir` or `--skills-dir` choices. The current package is:
+
+```sh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en
+```
+
+The URL selects a specific published package; repeating an older URL does not fetch a newer release. The installer verifies the selected package and updates its managed entry while retaining previous library copies. An edited entry or a conflicting existing target library is reported rather than silently overwritten.
 
 For project-ready ZIP installations, download the newer project ZIP and merge its complete library and chosen native entry into the same locations. Review any local PivotUI edits first, and retain other skills and project settings. For legacy Python installs, update the checkout and rerun the older command with the same destinations.
 

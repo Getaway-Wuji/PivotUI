@@ -136,36 +136,50 @@ Use PivotUI with **Codex, Claude Code, DSH (DeepSeek Harness), Cursor, or anothe
 
 ### Option 1: Install with one npx command
 
-With **Node.js 22+, npm/npx and Git** installed, open a terminal in your target project's root and run:
+With **Node.js 22+ and npm/npx** installed, open a terminal in your target project's root and run:
 
 ```sh
-npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en
 ```
 
-npx fetches the installer automatically. You do not need to clone the repository yourself or run Python. For another Agent, use the matching command:
+npx downloads the prepared installation package and runs it. This command does not need Git or Python. The first download may take a while; installation is complete when you see **`Installed PivotUI ...`**. A spinner stopping on its own does not confirm success. For another Agent, use the matching command:
 
 ```sh
 # Claude Code
-npx --yes github:Getaway-Wuji/PivotUI --agent claude-code --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent claude-code --language en
 # DSH / DeepSeek Harness
-npx --yes github:Getaway-Wuji/PivotUI --agent dsh --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent dsh --language en
 # Cursor
-npx --yes github:Getaway-Wuji/PivotUI --agent cursor --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent cursor --language en
 ```
 
 Use `--language zh` for Chinese. The default installation stays in this project: the complete library goes under `.pivotui/libraries/`, and the native entry goes under `.agents/skills/pivotui/` (or `.claude/skills/pivotui/` for Claude Code). Add `--global` for user-wide installation. [Other Agents, custom paths and preview](docs/INSTALL.en.md#command-install).
 
-### Option 2: Download a ZIP and install it yourself
+### Option 2: Download a ZIP and copy two folders
 
-Download one **project-ready ZIP**: [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0.zip) · [Chinese](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0.zip).
+Download one **project-ready ZIP**: [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0-r2.zip) · [Chinese](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0-r2.zip).
 
-1. Extract it and open the outer `PivotUI-English/` or `PivotUI-Chinese/` folder. Show dot-prefixed folders if your file manager hides them.
-2. Copy its `.pivotui/` contents into the same location at your project's root, keeping the complete library together.
-3. For **Codex, DSH or Cursor**, copy `.agents/skills/pivotui/` to your project's `.agents/skills/pivotui/`. For **Claude Code**, copy that same `pivotui/` folder to `.claude/skills/pivotui/` instead; its directory depth stays the same.
+For **Codex, DSH or Cursor**:
 
-Merge only PivotUI's folders and preserve other project skills and settings. Copy the whole `pivotui/` folder, including its hidden manifest; do not install both Agent entries for the same host. This route needs no installation command. The ZIP includes `INSTALL.md`; see also [manual project installation](docs/INSTALL.en.md#zip-install).
+1. Extract the ZIP, then open the extracted `PivotUI-English` or `PivotUI-Chinese` folder.
+2. Select **both `.agents` and `.pivotui`**, copy them, then paste them into your project folder. Copy the whole folders; you do not need to open them first.
+3. Open that project in your Agent, start a new chat, and select **pivotui**.
 
-Open a new Agent session, select **pivotui**, and describe the interface you want. No MCP setup or manual prompt installation is needed for either route.
+The result should look like this:
+
+```text
+your-project/
+├── .agents/
+└── .pivotui/
+```
+
+Your project folder means its outermost folder, the one you open in your Agent. Put these folders beside any existing project files. The copy installs PivotUI for **that project**; no installation command is needed.
+
+**Claude Code:** before copying, rename `.agents` to `.claude` **inside the extracted download**, then copy `.claude` and `.pivotui` into your project. Do not rename an existing folder in your project.
+
+If your project already has folders with these names, merge their contents and keep its other files. Review any same-file overwrite prompt before replacing your existing PivotUI files. If the two folders are hidden, enable hidden-file display. The ZIP includes `INSTALL.md`; see [step-by-step copy instructions](docs/INSTALL.en.md#zip-install).
+
+Once installed, describe the interface you want to **pivotui** in a new chat in that project.
 
 The original complete-edition downloads remain available for raw-file or MCP use: [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip) · [Chinese ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip). See the [installation guide](docs/INSTALL.en.md) and [verification record](docs/VALIDATION.md) for details.
 

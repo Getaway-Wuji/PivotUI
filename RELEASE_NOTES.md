@@ -1,8 +1,24 @@
 # PivotUI v0.4.0
 
-安装方式补充：现在可在目标项目中运行 `npx --yes github:Getaway-Wuji/PivotUI --agent codex --language zh`。新增 `PivotUI-Chinese-project-v0.4.0.zip` 与 `PivotUI-English-project-v0.4.0.zip`，供解压后直接复制项目文件夹；对应校验文件为 `PROJECT-CHECKSUMS-v0.4.0.sha256`。原来的两份完整语言版 ZIP 与 `CHECKSUMS.sha256` 均保留，下面记录的集群内容不变。
+安装说明更新：Codex、DSH、Cursor 用户解压项目安装包后，**把 `.agents` 和 `.pivotui` 两个文件夹一起复制到项目文件夹，就装好了**。Claude Code 用户先在解压副本里把 `.agents` 改名成 `.claude`，再复制这两个文件夹。新的 `PivotUI-Chinese-project-v0.4.0-r2.zip` 与 `PivotUI-English-project-v0.4.0-r2.zip` 简化了包内说明，校验文件为 `PROJECT-CHECKSUMS-v0.4.0-r2.sha256`；集群文件和入口未变，已经安装好的项目不用重装。原有全部 ZIP 和校验文件继续保留。
 
-Installation update: run `npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en` in your target project, or download an additional `PivotUI-English-project-v0.4.0.zip` / `PivotUI-Chinese-project-v0.4.0.zip` and copy its project folders. Verify these new archives with `PROJECT-CHECKSUMS-v0.4.0.sha256`. The original single-edition ZIPs and `CHECKSUMS.sha256` remain available; the cluster content described below is unchanged.
+命令安装改为直接获取已发布的 npm 安装包，无需 Git 获取源码：
+
+```sh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language zh
+```
+
+需要 Node.js 22+ 和 npm/npx。首次下载仍可能较慢，成功后会显示 `Installed PivotUI ...`。安装包校验文件为 `NPX-CHECKSUMS-v0.4.0-r2.sha256`。其他 Agent、英文版及排障步骤见仓库安装指南。
+
+Installation guide update: for Codex, DSH and Cursor, **extract the project ZIP and copy both `.agents` and `.pivotui` into your project folder**. For Claude Code, rename `.agents` to `.claude` in the extracted download before copying the two folders. `PivotUI-English-project-v0.4.0-r2.zip` and `PivotUI-Chinese-project-v0.4.0-r2.zip` contain simpler copy instructions; verify them with `PROJECT-CHECKSUMS-v0.4.0-r2.sha256`. The library and entry files are unchanged, so existing installations do not need reinstalling. All earlier ZIPs and checksums remain available.
+
+Command installation now fetches the published npm package directly, without Git source fetching:
+
+```sh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en
+```
+
+Requires Node.js 22+ and npm/npx. The first download can still be slow; success prints `Installed PivotUI ...`. The package checksum file is `NPX-CHECKSUMS-v0.4.0-r2.sha256`. See the repository installation guide for other Agents, the Chinese edition, and troubleshooting.
 
 PivotUI 首次公开发行：通过统一管理入口按需选择设计 Skill，让使用者专注描述需求。
 

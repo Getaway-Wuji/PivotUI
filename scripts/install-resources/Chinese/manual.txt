@@ -1,35 +1,36 @@
-# 复制文件夹安装 PivotUI
+# 安装 PivotUI：复制两个文件夹就行
 
-本压缩包包含一套完整语言版本及原生 `pivotui` 入口。复制这些文件不需要 npm、Git、Python 或 MCP 配置；Agent 仍需具备具体设计任务要求的工具。
+## 如果你用 Codex、DSH / DeepSeek Harness 或 Cursor
 
-1. 解压压缩包。名称以点开头的文件夹也要保留；如果文件管理器隐藏它们，请显示隐藏文件。
-2. 将解压出的 `.pivotui/` 文件夹复制到目标项目的根目录。里面包含完整集群、参考资料、嵌套模块、MCP 源码和许可声明，请保留内部结构。
-3. 将解压出的 `.agents/skills/pivotui/` 文件夹复制到**同一个项目内**对应的位置：
+1. **解压 ZIP**，打开解压出来的 `PivotUI-Chinese` 或 `PivotUI-English` 文件夹。里面有 `.agents`、`.pivotui` 和这份说明。
+2. **把 `.agents` 和 `.pivotui` 两个文件夹，一起复制到你的项目文件夹里。** 选中这两个文件夹，复制，再打开你的项目文件夹，粘贴。整个文件夹复制过去就行，不用点进去，也不用单独搬里面的文件。
+3. **在 Agent 里打开这个项目，新建一个对话。** 选择 `pivotui`，然后告诉它你要做什么界面。
 
-| Agent | 目标位置 |
-| --- | --- |
-| Codex、DSH / DeepSeek Harness、Cursor | `.agents/skills/pivotui/` |
-| Claude Code | `.claude/skills/pivotui/` |
-
-只复制 PivotUI 对应的文件夹，保留已有项目文件、其他 Skill 和设置。如果目标位置已有自定义过的 PivotUI，请先保留自己的版本，再决定是否替换。Claude Code 使用 `.claude` 目标，不要额外安装第二份 `.agents` 入口。
-
-4. 在项目中打开新的 Agent 会话，选择 **pivotui**。管理入口会按需读取集群中的 27 个模块入口。
-
-Codex / DSH / Cursor 安装后的目录如下：
+复制完以后，你的项目看起来应该是这样：
 
 ```text
 你的项目/
-├── .agents/skills/pivotui/
-│   ├── SKILL.md
-│   └── .pivotui-install.json
-└── .pivotui/libraries/{{LIBRARY_NAME}}/
-    ├── orchestration/
-    ├── page-design/
-    ├── design-system/
-    ├── mcp/
-    └── ...其余全部版本文件
+├── .agents/
+├── .pivotui/
+└── 你原来的其他项目文件（如果有）
 ```
 
-Claude Code 将上面的 `.agents` 换成 `.claude` 即可。入口使用相对路径，移动项目时两个文件夹需要一起移动。其他深度的自定义 skills 目录需要调整入口路径，这种情况可以使用命令安装器的 `--skills-dir` 参数。
+**这样就装好了。没有额外的安装按钮，也不用运行命令。**
 
-[版本清单](.pivotui/libraries/{{LIBRARY_NAME}}/README.md)列出全部模块；[项目许可](.pivotui/libraries/{{LIBRARY_NAME}}/LICENSE)及[第三方声明](.pivotui/libraries/{{LIBRARY_NAME}}/THIRD_PARTY_NOTICES.md)随完整版本保留。本包是原单语言 ZIP 的补充，不需要另外下载原包。
+**“项目文件夹”是哪个？** 就是你平时在编程工具里打开、用来做这个项目的最外层文件夹。里面可能有 `package.json`、`src` 等文件或文件夹；刚建的空项目也可以。把上面两个文件夹直接放进去，不要再多套一层 `PivotUI-Chinese` 或 `PivotUI-English`。复制到哪个项目，就在那个项目里使用。
+
+**项目里已经有 `.agents` 或 `.pivotui` 怎么办？** 合并进去，保留原来的其他 Skill 和设置。如果提示要覆盖同名文件，先看是不是以前安装的 PivotUI 文件；自己改过的内容先保留，再决定是否覆盖。
+
+## 如果你用 Claude Code
+
+1. 在**刚解压出来的下载文件夹里**，把 `.agents` 改名成 `.claude`。
+2. 把 `.claude` 和 `.pivotui` 一起复制到你的项目文件夹里。如果项目里已有 `.claude`，就合并进去，保留里面原来的其他文件。不要去改项目里原有 `.agents` 文件夹的名字。
+3. 在 Claude Code 里打开这个项目，新建一个对话，选择 `pivotui`。
+
+## 想确认有没有复制完整
+
+Codex、DSH 和 Cursor 的项目里应该有 `.agents/skills/pivotui/SKILL.md`；Claude Code 对应的是 `.claude/skills/pivotui/SKILL.md`。完整集群放在 `.pivotui/libraries/{{LIBRARY_NAME}}/` 里。
+
+以后移动项目时，这两个文件夹也要一起带走。如果解压后看不到它们，请在文件管理器里打开“显示隐藏文件”，再找一下。
+
+一个 `pivotui` 入口会按需选择集群中的 27 个模块入口。需要了解内容时，可查看[模块清单](.pivotui/libraries/{{LIBRARY_NAME}}/README.md)、[项目许可](.pivotui/libraries/{{LIBRARY_NAME}}/LICENSE)和[第三方声明](.pivotui/libraries/{{LIBRARY_NAME}}/THIRD_PARTY_NOTICES.md)。不用再下载其他 PivotUI 压缩包。
