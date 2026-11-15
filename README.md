@@ -134,6 +134,8 @@ English/ 或 Chinese/
 
 支持 **Codex、Claude Code、DSH（DeepSeek Harness）、Cursor 和其他兼容 Agent**。选择下面任意一种安装方式即可：两种方式都会提供一个原生 **pivotui** 入口，按任务读取完整集群中的 **27 个模块入口**。
 
+下面先介绍只装到一个项目里的方法。如果想让多个项目都能用，直接看[全局安装](#global-install)。npx 和压缩包两种方式都支持。
+
 ### 方式一：一条 npx 命令安装
 
 准备好 **Node.js 22+ 和 npm/npx**，在目标项目根目录打开终端，执行：
@@ -157,7 +159,7 @@ npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0
 
 ### 方式二：下载 ZIP，复制两个文件夹
 
-下载一套**项目安装 ZIP**：[中文版](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0-r2.zip) · [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0-r2.zip)。
+下载一套**安装 ZIP**：[中文版](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0-r2.zip) · [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0-r2.zip)。同一个 ZIP 既可以只装到一个项目，也可以[全局安装](#global-install)。
 
 如果你用的是 **Codex、DSH 或 Cursor**：
 
@@ -180,6 +182,38 @@ npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0
 项目里已有同名文件夹时，合并内容，保留其他文件。若提示覆盖同名文件，先核对是否要替换自己原有的 PivotUI 文件。看不到这两个文件夹时，打开“显示隐藏文件”。压缩包里附有 `INSTALL.md`，也可查看[一步步复制说明](docs/INSTALL.zh-CN.md#zip-install)。
 
 安装完成后，在这个项目的新对话中选择 **pivotui**，描述你要做的界面即可。
+
+<a id="global-install"></a>
+
+### 全局安装：装一次，多个项目共用
+
+**全局指的是当前电脑上的当前用户。** 安装后，你使用的本地 Agent 可以在不同项目中使用 PivotUI，新建项目时不用再复制一遍。
+
+**用压缩包：把两个文件夹放进“用户文件夹”。** Codex、DSH 或 Cursor 用户这样做：
+
+1. 解压 ZIP，打开解压出来的 `PivotUI-Chinese` 或 `PivotUI-English` 文件夹。
+2. **Windows：**打开文件资源管理器，在上方地址栏输入 **`%USERPROFILE%`**，按回车，就进入了你的用户文件夹。**macOS / Linux：**打开用户主文件夹（`~`）。
+3. 把解压出来的 **`.agents` 和 `.pivotui` 两个文件夹一起复制进去**，放成这样：
+
+```text
+你的用户文件夹/
+├── .agents/
+└── .pivotui/
+```
+
+**Claude Code 用户：**先在解压副本里把 `.agents` 改名为 `.claude`，再将 `.claude` 和 `.pivotui` 一起复制到用户文件夹。不要改已有文件夹的名字。
+
+目标位置已有同名文件夹时，合并内容，保留其他 Skill 和设置；遇到同名文件覆盖提示时，先核对自己是否改过原来的 PivotUI 文件。
+
+**用 npx：加上 `--global`。** 准备好 Node.js 22+ 和 npm/npx 后，在任意文件夹打开终端，执行：
+
+```sh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language zh --global
+```
+
+Claude Code 把 `codex` 换成 `claude-code`，DSH 换成 `dsh`，Cursor 换成 `cursor`。英文版使用 `--language en`。如果你设置过 `CLAUDE_CONFIG_DIR` 或 `DSH_AGENTS_HOME`，使用这条命令路线，让安装器设置对应的路径；详见[全局目录与自定义配置](docs/INSTALL.zh-CN.md#global-zip-install)。
+
+任意一种方式完成后，在你使用的本地 Agent 中打开一个项目，新建对话即可使用 **pivotui**。这份安装供当前用户使用；其他账号、远程机器或云端会话需要放到它们各自的安装位置。
 
 原来的完整语言版压缩包也保留，供原始文件或 MCP 接入使用：[中文版 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip) · [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip)。详见[安装指南](docs/INSTALL.zh-CN.md)和[验证记录](docs/VALIDATION.md)。
 

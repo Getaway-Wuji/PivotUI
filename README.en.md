@@ -134,6 +134,8 @@ Internal and external packages share functional categories. Their origin is docu
 
 Use PivotUI with **Codex, Claude Code, DSH (DeepSeek Harness), Cursor, or another compatible Agent**. Choose one of the two installation routes below. Both provide one native **pivotui** entry that reads the complete library's **27 module entrypoints** as needed.
 
+The steps below install into one project. To share PivotUI across your projects, go straight to [global installation](#global-install). Both npx and the ZIP support it.
+
 ### Option 1: Install with one npx command
 
 With **Node.js 22+ and npm/npx** installed, open a terminal in your target project's root and run:
@@ -157,7 +159,7 @@ Use `--language zh` for Chinese. The default installation stays in this project:
 
 ### Option 2: Download a ZIP and copy two folders
 
-Download one **project-ready ZIP**: [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0-r2.zip) · [Chinese](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0-r2.zip).
+Download one **installation ZIP**: [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0-r2.zip) · [Chinese](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0-r2.zip). The same ZIP works for a single project or [global installation](#global-install).
 
 For **Codex, DSH or Cursor**:
 
@@ -180,6 +182,38 @@ Your project folder means its outermost folder, the one you open in your Agent. 
 If your project already has folders with these names, merge their contents and keep its other files. Review any same-file overwrite prompt before replacing your existing PivotUI files. If the two folders are hidden, enable hidden-file display. The ZIP includes `INSTALL.md`; see [step-by-step copy instructions](docs/INSTALL.en.md#zip-install).
 
 Once installed, describe the interface you want to **pivotui** in a new chat in that project.
+
+<a id="global-install"></a>
+
+### Global installation: install once for your projects
+
+**Global means your user account on this computer.** It lets your chosen local Agent use PivotUI across projects, so you do not have to copy it into each new project.
+
+**With a ZIP: copy the two folders into your home folder.** For Codex, DSH or Cursor:
+
+1. Extract the ZIP and open the extracted `PivotUI-English` or `PivotUI-Chinese` folder.
+2. On **Windows**, open File Explorer, type **`%USERPROFILE%`** in its address bar, and press Enter. This opens your user folder. On **macOS or Linux**, open your home folder (`~`).
+3. Copy **both `.agents` and `.pivotui`** from the extracted download into that folder. Keep them together at this level:
+
+```text
+your-home-folder/
+├── .agents/
+└── .pivotui/
+```
+
+**Claude Code:** rename `.agents` to `.claude` in the extracted download first, then copy `.claude` and `.pivotui` into your home folder. Leave any existing folders' names as they are.
+
+If folders already exist at the destination, merge their contents and preserve other skills and settings; review same-file overwrite prompts before replacing customized PivotUI files.
+
+**With npx: add `--global`.** With Node.js 22+ and npm/npx installed, run this from any folder:
+
+```sh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en --global
+```
+
+For Claude Code, replace `codex` with `claude-code`; use `dsh` for DSH or `cursor` for Cursor. Use `--language zh` for Chinese. If you set `CLAUDE_CONFIG_DIR` or `DSH_AGENTS_HOME`, use this command route so the installer can choose the correct paths; see [global paths and custom configuration](docs/INSTALL.en.md#global-zip-install).
+
+After either route, open your chosen local Agent and start a new chat in a project to use **pivotui**. This installation serves the current user; other accounts, remote machines and cloud sessions have their own installation locations.
 
 The original complete-edition downloads remain available for raw-file or MCP use: [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip) · [Chinese ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip). See the [installation guide](docs/INSTALL.en.md) and [verification record](docs/VALIDATION.md) for details.
 

@@ -4,7 +4,7 @@
 
 安装一套完整语言版本和原生 **pivotui** Skill 入口，可选[一条 npx 命令安装](#command-install)或[下载 ZIP 后自行复制](#zip-install)。两种方式都从 `design-orchestrator` 开始，按任务读取需要的模块。
 
-[可选的原始文件/MCP 接入](#manual-setup) · [旧版 Python 安装器](#legacy-python) · MCP：[Codex](#codex) / [Claude Code](#claude-code) / [DSH](#deepseek-harness) / [其他 Agent](#other-agents)。
+[全局安装：npx](#global-install) / [ZIP](#global-zip-install) · [可选的原始文件/MCP 接入](#manual-setup) · [旧版 Python 安装器](#legacy-python) · MCP：[Codex](#codex) / [Claude Code](#claude-code) / [DSH](#deepseek-harness) / [其他 Agent](#other-agents)。
 
 <a id="command-install"></a>
 
@@ -51,11 +51,15 @@ npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0
 npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language zh --project "<target-project-directory>"
 ```
 
-若希望安装到用户范围，在多个项目之间共用，改为加上 `--global`：
+<a id="global-install"></a>
+
+若希望**全局安装，让本机多个项目共用**，加上 `--global`。这条命令可以在任意文件夹中运行：
 
 ```sh
 npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language zh --global
 ```
+
+这里的**全局是指当前电脑、当前用户账号**，不会自动安装到其他账号、远程机器或云端会话。其他 Agent 将 `codex` 换成 `claude-code`、`dsh` 或 `cursor`，保留 `--global` 即可；不要同时加 `--project`。
 
 用户范围的集群保存在 `~/.pivotui/libraries/`。Codex 和 Cursor 使用 `~/.agents/skills/pivotui/`；DSH 使用同一共享目录，并支持 `DSH_AGENTS_HOME`。Claude Code 使用 `~/.claude/skills/pivotui/`，并支持 `CLAUDE_CONFIG_DIR`。部分宿主还会读取其他工具的兼容目录，请让同一宿主只看到一个所选语言版本的入口。
 
@@ -84,6 +88,8 @@ npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0
 ## 方式二：下载 ZIP，复制两个文件夹
 
 如果你用的是 **Codex、DSH 或 Cursor**，安装就是把 **`.agents` 和 `.pivotui` 两个文件夹一起复制到你的项目里**，不用运行命令。
+
+**同一个 ZIP 也能全局安装**：把这两个文件夹改为复制到你的用户文件夹即可。具体步骤见下方[压缩包全局安装](#global-zip-install)。
 
 ### 按这几步复制
 
@@ -117,6 +123,31 @@ npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0
 3. 在 Claude Code 中打开这个项目，新建一个对话，选择 **pivotui**。
 
 只给解压出来的文件夹改名，不要改项目里原有的 `.agents`。如果项目里已经有 `.claude`，把下载的内容合并进去：PivotUI 的文件放在 `.claude/skills/pivotui/`，保留旁边其他 Skill 和设置。Claude Code 不需要再往 `.agents` 里复制一份 PivotUI。
+
+<a id="global-zip-install"></a>
+
+### 压缩包全局安装：复制一次，多个项目共用
+
+用上面同一份 ZIP 就行。如果你用 **Codex、DSH 或 Cursor**：
+
+1. 解压 ZIP，打开解压出来的 `PivotUI-Chinese` 或 `PivotUI-English` 文件夹。
+2. 打开**你的用户文件夹**。Windows 用户打开文件资源管理器，在地址栏输入 `%USERPROFILE%`，按回车。macOS 或 Linux 用户打开自己的主文件夹，路径通常写作 `~`。
+3. 把解压出来的 **`.agents` 和 `.pivotui` 两个文件夹一起复制进去**，里面的文件也一起保留。
+4. 在 Agent 里新建对话，选择 **pivotui**。以后本机的各个项目都能使用这份安装，不用再逐个项目复制。
+
+用户文件夹里应该是这样：
+
+```text
+你的用户文件夹/
+├── .agents/
+└── .pivotui/
+```
+
+**Claude Code 用户：**先在**解压出来的文件夹里**把 `.agents` 改名为 `.claude`，再把 `.claude` 和 `.pivotui` 一起复制到同一个用户文件夹。不要给用户文件夹里原有的 `.agents` 改名。
+
+目标位置已有同名文件夹时，合并内容，保留其他 Skill 和设置。遇到同名文件覆盖提示，先核对自己是否改过原有的 PivotUI 文件。两个文件夹直接放在用户文件夹里面，不要多套一层 `PivotUI-Chinese` 或 `PivotUI-English`。
+
+**这种全局安装供当前电脑、当前用户账号使用。** 其他账号、远程机器或云端会话需要各自安装。如果你自定义过 `CLAUDE_CONFIG_DIR` 或 `DSH_AGENTS_HOME`，请改用对应 Agent 的 [npx `--global` 命令](#global-install)，让安装器找到设置好的 Skill 目录，并写入正确的集群路径。
 
 其他 Agent 如果要求不同的文件夹位置，可以使用[自定义目录安装](#command-install)，由安装器设置对应的文件路径。
 

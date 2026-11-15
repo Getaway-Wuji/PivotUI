@@ -4,7 +4,7 @@
 
 Install one complete language edition and a native **pivotui** Skill entry. Choose [one-command npx installation](#command-install) or [download-and-copy ZIP installation](#zip-install). Both start with `design-orchestrator` and read only the modules needed for your task.
 
-[Optional raw files/MCP](#manual-setup) · [Legacy Python installer](#legacy-python) · MCP: [Codex](#codex) / [Claude Code](#claude-code) / [DSH](#deepseek-harness) / [other Agents](#other-agents).
+[Global installation: npx](#global-install) / [ZIP](#global-zip-install) · [Optional raw files/MCP](#manual-setup) · [Legacy Python installer](#legacy-python) · MCP: [Codex](#codex) / [Claude Code](#claude-code) / [DSH](#deepseek-harness) / [other Agents](#other-agents).
 
 <a id="command-install"></a>
 
@@ -51,11 +51,15 @@ The complete library is kept under `.pivotui/libraries/`. Run from the project r
 npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en --project "<target-project-directory>"
 ```
 
-For a user-wide installation available across projects, add `--global` instead:
+<a id="global-install"></a>
+
+For a **global installation shared by your local projects**, add `--global` instead. You can run it from any folder:
 
 ```sh
 npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r2.tgz pivotui --agent codex --language en --global
 ```
+
+Here, **global means the current user account on this computer**. It does not install for other accounts, remote machines or cloud sessions. For another Agent, replace `codex` with `claude-code`, `dsh` or `cursor`; keep `--global`. Do not combine it with `--project`.
 
 User-wide library storage is `~/.pivotui/libraries/`. Codex and Cursor use `~/.agents/skills/pivotui/`; DSH uses the same shared directory, respecting `DSH_AGENTS_HOME`. Claude Code uses `~/.claude/skills/pivotui/`, respecting `CLAUDE_CONFIG_DIR`. Some hosts read other tools' compatibility directories too; keep one chosen language entry visible to a host.
 
@@ -84,6 +88,8 @@ The installer preserves other skills, project instructions and MCP settings. It 
 ## Option 2: Download a ZIP and copy two folders
 
 For **Codex, DSH or Cursor**, installation means copying **`.agents` and `.pivotui` together into your project folder**. You do not need to run a command.
+
+The **same ZIP also supports global installation**: copy the two folders into your user home folder instead. See [global ZIP installation](#global-zip-install) below.
 
 ### Copy the folders
 
@@ -117,6 +123,31 @@ If `.agents` and `.pivotui` are not visible in the extracted folder, turn on you
 3. Open that project in Claude Code, start a new chat, and select **pivotui**.
 
 Rename only the folder in the extracted download, not an existing `.agents` folder in your project. If your project already has `.claude`, merge the downloaded files into it: the PivotUI files go under `.claude/skills/pivotui/`, alongside your other skills and settings. Keep those other files. You do not need to copy another PivotUI entry into `.agents` for Claude Code.
+
+<a id="global-zip-install"></a>
+
+### Install the ZIP globally: copy once for your projects
+
+Use the same ZIP linked above. For **Codex, DSH or Cursor**:
+
+1. Extract the ZIP and open the extracted `PivotUI-English` or `PivotUI-Chinese` folder.
+2. Open **your user home folder**. On Windows, open File Explorer, enter `%USERPROFILE%` in its address bar, and press Enter. On macOS or Linux, open your Home folder, written as `~` in paths.
+3. Copy **both `.agents` and `.pivotui`** from the extracted download into that home folder. Copy the complete folders, including their contents.
+4. Start a new chat in your Agent and select **pivotui**. You can use this copy across your local projects without copying it into each project.
+
+Your home folder should contain:
+
+```text
+your-home-folder/
+├── .agents/
+└── .pivotui/
+```
+
+**For Claude Code:** rename `.agents` to `.claude` **in the extracted download**, then copy both `.claude` and `.pivotui` into the same user home folder. Do not rename an existing `.agents` folder in your home folder.
+
+If these destination folders already exist, merge the contents and keep your other skills and settings. Review any same-file overwrite prompt before replacing a PivotUI file you have edited. Put the two folders directly in your home folder, without the outer `PivotUI-English` or `PivotUI-Chinese` wrapper.
+
+**This is global for your current account on this computer.** Other accounts, remote machines and cloud sessions need their own installation. If you customized `CLAUDE_CONFIG_DIR` or `DSH_AGENTS_HOME`, use the [npx `--global` command](#global-install) with the matching Agent instead; it will find that configured skills directory and set the library link correctly.
 
 For other Agents that require a different folder location, use the [custom directory option](#command-install) so the installer can set up the correct file paths.
 
