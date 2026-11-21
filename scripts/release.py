@@ -20,7 +20,7 @@ from urllib.parse import unquote, urlsplit
 import yaml
 
 
-VERSION = "0.4.0"
+VERSION = "0.4.2"
 EDITIONS = ("English", "Chinese")
 EXCLUDED_DIRECTORIES = {".venv", "__pycache__"}
 HAN = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
@@ -201,11 +201,10 @@ def check_structure(root: Path, editions: dict[str, dict[str, bytes]]) -> None:
                     raise ReleaseError(f"{label}: expected UTF-8 text")
                 continue
             normalized = re.sub(r"\\+", "/", text).casefold()
-            machine_user = os.environ.get("USERNAME", "__no_local_user__").casefold()
-            if re.search(r"/users/" + re.escape(machine_user) + r"(?:/|\b)", normalized):
-                raise ReleaseError(f"{label}: contains a personal build-machine path")
             owner = owning_package(relative, packages[edition])
             upstream = packages[edition].get(owner) == "external"
+            if not upstream and re.search(r"(?:^|[\s(\"'`])(?:[a-z]:/users/|/users/|/home/)(?!your-|example|user(?:/|\b))[^/\s\"'`]+/", normalized):
+                raise ReleaseError(f"{label}: contains a personal build-machine path")
             if edition == "English" and not upstream and path.suffix != ".py" and HAN.search(text):
                 raise ReleaseError(f"{label}: untranslated Han characters in authored English content")
             if path.suffix == ".md":
@@ -304,7 +303,7 @@ def write_release(root: Path, editions: dict[str, dict[str, bytes]]) -> list[Pat
         verify_archive(data, edition, editions[edition])
         destination = root / "dist" / f"PivotUI-{edition}-v{VERSION}.zip"
         pending[destination] = data
-    checksum_path = root / "dist" / "CHECKSUMS.sha256"
+    checksum_path = root / "dist" / f"CHECKSUMS-v{VERSION}.sha256"
     pending[checksum_path] = "".join(f"{digest(data)}  {path.name}\n" for path, data in pending.items()).encode("utf-8")
     # Preflight every output so one immutable-file conflict cannot leave a partial release.
     for path, data in pending.items():

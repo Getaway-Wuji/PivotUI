@@ -9,13 +9,25 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = fs.realpathSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '..'));
 const EDITIONS = { en: 'English', zh: 'Chinese' };
-const AGENTS = new Set(['codex', 'claude-code', 'dsh', 'cursor', 'generic']);
+const AGENTS = new Set([
+  'codex',
+  'claude-code',
+  'dsh',
+  'cursor',
+  'antigravity',
+  'gemini',
+  'windsurf',
+  'opencode',
+  'generic',
+]);
 const EXCLUDED = new Set(['.git', '.venv', '__pycache__', 'node_modules']);
 const MANAGED_BY = 'pivotui-installer-v1';
 const MANIFEST = '.pivotui-install.json';
 // npm omits this nested ignore file even when it is in the files allowlist.
 // Keep the exact bytes as a runtime resource; the release baseline verifies them.
 const NPM_PRESERVED_FILE = 'mcp/skill-cluster/.gitignore';
+const DEDUP_MANIFEST = path.join(ROOT, 'bin', 'npm-resources', 'dedup-edition.json');
+const MANAGED_LIB_NAME = /^(English|Chinese)-[a-f0-9]{16}$/;
 
 class InstallError extends Error {}
 
@@ -74,10 +86,37 @@ function sameHashes(left, right) {
   return Object.keys(left).length === Object.keys(right).length && Object.entries(left).every(([name, hash]) => right[name] === hash);
 }
 
+function readDedupConfig() {
+  const stat = statOrNull(DEDUP_MANIFEST);
+  if (!stat) return null;
+  if (stat.isSymbolicLink() || !stat.isFile()) {
+    throw new InstallError('Invalid deduplication manifest; use a complete, unmodified package.');
+  }
+  let config;
+  try { config = JSON.parse(fs.readFileSync(DEDUP_MANIFEST, 'utf8')); }
+  catch { throw new InstallError('Corrupted deduplication manifest; use a complete, unmodified package.'); }
+  if (!isRecord(config) || typeof config.deduplicated_edition !== 'string' || typeof config.shared_source !== 'string') {
+    throw new InstallError('Invalid deduplication manifest schema.');
+  }
+  return config;
+}
+
 function sourceInventory(edition) {
   const baseline = JSON.parse(fs.readFileSync(path.join(ROOT, 'language-sync.json'), 'utf8'));
   if (!isRecord(baseline) || !isRecord(baseline.files) || typeof baseline.cluster_version !== 'string') {
     throw new InstallError('Invalid release baseline; use a complete, unmodified package.');
+  }
+  const sibling = edition === 'English' ? 'Chinese' : 'English';
+  const editionDir = path.join(ROOT, edition);
+  const siblingDir = path.join(ROOT, sibling);
+  if (!statOrNull(editionDir)) {
+    if (statOrNull(siblingDir)) {
+      const siblingFlag = sibling === 'English' ? 'en' : 'zh';
+      throw new InstallError(
+        `This single-language package only bundles ${sibling}. Pass --language ${siblingFlag}, or download the ${edition} / universal installer tarball.`,
+      );
+    }
+    throw new InstallError(`Expected a real edition directory: ${editionDir}`);
   }
   const expected = {};
   for (const [name, pair] of Object.entries(baseline.files)) {
@@ -86,8 +125,21 @@ function sourceInventory(edition) {
     }
     expected[name] = pair[edition];
   }
-  const actual = inventory(path.join(ROOT, edition));
+  const actual = inventory(editionDir);
   const sourceOverrides = {};
+  const dedup = readDedupConfig();
+  if (dedup && dedup.deduplicated_edition === edition && dedup.shared_source === sibling) {
+    const sharedDir = path.join(ROOT, sibling);
+    const sharedActual = inventory(sharedDir);
+    for (const [name, pair] of Object.entries(baseline.files)) {
+      if (Object.hasOwn(actual, name)) continue;
+      if (pair[edition] !== pair[sibling]) continue;
+      if (Object.hasOwn(sharedActual, name)) {
+        actual[name] = sharedActual[name];
+        sourceOverrides[name] = path.join(sharedDir, name);
+      }
+    }
+  }
   if (!Object.hasOwn(actual, NPM_PRESERVED_FILE)) {
     const preserved = path.join(ROOT, 'bin', 'npm-resources', 'gitignore.txt');
     const stat = statOrNull(preserved);
@@ -117,10 +169,21 @@ function pythonFingerprint(hashes) {
 
 function defaultSkillsDir(agent, project, global) {
   if (agent === 'generic') throw new InstallError('--agent generic requires --skills-dir pointing to the host\'s skill directory.');
-  if (!global) return path.join(project, agent === 'claude-code' ? '.claude' : '.agents', 'skills');
+  if (!global) {
+    if (agent === 'claude-code') return path.join(project, '.claude', 'skills');
+    if (agent === 'antigravity') return path.join(project, '.agent', 'skills');
+    if (agent === 'gemini') return path.join(project, '.gemini', 'skills');
+    if (agent === 'windsurf') return path.join(project, '.windsurf', 'skills');
+    if (agent === 'opencode') return path.join(project, '.opencode', 'skills');
+    return path.join(project, '.agents', 'skills');
+  }
   if (agent === 'codex') return path.join(process.env.CODEX_HOME || path.join(os.homedir(), '.codex'), 'skills');
   if (agent === 'claude-code') return path.join(process.env.CLAUDE_CONFIG_DIR || path.join(os.homedir(), '.claude'), 'skills');
   if (agent === 'dsh') return path.join(process.env.DSH_AGENTS_HOME || path.join(os.homedir(), '.agents'), 'skills');
+  if (agent === 'antigravity') return path.join(os.homedir(), '.gemini', 'antigravity', 'skills');
+  if (agent === 'gemini') return path.join(os.homedir(), '.gemini', 'skills');
+  if (agent === 'windsurf') return path.join(os.homedir(), '.codeium', 'windsurf', 'skills');
+  if (agent === 'opencode') return path.join(os.homedir(), '.config', 'opencode', 'skills');
   return path.join(os.homedir(), '.agents', 'skills');
 }
 
@@ -156,6 +219,25 @@ function removeStaging(staging, parent) {
     throw new InstallError(`Refusing to clean an unexpected staging path: ${staging}`);
   }
   fs.rmSync(resolved, { recursive: true });
+}
+
+function pruneUnusedLibraries(libraryParent, keepLibrary) {
+  const parentStat = statOrNull(libraryParent);
+  if (!parentStat || parentStat.isSymbolicLink() || !parentStat.isDirectory()) return [];
+  const realParent = fs.realpathSync(libraryParent);
+  const keepReal = keepLibrary && statOrNull(keepLibrary) ? fs.realpathSync(keepLibrary) : null;
+  const removed = [];
+  for (const item of fs.readdirSync(realParent, { withFileTypes: true })) {
+    if (!item.isDirectory() || item.isSymbolicLink()) continue;
+    if (!MANAGED_LIB_NAME.test(item.name)) continue;
+    const candidate = path.join(realParent, item.name);
+    const resolved = fs.realpathSync(candidate);
+    if (path.dirname(resolved) !== realParent) continue;
+    if (keepReal && resolved === keepReal) continue;
+    fs.rmSync(resolved, { recursive: true });
+    removed.push(item.name);
+  }
+  return removed;
 }
 
 function installLibrary(source, destination, hashes, sourceOverrides) {
@@ -230,16 +312,56 @@ function installEntry(target, files, old) {
   }
 }
 
+function uninstallEntry(target, old) {
+  if (!sameFiles(checkEntry(target), old)) throw new InstallError('The entry changed before uninstall; rerun after other edits finish.');
+  for (const name of ['SKILL.md', MANIFEST]) {
+    const filename = path.join(target, name);
+    if (statOrNull(filename)) fs.unlinkSync(filename);
+  }
+  if (statOrNull(target) && fs.readdirSync(target).length === 0) {
+    fs.rmdirSync(target);
+  }
+}
+
+function showStatus(target, libraryParent) {
+  const existing = checkEntry(target);
+  if (!existing) {
+    console.log(`Status: not installed at ${target}`);
+    return;
+  }
+  const metadata = JSON.parse(existing[MANIFEST].toString('utf8'));
+  const resolvedLib = path.isAbsolute(metadata.library)
+    ? metadata.library
+    : path.resolve(target, metadata.library);
+  const libExists = Boolean(statOrNull(resolvedLib));
+  console.log(`Status: installed`);
+  console.log(`Version: ${metadata.cluster_version}`);
+  console.log(`Edition: ${metadata.edition}`);
+  console.log(`Scope: ${metadata.scope || 'unknown'}`);
+  console.log(`Agent Skill: ${path.join(target, 'SKILL.md')}`);
+  console.log(`Library: ${resolvedLib} (${libExists ? 'present' : 'MISSING'})`);
+  const parentStat = statOrNull(libraryParent);
+  if (parentStat && parentStat.isDirectory()) {
+    const allLibs = fs.readdirSync(libraryParent).filter(name => MANAGED_LIB_NAME.test(name));
+    if (allLibs.length > 1) {
+      console.log(`Stored libraries (${allLibs.length}): ${allLibs.join(', ')} (use --prune to remove unused older versions)`);
+    }
+  }
+}
+
 function usage() {
-  console.log(`Install the complete PivotUI library and one native Agent Skill. No Python needed.
+  console.log(`Install or manage the complete PivotUI Skill cluster and its native Agent Skill. No Python needed.
 
-Usage: pivotui --agent <codex|claude-code|dsh|cursor|generic> [options]
+Usage: pivotui --agent <codex|claude-code|dsh|cursor|antigravity|gemini|windsurf|opencode|generic> [options]
 
-  --language <en|zh>     Library language (default: en)
-  --project <directory> Project to install into (default: current directory)
-  --global              Install for this user instead of a project
+  --language <en|zh>    Library language (default: en, or the sole bundled edition in single-language tarballs)
+  --project <directory> Project to target (default: current directory)
+  --global              Target this user instead of a project
   --skills-dir <path>   Override the host's skills directory; required for generic
   --install-dir <path>  Override library storage (default: <project>/.pivotui)
+  --prune               After install or uninstall, remove unused older managed libraries under <install-dir>/libraries
+  --status              Inspect the current installation without writing files
+  --uninstall           Safely remove the managed pivotui skill entry (combine with --prune to remove libraries)
   --dry-run             Validate and show destinations without writing
   --help                Show this help
 
@@ -247,8 +369,15 @@ Relative paths are resolved from the current directory. --global cannot be
 combined with --project. Global library storage defaults to ~/.pivotui.`);
 }
 
+function defaultLanguage() {
+  const hasEn = Boolean(statOrNull(path.join(ROOT, 'English')));
+  const hasZh = Boolean(statOrNull(path.join(ROOT, 'Chinese')));
+  if (hasZh && !hasEn) return 'zh';
+  return 'en';
+}
+
 function parseArgs(argv) {
-  const options = { language: 'en', global: false, dryRun: false };
+  const options = { language: defaultLanguage(), global: false, dryRun: false, prune: false, status: false, uninstall: false };
   const valueFlags = new Map([['--agent', 'agent'], ['--language', 'language'], ['--project', 'project'], ['--skills-dir', 'skillsDir'], ['--install-dir', 'installDir']]);
   const seen = new Set();
   for (let index = 0; index < argv.length; index++) {
@@ -258,13 +387,17 @@ function parseArgs(argv) {
     seen.add(flag);
     if (flag === '--global') options.global = true;
     else if (flag === '--dry-run') options.dryRun = true;
+    else if (flag === '--prune') options.prune = true;
+    else if (flag === '--status') options.status = true;
+    else if (flag === '--uninstall') options.uninstall = true;
     else if (valueFlags.has(flag)) {
       const value = argv[++index];
       if (!value || value.startsWith('--')) throw new InstallError(`Missing value for ${flag}`);
       options[valueFlags.get(flag)] = value;
     } else throw new InstallError(`Unknown option: ${flag}. Use --help.`);
   }
-  if (!AGENTS.has(options.agent)) throw new InstallError('--agent is required; choose codex, claude-code, dsh, cursor, or generic.');
+  if (options.status && options.uninstall) throw new InstallError('--status and --uninstall cannot be used together.');
+  if (!AGENTS.has(options.agent)) throw new InstallError('--agent is required; choose codex, claude-code, dsh, cursor, antigravity, gemini, windsurf, opencode, or generic.');
   if (!Object.hasOwn(EDITIONS, options.language)) throw new InstallError('--language must be en or zh.');
   if (options.global && options.project !== undefined) throw new InstallError('--global and --project cannot be used together.');
   if (options.agent === 'generic' && options.skillsDir === undefined) throw new InstallError('--agent generic requires --skills-dir pointing to the host\'s skill directory.');
@@ -275,14 +408,44 @@ function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) { usage(); return; }
   const project = canonical(options.project ?? process.cwd());
-  const edition = EDITIONS[options.language];
-  const { hashes, version, sourceOverrides } = sourceInventory(edition);
   const store = canonical(options.installDir ?? path.join(options.global ? os.homedir() : project, '.pivotui'));
   const libraryParent = canonical(path.join(store, 'libraries'));
-  const library = path.join(libraryParent, `${edition}-${pythonFingerprint(hashes)}`);
   const skillsDir = canonical(options.skillsDir ?? defaultSkillsDir(options.agent, project, options.global));
   const target = path.join(skillsDir, 'pivotui');
-  const sourceRoots = Object.values(EDITIONS).map(name => fs.realpathSync(path.join(ROOT, name)));
+
+  if (options.status) {
+    showStatus(target, libraryParent);
+    return;
+  }
+
+  if (options.uninstall) {
+    const old = checkEntry(target);
+    if (!old) {
+      console.log(`Nothing to uninstall: ${target} does not exist.`);
+      return;
+    }
+    if (options.dryRun) {
+      console.log(`Dry run: would remove managed entry at ${target}${options.prune ? ` and prune libraries in ${libraryParent}` : ''}.`);
+      return;
+    }
+    withEntryLock(skillsDir, () => {
+      uninstallEntry(target, old);
+      if (options.prune) {
+        const removed = pruneUnusedLibraries(libraryParent, null);
+        if (removed.length > 0) console.log(`Pruned libraries: ${removed.join(', ')}`);
+      }
+    });
+    console.log(`Uninstalled PivotUI entry from ${target}.`);
+    return;
+  }
+
+  const edition = EDITIONS[options.language];
+  const { hashes, version, sourceOverrides } = sourceInventory(edition);
+  const library = path.join(libraryParent, `${edition}-${pythonFingerprint(hashes)}`);
+  const sourceRoots = Object.values(EDITIONS)
+    .map(name => path.join(ROOT, name))
+    .filter(p => Boolean(statOrNull(p)))
+    .map(p => fs.realpathSync(p));
   if (sourceRoots.some(root => within(target, root) || within(library, root)) || within(target, library) || within(library, target)) {
     throw new InstallError('Source editions, installed library, and skill entry must not overlap.');
   }
@@ -309,6 +472,10 @@ function main() {
     installLibrary(path.join(ROOT, edition), library, hashes, sourceOverrides);
     installEntry(target, files, old);
     if (!sameHashes(inventory(library), hashes) || !sameFiles(checkEntry(target), files)) throw new InstallError('Post-install verification failed.');
+    if (options.prune) {
+      const removed = pruneUnusedLibraries(libraryParent, library);
+      if (removed.length > 0) console.log(`Pruned older libraries: ${removed.join(', ')}`);
+    }
   });
   console.log(`Installed PivotUI ${version} (${edition}): ${Object.keys(hashes).length} files verified.`);
   console.log('Start a new Agent session and select the pivotui skill. No MCP setup is required.');

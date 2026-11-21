@@ -2,7 +2,8 @@
 name: component-system
 description: Select, reuse, adapt, and build shared UI components with consistent anatomy, interfaces, purposeful sizes and variants, and cross-page use. Use for component work or component gaps in a page task; retain the project's stack, theme, and behavior.
 metadata:
-  version: 1.0.0
+  version: 1.0.1
+  tags: [components, primitives, variants, api, reuse, design-system]
 ---
 
 # Component System
@@ -32,6 +33,6 @@ For visual direction, read [style directions](references/style-directions.md). R
 
 ## Validate and return the result
 
-Use [integration and validation](references/integration-and-validation.md) for cross-page work, main-controller handoff, or checks. Exercise the applicable task classes: existing reuse, new variant, and cross-page consumption. Inspect real content, necessary states, theme inheritance including portals, keyboard/focus, and relevant screen sizes. Run appropriate project checks for code changes; distinguish reasoning walkthroughs from rendered or runtime tests.
+Use [integration and validation](references/integration-and-validation.md) for cross-page work, main-controller handoff, or checks. New cross-page use or shared implementation, interface or theme changes trigger checks of representative affected consumers. Exercise the applicable task classes: existing reuse, new variant, and cross-page consumption. Inspect real content, necessary states, theme inheritance including portals, keyboard/focus, and relevant screen sizes. Run appropriate project checks for code changes; distinguish reasoning walkthroughs from rendered or runtime tests.
 
-Return the requested implementation or design specification, the components reused/added, interface and variant decisions, token source/proposals, affected callers, and actual verification. Keep records in the target project's existing format when continuity requires it. The authoring repository and other skills are not required runtime dependencies. Portable conventions derive from Foundations 0.2 and Orchestration 0.2; see [package use](PACKAGE.md).
+Return the requested implementation or design specification, the components reused/added, interface and variant decisions, token source/proposals, affected callers, and actual verification. For shared use, identify implementation locations, consuming pages, allowed differences, and one integrator, who may be the current implementer. Keep records in the target project's existing format when continuity requires it. The authoring repository and other skills are not required runtime dependencies. Portable excerpts derive from Foundations 0.2 and Orchestration 0.2; when running inside the cluster, follow the edition's current `design-system/ORCHESTRATION.md`. See [package use](PACKAGE.md).

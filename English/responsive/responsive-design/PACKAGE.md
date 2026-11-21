@@ -1,10 +1,10 @@
-# Responsive Design 1.0.1
+# Responsive Design 1.0.2
 
 A complete standalone English edition. The matching Chinese edition retains the same identifiers, file structure and behavior. Choose one edition for an installation or MCP connection.
 
 | Package | Origin | Author/source | Version | Rights and contents |
 | --- | --- | --- | --- | --- |
-| `responsive-design` | internal | This design skill cluster; attribution in [source map](references/source-map.md) | 1.0.1 | Original module guidance; no additional license grant is asserted here; third-party images and source packages are not redistributed |
+| `responsive-design` | internal | This design skill cluster; attribution in [source map](references/source-map.md) | 1.0.2 | Original module guidance; no additional license grant is asserted here; third-party images and source packages are not redistributed |
 
 ## Use
 

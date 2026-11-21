@@ -1,6 +1,8 @@
 ---
 name: floating-components
 description: Select Tooltip, Toast, Alert, Modal, Popconfirm, and Drawer within interaction-design; define appearance, feedback, exit, focus, and failure recovery for overlay/message selection and local fixes.
+metadata:
+  tags: [modal, drawer, toast, tooltip, alert, popconfirm, overlay, dialog]
 ---
 
 # Floating and Message Components

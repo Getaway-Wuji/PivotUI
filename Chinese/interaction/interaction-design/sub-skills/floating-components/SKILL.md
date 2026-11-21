@@ -1,6 +1,8 @@
 ---
 name: floating-components
 description: 在 interaction-design 内按任务选择 Tooltip、Toast、Alert、Modal、Popconfirm 与 Drawer，定义出现、反馈、退出、焦点及失败恢复；用于浮层或消息选择与局部修复。
+metadata:
+  tags: [浮层, 弹窗, 对话框, 抽屉, 提示, 气泡, modal, drawer, toast, tooltip, overlay]
 ---
 
 # 浮层与消息组件

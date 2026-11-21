@@ -1,6 +1,6 @@
 # PivotUI — 中文版
 
-集群发布版本：0.4.0
+集群发布版本：0.4.2
 语言：自制规则使用中文；外源包保留作者原文。
 
 Skills 按功能分类。同一功能的内源与外源包放在同一板块，来源在下表登记。从 [design-orchestrator](orchestration/design-orchestrator/SKILL.md) 开始，或对范围明确的任务直接使用对应模块。主控只加载选中的入口与当前需要的参考。
@@ -52,16 +52,16 @@ Chinese/
 
 | Skill | 来源 | 功能目录 | 状态 | 职责与入口 | 来源 / 版本 |
 | --- | --- | --- | --- | --- | --- |
-| `design-orchestrator` | 内源 | `orchestration` | 已包含 | [路由、区域分工与 Token 汇总](orchestration/design-orchestrator/SKILL.md) | 本项目 / 1.2.5 |
-| `global-style-skill` | 内源 | `orchestration` | 已包含 | [视觉方向与项目 Token](orchestration/global-style-skill/SKILL.md) | 本项目 / 1.1.1 |
+| `design-orchestrator` | 内源 | `orchestration` | 已包含 | [路由、区域分工与 Token 汇总](orchestration/design-orchestrator/SKILL.md) | 本项目 / 1.2.7 |
+| `global-style-skill` | 内源 | `orchestration` | 已包含 | [视觉方向与项目 Token](orchestration/global-style-skill/SKILL.md) | 本项目 / 1.1.3 |
 | `dashboard-design` | 内源 | `page-design` | 已包含 | [Dashboard 结构、指标、图表与摘要](page-design/dashboard-design/SKILL.md) | 本项目 / 1.1.4 |
 | `data-list-design` | 内源 | `page-design` | 已包含 | [完整列表、查询／选择范围、批量任务与详情返回](page-design/data-list-design/SKILL.md) | 本项目 / 1.0.0 |
 | `app-shell-design` | 内源 | `page-design` | 已包含 | [应用框架、路由上下文、内容边界与滚动](page-design/app-shell-design/SKILL.md) | 本项目 / 1.0.0；MIT，见本版 LICENSE |
 | `design-taste-frontend` | 外源 | `page-design` | 已导入 | [适配其规则的官网、产品页与既有站点审计](page-design/taste-skill/SKILL.md) | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) · 2.5.1 · `f6b7657` · MIT |
 | `interaction-design` | 内源 | `interaction` | 已包含 | [状态、反馈、焦点、键盘与恢复](interaction/interaction-design/SKILL.md) | 本项目 / 1.1.0 |
-| `component-system` | 内源 | `components` | 已包含 | [共用组件、接口与有用途的变体](components/component-system/SKILL.md) | 本项目 / 1.0.0 |
-| `responsive-design` | 内源 | `responsive` | 已纳入 | [内容优先级、布局变化、触屏与溢出](responsive/responsive-design/SKILL.md) | 本项目 / 1.0.1 |
-| `design-reference-research` | 内源 | `design-research` | 已包含；案例经文档审查 | [具名产品参考与限定范围的比较](design-research/design-reference-research/SKILL.md) | 本项目 / 1.0.0；[VoltAgent 来源数据](https://github.com/VoltAgent/awesome-design-md) · `fcc7028` · 数据为 MIT；自制规则为 MIT，见本版 LICENSE |
+| `component-system` | 内源 | `components` | 已包含 | [共用组件、接口与有用途的变体](components/component-system/SKILL.md) | 本项目 / 1.0.1 |
+| `responsive-design` | 内源 | `responsive` | 已纳入 | [内容优先级、布局变化、触屏与溢出](responsive/responsive-design/SKILL.md) | 本项目 / 1.0.2 |
+| `design-reference-research` | 内源 | `design-research` | 已包含；案例经文档审查 | [具名产品参考与限定范围的比较](design-research/design-reference-research/SKILL.md) | 本项目 / 1.0.1；[VoltAgent 来源数据](https://github.com/VoltAgent/awesome-design-md) · `fcc7028` · 数据为 MIT；自制规则为 MIT，见本版 LICENSE |
 | `ui-ux-pro-max` | 外源 | `design-research` | 已导入；本地检索已验证 | [仅设计研究与候选](design-research/ui-ux-pro-max/SKILL.md) | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) · 2.15.0 · `6ae86f6` · MIT |
 | `gpt-taste` | 外源 | `visual-styles` | 已导入；显式选用 | [高表现力对外营销；禁止用于业务工具](visual-styles/gpt-tasteskill/SKILL.md) | [Leonxlnx/taste-skill-classics](https://github.com/Leonxlnx/taste-skill-classics) · `5e08c93` · MIT |
 | `high-end-visual-design` | 外源 | `visual-styles` | 已导入；显式选用 | [柔和精细视觉方向](visual-styles/soft-skill/SKILL.md) | [Leonxlnx/taste-skill-classics](https://github.com/Leonxlnx/taste-skill-classics) · `5e08c93` · MIT |
@@ -84,6 +84,8 @@ Chinese/
 
 ## 选择与使用
 
+0.4.1 在已有项目记录中把共享决定对应到负责人、实现和实际验证，单人完成也适用。检查按改动触发：主题实际使用、公共组件调用处，以及响应式重排后的阅读／键盘顺序。复用有效证据，局部修复保持范围。名称仅传达氛围且方向依据充分时不自动触发案例研究；明确研究要求和缺失来源依据仍需处理。本次不新增产品案例或界面运行验证声明。
+
 [产品案例研究](design-research/design-reference-research/SKILL.md)增加 84 项来源目录与 8 张经文档审查的案例卡。从[简短索引](design-research/design-reference-research/references/index.md)进入，只读相关目录分片或 1–3 张案例卡。其余 76 项在查验前保留页面范围未知。第三方分析、作者建议与演示示例分别标明；文档审查不代表已验证线上产品。研究模块提供证据与适配建议，页面负责人和项目 Token 来源保持原有职责。无需强制第二遍研究，也不增加 MCP 工具。
 
 全局风格包含[40张风格参考卡](orchestration/global-style-skill/references/styles/index.md)，分为七个可交叉的浏览分类。方向未定时使用[选型规则](orchestration/global-style-skill/references/style-selection.md)，再只读相关卡片。沿用已有视觉设定；任务明确时自动选择暂定方案；明显不同且无法推断的方向才询问用户。只咨询时止于建议。这些参考不增加 Skill 入口，也不自动调用研究或需明确选用的外源流程。
@@ -105,7 +107,7 @@ Chinese/
 
 清单前两列供发布检查识别 Skill 名称与来源，两版须保持一致。新包放入适合的功能板块，带齐实际依赖与必要声明，并更新来源记录，不增加按内外源划分的容器目录。
 
-发布检查涵盖元信息、相对引用、两版清单、调用策略发现、语言隔离与压缩包和源文件的一致性。实际检查与边界记录在制作档案中。UI/UX 本地检索已在包移动并更名后检查，但不代表全部外源流程或宿主都已验证。本次公开发布不代表已执行所有远端设计流程。
+发布检查涵盖元信息、相对引用、两版清单、调用策略发现、语言隔离与压缩包和源文件的一致性。实际检查与边界记录在制作档案中。UI/UX 本地检索已在包移动并更名后检查，但不代表全部外源流程或宿主都已验证。本次发布不表示已上传 GitHub 或执行所有远端设计流程。
 
 每份发布包包含一套完整语言版、本地 MCP 源码与使用说明；排除个人启动配置、虚拟环境、缓存、原始研究和历史演示。
 

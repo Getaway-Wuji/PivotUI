@@ -1,6 +1,8 @@
 ---
 name: button-interaction
 description: Handle command-button hover, focus, press, disabled, loading, result, and recovery states while preserving action semantics, business logic, and a stable hit area.
+metadata:
+  tags: [button, press, loading, pending, disabled, keyboard]
 ---
 
 # Button Interaction

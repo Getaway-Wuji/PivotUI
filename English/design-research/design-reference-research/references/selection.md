@@ -10,8 +10,12 @@ With the cluster MCP, use metadata discovery → selected entry → `read_skill_
 
 | Condition | Decision |
 | --- | --- |
+| Name conveys mood only; direction is sufficiently supported | Continue with the chosen direction without opening the catalog. Describe local design choices as adaptations; do not present uninspected product details as source facts. |
+| Borrow a specific visual relationship | Inspect the relevant supplied material or reuse adequate inspected evidence. Research only missing source details needed for the decision; a familiar name is not evidence. |
+| Explicit case comparison or source check | Perform the requested scoped research even if the current theme is complete. |
+| Faithfully reproduce a supplied target | Keep that target authoritative and inspect it directly. Research only unresolved source questions; a catalog case must not replace the supplied target. |
 | Existing theme; local behavior fix | Skip reference research unless requested or needed for a concrete evidence gap. |
-| User requests a reviewed named brand | Read that card; retain the actual page scope when explaining its applicability. |
+| Source research targets a reviewed named brand | Read that card; retain the actual page scope when explaining its applicability. |
 | Generic dark developer marketing page | Consider Linear's surface and screenshot relationships; compare only if another unresolved dimension requires it. |
 | Operations Dashboard or administrative table | None of the initial eight establishes a complete verified operational workflow. Borrow a narrow visual relationship if useful; let existing page methods own structure and behavior. |
 | Consumer marketplace search/detail | Airbnb offers task-relevant document observations; booking outcomes and states still need target-product design and verification. |

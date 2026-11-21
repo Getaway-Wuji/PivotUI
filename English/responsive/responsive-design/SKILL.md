@@ -2,7 +2,8 @@
 name: responsive-design
 description: Plan, implement, and check responsive layouts for pages and components. Use for content reflow, navigation collapse, narrow tables or charts, input-capability differences, and local overflow fixes while retaining the project's visual system.
 metadata:
-  version: 1.0.1
+  version: 1.0.2
+  tags: [responsive, mobile, narrow, overflow, table, breakpoint, touch, reflow]
 ---
 
 # Responsive Design
@@ -21,7 +22,7 @@ For each affected region, establish **condition → retained content → rearran
 
 - Priorities follow the user's work. Keep important information and actions reachable; relocation or disclosure needs an understandable entry and complete content. Do not remove business fields merely to fit.
 - Follow existing breakpoints. Without them, find where actual content loses readability or operability, choose the smallest useful transition, then test around it. Device names and framework defaults are not universal thresholds.
-- Preserve meaningful DOM, reading, and keyboard order. Carry filters, selections, drafts, and operation state across layout changes.
+- Preserve meaningful DOM, reading, and keyboard order. CSS `order`/Grid repositioning, breakpoint hiding or alternate navigation copies trigger the [sequence checks](references/handoff-validation.md) for the affected layouts. Carry filters, selections, drafts, and operation state across layout changes.
 - Preserve the selected overlay's use conditions and exclusions during reflow. Do not turn Drawer into a full-screen editor; use a separate page or inline area when necessary. Adapt Modal presentation to its task and existing interaction contract.
 - Choose page-wide rules from viewport constraints and reusable component rules from available container space when appropriate. Input capabilities are a separate axis from width.
 - Avoid global horizontal clipping, uniformly reducing root/text size, or scaling the whole interface to hide a layout failure.

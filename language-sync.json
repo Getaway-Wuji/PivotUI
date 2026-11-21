@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cluster_version": "0.4.0",
+  "cluster_version": "0.4.2",
   "source_language": "English",
   "files": {
     "AGENTS.md": {
@@ -16,20 +16,20 @@
       "Chinese": "17809be961ad9322f48e3e37220dee88e36d7bce5f0b61a386e0464a6bdf2eb1"
     },
     "README.md": {
-      "English": "ba607757e0186394c806d1f036fae3ca2c1e786dbcc59c264b1321faa7c19b4b",
-      "Chinese": "dc8f3e7cbe7418ac917b41f40220c31e270cb5fe8631f2afd60c0360b11c3a5e"
+      "English": "1acba22932720987459d86338d783c350f3ba3da48b7c1e2dc4625f08bcafa38",
+      "Chinese": "a08d927ac7f9da54a6cf84ae07afecb323476667cf7b41ce63df7daeded801b7"
     },
     "THIRD_PARTY_NOTICES.md": {
       "English": "7537222fde90d822f07e5e9d19fb98af0cf3293b681c11e3b4fbbc5745e70811",
       "Chinese": "928dc1849f7565593df4757d5ec0691a1137566caecb861333a975acf2ca6af0"
     },
     "components/component-system/PACKAGE.md": {
-      "English": "04e85f06cd04b44dd4371984c2c96150b19d91a2160789c692f2cc2889f4077b",
-      "Chinese": "e6a9373eb99c20d68f66ae8b37e40f18e0aa29241a3275e7e55349a59a468d09"
+      "English": "8b8602582faba33a62e89635f2962768b54f929b10fcce335e5cf9235394c2fe",
+      "Chinese": "5de5bf6c93c6bed7fb1936bf1520d787f02cfb9c3f93a8a8676ca77df5c52b05"
     },
     "components/component-system/SKILL.md": {
-      "English": "8ff63b47b6f56a90b4cf496d57f5558c0cfe6ec5ac788a8fb44a229e06d9b2f1",
-      "Chinese": "fed3f4248322e04fde872194a3f134ed824b851fa43461fdfe2b537aafb0996c"
+      "English": "c62b149bcebae5d59a54bba2944053b14daa75bca52c7249df765236a5b90147",
+      "Chinese": "114f24c6357e259554190a60a63e38d43b306b6d0ef77d0124f8ba9aa78d074b"
     },
     "components/component-system/agents/openai.yaml": {
       "English": "713590976db90d10806f991cac6ef72338ef3f332089561adb8f7c114f1ab552",
@@ -48,8 +48,8 @@
       "Chinese": "0582999a12ec84961a6d12de1e2d7c8a9527f61074bf79765e1a190163f5b03d"
     },
     "components/component-system/references/integration-and-validation.md": {
-      "English": "6ccb7b8346440cd16f883d3c5e367f59d09a66e279865faf542c58e1710d6d23",
-      "Chinese": "df586083c349d3196ab3ce080a9ac2cb1c9b31348f6c3705619d5dbc16299032"
+      "English": "94a4af1fa7974202620cfb206e469061615e368e1316c1405b46ae7ce9a4545e",
+      "Chinese": "bddd038c9fc7d2bb6ec5e4e38bbd67244b94e69d366929b688b2c6ffbeb01e41"
     },
     "components/component-system/references/source-map.md": {
       "English": "9e27f98d4e68fe0d046f4444402d60691bfddf6fecdff29d892c7a55df9b33d1",
@@ -64,12 +64,12 @@
       "Chinese": "6d4bdc9a9cf30e7beb593475fdcdbf29f981ea6bd7923f202866145409f87b44"
     },
     "design-research/design-reference-research/SKILL.md": {
-      "English": "00939068230088bea0b93aabe2b5e4c8ffc26e73b09b0e18b2333457630c46b8",
-      "Chinese": "47ccc376332583016c97eb2be6629bdb2e79115e7c9c690eff84e4c44b6211b7"
+      "English": "3ba18a0e7c76a89b90420ab1a793e69c0bdb00e2fb676d8cf08bad524cfaabdb",
+      "Chinese": "a850c4b5c2d143d8cefa4c8344fce6fdc15b13273ff5d5f8a19707af057aa016"
     },
     "design-research/design-reference-research/UPSTREAM.md": {
-      "English": "ea95ee811ab9699cd620d0655b4f020b677d2704cdfaa90855ab081f45ec1377",
-      "Chinese": "ba0976f57c02ca4d5e71846d5260f060d4d5c811514f2fa7235a8dfaaaa9a982"
+      "English": "ee7e35de263c9e9e4f9ca50930ccfa236d49577fa13160566a6fffe7cff4f1f2",
+      "Chinese": "172eb751fed2fcce15f08fa4b133ac2d172f29514faa91b4de1b8847efdaf27c"
     },
     "design-research/design-reference-research/agents/openai.yaml": {
       "English": "2d1a6ed36b227c51d36b6c25fa49860bad4fe7ae5c205e95f76aaefd6ef5d29e",
@@ -132,8 +132,8 @@
       "Chinese": "fad6eb6c6e767bed6b2ffb97c32bb6e4ffa42477f047951d0db1f3fe7c955383"
     },
     "design-research/design-reference-research/references/selection.md": {
-      "English": "71edc6d457633872b7d99c28a55661ff978301532ade911c4d58a48dc73545ec",
-      "Chinese": "09245002f41a3e001d933b5382b36a462a32ee0cee526ac450f2405d40908022"
+      "English": "e832ec592030795c2773b1107cd48c95854fe3584cc6366a3b633f644af428b9",
+      "Chinese": "af7df97ec7cefe4afeb2c7aa09f1746b70601211ba9188b66b98b0a9e3e7414e"
     },
     "design-research/ui-ux-pro-max/LICENSE": {
       "English": "738f69dfa83db5c347c678fb9d90e560877059f0de93a327c39001bff92dc014",
@@ -448,8 +448,8 @@
       "Chinese": "91776565d8393f2701c57a38d9b5dd221aa8a3f363e0dacb557cb748a3ae6b9d"
     },
     "design-system/ORCHESTRATION.md": {
-      "English": "d3632ecc1d0c56dd4ba685a7a4571395b22716ca15a9a21491e0e09cf435c3e8",
-      "Chinese": "23b1c02e97534034dff0fd445c3b55a8cdcd6971ce20baf9223bcf279034d56c"
+      "English": "0770d8f7d84db4d3770ecbc18c4b1626e2f140292439423edfce20ff79ea8f7f",
+      "Chinese": "48fc790c25e7767f88ce2a167b1381d543ca41aa19c8f7c2a18fe38968240c2f"
     },
     "image-design/brandkit/LICENSE": {
       "English": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
@@ -500,8 +500,8 @@
       "Chinese": "26f5adf3dae78bf41dddaa9335905b19a4a45a52705479edfe9215fb0311653b"
     },
     "interaction/interaction-design/SKILL.md": {
-      "English": "c92b1bf1c4d8408e2a3ba351a50118b8dc2d77f691ea4ba14ff7e77b418bf6d2",
-      "Chinese": "1d5e9904e2bcba5d3e4d1bbe54bec33651aba991c369b7f17fa09bfac989dd86"
+      "English": "ddc44c21c37c7b356385cb623490a18b601d3509a502e1d6f6c437a7602c1c53",
+      "Chinese": "351e49eb9e90e33e9314753f04c49f64c58c58d49c0910f24df857166f96fe2e"
     },
     "interaction/interaction-design/agents/openai.yaml": {
       "English": "07a4ff9913f073d94e6b2855da73976702cbcc74b5dd264f2ea6a5b59f3b91af",
@@ -556,20 +556,20 @@
       "Chinese": "b1117940b637c490832ea444e24ec714680503323af1fac7427817ca3db12e7a"
     },
     "interaction/interaction-design/sub-skills/button-interaction/SKILL.md": {
-      "English": "ea531dc8601414fade11deea059786e5f4d173b25b29a526c75b6b8c7f34129b",
-      "Chinese": "73f1e61f529c88718e83ced9925d073d3786ec7a48d78126cea6e967365525f1"
+      "English": "98b7499888a0fec3bb66064b95ffde7994e8978a36a47a37fce4f67b568297bc",
+      "Chinese": "a2fcbde5a10ec3c1e2541951e71649bc205fdf5c8e6c3f6cbc401231be1450ef"
     },
     "interaction/interaction-design/sub-skills/floating-components/SKILL.md": {
-      "English": "16ed5f94de4986ee88e2dd2786e6e42ca696f18c11c37525fedc75ff2fcf43ba",
-      "Chinese": "bd7b85c44095e7925ecfd622c13beb23480ee8dc86e0c8f640d5a28e7bf9beb9"
+      "English": "fb1988ab11536fa6c651c7ebead371559cd53a86b0bd7717a41e3751f0c0aceb",
+      "Chinese": "b49ef5acb874437d0028e6d258f8e9f54a3322b75a5375be790bc875d3fabe48"
     },
     "interaction/interaction-design/sub-skills/form-interaction/SKILL.md": {
-      "English": "8445a2c55a6fb3ac17863cbea8e733563ee6dfa9c675b92ca291fb4b8ff39cf0",
-      "Chinese": "05206741e19a7ae6ae11b259889f6a1ea03fca6ccdf5f763f42848c51f9174e4"
+      "English": "72b5e8667f13649902a2e8a4c6e36329e38c0e2c22cfae5a0e20e109f5bbbc30",
+      "Chinese": "01b6cf119b6df5c61ac3158ecd90cec8334d17642f42d42f5063b8985901eb1f"
     },
     "interaction/interaction-design/sub-skills/navigation-interaction/SKILL.md": {
-      "English": "4eceb01c7c4cd623987c04006f483c0e30908072b1f87f542b77b1e70ceed19b",
-      "Chinese": "a90b3f7b4c7e01e473d3c16620c32cfdf32c824381e54912763c69562cc161be"
+      "English": "3231670eb11a1a80e22001ef3f15ce86da9e3e3db156ac9f40114e1b86b2e02b",
+      "Chinese": "abb1cf95060826a6dabae8b34a22a410ddeb6f71e5811d5310885ce8bd304b46"
     },
     "legacy/redesign-skill/LICENSE": {
       "English": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
@@ -620,28 +620,28 @@
       "Chinese": "472f568478bff9056ec56b5c5e8a7ca3d280c651d527321e1eb80892801164be"
     },
     "mcp/skill-cluster/README.md": {
-      "English": "860469e79bfcb75604b464755fe9b98c88f014be90790c2a766a4816d3f30317",
-      "Chinese": "b6aa290f3e3f2682264a08c734dad8cbfbad4b57a1c92faacc44b51defb18335"
+      "English": "d6f2c9b0749f18284fecd5876457273826de7e0dfa771d445583299ee5adc3dc",
+      "Chinese": "347303b4456fcbbfb69d8a3be41a22ab871d28d0b8b76371ad68906532decbf0"
     },
     "mcp/skill-cluster/requirements.txt": {
       "English": "4a346903aef3e6424d47a42f69b891765ea0a6c84ff490f6d6de60601d9ded32",
       "Chinese": "4a346903aef3e6424d47a42f69b891765ea0a6c84ff490f6d6de60601d9ded32"
     },
     "mcp/skill-cluster/server.py": {
-      "English": "648495ac67a65a1aaebe14085fde4a5b3ba70b242f4d363d312bb3be338c8441",
-      "Chinese": "648495ac67a65a1aaebe14085fde4a5b3ba70b242f4d363d312bb3be338c8441"
+      "English": "4ec7959385b195a7b84605818244d52091039cb8eb47a13fd71913b21e61f55e",
+      "Chinese": "4ec7959385b195a7b84605818244d52091039cb8eb47a13fd71913b21e61f55e"
     },
     "orchestration/design-orchestrator/SKILL.md": {
-      "English": "2dcf6a805c399d43d66d66a1254a7fafae21881fa7e27f0ffea5b50e681402b7",
-      "Chinese": "558cc9912b889b4f4f30f332f7041610c4bbb30634734c813ae69a5f40e65d38"
+      "English": "259a8301017b410d8ea1ee86a366dcac9c1f8373e1a773fc7320ea412c9f8eea",
+      "Chinese": "eeeefbe17e03491576fbf368fc8b51561669015d9bf18d6117ef6a517d52c2a1"
     },
     "orchestration/design-orchestrator/agents/openai.yaml": {
       "English": "22a78c2de6417f07bf67c259e6e24c4289f7fecdf7be12f0f87bef4eefeaa468",
       "Chinese": "51ebcc68747a1b4265fb2e5d3b49aef888e8e9cc5f754997cef47f941e663785"
     },
     "orchestration/design-orchestrator/references/design-contract.md": {
-      "English": "d436636cce913bfc97b7048c35c41e8b8696278cbde93d1bc947896681b36add",
-      "Chinese": "8b9a5cc99208011290981772621931bf4bc593aeee65361bd23b873258eb429c"
+      "English": "67d69492e93814416badffddfeb1901bd2052110ab736e1c5bddd6e3a2f9b73b",
+      "Chinese": "f149f14c0439356467bbbe966cf0bb1c8f8c403f9494462bd0fe15cf4f18f4c5"
     },
     "orchestration/design-orchestrator/references/external-catalog.md": {
       "English": "8d7cc94ee62cf2edd0732050ffbe96fe9c3d22ea8d5b092644ea22790e927ec4",
@@ -652,24 +652,24 @@
       "Chinese": "28373b388f26b98b71e2b1995f6fe265ada18dc5df404f7f705b015d76fece1d"
     },
     "orchestration/design-orchestrator/references/scenarios.md": {
-      "English": "083e9e8b70bb459f611964fa4162224b662d46e0d3a6eb90303c0d453bebae1d",
-      "Chinese": "6fe32c4a349a3d4014adfb1a7020d5502a273d46279ccf68ec96231175e2dd88"
+      "English": "a7f2afe4f9ed30265ef9885ffb9ddda88075b1dc2fbaca3193f2d5b707c00edb",
+      "Chinese": "72619773b83b996ad1916418ddc774de2fbd8f40281d62ec96921109ea0026e9"
     },
     "orchestration/design-orchestrator/references/skill-adapters.md": {
-      "English": "c74da4b314600a66ead65d66e82f54aaca99a189426b9d91e56ed39c15c0c4c0",
-      "Chinese": "078899eb2032c5147005185b582d524f71c988034dc51f39c14ecf0b6ea880b9"
+      "English": "bb572f32126543b8e2e97a254a7e91d171162efa748cfb0a9a5305952b86437d",
+      "Chinese": "9eba4f82b5f4ed3e6f22da5dc10542c75102e76696c58d7d310a06182b7c197d"
     },
     "orchestration/global-style-skill/SKILL.md": {
-      "English": "e62edee390a33bfaddf71034aac92bedfecada3ecbc3be75626d4c12af2f6516",
-      "Chinese": "b531f678d1b4eab831283d3f932e124ee18a54ac38583b05efed3d8c55447c06"
+      "English": "f665dfc0f23e12355c344cb47bded89a2df9f958e4a4571216f98e573873f84b",
+      "Chinese": "3a4dd3e1f6e19f406a5a47112a8eee11d19d355d5f9a1d7ba2a1e9c196c0c286"
     },
     "orchestration/global-style-skill/agents/openai.yaml": {
       "English": "3225253a4fa12feb22d7af012ab0aa00584cb41d54d668ef89bda004709dea92",
       "Chinese": "bcc9a93bbae9cd6199c8e03f3a349858804251eaea57815498a2812a8afd2f4a"
     },
     "orchestration/global-style-skill/references/style-selection.md": {
-      "English": "0c0a3a6e67fe25437d77280398bbe7f86873941fccee7aa3422fccd8986c9deb",
-      "Chinese": "9392a89ed9ee48052e0c7562188566e58eff04380421831776b1c87b5f63e3a7"
+      "English": "c2cec17d3551931b4ec28ded6c7b9f0a57a5d477394a15621d100d31b70e2f61",
+      "Chinese": "f5beb6accbbfc3ffecebc2be83a9ec4fb2ba1ce4feaf0b8073e16cdf2d24d845"
     },
     "orchestration/global-style-skill/references/styles/abstract-geometry.md": {
       "English": "4154a5cc9907d88e437be384a9ab1599845aaa51a0e933271d65781cba914956",
@@ -835,13 +835,17 @@
       "English": "00027d8d59f2372a0a966eb95e980f0f704dd19c3a103eac575f58bd45b13511",
       "Chinese": "cd122617a1e88c1982be0fb9df57c4002acb6855040ab91b1c2806ad9d271685"
     },
+    "orchestration/global-style-skill/scripts/check_tokens.py": {
+      "English": "9d545d07d391a593be019ad5fba503431773a7419fc97126de5510c241d6302c",
+      "Chinese": "9d545d07d391a593be019ad5fba503431773a7419fc97126de5510c241d6302c"
+    },
     "page-design/app-shell-design/PACKAGE.md": {
       "English": "950cbd2b4de9df048f6d5ebb2b736ab68cb8d6db865d45cdd79af6ad5ef6231e",
       "Chinese": "e1f5e334ef0a5d173cf4dedd471e6b436a75d9d8bfd4d8a33e30d2f733ba650d"
     },
     "page-design/app-shell-design/SKILL.md": {
-      "English": "5f5f291a5b9130d50d7245a02423b37ab2c2e3dad3f845fdd3e8cb178a9e4242",
-      "Chinese": "ca8cc5081d3e4bcdb5cc14a0d39b87b84bc366586298b7fde69c32875a6ddf22"
+      "English": "c655f1d8d00d558225299c55dc1942698424ef4f818e0a4be2bf28ad76879c99",
+      "Chinese": "40acb43dc490afae6000840a29556c553b4c5b2ae066f377ad2b49d886cdf859"
     },
     "page-design/app-shell-design/agents/openai.yaml": {
       "English": "305e3fc3a2d7afe1c0f8c88b62fdb51e11f8debb28b9e6e31815f4f9f0fcb29b",
@@ -864,8 +868,8 @@
       "Chinese": "afcf748f8df32051e1b7ac5783e8d57d6746054cfd457d9080b79b32a6883f8a"
     },
     "page-design/dashboard-design/SKILL.md": {
-      "English": "bcc1898ff644a48e4d6113da9eb05b3601494478693c86282c1ed114eff78900",
-      "Chinese": "c9b6133e7a6f734450fc3966657ca34240eb2ea60bdc1eec68cf12c16ebbe162"
+      "English": "ca167957583ef41cf33da40bf6a6d3d0b5355823c7a6009279b81d2e563bf9a1",
+      "Chinese": "f24ad00a4aa22cdb7f08e38b2b724cf5a46065f731b25623856b04e8b6b01385"
     },
     "page-design/dashboard-design/agents/openai.yaml": {
       "English": "c6240e155c076413837b1167ddef8325d891822ff3a60f2b165e594874a743a8",
@@ -904,8 +908,8 @@
       "Chinese": "894b19c6f998ec4712edab9c63f1b0f5460203dd920d68c5ef8de8c2b3092c20"
     },
     "page-design/data-list-design/SKILL.md": {
-      "English": "1f92fc83f4e452e378c879418e37baea2961fce21c121291eeb4dc27934be23b",
-      "Chinese": "3edbf18b6f685860680fc55912dbfe1c89d655478b5debfdce35b382ba2410e5"
+      "English": "09b7399557e9bc3791f83bf901f414eef52787754e8e44d87349a5393a48f39d",
+      "Chinese": "2fb3d7c6ca6a2999e857c7079423b26c6ef0cea70c8f999fff07a027d21680c2"
     },
     "page-design/data-list-design/agents/openai.yaml": {
       "English": "7d314d0ebb88b72ffe153bc91ef1d96c953a323d097085484fb797be0bd1b285",
@@ -7524,12 +7528,12 @@
       "Chinese": "0aae0d87b7b43bf5543d456bed4029c6986e835143a32c6b05c51d89035029ee"
     },
     "responsive/responsive-design/PACKAGE.md": {
-      "English": "e086113deb1b2080582148b982aa4a5acdb2a332f24872c71a980283d3ed7deb",
-      "Chinese": "e78bb5aa5c35f3f30248cdafdc1d6b538490f7032691d01d78194f2c9e972ac1"
+      "English": "330a2c289c37c6040103fd013770ac18c7d62eb02316f564d8068693cb845d20",
+      "Chinese": "eb0599442b7f667760504bfce47f94e27c96c8f08f359df28c3bf604ec02341b"
     },
     "responsive/responsive-design/SKILL.md": {
-      "English": "417a99e6d39506882396e3f2cbd018b0921c53098a72749f5ef445107046b66e",
-      "Chinese": "7ca18dcd094bae93e79694d1d0f55ebb4babd5266351bdb449f9155428d69e0b"
+      "English": "600f434f882e5179552de785dfa97dd5cabcb06161c03c41bc08ed0f0feb0df1",
+      "Chinese": "cdb557c9e3051fa1bc71f6426fb673ab282c4c8ac15d98b294b1767a0c667ab5"
     },
     "responsive/responsive-design/agents/openai.yaml": {
       "English": "656e1bb953f09480291912382c65f66bedf1334f1337e57f914df8065fad1e4d",
@@ -7544,8 +7548,8 @@
       "Chinese": "756f75d26c7b0ca942474529cd2eaf3b91d845b0bec5cd8e4f616b17511ccf72"
     },
     "responsive/responsive-design/references/handoff-validation.md": {
-      "English": "346560f25dcc2fc8b5123d1e440a90a6979504b470bfc380470a0aa14edb0ac6",
-      "Chinese": "4f38462ea9e6f9270858cc373dcbf75cbe2261c87114bee3fd12ce96fecf7daf"
+      "English": "ab9488c2fc2451529ba27e99b11537f448345f4c4248b32ba6b22c32ff2c1b09",
+      "Chinese": "aa9c5db79931dbb8ebb6ed2d1af4f3be8ffb633aff1975e52afcbb36e52bbe89"
     },
     "responsive/responsive-design/references/input-and-overflow.md": {
       "English": "57ca4a6413eac99a68d551c636b503eaa2952bb1b70ffc6f27199eff85f198e0",

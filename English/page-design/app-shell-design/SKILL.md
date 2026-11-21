@@ -3,6 +3,7 @@ name: app-shell-design
 description: "Design, implement, or repair the shared shell of an administration application: navigation hierarchy, current location, headers, content boundaries, and scrolling across list, detail, and edit pages. Use for cross-page framework work; page modules own business content."
 metadata:
   version: 1.0.0
+  tags: [app-shell, navigation, sidebar, header, breadcrumb, scroll, layout]
 ---
 
 # Application Shell Design

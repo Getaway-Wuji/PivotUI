@@ -1,16 +1,16 @@
-# Component System 1.0.0
+# Component System 1.0.1
 
 这是 component-system Skill 的完整独立中文版。对应英文版使用相同标识、结构和行为。每次安装或 MCP 连接选择一个语言版本。
 
 | 包 | 来源类型 | 作者/来源 | 版本 | 分发内容 |
 | --- | --- | --- | --- | --- |
-| `component-system` | 内源 | 本设计 Skill 集群；参考署名见 Skill 内的来源地图 | 1.0.0 | 原创指导，不包含第三方组件源码或素材 |
+| `component-system` | 内源 | 本设计 Skill 集群；参考署名见 Skill 内的来源地图 | 1.0.1 | 原创指导，不包含第三方组件源码或素材 |
 
 ## 使用
 
 组件任务可直接打开本 Skill 的 `SKILL.md`，也可由已有 `design-orchestrator` 根据元数据选择 `component-system`。本 Skill 不依赖其余集群模块。相对引用的参考文件包含必要共用约定和按条件读取的指导，无需制作档案、固定组件框架或外部账号。
 
-将完整 `component-system` 目录安装到宿主声明的技能根目录，保留参考文件和 `agents/openai.yaml`。Skill 文件夹直接位于语言根目录。需要本地 MCP 连接时，独立分发包在该语言版本的 `mcp/skill-cluster/` 目录附带已有 skill-cluster 服务及使用指南；其默认发现根为该语言根目录。依照指南创建环境并安装声明的依赖；包内不包含本机启动配置或环境。读取 MCP 输出获得规则，不代表实现已经执行。
+将完整 `component-system` 目录安装到宿主声明的技能根目录，保留参考文件和 `agents/openai.yaml`。在完整语言版本中，本包位于 `components/` 下。需要本地 MCP 连接时，独立分发包在该语言版本的 `mcp/skill-cluster/` 目录附带已有 skill-cluster 服务及使用指南；其默认发现根为该语言根目录。依照指南创建环境并安装声明的依赖；包内不包含本机启动配置或环境。读取 MCP 输出获得规则，不代表实现已经执行。
 
 ## 内容与证据
 

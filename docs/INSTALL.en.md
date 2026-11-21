@@ -13,27 +13,29 @@ Install one complete language edition and a native **pivotui** Skill entry. Choo
 Requires **Node.js 22+ and npm/npx**. Run the command in the **target project's root**, in the environment where the Agent runs:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent codex --language en
 ```
 
-npx downloads a prepared release package and runs its installer. This command does not require Git, Python or MCP setup. Use the same command in Windows, macOS and Linux terminals with Node.js and npm/npx installed.
+npx downloads the English-only complete cluster package (~29.3 MB, without bundling the Chinese copy) and runs its installer. For Chinese only, use `pivotui-installer-zh-v0.4.2.tgz` with `--language zh`; to switch languages from one package without downloading duplicate external skills, use the deduplicated universal package `pivotui-installer-v0.4.2.tgz` (~29.6 MB). This command does not require Git, Python or MCP setup. Use the same command in Windows, macOS and Linux terminals with Node.js and npm/npx installed.
 
-The first run downloads the complete installation package and may take a while. Wait for **`Installed PivotUI ...`** to confirm installation. A spinner stopping or the terminal returning to its prompt does not by itself confirm success. If it fails, keep the displayed error and see [troubleshooting](#npx-troubleshooting).
+Wait for **`Installed PivotUI ...`** to confirm installation. A spinner stopping or the terminal returning to its prompt does not by itself confirm success. The CLI also supports `--status` (inspect installation), `--prune` (clean up unused older library directories), and `--uninstall` (safely remove the managed entry). If it fails, keep the displayed error and see [troubleshooting](#npx-troubleshooting).
 
 Choose the Agent you use:
 
 ```sh
 # Claude Code
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent claude-code --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent claude-code --language en
 # DSH / DeepSeek Harness
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent dsh --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent dsh --language en
 # Cursor
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent cursor --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent cursor --language en
+# Antigravity / Gemini CLI / Windsurf / OpenCode
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent antigravity --language en
 # Another host that supports local SKILL.md packages
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent generic --language en --skills-dir "<your-agent-skills-directory>"
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent generic --language en --skills-dir "<your-agent-skills-directory>"
 ```
 
-Use `--language zh` for Chinese. This selects the authored instructions; upstream packages retain their original language. For `generic`, supply the actual host skills directory. The installer creates its `pivotui/` subdirectory.
+Use `--language zh` for Chinese (with `pivotui-installer-zh-v0.4.2.tgz` or the deduplicated `pivotui-installer-v0.4.2.tgz`). This selects the authored instructions; upstream packages retain their original language. For `generic`, supply the actual host skills directory. The installer creates its `pivotui/` subdirectory.
 
 ### Project scope and user scope
 
@@ -43,12 +45,16 @@ By default, installation is scoped to the current project:
 | --- | --- |
 | Codex / DSH / Cursor | `.agents/skills/pivotui/SKILL.md` |
 | Claude Code | `.claude/skills/pivotui/SKILL.md` |
+| Antigravity | `.agent/skills/pivotui/SKILL.md` |
+| Gemini CLI | `.gemini/skills/pivotui/SKILL.md` |
+| Windsurf | `.windsurf/skills/pivotui/SKILL.md` |
+| OpenCode | `.opencode/skills/pivotui/SKILL.md` |
 | Generic | `<your-agent-skills-directory>/pivotui/SKILL.md` |
 
 The complete library is kept under `.pivotui/libraries/`. Run from the project root or select it explicitly:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language en --project "<target-project-directory>"
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent codex --language en --project "<target-project-directory>"
 ```
 
 <a id="global-install"></a>
@@ -56,10 +62,10 @@ npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0
 For a **global installation shared by your local projects**, add `--global` instead. You can run it from any folder:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language en --global
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent codex --language en --global
 ```
 
-Here, **global means the current user account on this computer**. It does not install for other accounts, remote machines or cloud sessions. For another Agent, replace `codex` with `claude-code`, `dsh` or `cursor`; keep `--global`. Do not combine it with `--project`.
+Here, **global means the current user account on this computer**. It does not install for other accounts, remote machines or cloud sessions. For another Agent, replace `codex` with `claude-code`, `dsh`, `cursor`, `antigravity`, `gemini`, `windsurf`, or `opencode`; keep `--global`. Do not combine it with `--project`.
 
 User-wide library storage is `~/.pivotui/libraries/`. The native entry uses the selected Agent's directory:
 
@@ -69,6 +75,10 @@ User-wide library storage is `~/.pivotui/libraries/`. The native entry uses the 
 | Claude Code | `~/.claude/skills/pivotui/SKILL.md` | `$CLAUDE_CONFIG_DIR/skills/pivotui/SKILL.md` |
 | DSH | `~/.agents/skills/pivotui/SKILL.md` | `$DSH_AGENTS_HOME/skills/pivotui/SKILL.md` |
 | Cursor | `~/.agents/skills/pivotui/SKILL.md` | Use an explicit `--skills-dir` |
+| Antigravity | `~/.gemini/antigravity/skills/pivotui/SKILL.md` | Use an explicit `--skills-dir` |
+| Gemini CLI | `~/.gemini/skills/pivotui/SKILL.md` | Use an explicit `--skills-dir` |
+| Windsurf | `~/.codeium/windsurf/skills/pivotui/SKILL.md` | Use an explicit `--skills-dir` |
+| OpenCode | `~/.config/opencode/skills/pivotui/SKILL.md` | Use an explicit `--skills-dir` |
 
 Codex's dedicated directory follows [OpenAI's Skill installer](https://github.com/openai/skills/blob/main/skills/.system/skill-installer/SKILL.md). The public Codex skill guide also lists shared `.agents/skills` discovery. PivotUI uses `.codex/skills` for new Codex global installs and keeps `.agents/skills` for Codex project installs. The new global default does not move or delete earlier installations; if you already have an entry in the shared directory, review which copy you want to use and avoid unintended duplicate entries. Other Agents may still use the shared copy.
 

@@ -1,6 +1,6 @@
 {
   "name": "@getaway-wuji/pivotui",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "description": "Install the complete PivotUI design Skill cluster for your Agent.",
   "private": true,
   "type": "module",

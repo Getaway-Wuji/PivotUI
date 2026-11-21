@@ -3,6 +3,7 @@ name: data-list-design
 description: 设计并实现完整后台数据列表页。用于列表编排、搜索筛选、视图与列管理、选择与批量任务、导出范围及详情返回；沿用产品应用框架和公共控件。
 metadata:
   version: 1.0.0
+  tags: [数据列表, 表格, 筛选, 搜索, 分页, 批量, 导出, table, list]
 ---
 
 # 完整数据列表页设计

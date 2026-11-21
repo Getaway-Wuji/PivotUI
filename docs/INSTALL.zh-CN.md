@@ -13,27 +13,29 @@
 需要 **Node.js 22+ 和 npm/npx**。请在 Agent 实际运行的环境里，打开**目标项目根目录**并执行：
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent codex --language zh
 ```
 
-npx 会下载已经打包好的发布包，再运行里面的安装器。这条命令不需要 Git、Python 或 MCP 配置。安装好 Node.js 和 npm/npx 后，Windows、macOS 和 Linux 终端都使用同一条命令。
+npx 会下载中文单语言完整集群安装包（约 29.4 MB，不再附带英文副本），再运行里面的安装器。如需英文单语言包，使用 `pivotui-installer-en-v0.4.2.tgz` 配合 `--language en`；如需在单个安装包内切换中英文，可使用外源去重后的通用双语包 `pivotui-installer-v0.4.2.tgz`（约 29.6 MB）。这条命令不需要 Git、Python 或 MCP 配置。安装好 Node.js 和 npm/npx 后，Windows、macOS 和 Linux 终端都使用同一条命令。
 
-首次运行需要下载完整安装包，可能等待较久。请以 **`Installed PivotUI ...`** 提示作为安装完成的标志；转圈停止或终端回到输入提示符，本身不代表成功。若报错，请保留报错内容，查看[常见问题](#npx-troubleshooting)。
+首次运行请以 **`Installed PivotUI ...`** 提示作为安装完成的标志；转圈停止或终端回到输入提示符，本身不代表成功。支持 `--status`（查看安装状态）、`--prune`（升级/卸载时清理未使用的旧指纹库目录）与 `--uninstall`（安全卸载受管入口）。若报错，请保留报错内容，查看[常见问题](#npx-troubleshooting)。
 
 选择你使用的 Agent：
 
 ```sh
 # Claude Code
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent claude-code --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent claude-code --language zh
 # DSH / DeepSeek Harness
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent dsh --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent dsh --language zh
 # Cursor
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent cursor --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent cursor --language zh
+# Antigravity / Gemini CLI / Windsurf / OpenCode
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent antigravity --language zh
 # 其他支持本地 SKILL.md 包的宿主
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent generic --language zh --skills-dir "<your-agent-skills-directory>"
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent generic --language zh --skills-dir "<your-agent-skills-directory>"
 ```
 
-英文版使用 `--language en`。该参数选择内源指令的语言，外源包仍保留上游原语言。选择 `generic` 时，需要提供宿主实际的 skills 目录，安装器会在其中创建 `pivotui/` 子目录。
+英文版使用 `--language en`（搭配 `pivotui-installer-en-v0.4.2.tgz` 或通用去重包 `pivotui-installer-v0.4.2.tgz`）。该参数选择内源指令的语言，外源包仍保留上游原语言。选择 `generic` 时，需要提供宿主实际的 skills 目录，安装器会在其中创建 `pivotui/` 子目录。
 
 ### 项目范围与用户范围
 
@@ -43,12 +45,16 @@ npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0
 | --- | --- |
 | Codex / DSH / Cursor | `.agents/skills/pivotui/SKILL.md` |
 | Claude Code | `.claude/skills/pivotui/SKILL.md` |
+| Antigravity | `.agent/skills/pivotui/SKILL.md` |
+| Gemini CLI | `.gemini/skills/pivotui/SKILL.md` |
+| Windsurf | `.windsurf/skills/pivotui/SKILL.md` |
+| OpenCode | `.opencode/skills/pivotui/SKILL.md` |
 | Generic | `<your-agent-skills-directory>/pivotui/SKILL.md` |
 
 完整集群保存在 `.pivotui/libraries/`。请从项目根目录执行，也可以显式指定项目：
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language zh --project "<target-project-directory>"
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent codex --language zh --project "<target-project-directory>"
 ```
 
 <a id="global-install"></a>
@@ -56,10 +62,10 @@ npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0
 若希望**全局安装，让本机多个项目共用**，加上 `--global`。这条命令可以在任意文件夹中运行：
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language zh --global
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent codex --language zh --global
 ```
 
-这里的**全局是指当前电脑、当前用户账号**，不会自动安装到其他账号、远程机器或云端会话。其他 Agent 将 `codex` 换成 `claude-code`、`dsh` 或 `cursor`，保留 `--global` 即可；不要同时加 `--project`。
+这里的**全局是指当前电脑、当前用户账号**，不会自动安装到其他账号、远程机器或云端会话。其他 Agent 将 `codex` 换成 `claude-code`、`dsh`、`cursor`、`antigravity`、`gemini`、`windsurf` 或 `opencode`，保留 `--global` 即可；不要同时加 `--project`。
 
 用户范围的完整集群保存在 `~/.pivotui/libraries/`。Skill 入口使用所选 Agent 对应的目录：
 
@@ -69,6 +75,10 @@ npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0
 | Claude Code | `~/.claude/skills/pivotui/SKILL.md` | `$CLAUDE_CONFIG_DIR/skills/pivotui/SKILL.md` |
 | DSH | `~/.agents/skills/pivotui/SKILL.md` | `$DSH_AGENTS_HOME/skills/pivotui/SKILL.md` |
 | Cursor | `~/.agents/skills/pivotui/SKILL.md` | 用 `--skills-dir` 显式指定 |
+| Antigravity | `~/.gemini/antigravity/skills/pivotui/SKILL.md` | 用 `--skills-dir` 显式指定 |
+| Gemini CLI | `~/.gemini/skills/pivotui/SKILL.md` | 用 `--skills-dir` 显式指定 |
+| Windsurf | `~/.codeium/windsurf/skills/pivotui/SKILL.md` | 用 `--skills-dir` 显式指定 |
+| OpenCode | `~/.config/opencode/skills/pivotui/SKILL.md` | 用 `--skills-dir` 显式指定 |
 
 Codex 专属目录与 [OpenAI 官方 Skill 安装器](https://github.com/openai/skills/blob/main/skills/.system/skill-installer/SKILL.md)一致。Codex 公开 Skill 指南也列出了共享 `.agents/skills` 发现目录。PivotUI 的新 Codex 全局安装使用 `.codex/skills`，Codex 项目安装继续使用 `.agents/skills`。新的全局默认位置不会自动搬动或删除旧安装；如果共享目录里已经有一份入口，请核对自己要使用哪一份，避免无意保留重复入口。其他 Agent 可能还在使用那份共享安装。
 

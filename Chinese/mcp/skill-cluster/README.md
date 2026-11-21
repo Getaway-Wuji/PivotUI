@@ -42,17 +42,19 @@ python server.py --skill-root <所选语言版本目录> --skill-root <已安装
 
 多个根目录重叠时，同一个解析后的实际入口只登记一次，保留首次目录标识，并采用已配置根目录内发现的最外层技能包边界。仅登记嵌套入口的目录不会授予读取未配置父包的权限。不同文件系统位置的副本即使内容相同，仍是不同入口。
 
-## 三个固定工具
+## 三个固定工具与共享只读资源
 
 | 工具 | 输入 | 返回 |
 | --- | --- | --- |
-| `catalog_skills` | 可选 `query`，按元数据筛选 | 名称、说明、id、别名、分类、上游隐式调用设置；没有 Skill 正文 |
-| `load_skill` | `skill_id`，支持名称、别名或明确 id | 选中入口正文及其直接链接的资源文件名 |
+| `catalog_skills` | 可选 `query`，按元数据筛选（支持中英双语界面意图同义词） | 名称、说明、id、版本、标签、前置依赖（`requires`）、禁用范围（`exclude_scopes`）、别名、分类与上游隐式调用设置；不含 Skill 正文 |
+| `load_skill` | `skill_id`，支持名称、别名或明确 id | 选中入口正文及其直接引用的包内文本文件名（含 Markdown 链接与反引号路径） |
 | `read_skill_file` | `skill_id`、相对 `path`，可选 `offset`、`limit` | 一个包内 UTF-8 文本文件的指定字符片段 |
+
+集群共享文档（`design-system/FOUNDATIONS.md`、`design-system/ORCHESTRATION.md`、`README.md`、`THIRD_PARTY_NOTICES.md`）以只读 MCP Resource 暴露在 `pivotui://docs/<filename>` 下，同时保持 `read_skill_file` 严格的包内路径边界。
 
 单次正文最多 12,000 字符，单文件最多 2 MiB。长文本返回 `truncated`、`next_offset` 和 `revision`；下一次用返回的 offset 继续读取。同一文件跨页 revision 变化时应重新读取，避免混合不同版本。
 
-这些工具提供无状态读取，不维护会话缓存；重复调用会重新读取当前内容。宿主 AI 应复用任务上下文中已有的入口和资源，只在需要补齐内容或核实变更时重新读取。
+目录发现按文件修改时间与大小缓存 frontmatter 解析结果，增删改 Skill 立即生效，无需重启。工具调用仍为无状态读取，不维护会话记忆；宿主 AI 应复用任务上下文中已有的入口和资源，只在需要补齐内容或核实变更时重新读取。
 
 嵌套子 Skill 可以读取所属顶层包内的共享参考，例如 `../../references/rules.md`。绝对路径、逃出包边界的路径及符号链接、二进制文件均不能通过资源工具读取。资源内容只作为文本返回，不被执行。
 

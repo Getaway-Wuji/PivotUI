@@ -1,6 +1,6 @@
 # Provenance and distribution
 
-Package: `design-reference-research` 1.0.0. Origin: internal authored research method and adapted case cards. It is not an imported VoltAgent Skill and does not rename the upstream project.
+Package: `design-reference-research` 1.0.1. Origin: internal authored research method and adapted case cards. It is not an imported VoltAgent Skill and does not rename the upstream project.
 
 Source author/project: VoltAgent, [awesome-design-md](https://github.com/VoltAgent/awesome-design-md). Fixed source revision: `fcc70284932276d085f01ef9f83edde90b1258cb`. Source snapshot and document review date: 2026-11-14. The upstream DESIGN documents often call themselves `alpha`; this package version describes the local method and cards, not an upstream release.
 

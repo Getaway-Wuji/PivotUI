@@ -42,17 +42,19 @@ The server discovers packages directly under a root or one functional category l
 
 Overlapping roots register the same resolved entrypoint once, retaining its first catalog id and the outermost skill-package boundary discovered within the configured roots. Registering only a nested entry's directory does not grant access to its unconfigured parent package. Separate filesystem copies remain distinct entries even when their contents match.
 
-## Three fixed tools
+## Three fixed tools and shared resources
 
 | Tool | Input | Result |
 | --- | --- | --- |
-| `catalog_skills` | Optional metadata filter `query` | Names, descriptions, ids, aliases, categories, and upstream implicit-invocation flags; no skill bodies |
-| `load_skill` | `skill_id`: name, alias, or exact id | One selected entrypoint and the filenames it directly links |
+| `catalog_skills` | Optional metadata filter `query` (supports bilingual UI intent synonyms) | Names, descriptions, ids, versions, tags, prerequisites (`requires`), scope exclusions (`exclude_scopes`), aliases, categories, and upstream implicit-invocation flags; no skill bodies |
+| `load_skill` | `skill_id`: name, alias, or exact id | One selected entrypoint and the in-package text filenames it links (Markdown links and inline backtick paths) |
 | `read_skill_file` | `skill_id`, relative `path`, optional `offset` and `limit` | A character slice of one UTF-8 text file within the selected package |
+
+Shared edition guides (`design-system/FOUNDATIONS.md`, `design-system/ORCHESTRATION.md`, `README.md`, and `THIRD_PARTY_NOTICES.md`) are exposed as read-only MCP resources under `pivotui://docs/<filename>` without widening package boundaries in `read_skill_file`.
 
 A response contains at most 12,000 content characters; a file may be at most 2 MiB. Long files return `truncated`, `next_offset`, and `revision`. Continue from the returned offset. If the revision changes between pages, restart the read to avoid combining versions.
 
-These tools are stateless reads, not a session cache. Repeated calls read fresh content. The host AI should reuse entries and resources already available in the task context, rereading when needed to obtain missing content or verify changes.
+Discovery caches parsed frontmatter by file mtime/size and refreshes immediately when files are added, edited, or removed. Tool reads remain stateless without session memory; the host AI should reuse entries and resources already available in the task context, rereading when needed to obtain missing content or verify changes.
 
 A nested skill can read shared references in its top-level package, such as `../../references/rules.md`. Absolute paths, paths or symbolic links escaping that package, and binary resources are rejected. Resource contents are returned as text and never executed.
 

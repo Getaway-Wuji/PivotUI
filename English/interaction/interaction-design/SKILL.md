@@ -3,6 +3,7 @@ name: interaction-design
 description: Design and repair state transitions, keyboard focus, submission feedback, and failure recovery for buttons, forms, navigation, overlays, and table actions. Select interaction submodules and React Bits animations on demand while managing performance. Supplement a page lead or handle local behavior without replacing its layout, business rules, or visual system.
 metadata:
   version: 1.1.0
+  tags: [interaction, states, async, focus, keyboard, feedback, recovery, motion]
 ---
 
 # Detailed Interaction Design
@@ -55,4 +56,4 @@ For local tasks, deliver the necessary behavior specification or code and check 
 
 Standalone example: Use `$interaction-design` to repair keyboard focus and save-failure recovery in an editing Drawer, preserve existing components and styles, and choose animation only for necessary state transitions.
 
-Version 1.1.0. Shared-method sources: Interface Design Foundations 0.2 and Authored/External Design Skills Orchestration 0.1. Reference research and submodule/overlay conventions dated 2026-11-14. Effective target-project conventions and the user's current instructions take precedence.
+Version 1.1.0. Standalone excerpts derive from Interface Design Foundations 0.2 and Orchestration 0.1; when running inside the cluster, follow the edition's current `design-system/ORCHESTRATION.md`. Reference research and submodule/overlay conventions dated 2026-11-14. Effective target-project conventions and the user's current instructions take precedence.

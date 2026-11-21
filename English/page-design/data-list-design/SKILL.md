@@ -3,6 +3,7 @@ name: data-list-design
 description: Design and implement complete administrative data list pages. Use for list composition, search and filters, views and columns, selection and bulk work, export scope, and returning from detail; retain the product shell and shared controls.
 metadata:
   version: 1.0.0
+  tags: [table, data-list, filter, search, pagination, bulk, export]
 ---
 
 # Data List Design

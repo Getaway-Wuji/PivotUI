@@ -1,6 +1,8 @@
 ---
 name: button-interaction
 description: 处理命令按钮的悬停、焦点、按下、禁用、加载、结果与恢复；保留原有动作语义、业务逻辑和稳定命中区。
+metadata:
+  tags: [按钮, 点击, 加载态, 禁用, 防重复, button, loading]
 ---
 
 # 按钮交互

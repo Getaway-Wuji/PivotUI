@@ -1,10 +1,10 @@
 # 来源与分发
 
-包：`design-reference-research` 1.0.0。来源属性：本项目编写的研究方法与适配案例卡。它不是导入的 VoltAgent Skill，也没有重命名上游项目。
+包：`design-reference-research` 1.0.1。来源属性：本项目编写的研究方法与适配案例卡。它不是导入的 VoltAgent Skill，也没有重命名上游项目。
 
 来源作者/项目：VoltAgent，[awesome-design-md](https://github.com/VoltAgent/awesome-design-md)。固定来源提交：`fcc70284932276d085f01ef9f83edde90b1258cb`。来源快照与文档审查日期：2026-11-14。上游 DESIGN 文档经常自称 `alpha`；本包版本表示本地方法和案例卡版本，不是上游发行版本。
 
-原始 [MIT LICENSE](LICENSE)，copyright 2026 VoltAgent，在中英文版本中均原字节保留。八张改写摘要及事实性 Token 示例来自该来源。本项目编写的编排文字由 Getaway-Wuji 以 MIT 许可发布，见本版的[项目 LICENSE](../../LICENSE)；随附上游 LICENSE 标识 VoltAgent 资料及其原始版权，不授予公司标识、专有字体、照片或其他品牌资产的权利。本包不包含这些资产。
+原始 [MIT LICENSE](LICENSE)，copyright 2026 VoltAgent，在中英文版本中均原字节保留。八张改写摘要及事实性 Token 示例来自该来源。本项目编写的编排文字没有另行声明全项目许可；随附上游 LICENSE 标识上游资料，不授予公司标识、专有字体、照片或其他品牌资产的权利。本包不包含这些资产。
 
 ## 随包内容
 

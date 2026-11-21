@@ -3,6 +3,7 @@ name: dashboard-design
 description: Design or improve a backend Dashboard (including "dash broad") from business roles, data tasks, and reference images. Choose information structure, charts, visual language, and necessary interactions for business overviews, analysis, live monitoring, workspaces, and resource overviews. Standalone application navigation, forms, and full data-list design are outside this module.
 metadata:
   version: 1.1.4
+  tags: [dashboard, analytics, kpi, charts, monitoring, workspace]
 ---
 
 # Dashboard Design

@@ -10,16 +10,16 @@ Return only relevant facts:
 
 | Item | Useful handoff |
 | --- | --- |
-| Components | Reused imports, changed shared files, new components and current consumers |
+| Components | Reused imports, shared implementation locations, changed files, new components and consuming pages |
 | Contract | Props/value types, stable identifiers, events, composition points and ownership of requests/state |
-| Variants | Name, use condition, difference from existing choices, supported combinations and defaults |
+| Variants | Name, use condition, difference from existing choices, supported combinations, defaults and allowed per-page differences |
 | Tokens | Authoritative source; existing mappings; proposed shared additions with reason and affected components/pages |
-| Responsibilities | Page lead's business content, behavior rules received or filled, responsive decisions, one integration owner |
+| Responsibilities | Page lead's business content, behavior rules received or filled, responsive decisions, one integration owner; the current implementer may perform all these roles |
 | Evidence | Checks actually executed and their scope, results, limitations and any migration still needed |
 
 The orchestrator consolidates shared-token changes, with global style generation/validation where available. Without a controller, make only needed project-scoped additions in its existing authoritative source and document their purpose and consumers. Do not invent a library-wide palette. For local fixes with a complete theme, no new token process is required.
 
-Existing overlay specialists own overlay selection and behavior; this module integrates shared interfaces and consumes their implementation. If an overlay implementation is already adequate, reuse it. A component task may enter this skill directly; discovering every other module is unnecessary.
+Existing overlay specialists own overlay selection and behavior; this module integrates shared interfaces and consumes their implementation. If an overlay implementation is already adequate, reuse it. Shared Modal behavior covers naming, focus entry/containment/return, dismissal and pending-operation rules as applicable; within the agreed interaction rules, initial focus can differ with the task and risk. Record intentional differences instead of forcing every Modal to focus the same control. A component task may enter this skill directly; discovering every other module is unnecessary.
 
 ## The three task classes
 
@@ -32,6 +32,8 @@ Existing overlay specialists own overlay selection and behavior; this module int
 For a skill-only authoring task, run realistic scenario walkthroughs against the entry and resources. These evaluate decision guidance, not a rendered implementation. For implementation tasks, execute appropriate available checks on the changed code and relevant callers. Do not declare runtime verification from a source reading or a passing metadata validator.
 
 ## Check what changed
+
+When adding cross-page consumers or changing a shared implementation, interface or theme, use the affected callers to select representative rendered checks covering the changed variants and theme contexts. Compare the shared base contract and permitted differences; include a Portal/Modal path and focus return when affected. Record the chosen pages, states, actions and actual outcomes so one successful caller does not stand for all contexts. Local reuse with no shared change needs checks of that use, not an unrelated site-wide audit or a mandatory specialist handoff.
 
 - **Token inheritance:** inspect actual source and generated values; check a consumer in every affected theme. Include a portal/Modal/message path if touched, since it may escape theme context. New values name a use, not a screenshot color.
 - **Interface consistency:** verify controlled changes and initial values, event payload/timing, stable row/option keys, native attributes and focus access. Preserve current library naming. Check existing consumers of a changed public API.

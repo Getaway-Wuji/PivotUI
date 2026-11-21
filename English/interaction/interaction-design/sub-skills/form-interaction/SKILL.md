@@ -1,6 +1,8 @@
 ---
 name: form-interaction
 description: Handle states and feedback during input, selection, validation, filtering, and submission; protect drafts and define error location, async saving, and continuation after failure.
+metadata:
+  tags: [form, input, validation, submit, draft, filter, select]
 ---
 
 # Form Interaction

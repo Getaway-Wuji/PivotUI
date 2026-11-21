@@ -17,7 +17,7 @@ PivotUI 是一套面向 UI 设计与实现的 **Skill 集群**，把任务分配
 
 管理层先理解你要的结果，为每个区域确定主负责人，再根据具体缺口引入辅助 Skill，并把结果整合到同一个产品中。从业务结构到可运行界面，各模块共享已有主题、组件和设计决策，减少重复选择与来回协调。
 
-当前版本 **0.4.0** 包含 **23 个包：9 个内源模块、14 个外源包**；计入交互模块的 4 个子入口，共有 **27 个标准 `SKILL.md` 入口**。中文与英文版均可独立使用；外源包在两版中保留上游原语言和声明。
+当前版本 **0.4.2** 包含 **23 个包：9 个内源模块、14 个外源包**；计入交互模块的 4 个子入口，共有 **27 个标准 `SKILL.md` 入口**。中文与英文版均可独立使用与独立下载（单语言包及去重双语包均约 29 MB）；外源包在两版中保留上游原语言和声明。
 
 ## 什么是 Skill 集群？
 
@@ -132,34 +132,36 @@ English/ 或 Chinese/
 
 ## 快速开始
 
-支持 **Codex、Claude Code、DSH（DeepSeek Harness）、Cursor 和其他兼容 Agent**。选择下面任意一种安装方式即可：两种方式都会提供一个原生 **pivotui** 入口，按任务读取完整集群中的 **27 个模块入口**。
+支持 **Codex、Claude Code、DSH（DeepSeek Harness）、Cursor、Antigravity、Gemini CLI、Windsurf、OpenCode 和其他兼容 Agent**。选择下面任意一种安装方式即可：两种方式都会提供一个原生 **pivotui** 入口，按任务读取完整集群中的 **27 个模块入口**。
 
 下面先介绍只装到一个项目里的方法。如果想让多个项目都能用，直接看[全局安装](#global-install)。npx 和压缩包两种方式都支持。
 
-### 方式一：一条 npx 命令安装
+### 方式一：一条 npx 命令安装（单语言下载，无需同时下中英文）
 
-准备好 **Node.js 22+ 和 npm/npx**，在目标项目根目录打开终端，执行：
+准备好 **Node.js 22+ 和 npm/npx**，在目标项目根目录打开终端，执行（中文单语言安装包，仅含中文完整集群，约 29 MB）：
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent codex --language zh
 ```
 
-npx 会下载打包好的安装包并运行，不需要 Git 或 Python。首次下载可能较慢，请等到出现 **`Installed PivotUI ...`**，才表示安装完成；转圈停止本身不代表成功。其他 Agent 使用对应命令：
+npx 会下载打包好的安装包并运行，不需要 Git 或 Python。首次下载请等到出现 **`Installed PivotUI ...`**，才表示安装完成；转圈停止本身不代表成功。其他 Agent 使用对应命令：
 
 ```sh
 # Claude Code
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent claude-code --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent claude-code --language zh
 # DSH / DeepSeek Harness
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent dsh --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent dsh --language zh
 # Cursor
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent cursor --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent cursor --language zh
+# Antigravity / Gemini CLI / Windsurf / OpenCode（替换 --agent 值即可）
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent antigravity --language zh
 ```
 
-英文版使用 `--language en`。默认安装到当前项目：完整集群放在 `.pivotui/libraries/`，原生入口放在 `.agents/skills/pivotui/`，Claude Code 则使用 `.claude/skills/pivotui/`。加上 `--global` 可安装到用户范围。[其他 Agent、自定义目录和预览](docs/INSTALL.zh-CN.md#command-install)。
+英文单语言安装包使用 `pivotui-installer-en-v0.4.2.tgz` 配合 `--language en`；如果需要在同一份安装包里切换中英文，可使用外源去重后的通用双语包 `pivotui-installer-v0.4.2.tgz`（约 29.6 MB，公共外源只存一份，不重复下载）。默认安装到当前项目：完整集群放在 `.pivotui/libraries/`，原生入口放在对应 Agent 的 skills 目录（如 `.agents/skills/pivotui/`、`.claude/skills/pivotui/`、`.agent/skills/pivotui/`）。支持 `--global`（全局安装）、`--status`（查看当前状态）、`--prune`（升级后清理旧版库目录）和 `--uninstall`（安全卸载）。[其他 Agent、自定义目录和预览](docs/INSTALL.zh-CN.md#command-install)。
 
 ### 方式二：下载 ZIP，复制两个文件夹
 
-下载一套**安装 ZIP**：[中文版](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0-r2.zip) · [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0-r2.zip)。同一个 ZIP 既可以只装到一个项目，也可以[全局安装](#global-install)。
+下载一套**安装 ZIP**：[中文版](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-Chinese-project-v0.4.2-r2.zip) · [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-English-project-v0.4.2-r2.zip)。同一个 ZIP 既可以只装到一个项目，也可以[全局安装](#global-install)。
 
 如果你用的是 **Codex、DSH 或 Cursor**：
 
@@ -214,14 +216,14 @@ Codex 最后应该放成这样：
 **用 npx：加上 `--global`。** 准备好 Node.js 22+ 和 npm/npx 后，在任意文件夹打开终端，执行：
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language zh --global
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent codex --language zh --global
 ```
 
-Claude Code 把 `codex` 换成 `claude-code`，DSH 换成 `dsh`，Cursor 换成 `cursor`。英文版使用 `--language en`。Codex 全局默认使用 `$CODEX_HOME/skills`，未设置 `CODEX_HOME` 时使用 `~/.codex/skills`。如果你设置过 `CODEX_HOME`、`CLAUDE_CONFIG_DIR` 或 `DSH_AGENTS_HOME`，使用这条命令路线，让安装器设置对应的路径；显式传入 `--skills-dir` 可以指定入口目录。详见[全局目录与自定义配置](docs/INSTALL.zh-CN.md#global-zip-install)。
+Claude Code 把 `codex` 换成 `claude-code`，DSH 换成 `dsh`，Cursor 换成 `cursor`，Antigravity 换成 `antigravity`，Gemini CLI 换成 `gemini`，Windsurf 换成 `windsurf`，OpenCode 换成 `opencode`。英文单语言包使用 `pivotui-installer-en-v0.4.2.tgz` 配合 `--language en`（也可使用去重双语包 `pivotui-installer-v0.4.2.tgz`）。Codex 全局默认使用 `$CODEX_HOME/skills`，未设置 `CODEX_HOME` 时使用 `~/.codex/skills`。如果你设置过 `CODEX_HOME`、`CLAUDE_CONFIG_DIR` 或 `DSH_AGENTS_HOME`，使用这条命令路线，让安装器设置对应的路径；显式传入 `--skills-dir` 可以指定入口目录。详见[全局目录与自定义配置](docs/INSTALL.zh-CN.md#global-zip-install)。
 
 任意一种方式完成后，在你使用的本地 Agent 中打开一个项目，新建对话即可使用 **pivotui**。这份安装供当前用户使用；其他账号、远程机器或云端会话需要放到它们各自的安装位置。
 
-原来的完整语言版压缩包也保留，供原始文件或 MCP 接入使用：[中文版 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip) · [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip)。详见[安装指南](docs/INSTALL.zh-CN.md)和[验证记录](docs/VALIDATION.md)。
+原来的完整语言版压缩包也保留，供原始文件或 MCP 接入使用：[中文版 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-Chinese-v0.4.2.zip) · [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-English-v0.4.2.zip)。详见[安装指南](docs/INSTALL.zh-CN.md)和[验证记录](docs/VALIDATION.md)。
 
 <a id="skills"></a>
 

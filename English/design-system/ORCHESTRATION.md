@@ -1,9 +1,9 @@
 # Orchestrating Authored and External Design Skills
 
-Version: 0.4.5
-Date: 2026-11-14  
-Distribution: 0.4.0, English
-Status: layered, on-demand loading. The [orchestrator](../orchestration/design-orchestrator/SKILL.md) is version 1.2.5. Application shells, data lists, Dashboard, interaction and its nested overlay modules, global style, and component-system have working entries. Responsive design and product-reference research have bilingual entries and are integrated by their actual capabilities. Discover actual capabilities at runtime.
+Version: 0.4.7
+Date: 2026-11-21  
+Distribution: 0.4.2, English
+Status: layered, on-demand loading. The [orchestrator](../orchestration/design-orchestrator/SKILL.md) is version 1.2.7. Application shells, data lists, Dashboard, interaction and its nested overlay modules, global style, and component-system have working entries. Responsive design and product-reference research have bilingual entries and are integrated by their actual capabilities. Discover actual capabilities at runtime.
 
 This agreement covers marketing sites, portfolios, redesigns, builds from references, business dashboards, and direction exploration. Use it with the [shared foundations](FOUNDATIONS.md). Choose one lead per design region, then involve component, interaction, responsive, or research capabilities as needed.
 
@@ -41,7 +41,7 @@ Discover actual names and entries rather than treating historical availability a
 | --- | --- | --- | --- |
 | `design-orchestrator` | Identify tasks, select modules, consolidate tokens, hand off | Entry and responsibility changes | No detailed business rules or default full-reference loading |
 | `global-style-skill` | Recommend/compare visual direction; generate, extend, migrate, or validate tokens | Unresolved selection, explicit restyling, token gaps or requested checks | Advice can stop before tokens; no page ownership or redundant selection after adequate lead work; skip ordinary local work with complete themes |
-| `design-reference-research` | Find and compare named product cases; inspect source scope and return transferable patterns | Explicit references/comparisons, source checks, or a concrete case-evidence gap | Internal method with attributed external data; distinguish marketing/product/illustrative surfaces and evidence types; no page ownership or second token source |
+| `design-reference-research` | Find and compare named product cases; inspect source scope and return transferable patterns | Requested case research/comparisons, source checks, or missing evidence for concrete borrowed traits | Mood-only naming with sufficient direction does not require research; distinguish marketing/product/illustrative surfaces and evidence types; no page ownership or second token source |
 | `floating-components` | Select and implement Tooltip, Toast, Alert, Modal, Popconfirm, Drawer | Overlay or messaging tasks | Use the existing nested interaction entry; do not duplicate rules |
 | `dashboard-design` | Roles, tasks, metrics, charts, density, dashboard structure | Dashboard analysis and implementation | Own content and summaries; reuse the shell; handle full navigation, lists, and forms separately |
 | `data-list-design` | Information priority, search/filtering, views/columns, sorting/pagination, selection, bulk tasks, exports and detail return | Complete administrative list design and implementation | Reuse shell/tokens and Table/shared controls; interaction and responsive support fill gaps; select only needed features |
@@ -140,7 +140,7 @@ Inherit established themes/references unless the user explicitly changes them. F
 
 ### Named product references
 
-For a named reference, case comparison or source audit, route to `design-reference-research` directly. Confirm the actual surface and evidence type before transferring traits; a marketing dashboard screenshot or generated SaaS example cannot establish product workflow. Preserve the page lead, current brand and token authority, and return only the relevant findings. If a source is indexed-only, inspect it before recommending specifics or state what remains unavailable. Use the [reference scenarios](../orchestration/design-orchestrator/references/scenarios.md#product-reference-research-and-transfer) to check these distinctions.
+Distinguish mood, specific visual borrowing, and requested case research/comparison, source verification or faithful reproduction. Mood-only naming with sufficiently grounded direction needs no automatic research or invented source details. Inspect supplied evidence for concrete borrowing or reproduction; use `design-reference-research` for missing source evidence and explicit research/comparison/audit requests. Confirm actual surface and evidence type before transferring traits; a marketing dashboard screenshot or generated SaaS example cannot establish product workflow. Preserve the page lead, current brand and token authority. If a source is indexed-only, inspect it before recommending specifics or state what remains unavailable. Use the [reference scenarios](../orchestration/design-orchestrator/references/scenarios.md#product-reference-research-and-transfer) to check these distinctions.
 
 An adapted project `DESIGN.md`, when requested, records adopted traits, sources, region scope and supplemental behavior decisions while linking the true token source. Its preparation does not create a second independently editable theme, invoke Stitch or establish rendered-interface success.
 
@@ -175,6 +175,8 @@ Use a concise working agreement in existing task or project records; a separate 
 | Components and behavior | Existing components, missing states, and required variants |
 | Devices and motion | Target devices, layout changes, permitted motion scope |
 | Delivery and checks | Expected output, allowed edits, and verifiable outcomes |
+
+For multiple regions or shared changes, connect each relevant decision to its integration owner, implementation location, actual check/evidence and unverified work in existing records. The same implementer may own every role; this applies equally to solo work. Before delivery, select checks from the change: actual theme consumption, shared component behavior across affected callers, and reading/keyboard order after reflow. Reuse applicable evidence, record its coverage and fill gaps without automatically rerunning specialists or auditing the entire site. Theme generation alone does not establish correct consumption. The [handoff guide](../orchestration/design-orchestrator/references/design-contract.md) contains the compact record and change triggers.
 
 Read an external skill's actual entry and task-relevant resources. Check its version, inputs, outputs, dependencies, defaults, and validation method. Choose full use, adaptation, or research-only use before applying it.
 

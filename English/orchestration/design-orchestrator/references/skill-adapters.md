@@ -35,7 +35,7 @@ With MCP, read the selection guide as `references/style-selection.md` under the 
 
 ## Product cases as evidence
 
-Use `design-reference-research` when the user names a product reference, asks for a case comparison or source check, or needs concrete examples that current direction guidance does not supply. Use `ui-ux-pro-max` for an unresolved general style, typography or UX question. Choose by the missing evidence; neither is a mandatory pass after the other. A complete existing theme and a local repair ordinarily skip both.
+Use `design-reference-research` for requested case research/comparison or source checks, and when specific borrowed traits need evidence that current material does not supply. A product name used only to convey mood does not require research when the direction is sufficiently grounded; record the interpretation without attributing unverified details. Inspect supplied references directly when sufficient, preserving their authority for reproduction. Explicit research requests still require research. Use `ui-ux-pro-max` for an unresolved general style, typography or UX question. Choose by the missing evidence; neither is a mandatory pass after the other. A complete existing theme and a local repair ordinarily skip both.
 
 Filter by the task's actual surface before appearance: marketing page, marketplace/product flow, working application, registration, or illustrative example. A company's name and a dashboard-looking marketing panel do not establish working-product coverage. Keep official rules, third-party observations or extraction claims, author recommendations, and synthetic examples distinct. A document review or precise number does not prove live CSS, interaction, accessibility or responsive behavior.
 

@@ -2,7 +2,8 @@
 name: global-style-skill
 description: Select or compare a product's visual direction and generate, organize, or validate its design tokens. Use for style exploration, requested visual changes, new themes, brand migrations, or cross-region consistency. Skip local behavior fixes covered by the existing theme.
 metadata:
-  version: 1.1.1
+  version: 1.1.3
+  tags: [theme, tokens, color, palette, typography, style, dark, light, contrast]
 ---
 
 # Global Style and Design Tokens
@@ -14,6 +15,8 @@ Handle the current product's visual direction, design tokens, and consistent use
 Read the task type, current theme source, established brand, reference purpose, allowed change scope, and output format from the request and target project. Prefer the target project's design conventions. Read this series' shared conventions and module records only when present in the target project. Work independently without those files; do not search for this skill's original authoring directory.
 
 Distinguish direction advice, generation, local extension, migration, and validation only. If tokens are complete and the user only wants an interaction fix, return the source and "no change needed"; do not rebuild the theme for every request. A requested style comparison or visual change still belongs here even with complete tokens. Advice-only work returns recommendations without writing tokens or page code. Supply reasoned provisional values for ordinary missing details, labeling them as candidates. Ask only about material conflicts that cannot reasonably be inferred.
+
+An established theme does not by itself prove that affected pages and components use it correctly. This module can contribute validation at delivery without selecting a new direction or regenerating values. Reuse adequate validation already completed by the implementer.
 
 ## Choose the visual evidence
 
@@ -27,7 +30,7 @@ For open style choices or comparisons, read [selection rules](references/style-s
 
 Choose and briefly explain a provisional direction when the task is clear or the user delegates the choice. Offer 2–3 concrete alternatives and ask the user to choose only when materially different directions remain equally plausible and the user's preference cannot be inferred; keep dependent visual changes pending while continuing independent work. Explicit references and current instructions take priority. The selection rules describe handoff, combination limits, evidence boundaries, and optional research without making other skills mandatory.
 
-For a named product reference or a concrete case-evidence gap, use `design-reference-research` when available, following the selection guide's evidence rules. Its metadata and selected cases supplement this same decision; they do not start another theme workflow. Keep source observations, recommendations and synthetic examples distinct, and map adopted traits to the existing token source. Ordinary local repairs skip research. If that module is absent, inspect supplied evidence directly and disclose remaining gaps; this skill remains independently usable.
+For requested case analysis/comparison or source verification, or a concrete case-evidence gap, use `design-reference-research` when available, following the selection guide's evidence rules. For specific visual borrowing, inspect supplied material or reuse adequate inspected evidence, researching only remaining source gaps unless research is explicitly requested. A name used only to describe atmosphere with a sufficiently supported direction does not require case research; record the intended mood without claiming observed product details. Research metadata and selected cases supplement this same decision; they do not start another theme workflow. Keep source observations, recommendations and synthetic examples distinct, and map adopted traits to the existing token source. Ordinary local repairs skip research. If that module is absent, inspect supplied evidence directly and disclose remaining gaps; this skill remains independently usable.
 
 ## Generate and consolidate
 
@@ -48,9 +51,16 @@ Express local differences as explicitly named component or region variants. Mark
 
 ## Validate actual output
 
-Compare specified files or interfaces with the adopted design decisions and authoritative source. Check actual color, typography, spacing, and radius references for unintended hardcoding, theme overrides, missing variants, or invalid references. Reasonable local constants, such as a fixed icon size, are not automatically errors.
+Compare specified files or interfaces with the adopted design decisions and authoritative source. Check actual color, typography, spacing, and radius references for unintended overrides, missing variants, or invalid references. Classify local colors before changing them: a conflicting shared semantic role needs reconciliation; an intentional region variant needs an explicit scope; illustration or decorative constants may remain local. A literal value, including a fixed icon size, is not automatically an error.
 
-For validation-only requests, return locatable findings, evidence, and proposed fixes. For correction requests, apply theme changes within scope. Check contrast and other visual issues against actual combinations rather than variable names alone. Treat a user-selected new direction as a change, rather than mechanically restoring the old conventions.
+When implementation adds several regions or changes shared theme values, verify representative affected consumers as well as the source:
+
+- Select pages or shared components that cover distinct uses of the affected shared values. Include the relevant visible states, such as focus, selected, error, or disabled, rather than checking only defaults.
+- Inspect actual foreground/background combinations and theme inheritance. Where present and affected, include image or transparent backgrounds and overlays rendered through a Portal or outside the theme container.
+- Name the person or agent integrating findings; this can be the same implementer. Reuse still-valid evidence, and expand checks only for uncovered or changed uses. This does not require another reviewer, a new theme, or a full-site pass through every state.
+- Record the inspected consumers, states and conditions, results or fix locations, and unverified scope in the existing project notes or requested output. Source-file checks alone do not verify rendered consumption.
+
+For validation-only requests, return locatable findings, evidence, and proposed fixes. For correction requests, apply theme changes within scope. When Python 3.11+ is available, you can run [check_tokens.py](scripts/check_tokens.py) on CSS or JSON token files (`python scripts/check_tokens.py <file> [--pair --fg:--bg]`) to deterministically verify duplicate definitions, undefined `var()` references, reference cycles, and opaque hex/rgb WCAG contrast ratios; static token checks supplement rather than replace rendered-page inspection. Check contrast and other visual issues against actual combinations rather than variable names alone. Treat a user-selected new direction as a change, rather than mechanically restoring the old conventions.
 
 ## Return results
 

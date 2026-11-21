@@ -3,6 +3,7 @@ name: app-shell-design
 description: "设计、实现或修复管理应用的共享外壳：跨列表、详情和编辑页的导航层级、当前位置、页头、内容边界与滚动。用于跨页面框架任务；业务内容由页面模块负责。"
 metadata:
   version: 1.0.0
+  tags: [应用框架, 导航, 侧边栏, 面包屑, 顶栏, 滚动, shell, navigation]
 ---
 
 # 应用外壳设计

@@ -39,9 +39,19 @@ The repository's single Node bin is distributed as a fixed Release `.tgz` asset.
 
 仓库的单一 Node 入口以固定 Release `.tgz` 附件发布，首选调用为 `npx --yes --package=<asset-url> pivotui`，后接安装参数。这条路线使用 npm 的 HTTP 下载和缓存，无需在用户机器上执行 Git 克隆、SSH 回退或源码打包。`npx --yes github:Getaway-Wuji/PivotUI` 仍作为兼容的源码路线保留，需要 Git。两者运行相同安装器，不调用 Python，也不依赖发布到 npm registry。`package.json` 明确包含完整双版本、审阅基线、执行入口及模板。发布修改前，按基线核对实际 `npm pack` 内容，确保未漏掉必要资源。安装默认作用于当前项目并使用可搬移的相对路径；显式添加 `--global` 才选择用户范围。
 
-Run `npm pack --json --pack-destination <staging-directory>`, verify both edition inventories including the fixed npm filename mapping, and publish the resulting bytes as `pivotui-installer-v0.4.0-r3.tgz` with `NPX-CHECKSUMS-v0.4.0-r3.sha256`. Test the actual public URL from an isolated project before claiming it works. Use a new packaging revision for changed bytes; never replace an existing asset. The first download is still a complete package and can be slow. An exit code alone is insufficient: confirm the generated entry, manifest and all installed library hashes.
+Run `python scripts/build_npm_packages.py` to build and verify three complete-cluster npm tarballs plus `NPX-CHECKSUMS-v0.4.2.sha256` without removing any external skill:
+- `pivotui-installer-zh-v0.4.2.tgz` (~29.4 MB): Chinese-only complete cluster (zero English files).
+- `pivotui-installer-en-v0.4.2.tgz` (~29.3 MB): English-only complete cluster (zero Chinese files).
+- `pivotui-installer-v0.4.2.tgz` (~29.6 MB): Deduplicated bilingual cluster storing byte-identical external and shared files once via `bin/npm-resources/dedup-edition.json` while still SHA-256 verifying every installed file against `language-sync.json`.
 
-执行 `npm pack --json --pack-destination <staging-directory>`，核对两版文件清单（包括 npm 的固定文件名恢复映射），再将产物以 `pivotui-installer-v0.4.0-r3.tgz` 和 `NPX-CHECKSUMS-v0.4.0-r3.sha256` 发布。实际在隔离项目中执行公开 URL 后，才能宣称该命令已验证。内容变化使用新打包修订号，不覆盖既有附件。首次仍需下载完整包，可能较慢；不能仅根据退出码判断成功，还要确认生成的入口、清单和完整集群文件哈希。
+Direct `npm pack --json --pack-destination <staging-directory>` on the repository root also remains supported. Test the actual public URL from an isolated project before claiming it works. Use a new packaging revision for changed bytes; never replace an existing asset. An exit code alone is insufficient: confirm the generated entry, manifest and all installed library hashes.
+
+运行 `python scripts/build_npm_packages.py` 构建并核验三份完整集群 npm 安装包及 `NPX-CHECKSUMS-v0.4.2.sha256`（完整保留全部 23 个包与 14 个外源包，不做功能删减）：
+- `pivotui-installer-zh-v0.4.2.tgz`（约 29.4 MB）：纯中文单语言完整集群，不含英文副本。
+- `pivotui-installer-en-v0.4.2.tgz`（约 29.3 MB）：纯英文单语言完整集群，不含中文副本。
+- `pivotui-installer-v0.4.2.tgz`（约 29.6 MB）：外源去重后的双语通用包，通过 `bin/npm-resources/dedup-edition.json` 将中英文逐字节一致的外源与共享文件只保存一份，安装时仍逐一按 `language-sync.json` 核验全部文件 SHA-256。
+
+在仓库根目录直接执行 `npm pack --json --pack-destination <staging-directory>` 仍完全兼容。实际在隔离项目中执行公开 URL 后，才能宣称该命令已验证。内容变化使用新打包修订号，不覆盖既有附件；不能仅根据退出码判断成功，还要确认生成的入口、清单和完整集群文件哈希。
 
 npm omits the nested MCP `.gitignore` file even when its source directory is included. The Node package therefore carries its original bytes as a fixed runtime resource. Only that missing source path may use the packaged mapping, and its hash must match the selected edition's baseline. Installed libraries retain the original filename and are checked against all 1,911 expected file hashes; missing unrelated files and edited originals still fail validation.
 

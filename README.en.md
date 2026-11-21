@@ -17,7 +17,7 @@ PivotUI is a UI design Skill cluster that connects task routing, visual directio
 
 The management layer interprets the requested result, assigns a lead for each region, adds specialists for concrete gaps, and brings their results into the same product. A complete task can move from business structure to working interface while preserving the project's theme, components, and decisions.
 
-Release **0.4.0** includes **23 packages: 9 authored modules and 14 external packages**, with **27 standard `SKILL.md` entrypoints** including four interaction submodules. The English and Chinese editions are independently usable. External packages retain their original language and notices in both editions.
+Release **0.4.2** includes **23 packages: 9 authored modules and 14 external packages**, with **27 standard `SKILL.md` entrypoints** including four interaction submodules. The English and Chinese editions are independently usable and independently downloadable (both single-language and deduplicated bilingual tarballs are ~29 MB). External packages retain their original language and notices in both editions.
 
 ## What is a Skill cluster?
 
@@ -132,34 +132,36 @@ Internal and external packages share functional categories. Their origin is docu
 
 ## Quick start
 
-Use PivotUI with **Codex, Claude Code, DSH (DeepSeek Harness), Cursor, or another compatible Agent**. Choose one of the two installation routes below. Both provide one native **pivotui** entry that reads the complete library's **27 module entrypoints** as needed.
+Use PivotUI with **Codex, Claude Code, DSH (DeepSeek Harness), Cursor, Antigravity, Gemini CLI, Windsurf, OpenCode, or another compatible Agent**. Choose one of the two installation routes below. Both provide one native **pivotui** entry that reads the complete library's **27 module entrypoints** as needed.
 
 The steps below install into one project. To share PivotUI across your projects, go straight to [global installation](#global-install). Both npx and the ZIP support it.
 
-### Option 1: Install with one npx command
+### Option 1: Install with one npx command (single-language download, no redundant edition)
 
-With **Node.js 22+ and npm/npx** installed, open a terminal in your target project's root and run:
+With **Node.js 22+ and npm/npx** installed, open a terminal in your target project's root and run (English-only installer tarball, ~29 MB):
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent codex --language en
 ```
 
-npx downloads the prepared installation package and runs it. This command does not need Git or Python. The first download may take a while; installation is complete when you see **`Installed PivotUI ...`**. A spinner stopping on its own does not confirm success. For another Agent, use the matching command:
+npx downloads the prepared installation package and runs it. This command does not need Git or Python. Installation is complete when you see **`Installed PivotUI ...`**. A spinner stopping on its own does not confirm success. For another Agent, use the matching command:
 
 ```sh
 # Claude Code
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent claude-code --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent claude-code --language en
 # DSH / DeepSeek Harness
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent dsh --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent dsh --language en
 # Cursor
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent cursor --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent cursor --language en
+# Antigravity / Gemini CLI / Windsurf / OpenCode (swap --agent value)
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent antigravity --language en
 ```
 
-Use `--language zh` for Chinese. The default installation stays in this project: the complete library goes under `.pivotui/libraries/`, and the native entry goes under `.agents/skills/pivotui/` (or `.claude/skills/pivotui/` for Claude Code). Add `--global` for user-wide installation. [Other Agents, custom paths and preview](docs/INSTALL.en.md#command-install).
+For Chinese only, use `pivotui-installer-zh-v0.4.2.tgz` with `--language zh`. If you want one tarball that supports switching between English and Chinese without downloading duplicate external packages, use the deduplicated universal tarball `pivotui-installer-v0.4.2.tgz` (~29.6 MB). The default installation stays in this project under `.pivotui/libraries/` and the agent's skills folder (e.g. `.agents/skills/pivotui/`, `.claude/skills/pivotui/`, `.agent/skills/pivotui/`). Supports `--global`, `--status`, `--prune` (clean up unused older managed libraries), and `--uninstall`. [Other Agents, custom paths and preview](docs/INSTALL.en.md#command-install).
 
 ### Option 2: Download a ZIP and copy two folders
 
-Download one **installation ZIP**: [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0-r2.zip) · [Chinese](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0-r2.zip). The same ZIP works for a single project or [global installation](#global-install).
+Download one **installation ZIP**: [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-English-project-v0.4.2-r2.zip) · [Chinese](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-Chinese-project-v0.4.2-r2.zip). The same ZIP works for a single project or [global installation](#global-install).
 
 For **Codex, DSH or Cursor**:
 
@@ -214,14 +216,14 @@ If folders already exist at the destination, merge their contents and preserve o
 **With npx: add `--global`.** With Node.js 22+ and npm/npx installed, run this from any folder:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language en --global
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent codex --language en --global
 ```
 
-For Claude Code, replace `codex` with `claude-code`; use `dsh` for DSH or `cursor` for Cursor. Use `--language zh` for Chinese. The Codex global default is `$CODEX_HOME/skills`, or `~/.codex/skills` when `CODEX_HOME` is not set. If you set `CODEX_HOME`, `CLAUDE_CONFIG_DIR` or `DSH_AGENTS_HOME`, use this command route so the installer can choose the correct paths; an explicit `--skills-dir` overrides the entry directory. See [global paths and custom configuration](docs/INSTALL.en.md#global-zip-install).
+For other agents, replace `codex` with `claude-code`, `dsh`, `cursor`, `antigravity`, `gemini`, `windsurf`, or `opencode`. For Chinese only, use `pivotui-installer-zh-v0.4.2.tgz` with `--language zh` (or `pivotui-installer-v0.4.2.tgz` for the deduplicated bilingual tarball). The Codex global default is `$CODEX_HOME/skills`, or `~/.codex/skills` when `CODEX_HOME` is not set. If you set `CODEX_HOME`, `CLAUDE_CONFIG_DIR` or `DSH_AGENTS_HOME`, use this command route so the installer can choose the correct paths; an explicit `--skills-dir` overrides the entry directory. See [global paths and custom configuration](docs/INSTALL.en.md#global-zip-install).
 
 After either route, open your chosen local Agent and start a new chat in a project to use **pivotui**. This installation serves the current user; other accounts, remote machines and cloud sessions have their own installation locations.
 
-The original complete-edition downloads remain available for raw-file or MCP use: [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip) · [Chinese ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip). See the [installation guide](docs/INSTALL.en.md) and [verification record](docs/VALIDATION.md) for details.
+The original complete-edition downloads remain available for raw-file or MCP use: [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-English-v0.4.2.zip) · [Chinese ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-Chinese-v0.4.2.zip). See the [installation guide](docs/INSTALL.en.md) and [verification record](docs/VALIDATION.md) for details.
 
 <a id="skills"></a>
 

@@ -1,3 +1,24 @@
+# PivotUI v0.4.2
+
+在完整保留全部 **23 个包（9 个内源 + 14 个外源）与 27 个入口** 的前提下，本版本重点优化分发体积、安装管理、MCP 发现能力与确定性校验工具：
+
+- **解决中英文强制同时下载，安装包体积直降近 50%**：新增单语言 npx 安装包 `pivotui-installer-zh-v0.4.2.tgz`（29.35 MB，仅含中文完整集群）与 `pivotui-installer-en-v0.4.2.tgz`（29.31 MB，仅含英文完整集群），同时提供外源去重后的双语通用包 `pivotui-installer-v0.4.2.tgz`（29.57 MB，较旧版 57.26 MB 缩减约 48.4%），安装时仍逐一核验全部 1,912 个文件 SHA-256。
+- **安装器生命周期管理与更多 Agent 预设**：`pivotui` CLI 新增 `--status`（查看状态）、`--prune`（清理未使用的旧版本指纹库目录）、`--uninstall`（安全卸载受管入口），并新增 `antigravity`、`gemini`、`windsurf`、`opencode` 默认路径预设。
+- **MCP 服务升级至 1.1.0**：增加基于文件 mtime/size 的 frontmatter 发现缓存、在目录元数据中直接返回 `version` / `tags` / `requires` / `exclude_scopes`（0 正文读取预过滤）、支持中英双语界面意图同义词与复合词搜索、扩展 `linked_resources` 识别行内反引号路径，并通过只读 MCP Resource（`pivotui://docs/`）暴露共享集群规范文档，同时保持三个只读固定工具与严格包内边界不变。
+- **确定性静态 Token 校验脚本**：`global-style-skill` 1.1.3 随包附带零依赖 `scripts/check_tokens.py`，可对 CSS / JSON 设计变量执行重复定义、未定义引用、循环引用与 WCAG 2.1 对比度检查；全部 13 个内源入口补充结构化 `metadata.tags`。
+- **同步 0.4.1 → 0.4.2 集群规则**：同步集成检查与参考意图路由规则，消除主仓与公开发布仓的版本漂移。
+
+---
+
+Release **v0.4.2** keeps all **23 packages (9 authored + 14 external) and 27 entrypoints** intact while optimizing distribution size, installer ergonomics, MCP discovery, and deterministic validation:
+
+- **Independent single-language & deduplicated bilingual npm installers (~48% smaller)**: ships `pivotui-installer-en-v0.4.2.tgz` (29.31 MB, English-only), `pivotui-installer-zh-v0.4.2.tgz` (29.35 MB, Chinese-only), and a deduplicated universal package `pivotui-installer-v0.4.2.tgz` (29.57 MB vs 57.26 MB in v0.4.0) while preserving full SHA-256 verification of all 1,912 installed files.
+- **Installer lifecycle & expanded Agent presets**: adds `--status`, `--prune` (cleans up unreferenced older managed libraries), `--uninstall`, plus built-in presets for `antigravity`, `gemini`, `windsurf`, and `opencode`.
+- **MCP server 1.1.0**: adds mtime/size frontmatter caching, structured `version`/`tags`/`requires`/`exclude_scopes` catalog metadata, bilingual UI intent synonym matching, inline backtick resource discovery, and read-only `pivotui://docs/` MCP resources while preserving the fixed three-tool surface and package boundary checks.
+- **Deterministic token validation**: `global-style-skill` 1.1.3 bundles zero-dependency `scripts/check_tokens.py` for CSS/JSON duplicate, undefined-ref, cycle, and WCAG contrast validation; all 13 internal entrypoints now include structured `metadata.tags`.
+
+---
+
 # PivotUI v0.4.0
 
 Codex 全局目录更新：`r3` 命令安装包把 `--agent codex --global` 的默认入口放在 `~/.codex/skills/pivotui/SKILL.md`，并支持 `CODEX_HOME`；完整资源仍放在 `~/.pivotui/libraries/`。项目安装的 `.agents/skills/pivotui/` 不变。手动全局安装时，将 ZIP 里 `.agents/skills/` 下的 `pivotui` 文件夹复制到用户的 `.codex/skills/`，再把 `.pivotui` 文件夹放到用户主目录。已有共享目录的安装不会被自动移动或删除。

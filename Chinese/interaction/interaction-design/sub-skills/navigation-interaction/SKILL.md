@@ -1,6 +1,8 @@
 ---
 name: navigation-interaction
 description: 处理侧边栏、面包屑、折叠导航、页内标签和命令菜单的当前位置、展开状态、键盘与焦点接续，保留既定信息架构。
+metadata:
+  tags: [导航交互, 侧栏, 面包屑, 选项卡, 命令菜单, 焦点, navigation, sidebar]
 ---
 
 # 导航交互

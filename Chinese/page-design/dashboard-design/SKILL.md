@@ -3,6 +3,7 @@ name: dashboard-design
 description: 根据业务角色、数据任务和参考图设计或优化后台 Dashboard／仪表盘（含 dash broad），选择信息结构、图表、视觉风格与必要交互。适用于经营概览、分析诊断、实时监控、工作台和资源概览；单独的全站导航、表单或数据列表设计不属于本模块。
 metadata:
   version: 1.1.4
+  tags: [看板, 仪表盘, 概览, 图表, 指标, 监控, dashboard, charts]
 ---
 
 # Dashboard Design
