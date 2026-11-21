@@ -1,0 +1,4 @@
+interface:
+  display_name: "Detail Page Design"
+  short_description: "Design clear entity detail pages with safe actions and return continuity"
+  default_prompt: "Use $detail-page-design to design or implement a business entity detail page using my product's shell, components, and tokens, including edge states and list-return continuity."

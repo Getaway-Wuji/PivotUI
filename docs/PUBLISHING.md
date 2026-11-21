@@ -15,7 +15,7 @@ python scripts/release.py --record-sync
 python scripts/release.py
 ```
 
-The builder checks metadata, edition inventories, local Markdown paths, package identity, original external-file parity and the reviewed hash baseline. It creates `dist/PivotUI-English-v0.4.0.zip`, `dist/PivotUI-Chinese-v0.4.0.zip` and `dist/CHECKSUMS.sha256`, then verifies every archived file against the selected edition. ZIP timestamps are fixed for reproducible output. It refuses to replace different bytes at an existing version: bump `VERSION`, update edition documentation and release links, review, then record the new baseline.
+The builder checks metadata, edition inventories, local Markdown paths, package identity, original external-file parity and the reviewed hash baseline. It creates `dist/PivotUI-English-v0.5.0.zip`, `dist/PivotUI-Chinese-v0.5.0.zip` and `dist/CHECKSUMS-v0.5.0.sha256`, then verifies every archived file against the selected edition. ZIP timestamps are fixed for reproducible output. It refuses to replace different bytes at an existing version: bump `VERSION`, update edition documentation and release links, review, then record the new baseline.
 
 构建器检查元数据、双语清单、相对链接、包身份、外源字节一致性和审阅后的校验基线；生成两份 ZIP 与校验值后，逐文件比对发布目录。ZIP 使用固定时间戳，便于重复构建。相同版本已有不同内容时拒绝覆盖，应先更新版本及文档链接，再审阅、记录基线和打包。
 
@@ -39,17 +39,17 @@ The repository's single Node bin is distributed as a fixed Release `.tgz` asset.
 
 仓库的单一 Node 入口以固定 Release `.tgz` 附件发布，首选调用为 `npx --yes --package=<asset-url> pivotui`，后接安装参数。这条路线使用 npm 的 HTTP 下载和缓存，无需在用户机器上执行 Git 克隆、SSH 回退或源码打包。`npx --yes github:Getaway-Wuji/PivotUI` 仍作为兼容的源码路线保留，需要 Git。两者运行相同安装器，不调用 Python，也不依赖发布到 npm registry。`package.json` 明确包含完整双版本、审阅基线、执行入口及模板。发布修改前，按基线核对实际 `npm pack` 内容，确保未漏掉必要资源。安装默认作用于当前项目并使用可搬移的相对路径；显式添加 `--global` 才选择用户范围。
 
-Run `python scripts/build_npm_packages.py` to build and verify three complete-cluster npm tarballs plus `NPX-CHECKSUMS-v0.4.2.sha256` without removing any external skill:
-- `pivotui-installer-zh-v0.4.2.tgz` (~29.4 MB): Chinese-only complete cluster (zero English files).
-- `pivotui-installer-en-v0.4.2.tgz` (~29.3 MB): English-only complete cluster (zero Chinese files).
-- `pivotui-installer-v0.4.2.tgz` (~29.6 MB): Deduplicated bilingual cluster storing byte-identical external and shared files once via `bin/npm-resources/dedup-edition.json` while still SHA-256 verifying every installed file against `language-sync.json`.
+Run `python scripts/build_npm_packages.py` to build and verify three complete-cluster npm tarballs plus `NPX-CHECKSUMS-v0.5.0.sha256` without removing any external skill:
+- `pivotui-installer-zh-v0.5.0.tgz` (~29.4 MB): Chinese-only complete cluster (zero English files).
+- `pivotui-installer-en-v0.5.0.tgz` (~29.3 MB): English-only complete cluster (zero Chinese files).
+- `pivotui-installer-v0.5.0.tgz` (~29.6 MB): Deduplicated bilingual cluster storing byte-identical external and shared files once via `bin/npm-resources/dedup-edition.json` while still SHA-256 verifying every installed file against `language-sync.json`.
 
 Direct `npm pack --json --pack-destination <staging-directory>` on the repository root also remains supported. Test the actual public URL from an isolated project before claiming it works. Use a new packaging revision for changed bytes; never replace an existing asset. An exit code alone is insufficient: confirm the generated entry, manifest and all installed library hashes.
 
-运行 `python scripts/build_npm_packages.py` 构建并核验三份完整集群 npm 安装包及 `NPX-CHECKSUMS-v0.4.2.sha256`（完整保留全部 23 个包与 14 个外源包，不做功能删减）：
-- `pivotui-installer-zh-v0.4.2.tgz`（约 29.4 MB）：纯中文单语言完整集群，不含英文副本。
-- `pivotui-installer-en-v0.4.2.tgz`（约 29.3 MB）：纯英文单语言完整集群，不含中文副本。
-- `pivotui-installer-v0.4.2.tgz`（约 29.6 MB）：外源去重后的双语通用包，通过 `bin/npm-resources/dedup-edition.json` 将中英文逐字节一致的外源与共享文件只保存一份，安装时仍逐一按 `language-sync.json` 核验全部文件 SHA-256。
+运行 `python scripts/build_npm_packages.py` 构建并核验三份完整集群 npm 安装包及 `NPX-CHECKSUMS-v0.5.0.sha256`（完整保留全部 25 个包（11 内源 + 14 外源），不做功能删减）：
+- `pivotui-installer-zh-v0.5.0.tgz`（约 29.4 MB）：纯中文单语言完整集群，不含英文副本。
+- `pivotui-installer-en-v0.5.0.tgz`（约 29.3 MB）：纯英文单语言完整集群，不含中文副本。
+- `pivotui-installer-v0.5.0.tgz`（约 29.6 MB）：外源去重后的双语通用包，通过 `bin/npm-resources/dedup-edition.json` 将中英文逐字节一致的外源与共享文件只保存一份，安装时仍逐一按 `language-sync.json` 核验全部文件 SHA-256。
 
 在仓库根目录直接执行 `npm pack --json --pack-destination <staging-directory>` 仍完全兼容。实际在隔离项目中执行公开 URL 后，才能宣称该命令已验证。内容变化使用新打包修订号，不覆盖既有附件；不能仅根据退出码判断成功，还要确认生成的入口、清单和完整集群文件哈希。
 
@@ -69,6 +69,6 @@ python scripts/build_project_archives.py
 
 在具备 Node.js 和现有 Python 构建依赖的维护环境中执行上面的命令，生成额外的项目手动安装包。下载用户只需解压和复制文件，不需要这些构建工具。
 
-The builder uses the real Node project installer, verifies unchanged edition bytes, portable entry links and exact ZIP contents, and creates `PivotUI-English-project-v0.4.0-r2.zip`, `PivotUI-Chinese-project-v0.4.0-r2.zip`, and `PROJECT-CHECKSUMS-v0.4.0-r2.sha256`. Revision 2 simplifies the copy guide; its library and entry files match the original project packages. Upload them as additional release assets. Preserve the original single-edition and project ZIPs and their checksum assets. Do not replace an existing filename with different bytes; increment `PACKAGING_REVISION` for later archive changes.
+The builder uses the real Node project installer, verifies unchanged edition bytes, portable entry links and exact ZIP contents, and creates `PivotUI-English-project-v0.5.0-r2.zip`, `PivotUI-Chinese-project-v0.5.0-r2.zip`, and `PROJECT-CHECKSUMS-v0.5.0-r2.sha256`. Revision 2 simplifies the copy guide; its library and entry files match the original project packages. Upload them as additional release assets. Preserve the original single-edition and project ZIPs and their checksum assets. Do not replace an existing filename with different bytes; increment `PACKAGING_REVISION` for later archive changes.
 
-构建器调用真实 Node 项目安装器，检查语言版本字节未变、入口链接可搬移及 ZIP 精确内容，生成 `PivotUI-English-project-v0.4.0-r2.zip`、`PivotUI-Chinese-project-v0.4.0-r2.zip` 和 `PROJECT-CHECKSUMS-v0.4.0-r2.sha256`。第 2 次打包简化了复制说明，集群资源和入口文件与原项目安装包一致。将它们作为额外发布附件上传，保留原单语言、原项目 ZIP 和对应校验文件。不得用不同内容替换已有同名文件，后续压缩包变化递增 `PACKAGING_REVISION`。
+构建器调用真实 Node 项目安装器，检查语言版本字节未变、入口链接可搬移及 ZIP 精确内容，生成 `PivotUI-English-project-v0.5.0-r2.zip`、`PivotUI-Chinese-project-v0.5.0-r2.zip` 和 `PROJECT-CHECKSUMS-v0.5.0-r2.sha256`。第 2 次打包简化了复制说明，集群资源和入口文件与原项目安装包一致。将它们作为额外发布附件上传，保留原单语言、原项目 ZIP 和对应校验文件。不得用不同内容替换已有同名文件，后续压缩包变化递增 `PACKAGING_REVISION`。

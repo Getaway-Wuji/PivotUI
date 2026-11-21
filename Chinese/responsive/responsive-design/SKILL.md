@@ -2,7 +2,7 @@
 name: responsive-design
 description: 为页面和组件规划、实现并检查响应式布局。适用于内容重排、导航收纳、窄屏表格或图表、输入能力差异及局部溢出修复，同时保留项目的视觉体系。
 metadata:
-  version: 1.0.2
+  version: 1.0.3
   tags: [响应式, 移动端, 手机, 窄屏, 溢出, 表格, 断点, 触控, responsive, mobile]
 ---
 
@@ -37,6 +37,7 @@ metadata:
 | 协调负责人或检查已完成的修改 | [交接与验证](references/handoff-validation.md) |
 | 独立任务缺少项目共享约定 | [可移植基础约定](references/foundations.md) |
 | 需要核对来源或框架相关说法 | [来源与采用边界](references/source-map.md) |
+| 浏览器自动化检查横向溢出、Tab 焦点、可访问名称与窄屏触控尺寸 | [界面审计脚本](scripts/audit_ui.mjs)：具备 Node + Playwright 时运行 `node scripts/audit_ui.mjs <url-or-file> [--viewports 1440x900,768x900,375x812]` |
 
 ## 实现并交回结果
 

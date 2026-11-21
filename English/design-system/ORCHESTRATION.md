@@ -1,9 +1,9 @@
 # Orchestrating Authored and External Design Skills
 
-Version: 0.4.7
+Version: 0.5.0
 Date: 2026-11-21  
-Distribution: 0.4.2, English
-Status: layered, on-demand loading. The [orchestrator](../orchestration/design-orchestrator/SKILL.md) is version 1.2.7. Application shells, data lists, Dashboard, interaction and its nested overlay modules, global style, and component-system have working entries. Responsive design and product-reference research have bilingual entries and are integrated by their actual capabilities. Discover actual capabilities at runtime.
+Distribution: 0.5.0, English
+Status: layered, on-demand loading. The [orchestrator](../orchestration/design-orchestrator/SKILL.md) is version 1.3.0. Application shells, dashboards, data lists, detail pages, form/settings workflows, interaction and its nested overlay modules, global style, component-system, responsive design, and product-reference research all have working bilingual entries. Discover actual capabilities at runtime.
 
 This agreement covers marketing sites, portfolios, redesigns, builds from references, business dashboards, and direction exploration. Use it with the [shared foundations](FOUNDATIONS.md). Choose one lead per design region, then involve component, interaction, responsive, or research capabilities as needed.
 
@@ -45,6 +45,8 @@ Discover actual names and entries rather than treating historical availability a
 | `floating-components` | Select and implement Tooltip, Toast, Alert, Modal, Popconfirm, Drawer | Overlay or messaging tasks | Use the existing nested interaction entry; do not duplicate rules |
 | `dashboard-design` | Roles, tasks, metrics, charts, density, dashboard structure | Dashboard analysis and implementation | Own content and summaries; reuse the shell; handle full navigation, lists, and forms separately |
 | `data-list-design` | Information priority, search/filtering, views/columns, sorting/pagination, selection, bulk tasks, exports and detail return | Complete administrative list design and implementation | Reuse shell/tokens and Table/shared controls; interaction and responsive support fill gaps; select only needed features |
+| `detail-page-design` | Record identity, status header, structured attribute groups, related collections, safe actions, edge states and list return | Entity detail pages and record inspection views | Reuse shell/tokens and shared controls; route substantial multi-field editing to `form-workflow-design` |
+| `form-workflow-design` | Single-page, sectioned settings, or multi-step wizard flows; dirty-state protection, validation summary, sticky save bars and cancel scope | Full-page forms, edit screens, wizards and settings pages | Reuse shell/tokens and shared controls; `form-interaction` handles low-level field/IME/async gaps |
 | `app-shell-design` | Navigation hierarchy, route context, headings, content boundaries and scrolling | New or changed shared application frames | Reuse an adequate frame; page leads own content; one agreed return-state coordinator |
 | `interaction-design` | Transitions, feedback, focus, keyboard, loading, recovery | Define before implementation, apply during it, verify afterward | Fill behavior gaps without choosing new brand colors or rearranging the whole page |
 | `component-system` | Reuse shared components, variants, consistent interfaces and visual states | Inventory before structure, reuse or extend during implementation | Add purposeful components without forcing every one-off layout into a component |

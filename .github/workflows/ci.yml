@@ -1,0 +1,52 @@
+name: PivotUI CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install release validator dependency
+        run: python -m pip install -r scripts/requirements.txt
+
+      - name: Validate bilingual baseline, metadata, links, and external parity
+        run: python scripts/release.py --check-only
+
+      - name: Verify global-style-skill token validator script
+        run: |
+          python -c '
+          import tempfile, pathlib, subprocess, sys
+          with tempfile.TemporaryDirectory() as d:
+              css = pathlib.Path(d) / "tokens.css"
+              css.write_text(":root { --bg: #ffffff; --ink: #111827; --accent: var(--ink); }\n", encoding="utf-8")
+              subprocess.run([sys.executable, "English/orchestration/global-style-skill/scripts/check_tokens.py", str(css), "--pair", "--ink:--bg"], check=True)
+          '
+
+      - name: Verify Node installer dry-run (English & Chinese)
+        run: |
+          mkdir -p /tmp/pivotui-ci-en /tmp/pivotui-ci-zh
+          node bin/pivotui.mjs --agent codex --language en --project /tmp/pivotui-ci-en --dry-run
+          node bin/pivotui.mjs --agent codex --language zh --project /tmp/pivotui-ci-zh --dry-run
+          node cli/bin/pivotui-cli.mjs --language zh --print-urls
+
+      - name: Verify Python installer dry-run
+        run: |
+          python scripts/install.py --agent codex --language en --project /tmp/pivotui-ci-en --dry-run
+          python scripts/install.py --agent antigravity --language zh --project /tmp/pivotui-ci-zh --dry-run

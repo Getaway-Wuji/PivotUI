@@ -1,14 +1,13 @@
-# Portable shared conventions
+# Portable Shared Design Foundations — Application Shell Design
 
-Necessary methods adapted from Shared Interface Design Foundations **0.2** and Orchestration **0.4.1**. These excerpts support independent use; they do not require the original repository. Explicit user requirements and established target-product conventions take priority.
+Synchronized excerpt from *Shared Interface Design Foundations* **0.2** and *Orchestrating Authored and External Design Skills* **0.5.0**. Read only when the target project lacks its own design standards; inside the full cluster, the edition's `design-system/FOUNDATIONS.md` and `design-system/ORCHESTRATION.md` remain authoritative.
 
-1. Organize the interface around users' tasks. Convey hierarchy through placement, alignment, spacing, typography and grouping before adding decoration.
-2. Keep same-level pages consistent in navigation, content starting line, heading and global action placement. Page content may have task-specific composition.
-3. Use the product's authoritative tokens and existing component conventions. This package specifies no universal palette, font, radius, density or theme. New shared values need one maintained source and clear consumers.
-4. Assign one owner per region and component. Shell, page content, behavior, component implementation and responsive support have separate contributions; the named owner integrates them. Missing specialists do not block ordinary work.
-5. Distinguish current/expanded/focus and other relevant states. Use named keyboard-operable controls, visible focus, and appropriate focus restoration. Preserve input and operation state through recoverable changes.
-6. Separate page and local scrolling; fixed regions and overlays must leave content, actions and focus reachable. Adapt to real content and available space.
-7. Record what references establish, what is estimated and what is supplemental. Product-specific decisions stay in that product. Do not generalize a sample brand to the library.
-8. Inspect actual rendering and behavior when implementation is delivered. Report only performed checks; static instruction review does not establish runtime or device compatibility.
+## Core invariants
 
-The standalone package includes these excerpts so shared essentials remain available without loading unrelated modules. Reconcile them with their source versions when maintaining future editions.
+- **Task-first hierarchy:** Organize layout, grouping, alignment, and emphasis around what the user must understand, decide, and do.
+- **One authoritative token source:** Reuse the target product's existing CSS variables, theme objects, or component library configuration. Express region differences as explicit named variants; never maintain two independently editable themes or push client brand defaults back into the skill library.
+- **One owner per region and component:** A named page lead owns region composition; shared components have one integration owner; specialists fill concrete gaps rather than running as a mandatory pipeline.
+- **Realistic content and complete states:** Handle long text, mixed Chinese/Latin copy, tabular numbers, zero vs missing vs unloaded values, loading, empty, error, permission, focus, and keyboard states.
+- **Overlay and safety boundaries:** Tooltip explains briefly; Toast carries lightweight non-error feedback (never errors); Alert persists problems; Modal guards irreversible actions; Popconfirm covers low-risk local confirmation; Drawer preserves editing context without absorbing full-screen workflows. `gpt-taste` is restricted to public marketing and never used in dashboards or business tools.
+- **Responsive and scroll discipline:** Adapt content and controls to available width, height, and input capability without global horizontal clipping or hiding critical business fields. Separate shell scrolling from local table/panel scrolling.
+- **Honest verification:** Distinguish static document inspection, script validation, rendered browser checks, and physical-device testing. Never report unperformed checks as passed.

@@ -2,7 +2,7 @@
 
 [首页](../README.md) · [安装配置](INSTALL.zh-CN.md) · [任务分配](ARCHITECTURE.zh-CN.md) · [English](SKILLS.en.md)
 
-版本 **0.4.0** 包含 **23 个包：9 个内源模块、14 个外源包**。交互包内另有 4 个子模块，因此标准 `SKILL.md` 入口总数为 **27 个**。参考卡、模板和数据集属于资源，不另计为 Skill。
+版本 **0.5.0** 包含 **25 个包：11 个内源模块、14 个外源包**。交互包内另有 4 个子模块，因此标准 `SKILL.md` 入口总数为 **29 个**。参考卡、模板和数据集属于资源，不另计为 Skill。
 
 “内源”表示本项目编写的能力，“外源”表示从明确署名的上游引入的包。内源并不代表全部参考材料均为原创，例如产品案例研究模块使用了署名的 VoltAgent 来源元数据。许可范围和本地适配见 [THIRD_PARTY_NOTICES](../THIRD_PARTY_NOTICES.md)、各包的 `LICENSE` 与 `UPSTREAM.md`。
 
@@ -12,7 +12,7 @@
 
 ### 1. `design-orchestrator`：任务统一入口
 
-[入口](../Chinese/orchestration/design-orchestrator/SKILL.md) · `orchestration/design-orchestrator` · **1.2.5**
+[入口](../Chinese/orchestration/design-orchestrator/SKILL.md) · `orchestration/design-orchestrator` · **1.3.0**
 
 **用途。** 将自然语言需求转成可协作的设计任务。先判断用户要的是建议、审查、设计图、设计变量还是代码，再选出足够完成任务的最小能力组合。
 
@@ -24,7 +24,7 @@
 
 ### 2. `global-style-skill`：视觉方向与设计变量
 
-[入口](../Chinese/orchestration/global-style-skill/SKILL.md) · `orchestration/global-style-skill` · **1.1.1**
+[入口](../Chinese/orchestration/global-style-skill/SKILL.md) · `orchestration/global-style-skill` · **1.1.3**（含静态校验脚本 `scripts/check_tokens.py`）
 
 **用途。** 选择或比较视觉方向，生成、补充、迁移、整理和验证产品设计变量。包含 **40 张风格参考卡**，按七个可重叠的浏览分组组织，提供可选视觉属性。
 
@@ -57,6 +57,18 @@
 **工作与产出。** 明确识别与比较字段、查询和结果范围、权限、数据规模、选择边界、批量任务影响和导出对象。从详情返回保留已应用筛选和页码，区分当前页选择与所有查询结果选择。交付设计规格或可用列表及实际流程检查。
 
 **边界。** 复用应用框架和设计变量。`component-system` 负责可复用 Table 与控件实现，列表负责人决定它们如何表达业务工作。Dashboard 内的小摘要表或单个控件问题不自动触发完整列表流程。
+
+### `detail-page-design`：实体详情页与安全操作
+
+[入口](../Chinese/page-design/detail-page-design/SKILL.md) · `page-design/detail-page-design` · **1.0.0**
+
+**用途。** 组织单条业务记录的身份页头、状态标签、结构化属性分组、关联数据、安全操作、404/403/过期异常状态以及来源列表返回连续性。
+
+### `form-workflow-design`：整页表单、向导与设置页
+
+[入口](../Chinese/page-design/form-workflow-design/SKILL.md) · `page-design/form-workflow-design` · **1.0.0**
+
+**用途。** 组织整页新建/编辑表单、多分区系统设置与分步向导，落实草稿与源数据隔离、脏状态拦截、错误汇总定位与吸底保存栏。
 
 ### 5. `app-shell-design`：应用共用框架
 
@@ -120,7 +132,7 @@
 
 ### 8. `responsive-design`：保持任务可用的响应式适配
 
-[入口](../Chinese/responsive/responsive-design/SKILL.md) · `responsive/responsive-design` · **1.0.1**
+[入口](../Chinese/responsive/responsive-design/SKILL.md) · `responsive/responsive-design` · **1.0.3**（含 Playwright 审计脚本 `scripts/audit_ui.mjs`）
 
 **用途。** 当空间、视口高度和输入能力变化时，保留必要信息与操作。
 
@@ -132,7 +144,7 @@
 
 ### 9. `design-reference-research`：指定产品案例研究
 
-[入口](../Chinese/design-research/design-reference-research/SKILL.md) · `design-research/design-reference-research` · **1.0.0**
+[入口](../Chinese/design-research/design-reference-research/SKILL.md) · `design-research/design-reference-research` · **1.1.0**（12 张已审案例卡 + 72 项索引）
 
 **用途。** 带着明确证据范围查找、比较并转化产品设计参考。研究方法由本项目编写，使用署名的 [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) 元数据，来源版本为 `fcc70284932276d085f01ef9f83edde90b1258cb`。
 

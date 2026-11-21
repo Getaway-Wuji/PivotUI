@@ -2,7 +2,7 @@
 name: design-orchestrator
 description: 界面设计集群的轻量入口：按交付物和改动范围选择独立 Skill，明确区域负责人并汇总项目 Token；用于官网、后台、参考图、组件、交互与响应式任务。
 metadata:
-  version: 1.2.7
+  version: 1.3.0
   tags: [编排, 路由, 主控, 任务分配, 协作, orchestration, routing]
 ---
 
@@ -23,6 +23,8 @@ metadata:
 | 选择／比较视觉方向，或新增／变更／检查共享视觉值 | `global-style-skill`：推荐方向，按需生成或校验 Token | 主题或主力已有适用方向／值时复用；明确改风格时，即使 Token 完整也可能需要选型 |
 | 业务总览、分析、监控、工作台 | `dashboard-design`：内容层级、指标、图表与必要状态 | 负责看板区域，复用其中已满足要求的组件、交互与窄屏行为 |
 | 完整后台数据列表页 | `data-list-design`：信息优先级、查询与结果、选择、批量任务、导出范围及详情返回连续性 | 沿用产品框架和 Token；Table／公共控件由 `component-system` 提供；交互、响应式只补缺口 |
+| 业务实体详情页与核查视图 | `detail-page-design`：身份与状态页头、信息分组、关联数据、安全操作、异常状态与返回连续性 | 沿用产品框架和 Token；复杂多字段编辑交由 `form-workflow-design` |
+| 整页表单、编辑页、分步向导或系统设置页 | `form-workflow-design`：字段分区、单页／设置／向导结构、脏状态保护、校验汇总与保存／取消流 | 沿用框架、Token 与共享控件；底层字段／输入法／异步竞态缺口由 `form-interaction` 补充 |
 | 应用外壳、跨页导航或框架一致性 | `app-shell-design`：信息架构、标题区、内容边界与滚动归属 | 已有框架足够时复用；页面主力负责内容；导航、组件、响应式只补缺口 |
 | 公共组件、接口、变体或缺失基础组件 | `component-system`：可复用实现 | 页面编排及业务语义由页面执行者负责；行为有缺口才加专家 |
 | 按钮、表单、导航、浮层行为 | `button-interaction`、`form-interaction`、`navigation-interaction`、`floating-components`；`interaction-design` 协调共享行为 | 选相关子入口，共享父规则读一次；跨组件或异步行为按需读父入口与相关方法，不全读兄弟模块 |
@@ -37,7 +39,7 @@ metadata:
 | 明确选用 Stitch 流程 | `stitch-design-taste`：面向 Stitch 的 `DESIGN.md` | 区分设计文档、生成屏幕和前端代码，核对实际工具访问 |
 | 明确要求历史兼容 | `redesign-existing-projects`、`design-taste-frontend-v1`、`design-taste-frontend-v2-experimental` | 使用明确选定的固定版本，不因当前 Skill 缺失而自动回退 |
 
-设置表单等尚无可用的专门页面 Skill 时，由当前执行者负责页面编排与业务流程；组件、交互、响应式补具体缺口，不把所有后台页面套成 Dashboard。
+若遇到上述页面模块未覆盖的特殊业务页，由当前执行者负责页面编排与业务流程，组件、交互与响应式模块按缺口补充；不把所有后台页面套成 Dashboard。
 
 每区域一个主力，每组件一个代码负责人，同一执行者可以承担全部职责。混合官网／业务应用按区域分工，共享权威主题。目录说明与调用标志描述的是上游能力，不覆盖本表分工；泛泛的审美偏好不触发需明确选用的 Classics。需求、工具或实际缺口变化时再调整路线，按分工完成工作，不循环交接。
 

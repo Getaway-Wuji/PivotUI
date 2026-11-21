@@ -2,6 +2,7 @@
 name: form-interaction
 description: 处理输入、选择、校验、筛选与提交中的状态和反馈，保护草稿并明确错误定位、异步保存与失败后的继续路径。
 metadata:
+  version: 1.1.0
   tags: [表单, 输入框, 校验, 提交, 草稿, 筛选, form, validation]
 ---
 

@@ -1,0 +1,31 @@
+{
+  "name": "@getaway-wuji/pivotui",
+  "version": "0.5.0",
+  "description": "Lightweight CLI launcher for installing the complete PivotUI UI Skill cluster (single-language download + SHA-256 verification).",
+  "type": "module",
+  "bin": {
+    "pivotui": "bin/pivotui-cli.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "bin/",
+    "README.md"
+  ],
+  "keywords": [
+    "pivotui",
+    "ui-design",
+    "agent-skills",
+    "mcp",
+    "codex",
+    "claude-code",
+    "cursor"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Getaway-Wuji/PivotUI.git",
+    "directory": "cli"
+  }
+}

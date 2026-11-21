@@ -2,7 +2,7 @@
 name: responsive-design
 description: Plan, implement, and check responsive layouts for pages and components. Use for content reflow, navigation collapse, narrow tables or charts, input-capability differences, and local overflow fixes while retaining the project's visual system.
 metadata:
-  version: 1.0.2
+  version: 1.0.3
   tags: [responsive, mobile, narrow, overflow, table, breakpoint, touch, reflow]
 ---
 
@@ -37,6 +37,7 @@ For each affected region, establish **condition → retained content → rearran
 | Coordinating owners or checking a completed change | [Handoff and validation](references/handoff-validation.md) |
 | Standalone work lacks shared project conventions | [Portable foundations](references/foundations.md) |
 | Source provenance or a framework claim needs checking | [Source map](references/source-map.md) |
+| Automated browser check for overflow, Tab focus, accessible names, and narrow touch targets | [UI audit script](scripts/audit_ui.mjs): run `node scripts/audit_ui.mjs <url-or-file> [--viewports 1440x900,768x900,375x812]` when Node + Playwright are available |
 
 ## Implement and return
 

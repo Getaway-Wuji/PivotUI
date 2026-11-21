@@ -20,7 +20,7 @@ from urllib.parse import unquote, urlsplit
 import yaml
 
 
-VERSION = "0.4.2"
+VERSION = "0.5.0"
 EDITIONS = ("English", "Chinese")
 EXCLUDED_DIRECTORIES = {".venv", "__pycache__"}
 HAN = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
@@ -201,10 +201,10 @@ def check_structure(root: Path, editions: dict[str, dict[str, bytes]]) -> None:
                     raise ReleaseError(f"{label}: expected UTF-8 text")
                 continue
             normalized = re.sub(r"\\+", "/", text).casefold()
+            if packages[edition].get(owning_package(relative, packages[edition])) != "external" and re.search(r"(?:^|[\s(\"'`])(?:[a-z]:/users/|/users/|/home/)(?!your-|example|user(?:/|\b))[^/\s\"'`]+/", normalized):
+                raise ReleaseError(f"{label}: contains a personal build-machine path")
             owner = owning_package(relative, packages[edition])
             upstream = packages[edition].get(owner) == "external"
-            if not upstream and re.search(r"(?:^|[\s(\"'`])(?:[a-z]:/users/|/users/|/home/)(?!your-|example|user(?:/|\b))[^/\s\"'`]+/", normalized):
-                raise ReleaseError(f"{label}: contains a personal build-machine path")
             if edition == "English" and not upstream and path.suffix != ".py" and HAN.search(text):
                 raise ReleaseError(f"{label}: untranslated Han characters in authored English content")
             if path.suffix == ".md":

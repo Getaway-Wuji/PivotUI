@@ -2,7 +2,7 @@
 name: design-orchestrator
 description: Lightweight entry point for a UI design skill cluster. Match the requested deliverable and scope to independent skills, assign regional ownership, and consolidate project tokens for websites, dashboards, references, components, interactions, and responsive work.
 metadata:
-  version: 1.2.7
+  version: 1.3.0
   tags: [orchestration, routing, ownership, handoff, tokens]
 ---
 
@@ -23,6 +23,8 @@ This is a role map, not a sequence to run. Choose an appropriate lead and add a 
 | Select/compare a visual direction, or create/change/check shared design values | `global-style-skill`: recommend direction; generate or validate tokens as needed | Reuse suitable direction/values already provided by the theme or lead; explicit restyling can require selection even with complete tokens |
 | Business overview, analytics, monitoring, workspace | `dashboard-design`: content hierarchy, metrics, charts and necessary states | Own the dashboard region; reuse its adequate component, interaction and narrow-screen behavior |
 | Complete administrative data list | `data-list-design`: information priority, query/results, selection, bulk tasks, export scope and detail-return continuity | Reuse the product shell and tokens; Table/shared controls belong to `component-system`; add interaction or responsive support only for gaps |
+| Entity detail or inspection page | `detail-page-design`: identity/status header, attribute groups, related records, safe actions, edge states and return continuity | Reuse the product shell and tokens; route substantial multi-field edits to `form-workflow-design` |
+| Full-page form, edit screen, wizard or settings page | `form-workflow-design`: sectioning, single/settings/stepped flow, dirty-state protection, validation summary, save/cancel flow | Reuse shell/tokens and shared controls; add `form-interaction` for low-level field, IME, or async race gaps |
 | Application shell, cross-page navigation or frame consistency | `app-shell-design`: information architecture, headers, content boundaries and scroll ownership | Reuse an adequate shell; page leads own content; add navigation, component or responsive specialists only for gaps |
 | Shared components, interfaces, variants or missing primitives | `component-system`: reusable implementation | Page composition and business semantics stay with the page implementer; add behavior specialists only for gaps |
 | Button, form, navigation or overlay behavior | `button-interaction`, `form-interaction`, `navigation-interaction`, `floating-components`; `interaction-design` coordinates shared behavior | Select the relevant leaf; read shared parent rules once. Cross-component or async behavior may need the parent and referenced methods, not all siblings |
@@ -37,7 +39,7 @@ This is a role map, not a sequence to run. Choose an appropriate lead and add a 
 | Explicit Stitch workflow | `stitch-design-taste`: Stitch-oriented `DESIGN.md` | Distinguish the design document from screen generation or frontend code; inspect actual tool access |
 | Explicit historical compatibility | `redesign-existing-projects`, `design-taste-frontend-v1`, `design-taste-frontend-v2-experimental` | Use the deliberately selected pinned version; never an automatic fallback for an unavailable current skill |
 
-For a settings form or other page without an available dedicated page skill, name the current implementer as composition/business-flow owner; component, interaction, and responsive modules supply specific gaps. Do not force a dashboard workflow onto every administration page.
+For specialized pages outside the modules above, name the current implementer as composition/business-flow owner while component, interaction, and responsive modules fill concrete gaps. Do not force a dashboard workflow onto every administration page.
 
 Assign one lead per region and one code owner per component; the same implementer may hold all roles. Split mixed marketing/application work by region while sharing the authoritative theme. Catalog descriptions and invocation flags describe upstream capabilities; they do not override this role map. Generic aesthetic preferences do not invoke opt-in classics. Reassess the route when requirements, available tools, or observed gaps change; finish assigned work without circular handoffs.
 

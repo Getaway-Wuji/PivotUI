@@ -1,0 +1,4 @@
+interface:
+  display_name: "表单与设置页流程设计"
+  short_description: "设计整页表单、编辑流程、分步向导与设置页，保障草稿安全与清晰反馈"
+  default_prompt: "使用 $form-workflow-design 沿用产品应用框架、组件与 Token 设计或实现整页表单、编辑页或设置页，保障草稿保护与清晰的保存/取消反馈。"

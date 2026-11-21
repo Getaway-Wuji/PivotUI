@@ -1,5 +1,21 @@
 # Publication checks / 发布检查
 
+## Release v0.5.0 (2026-11-21) / v0.5.0 发布核验
+
+| Check / 检查 | Result / 结果 |
+| --- | --- |
+| Paired edition inventory / 双语文件清单 | 1,929 paired files per edition; reviewed baseline validated (`release.py --check-only`) / 每版 1,929 个对应文件，基线一致 |
+| Skill metadata & entrypoints / 元数据与入口 | 25 packages (11 internal + 14 external), 29 entrypoints (all 4 interaction submodules aligned to `1.1.0`) / 25 包、29 入口 |
+| Upstream parity / 外源一致性 | All 14 external packages retain byte-identical upstream files across English and Chinese / 14 个外源包逐字节一致 |
+| MCP server 1.1.0 & packaged MCP / MCP 服务与归档核验 | 30 unit + live stdio tests passed; dynamic `packaged-mcp` verifier passed across both renamed release archives (3 tools + `pivotui://docs/` resources + all 29 entries) |
+| Deterministic UI scripts / 可执行校验脚本 | `global-style-skill/scripts/check_tokens.py` (3/3 unit tests + integrated demo CSS PASS); `responsive-design/scripts/audit_ui.mjs` executed in real Edge via Playwright across 1440/768/375px viewports on the integrated workflow demo (0 overflow, 0 hidden-focus, 0 unnamed controls) |
+| Routing & policy benchmark / 路由与合规评测 | 28 scenarios / 56 bilingual assertions + shared docs + aliases passed (`scripts/eval_routing.py`) |
+| Single-language & deduplicated npm installers / 安装器核验 | Built and hash-verified `pivotui-installer-zh-v0.5.0.tgz`, `pivotui-installer-en-v0.5.0.tgz`, `pivotui-installer-v0.5.0.tgz` (~29 MB each) plus project/full ZIPs; offline `npx`, `--status`/`--prune`/`--uninstall`, new agent presets, and Python installer tests verified |
+
+Physical mobile-device testing, screen-reader testing, and live third-party image/Stitch executions remain outside this verification scope.
+
+---
+
 Checked on 2026-11-14 for the first PivotUI v0.4.0 publication.
 
 | Check / 检查 | Result / 结果 |

@@ -1,15 +1,13 @@
-# Portable shared conventions
+# Portable Shared Design Foundations — Responsive Design
 
-Necessary excerpts adapted from Shared Interface Design Foundations 0.2 and Orchestration 0.3, read 2026-11-14. This file supports independent use; within a target project, follow its current explicit requirements and established conventions.
+Synchronized excerpt from *Shared Interface Design Foundations* **0.2** and *Orchestrating Authored and External Design Skills* **0.5.0**. Read only when the target project lacks its own design standards; inside the full cluster, the edition's `design-system/FOUNDATIONS.md` and `design-system/ORCHESTRATION.md` remain authoritative.
 
-- Organize information around what users need to understand, decide and do. Visual hierarchy follows task importance; density follows content and context.
-- Inherit the project's colors, typography, spacing, radii, layering and components. Maintain one authoritative product token source. This module does not choose a universal font, palette or breakpoint scale.
-- Give each region one implementation owner. The orchestrator selects modules and consolidates tokens; page leads own content; component owners integrate shared variants; interaction and responsive specialists define and check assigned behavior.
-- Keep relevant loading, empty, error, selected and disabled states usable. Preserve entered values and selection across recoverable errors and layout changes. Primary operations need understandable names, keyboard access and visible focus.
-- Use the existing Modal, Toast, Tooltip and Drawer conventions. Keep overlay content, focus and primary actions unobscured. Do not change confirmation or destructive-operation semantics merely because space is narrower.
-- Distinguish page scrolling from local scrolling. Preserve important information and actions when content wraps, stacks, moves into disclosure or scrolls locally.
-- Read only resources needed for the actual task. Complete ordinary missing capabilities with available methods rather than pretending another skill ran.
-- Record references, adopted decisions, provisional assumptions and actual verification in the target project when continuity requires it. The original authoring workspace is not a runtime dependency.
-- Separate observation from inference. Do not claim unprovided states or unperformed tests. Respect the user's edit boundary; propose shared changes to their owner instead of silently expanding a local repair.
+## Core invariants
 
-These excerpts carry methods, not a target product's visual preferences. Updates to the shared specification require checking this snapshot's relevance before a new module release.
+- **Task-first hierarchy:** Organize layout, grouping, alignment, and emphasis around what the user must understand, decide, and do.
+- **One authoritative token source:** Reuse the target product's existing CSS variables, theme objects, or component library configuration. Express region differences as explicit named variants; never maintain two independently editable themes or push client brand defaults back into the skill library.
+- **One owner per region and component:** A named page lead owns region composition; shared components have one integration owner; specialists fill concrete gaps rather than running as a mandatory pipeline.
+- **Realistic content and complete states:** Handle long text, mixed Chinese/Latin copy, tabular numbers, zero vs missing vs unloaded values, loading, empty, error, permission, focus, and keyboard states.
+- **Overlay and safety boundaries:** Tooltip explains briefly; Toast carries lightweight non-error feedback (never errors); Alert persists problems; Modal guards irreversible actions; Popconfirm covers low-risk local confirmation; Drawer preserves editing context without absorbing full-screen workflows. `gpt-taste` is restricted to public marketing and never used in dashboards or business tools.
+- **Responsive and scroll discipline:** Adapt content and controls to available width, height, and input capability without global horizontal clipping or hiding critical business fields. Separate shell scrolling from local table/panel scrolling.
+- **Honest verification:** Distinguish static document inspection, script validation, rendered browser checks, and physical-device testing. Never report unperformed checks as passed.

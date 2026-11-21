@@ -2,7 +2,7 @@
 
 [Home](../README.en.md) · [Installation](INSTALL.en.md) · [Routing](ARCHITECTURE.en.md) · [简体中文](SKILLS.zh-CN.md)
 
-Release **0.4.0** contains **23 packages: 9 internal and 14 external**. Four interaction submodules are included inside their parent package, giving **27 `SKILL.md` entrypoints**. Reference cards, templates, and datasets are resources rather than additional skills.
+Release **0.5.0** contains **25 packages: 11 internal and 14 external**. Four interaction submodules are included inside their parent package, giving **29 `SKILL.md` entrypoints**. Reference cards, templates, and datasets are resources rather than additional skills.
 
 “Internal” identifies this project's authored capability. “External” identifies an imported upstream package whose author is credited below. Internal authorship does not imply that all reference material is original: the product-reference research module, for example, includes attributed VoltAgent source metadata. Exact license scope and local adaptations are recorded in [THIRD_PARTY_NOTICES](../THIRD_PARTY_NOTICES.md), package `LICENSE` files, and `UPSTREAM.md` records.
 
@@ -12,7 +12,7 @@ Paths below point into the English edition; the Chinese edition has the same dir
 
 ### 1. `design-orchestrator` — the task entrypoint
 
-[Entry](../English/orchestration/design-orchestrator/SKILL.md) · `orchestration/design-orchestrator` · version **1.2.5**
+[Entry](../English/orchestration/design-orchestrator/SKILL.md) · `orchestration/design-orchestrator` · version **1.3.0**
 
 **Purpose.** Turn an ordinary request into a coordinated design assignment. It identifies whether the result should be advice, an audit, design images, tokens, or implemented code, then chooses the smallest sufficient set of capabilities.
 
@@ -24,7 +24,7 @@ Paths below point into the English edition; the Chinese edition has the same dir
 
 ### 2. `global-style-skill` — visual direction and tokens
 
-[Entry](../English/orchestration/global-style-skill/SKILL.md) · `orchestration/global-style-skill` · version **1.1.1**
+[Entry](../English/orchestration/global-style-skill/SKILL.md) · `orchestration/global-style-skill` · version **1.1.3** (includes `scripts/check_tokens.py`)
 
 **Purpose.** Choose or compare visual directions and generate, extend, migrate, organize, or validate a product's named design values. Its **40 reference cards** offer selectable visual attributes in seven overlapping browsing groups.
 
@@ -57,6 +57,18 @@ Paths below point into the English edition; the Chinese edition has the same dir
 **Work and output.** It defines identifying/comparison fields, query and result scope, permissions, dataset scale, selection boundaries, batch-operation impact, and exported records. It preserves applied filters and page number on return from detail and distinguishes current-page selection from all matching records. It delivers the specification or working list and actual flow checks.
 
 **Boundary.** The module reuses shell and tokens. `component-system` owns reusable Table and control implementations; the list lead owns how they express business work. A small summary table inside a dashboard or one control repair does not automatically require the entire list workflow.
+
+### `detail-page-design` — entity detail pages and safe actions
+
+[Entry](../English/page-design/detail-page-design/SKILL.md) · `page-design/detail-page-design` · version **1.0.0**
+
+**Purpose.** Structure single-record inspection views: identity and status header, attribute groups, related records, isolated destructive actions, 404/403/stale edge states, and source-list return continuity.
+
+### `form-workflow-design` — full-page forms, wizards, and settings pages
+
+[Entry](../English/page-design/form-workflow-design/SKILL.md) · `page-design/form-workflow-design` · version **1.0.0**
+
+**Purpose.** Organize single-page create/edit forms, sectioned settings, and multi-step wizards with isolated draft snapshots, dirty-state protection, validation summaries, and sticky save bars.
 
 ### 5. `app-shell-design` — the shared application frame
 
@@ -120,7 +132,7 @@ Selects and specifies Tooltip, Toast, Alert, Modal, Popconfirm, and Drawer. Tool
 
 ### 8. `responsive-design` — adaptation that preserves the task
 
-[Entry](../English/responsive/responsive-design/SKILL.md) · `responsive/responsive-design` · version **1.0.1**
+[Entry](../English/responsive/responsive-design/SKILL.md) · `responsive/responsive-design` · version **1.0.3** (includes Playwright `scripts/audit_ui.mjs`)
 
 **Purpose.** Keep necessary information and operations usable as available space, viewport height, and input capabilities change.
 
@@ -132,7 +144,7 @@ Selects and specifies Tooltip, Toast, Alert, Modal, Popconfirm, and Drawer. Tool
 
 ### 9. `design-reference-research` — evidence from named products
 
-[Entry](../English/design-research/design-reference-research/SKILL.md) · `design-research/design-reference-research` · version **1.0.0**
+[Entry](../English/design-research/design-reference-research/SKILL.md) · `design-research/design-reference-research` · version **1.1.0** (12 reviewed cases + 72 indexed)
 
 **Purpose.** Find, compare, and adapt concrete product design references with explicit evidence boundaries. The internal research method uses attributed metadata from [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md), revision `fcc70284932276d085f01ef9f83edde90b1258cb`.
 

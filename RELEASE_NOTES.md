@@ -1,3 +1,29 @@
+# PivotUI v0.5.0
+
+在完整保留全部 **14 个外源包** 的基础上，PivotUI v0.5.0 补齐中后台全链路页面矩阵、新增浏览器级自动化审计工具、扩充开发者/平台案例库，并完善开源 CI 与轻量 CLI 入口（总计 **25 个包：11 内源 + 14 外源，29 个标准入口**）：
+
+- **补齐中后台页面闭环（+2 内源页面模块）**：新增 [detail-page-design](English/page-design/detail-page-design/SKILL.md)（实体详情页：身份与状态页头、结构化信息分组、关联数据、安全操作、404/403/过期异常状态与列表返回连续性）与 [form-workflow-design](English/page-design/form-workflow-design/SKILL.md)（整页新建/编辑表单、分步向导与系统设置页：草稿隔离、脏状态拦截、错误汇总定位与吸底保存栏）；`design-orchestrator` 升级至 `1.3.0`。
+- **可复用 Playwright 浏览器界面审计脚本**：`responsive-design`（1.0.3）随包提供 `scripts/audit_ui.mjs`，支持多视口自动检测横向溢出、Tab 键盘顺序与隐藏焦点误落、交互控件可访问名称及窄屏触控尺寸，已在真实 Edge 浏览器中对联合样例验证通过。
+- **产品参考案例库扩充至 12 张已审案例卡**：`design-reference-research`（1.1.0）基于固定快照 `fcc7028` 新增 4 张开发者/平台类已审文档案例卡（`sentry`、`supabase`、`posthog`、`raycast`），总计 12 张已审案例卡 + 72 项索引记录。
+- **基础规范单一真源自动同步 + 子模块版本对齐**：全部 9 个含 `references/foundations.md` 的内源包现由统一脚本同步至 `Foundations 0.2 / Orchestration 0.5.0`；4 个嵌套交互子模块统一对齐 `metadata.version: 1.1.0`。
+- **单语言 & 去重双语安装包 + 轻量 CLI + Python 安装器对齐 + GitHub Actions CI**：
+  - 提供纯中文 `pivotui-installer-zh-v0.5.0.tgz`、纯英文 `pivotui-installer-en-v0.5.0.tgz` 与去重双语 `pivotui-installer-v0.5.0.tgz`（均约 29 MB）；
+  - 新增 `< 10 KB` 零依赖 CLI 包目录 `cli/`（`@getaway-wuji/pivotui`），支持短命令与交互式安装并自动核验 `NPX-CHECKSUMS` SHA-256；
+  - `scripts/install.py` 与 `bin/pivotui.mjs` 对齐支持 `--project`、`--status`、`--prune`、`--uninstall` 及 `antigravity`/`gemini`/`windsurf`/`opencode` 预设；
+  - 新增 `.github/workflows/ci.yml`，在 Push / PR 时自动验证双语基线、链接、Token 校验器与双安装器干跑。
+
+---
+
+Release **v0.5.0** keeps all **14 external packages** intact while completing PivotUI's admin page matrix (**25 packages: 11 internal + 14 external; 29 standard entrypoints**), adding a reusable Playwright browser UI auditor, expanding reviewed developer-platform cases, and introducing CI and a lightweight CLI launcher:
+
+- **Complete admin page matrix (+2 internal modules)**: adds `detail-page-design` (1.0.0) and `form-workflow-design` (1.0.0) alongside `app-shell-design`, `dashboard-design`, and `data-list-design`; `design-orchestrator` updated to `1.3.0`.
+- **Reusable Playwright UI audit script**: `responsive-design` (1.0.3) bundles `scripts/audit_ui.mjs` to check horizontal overflow, Tab/hidden-focus violations, interactive accessible names, and narrow touch targets across viewports (verified in real Edge against the integrated workflow demo).
+- **12 document-reviewed product cases**: `design-reference-research` (1.1.0) adds four developer/platform case cards (`sentry`, `supabase`, `posthog`, `raycast`) from pinned VoltAgent `fcc7028` (12 reviewed + 72 indexed-only).
+- **Single-source foundations sync & submodule alignment**: all 9 internal `references/foundations.md` files are synchronized to Foundations 0.2 / Orchestration 0.5.0; all 4 nested interaction submodules declare `metadata.version: 1.1.0`.
+- **Installer parity, lightweight CLI & GitHub Actions CI**: ships single-language (`zh`/`en`) and deduplicated bilingual `v0.5.0` tarballs (~29 MB each), adds the `< 10 KB` `cli/` launcher package (`@getaway-wuji/pivotui`), brings `scripts/install.py` to feature parity with `bin/pivotui.mjs` (`--project`, `--status`, `--prune`, `--uninstall`, expanded agent presets), and adds `.github/workflows/ci.yml`.
+
+---
+
 # PivotUI v0.4.2
 
 在完整保留全部 **23 个包（9 个内源 + 14 个外源）与 27 个入口** 的前提下，本版本重点优化分发体积、安装管理、MCP 发现能力与确定性校验工具：

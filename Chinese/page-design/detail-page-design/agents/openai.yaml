@@ -1,0 +1,4 @@
+interface:
+  display_name: "实体详情页设计"
+  short_description: "设计结构清晰的业务详情页，兼顾安全操作、异常状态与返回连续性"
+  default_prompt: "使用 $detail-page-design 沿用产品应用框架、组件与 Token 设计或实现业务实体详情页，覆盖异常状态与列表返回连续性。"

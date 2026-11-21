@@ -1,6 +1,6 @@
 # Case index
 
-Snapshot: VoltAgent/awesome-design-md at `fcc70284932276d085f01ef9f83edde90b1258cb`, reviewed 2026-11-14. 84 source records; eight document-reviewed local cards; 76 indexed-only records with unknown scope. No card claims current-site verification. This is a case library, not an official company-design-system catalog.
+Snapshot: VoltAgent/awesome-design-md at `fcc70284932276d085f01ef9f83edde90b1258cb`, reviewed 2026-11-14 and expanded 2026-11-21. 84 source records; twelve document-reviewed local cards; 72 indexed-only records with unknown scope. No card claims current-site verification. This is a case library, not an official company-design-system catalog.
 
 ## Reviewed candidates
 
@@ -16,12 +16,16 @@ Read only the cases useful for the current task. These labels describe the inspe
 | [Vercel](cases/vercel.md) | Marketing and auto-derived examples | Neutral hierarchy, technical type roles, spacing rhythm | `ex-*` surfaces are illustrative, not verified shipped components |
 | [Airbnb](cases/airbnb.md) | Marketplace search and details | Image/information balance, search, booking action placement | Loading, precise hover, full error states unobserved |
 | [Kraken](cases/kraken.md) | Unspecified white-background website | Purple action roles, buttons, badges | Limited detail; breakpoint list has no reflow rules |
+| [Sentry](cases/sentry.md) | Developer marketing and pricing (inspired) | Dual-polarity dark violet + white surfaces, focus ring, code pairing | Inspired analysis; does not verify live issue-triage tables |
+| [Supabase](cases/supabase.md) | Platform marketing and UI mockups (inspired) | Quiet monochrome chrome, single emerald CTA with dark ink | Inspired analysis; does not verify live Studio SQL/table workflows |
+| [PostHog](cases/posthog.md) | Developer marketing, docs, and analytics cards | Warm cream canvas, white bordered cards, soft/strong semantic badges | Does not verify live query builders or session replay |
+| [Raycast](cases/raycast.md) | Marketing modeled on command-palette chrome | Disciplined near-black surface ladder, 1px hairlines, 15%-alpha category badges | Does not verify desktop keyboard trees or light-theme equivalents |
 
-For a complete business Dashboard, permission-aware list, keyboard flow or interaction contract, these eight cards supply at most scoped visual candidates. None provides a verified full operational workflow. [Selection rules](selection.md) explain fallback and claim-level evidence. [Patterns](patterns.md) compare transferable relationships only when needed.
+For a complete business Dashboard, permission-aware list, keyboard flow or interaction contract, these twelve cards supply at most scoped visual candidates. None provides a verified full operational workflow. [Selection rules](selection.md) explain fallback and claim-level evidence. [Patterns](patterns.md) compare transferable relationships only when needed.
 
 ## Find another named source
 
-Open only the alphabetic shard covering the exact source ID. Each has 21 records. Unknown scope stays unknown until the source has actually been read; indexed-only cases require online source access or user-supplied material for further analysis. The eight cards above work offline.
+Open only the alphabetic shard covering the exact source ID. Each has 21 records. Unknown scope stays unknown until the source has actually been read; indexed-only cases require online source access or user-supplied material for further analysis. The twelve cards above work offline.
 
 | ID range | Metadata file |
 | --- | --- |

@@ -2,6 +2,7 @@
 name: navigation-interaction
 description: Handle current location, expansion, keyboard input, and focus continuity in sidebars, breadcrumbs, collapsible navigation, page tabs, and command menus while preserving established information architecture.
 metadata:
+  version: 1.1.0
   tags: [navigation, sidebar, tabs, breadcrumb, command-menu, focus]
 ---
 

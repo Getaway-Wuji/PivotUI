@@ -13,10 +13,10 @@ Install one complete language edition and a native **pivotui** Skill entry. Choo
 Requires **Node.js 22+ and npm/npx**. Run the command in the **target project's root**, in the environment where the Agent runs:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent codex --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent codex --language en
 ```
 
-npx downloads the English-only complete cluster package (~29.3 MB, without bundling the Chinese copy) and runs its installer. For Chinese only, use `pivotui-installer-zh-v0.4.2.tgz` with `--language zh`; to switch languages from one package without downloading duplicate external skills, use the deduplicated universal package `pivotui-installer-v0.4.2.tgz` (~29.6 MB). This command does not require Git, Python or MCP setup. Use the same command in Windows, macOS and Linux terminals with Node.js and npm/npx installed.
+npx downloads the English-only complete cluster package (~29.3 MB, without bundling the Chinese copy) and runs its installer. For Chinese only, use `pivotui-installer-zh-v0.5.0.tgz` with `--language zh`; to switch languages from one package without downloading duplicate external skills, use the deduplicated universal package `pivotui-installer-v0.5.0.tgz` (~29.6 MB). This command does not require Git, Python or MCP setup. Use the same command in Windows, macOS and Linux terminals with Node.js and npm/npx installed.
 
 Wait for **`Installed PivotUI ...`** to confirm installation. A spinner stopping or the terminal returning to its prompt does not by itself confirm success. The CLI also supports `--status` (inspect installation), `--prune` (clean up unused older library directories), and `--uninstall` (safely remove the managed entry). If it fails, keep the displayed error and see [troubleshooting](#npx-troubleshooting).
 
@@ -24,18 +24,18 @@ Choose the Agent you use:
 
 ```sh
 # Claude Code
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent claude-code --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent claude-code --language en
 # DSH / DeepSeek Harness
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent dsh --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent dsh --language en
 # Cursor
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent cursor --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent cursor --language en
 # Antigravity / Gemini CLI / Windsurf / OpenCode
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent antigravity --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent antigravity --language en
 # Another host that supports local SKILL.md packages
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent generic --language en --skills-dir "<your-agent-skills-directory>"
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent generic --language en --skills-dir "<your-agent-skills-directory>"
 ```
 
-Use `--language zh` for Chinese (with `pivotui-installer-zh-v0.4.2.tgz` or the deduplicated `pivotui-installer-v0.4.2.tgz`). This selects the authored instructions; upstream packages retain their original language. For `generic`, supply the actual host skills directory. The installer creates its `pivotui/` subdirectory.
+Use `--language zh` for Chinese (with `pivotui-installer-zh-v0.5.0.tgz` or the deduplicated `pivotui-installer-v0.5.0.tgz`). This selects the authored instructions; upstream packages retain their original language. For `generic`, supply the actual host skills directory. The installer creates its `pivotui/` subdirectory.
 
 ### Project scope and user scope
 
@@ -54,7 +54,7 @@ By default, installation is scoped to the current project:
 The complete library is kept under `.pivotui/libraries/`. Run from the project root or select it explicitly:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent codex --language en --project "<target-project-directory>"
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent codex --language en --project "<target-project-directory>"
 ```
 
 <a id="global-install"></a>
@@ -62,7 +62,7 @@ npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0
 For a **global installation shared by your local projects**, add `--global` instead. You can run it from any folder:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent codex --language en --global
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent codex --language en --global
 ```
 
 Here, **global means the current user account on this computer**. It does not install for other accounts, remote machines or cloud sessions. For another Agent, replace `codex` with `claude-code`, `dsh`, `cursor`, `antigravity`, `gemini`, `windsurf`, or `opencode`; keep `--global`. Do not combine it with `--project`.
@@ -91,13 +91,13 @@ Official discovery references: [Codex Skills](https://developers.openai.com/code
 Preview destinations and validate the source without installing files into the project:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language en --dry-run
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent codex --language en --dry-run
 ```
 
 npx may still download its package into the npm cache. Override the library store and/or entry directory when needed:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language en --install-dir "<library-storage-directory>" --skills-dir "<your-agent-skills-directory>"
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent codex --language en --install-dir "<library-storage-directory>" --skills-dir "<your-agent-skills-directory>"
 ```
 
 Replace placeholders with real paths and retain quotes around paths with spaces. Keep the complete library available to the Agent. A local install is not automatically available in a remote machine or cloud session.
@@ -116,8 +116,8 @@ The **same ZIP also supports global installation**. Place its `pivotui` entry fo
 
 Download one ZIP:
 
-- [PivotUI English project ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-project-v0.4.0-r2.zip)
-- [PivotUI Chinese project ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-project-v0.4.0-r2.zip)
+- [PivotUI English project ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/PivotUI-English-project-v0.5.0-r2.zip)
+- [PivotUI Chinese project ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/PivotUI-Chinese-project-v0.5.0-r2.zip)
 
 1. Extract the ZIP. Open the extracted `PivotUI-English` or `PivotUI-Chinese` folder. You will see `.agents`, `.pivotui`, and `INSTALL.md`.
 2. Select **both `.agents` and `.pivotui`**, copy them, and paste them into the folder for your project. Copy the whole folders, without opening them or picking out files inside.
@@ -183,7 +183,7 @@ For other Agents that require a different folder location, use the [custom direc
 
 ### Start using PivotUI
 
-Both installation routes expose **one native pivotui entry**, which reads the complete library's **27 module entrypoints** as needed. Select it and describe the interface you want; you do not need to paste setup prompts into project rules. Installation/file checks are distinct from executing a complete host workflow; see [actual verification](VALIDATION.md).
+Both installation routes expose **one native pivotui entry**, which reads the complete library's **29 module entrypoints** as needed. Select it and describe the interface you want; you do not need to paste setup prompts into project rules. Installation/file checks are distinct from executing a complete host workflow; see [actual verification](VALIDATION.md).
 
 <a id="manual-setup"></a>
 
@@ -193,7 +193,7 @@ Either installation route above is enough for native Skill use. The following se
 
 ### Get one edition
 
-The original complete-edition archives remain available: [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-English-v0.4.0.zip) and [Chinese ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/PivotUI-Chinese-v0.4.0.zip). They contain the raw language edition, local MCP server and required package resources. They differ from the project-ready ZIPs above: they do not include a project-level native entry. You can also use `English/` or `Chinese/` in a repository checkout.
+The original complete-edition archives remain available: [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/PivotUI-English-v0.5.0.zip) and [Chinese ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/PivotUI-Chinese-v0.5.0.zip). They contain the raw language edition, local MCP server and required package resources. They differ from the project-ready ZIPs above: they do not include a project-level native entry. You can also use `English/` or `Chinese/` in a repository checkout.
 
 - Choose `Chinese/` for Chinese authored instructions, or `English/` for English authored instructions.
 - External packages retain their upstream language in both editions.
@@ -471,7 +471,7 @@ Use `python3` on macOS/Linux. This older installer defaults to user-wide directo
 When retrying a failed download, this command prints more detail. Keep any Agent, language or destination options you need. npm's `--loglevel=verbose` and `--timing` options must come **before `--package`**:
 
 ```sh
-npx --yes --loglevel=verbose --timing --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language en
+npx --yes --loglevel=verbose --timing --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent codex --language en
 ```
 
 Verbose output shows requests and stages, not necessarily a live download percentage. There is no need to interrupt a download that is still progressing just to add logging.
@@ -487,7 +487,7 @@ npx --yes github:Getaway-Wuji/PivotUI --agent codex --language en
 For npx installations, use the latest release-package command from this guide, keeping the same Agent, language and scope. Preserve any `--project`, `--global`, `--install-dir` or `--skills-dir` choices. The current package is:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.0/pivotui-installer-v0.4.0-r3.tgz pivotui --agent codex --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent codex --language en
 ```
 
 The URL selects a specific published package; repeating an older URL does not fetch a newer release. The installer verifies the selected package and updates its managed entry while retaining previous library copies. An edited entry or a conflicting existing target library is reported rather than silently overwritten.

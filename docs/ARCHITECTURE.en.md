@@ -39,14 +39,14 @@ flowchart TD
 | --- | --- | --- |
 | Scope, routing, cross-region decisions | `design-orchestrator` | A concise assignment and consolidated results |
 | Direction and token generation/validation | `global-style-skill` | Selected or provisional direction, editable token source, affected scope |
-| Dashboard, complete data list, application frame | Corresponding page module | Page structure and business contract within its region |
+| Dashboard, data list, entity detail, form/settings, application frame | Corresponding page module | Page structure and business contract within its region |
 | Shared component anatomy, interface and variants | `component-system` | Reusable implementation integrated by one component owner |
 | State transitions, input, focus and recovery | `interaction-design` and selected leaves | Concrete behavior contract, code or targeted proposals |
 | Reflow, input capability and overflow | `responsive-design` | Adaptation conditions while preserving content and operation |
 | Evidence and candidates | Research modules | Sources, fit, limitations and recommendations to the existing owner |
 | Image concepts | Selected image module | Requested visual assets; implementation remains a separate requested result |
 
-A settings form or detail page has no dedicated standalone page module in this release. The current implementer owns its composition and business flow, supported by relevant component, form, overlay, and responsive guidance. The router does not force every business page into the Dashboard method.
+The complete admin page matrix is covered by `app-shell-design`, `dashboard-design`, `data-list-design`, `detail-page-design`, and `form-workflow-design`. For specialized pages outside these modules, the current implementer owns composition and business flow; the router never forces every business page into the Dashboard method.
 
 ## One product, one authoritative token source
 
@@ -74,7 +74,7 @@ A compatible current taste workflow can own the public pages; Dashboard, data-li
 
 ### Style exploration or a named-product comparison
 
-Global style starts from the unresolved choice and reads only useful cards among its 40 references. `ui-ux-pro-max` can supply additional style, typography, palette, or UX candidates. `design-reference-research` can compare concrete product examples, normally beginning with 1–3 relevant cards. The 84-source inventory includes eight document-reviewed cases and 76 indexed-only records; indexed availability is not proof of reviewed product behavior. Research returns evidence and adaptations to the decision owner. Advice-only work does not write a new theme or implement pages.
+Global style starts from the unresolved choice and reads only useful cards among its 40 references. `ui-ux-pro-max` can supply additional style, typography, palette, or UX candidates. `design-reference-research` can compare concrete product examples, normally beginning with 1–3 relevant cards. The 84-source inventory includes twelve document-reviewed cases and 72 indexed-only records; indexed availability is not proof of reviewed product behavior. Research returns evidence and adaptations to the decision owner. Advice-only work does not write a new theme or implement pages.
 
 ### Images and code are distinct outputs
 

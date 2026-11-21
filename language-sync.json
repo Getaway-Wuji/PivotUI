@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cluster_version": "0.4.2",
+  "cluster_version": "0.5.0",
   "source_language": "English",
   "files": {
     "AGENTS.md": {
@@ -16,8 +16,8 @@
       "Chinese": "17809be961ad9322f48e3e37220dee88e36d7bce5f0b61a386e0464a6bdf2eb1"
     },
     "README.md": {
-      "English": "1acba22932720987459d86338d783c350f3ba3da48b7c1e2dc4625f08bcafa38",
-      "Chinese": "a08d927ac7f9da54a6cf84ae07afecb323476667cf7b41ce63df7daeded801b7"
+      "English": "d8f44c5e12eb73024383be406d28cf00b9f2ff4826d80c9cb6dee9e770caeba1",
+      "Chinese": "ebadf4e0a12e4db6145cfe0843f34db298573531eb404de9815a3fe9387a848b"
     },
     "THIRD_PARTY_NOTICES.md": {
       "English": "7537222fde90d822f07e5e9d19fb98af0cf3293b681c11e3b4fbbc5745e70811",
@@ -44,8 +44,8 @@
       "Chinese": "fa119cb3fb0be58e2ed51c42ca6f7f2a775f6bbb8782ce5d5f525f55c4b06b55"
     },
     "components/component-system/references/foundations.md": {
-      "English": "f26d2969d68849b3b66d366c60776a4e94a42060250f8d1678c3ed2f83a05965",
-      "Chinese": "0582999a12ec84961a6d12de1e2d7c8a9527f61074bf79765e1a190163f5b03d"
+      "English": "b7349ecbe0c162a0648d3831bdcf2563fdd8a4e64b44da415fc20f8414ee5897",
+      "Chinese": "3c4a2c043dce58a6b35bb8a3706031f431510001d4b4fe90bcbd5299c8a5dea2"
     },
     "components/component-system/references/integration-and-validation.md": {
       "English": "94a4af1fa7974202620cfb206e469061615e368e1316c1405b46ae7ce9a4545e",
@@ -64,8 +64,8 @@
       "Chinese": "6d4bdc9a9cf30e7beb593475fdcdbf29f981ea6bd7923f202866145409f87b44"
     },
     "design-research/design-reference-research/SKILL.md": {
-      "English": "3ba18a0e7c76a89b90420ab1a793e69c0bdb00e2fb676d8cf08bad524cfaabdb",
-      "Chinese": "a850c4b5c2d143d8cefa4c8344fce6fdc15b13273ff5d5f8a19707af057aa016"
+      "English": "577433c8e68a58458b27f4080cd87aae72c10ace99339328b9f2ee8ecc1e22df",
+      "Chinese": "4414d8d99f5db853c5e119b032e144f7e4efb46038d0a47f8200e9997363c115"
     },
     "design-research/design-reference-research/UPSTREAM.md": {
       "English": "ee7e35de263c9e9e4f9ca50930ccfa236d49577fa13160566a6fffe7cff4f1f2",
@@ -95,13 +95,29 @@
       "English": "2095b487021eedd2a0aa0c11328853f5fc3903f68adbd9d18dd94ae5b415190f",
       "Chinese": "af3e8561f2bf1b9300fb888bccf3133cee6c0e2e36fce8d592e97338c71353eb"
     },
+    "design-research/design-reference-research/references/cases/posthog.md": {
+      "English": "a3069e3eaaebfec8921a53a3f87abdf3bf37f1c5ba9a2468a5714cda68ce977d",
+      "Chinese": "31c91e66145a5bdae74b0fe5074eb39740867ee4709cb171e655ebb5e3244839"
+    },
+    "design-research/design-reference-research/references/cases/raycast.md": {
+      "English": "d112523c04a6fcebdb860f03835081a039eb67a01268fde1190234a528c80761",
+      "Chinese": "897a0764c1e5f7511c1754740cd3593f8a519fac8e6d2691150e9192e163e8b6"
+    },
     "design-research/design-reference-research/references/cases/sap.md": {
       "English": "d7567080f847b787663aaf092b61a22cf6bef65b825ecf283a1a724d83ad6629",
       "Chinese": "7ded44d1592bbb53b957704aaa37671977a2bf93a8a467f2a84e0844d8e829cf"
     },
+    "design-research/design-reference-research/references/cases/sentry.md": {
+      "English": "e419f698f7cfdc75baca2336dd99fc05b3c1980b82c366cc85ca86dd76178ef3",
+      "Chinese": "312481596fd246952e8b45a9665f4cdc8d631a676c781a48946566d92eba7838"
+    },
     "design-research/design-reference-research/references/cases/stripe.md": {
       "English": "2ec8d4019b06b97b85fbe5ddc4f417ee97cded5eec658de529a9f561ede9129d",
       "Chinese": "8e998299ed2a875f4609e6984349a9d8a6ad76dc881195966ebd7e9d5ef697d1"
+    },
+    "design-research/design-reference-research/references/cases/supabase.md": {
+      "English": "810dd4c2ca1b3036e8433de8ca092cc5545860a2e9166271c4226306f34be4cc",
+      "Chinese": "8b25b815efb095ec393884a6a828a6452c79e1a5a01a3840ab1415ea121663c4"
     },
     "design-research/design-reference-research/references/cases/vercel.md": {
       "English": "2be3a348efcb415eeb8f723f42bfc908e88d344f2ca3ff0b3394877b4ca62f6b",
@@ -116,16 +132,16 @@
       "Chinese": "837c0fcbbb57d895f84a767bc6bee149cfa768b4a12786e6eaefe4cc4b3cd6be"
     },
     "design-research/design-reference-research/references/catalog/catalog-03.csv": {
-      "English": "e9772f337f1ee42a9b6db9e50b3d965f0b75902e15c793d18fccdc8bfd9b70af",
-      "Chinese": "e9772f337f1ee42a9b6db9e50b3d965f0b75902e15c793d18fccdc8bfd9b70af"
+      "English": "03eb22875f31defd4a5aead557f90de2059b6aada13262ee5cce816b47b9283c",
+      "Chinese": "03eb22875f31defd4a5aead557f90de2059b6aada13262ee5cce816b47b9283c"
     },
     "design-research/design-reference-research/references/catalog/catalog-04.csv": {
-      "English": "45e64351e23bed43c4c39e145eb3a98bc37ca85972376fb171625d884a8d45a6",
-      "Chinese": "45e64351e23bed43c4c39e145eb3a98bc37ca85972376fb171625d884a8d45a6"
+      "English": "2a05ed10f86433993ef7ed5bb703fc30999b6976de58660ad0dc4e58aa24f42e",
+      "Chinese": "2a05ed10f86433993ef7ed5bb703fc30999b6976de58660ad0dc4e58aa24f42e"
     },
     "design-research/design-reference-research/references/index.md": {
-      "English": "95af99d480397ba33aa228fe3e4e20560e0631e1171403b0c39447a4e66b9dc1",
-      "Chinese": "d5907eb4d71c0e1fe9c1e53d90388320b3299cc9e69fbcb656cfb6a23c9c8e91"
+      "English": "35d34fe323ace40b695bd9cc4b97b129af13b384c23b9f2f1100846a5397794d",
+      "Chinese": "9c5543488d8a4d0cecad01fa090956fbbcd3658d56138ec96fa78c943add354a"
     },
     "design-research/design-reference-research/references/patterns.md": {
       "English": "062869b5f1d64dbb0a3cc32c83b01a90f4c273e1a538871f2c7fb898a9fbfce9",
@@ -448,8 +464,8 @@
       "Chinese": "91776565d8393f2701c57a38d9b5dd221aa8a3f363e0dacb557cb748a3ae6b9d"
     },
     "design-system/ORCHESTRATION.md": {
-      "English": "0770d8f7d84db4d3770ecbc18c4b1626e2f140292439423edfce20ff79ea8f7f",
-      "Chinese": "48fc790c25e7767f88ce2a167b1381d543ca41aa19c8f7c2a18fe38968240c2f"
+      "English": "02155e879436e4cd17119c5342c057920513ebbee3a958a559e66388658e1967",
+      "Chinese": "592f61e6601cad873fc2314c1dc33502f94da8b56954ef942be440a85a857a8a"
     },
     "image-design/brandkit/LICENSE": {
       "English": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
@@ -528,8 +544,8 @@
       "Chinese": "03854306bbe3d52a2f7dc414d3a9de782cf27f2ca00a5c8275f00c239edf3520"
     },
     "interaction/interaction-design/references/foundations.md": {
-      "English": "577725bb3355f211f20fd0ab841d318fb121301b6cad5417de50d7d46362c9a6",
-      "Chinese": "a3f7ce17c189f7a2d8d55c69767e9a11de4880612c8c531999704d7d0c2ba8c1"
+      "English": "eba71f319d108a50c232d96452b902e3224e53bd5990b166de4255a7fd20a544",
+      "Chinese": "623442c7899e08a41c7acebce1a20f068c096d21d03c047fe3a25da12784de27"
     },
     "interaction/interaction-design/references/handoff-validation.md": {
       "English": "520b2226bf2a32e845e92a3dee38b74acdefcc81d7db9a1c45a0ef62d8919fad",
@@ -556,20 +572,20 @@
       "Chinese": "b1117940b637c490832ea444e24ec714680503323af1fac7427817ca3db12e7a"
     },
     "interaction/interaction-design/sub-skills/button-interaction/SKILL.md": {
-      "English": "98b7499888a0fec3bb66064b95ffde7994e8978a36a47a37fce4f67b568297bc",
-      "Chinese": "a2fcbde5a10ec3c1e2541951e71649bc205fdf5c8e6c3f6cbc401231be1450ef"
+      "English": "954bed08ab379fe1ad663023c120d431d0d566600b9f2a504bb64689e42bd222",
+      "Chinese": "3cb6357f19665b2fdb504804270e3125c1292b1e9189b09dec19b75896adcbe0"
     },
     "interaction/interaction-design/sub-skills/floating-components/SKILL.md": {
-      "English": "fb1988ab11536fa6c651c7ebead371559cd53a86b0bd7717a41e3751f0c0aceb",
-      "Chinese": "b49ef5acb874437d0028e6d258f8e9f54a3322b75a5375be790bc875d3fabe48"
+      "English": "b0287dc55f098711a725acc9adcf3728c49c2abf021ca1a9d5625fda1b322717",
+      "Chinese": "152e1fed9b232b011c945b56df3def28863eecee4a9f87c96cf40945e3d464c5"
     },
     "interaction/interaction-design/sub-skills/form-interaction/SKILL.md": {
-      "English": "72b5e8667f13649902a2e8a4c6e36329e38c0e2c22cfae5a0e20e109f5bbbc30",
-      "Chinese": "01b6cf119b6df5c61ac3158ecd90cec8334d17642f42d42f5063b8985901eb1f"
+      "English": "9f7b2350a354c15f15f27ebaa55978bedcd3cae35df9b662779193ccc52f4e18",
+      "Chinese": "935f1e4cb8321d783090ad71082a2a47f754bbecaf05b7cf78ad38312dadd5eb"
     },
     "interaction/interaction-design/sub-skills/navigation-interaction/SKILL.md": {
-      "English": "3231670eb11a1a80e22001ef3f15ce86da9e3e3db156ac9f40114e1b86b2e02b",
-      "Chinese": "abb1cf95060826a6dabae8b34a22a410ddeb6f71e5811d5310885ce8bd304b46"
+      "English": "7db88665ef7357de44e9d3696f4522e75de2d980d87fa092507d256ff0ab9597",
+      "Chinese": "9a39281f3f763e7dbd2b9869c2521ad800929f7e63b21afd5ce330cd705a4914"
     },
     "legacy/redesign-skill/LICENSE": {
       "English": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
@@ -628,12 +644,12 @@
       "Chinese": "4a346903aef3e6424d47a42f69b891765ea0a6c84ff490f6d6de60601d9ded32"
     },
     "mcp/skill-cluster/server.py": {
-      "English": "4ec7959385b195a7b84605818244d52091039cb8eb47a13fd71913b21e61f55e",
-      "Chinese": "4ec7959385b195a7b84605818244d52091039cb8eb47a13fd71913b21e61f55e"
+      "English": "99ce07fd7a9c38eaa93d5f25996230efa40b7ad8c3d398ff07b4f47f1a3c0fa3",
+      "Chinese": "99ce07fd7a9c38eaa93d5f25996230efa40b7ad8c3d398ff07b4f47f1a3c0fa3"
     },
     "orchestration/design-orchestrator/SKILL.md": {
-      "English": "259a8301017b410d8ea1ee86a366dcac9c1f8373e1a773fc7320ea412c9f8eea",
-      "Chinese": "eeeefbe17e03491576fbf368fc8b51561669015d9bf18d6117ef6a517d52c2a1"
+      "English": "c7d0c2e2d481babe0161ea6e87ae67aafb1f4e119cb912626ded23ab3e4b79ef",
+      "Chinese": "afd5b8de5ef43abec5bd260b3d73a0aeaad5ac959c7da3fc3fa3479b82579abc"
     },
     "orchestration/design-orchestrator/agents/openai.yaml": {
       "English": "22a78c2de6417f07bf67c259e6e24c4289f7fecdf7be12f0f87bef4eefeaa468",
@@ -648,8 +664,8 @@
       "Chinese": "2b482f75adc44504b906da1475aa20ca65ca9ef562aef0551e075d100243e569"
     },
     "orchestration/design-orchestrator/references/foundations.md": {
-      "English": "88dd35ab04904405a81d123cdb4fdfab2821152e20cdaf0f44316c77fb4a227c",
-      "Chinese": "28373b388f26b98b71e2b1995f6fe265ada18dc5df404f7f705b015d76fece1d"
+      "English": "73cc7da6d786b643afb4aeb0f41f197214657449af184b093e7a25e0522a7aa4",
+      "Chinese": "a701b3a72d3e1b2b9994c1201c32612925105b9f88eb405e1d8bccfd0b4bc186"
     },
     "orchestration/design-orchestrator/references/scenarios.md": {
       "English": "a7f2afe4f9ed30265ef9885ffb9ddda88075b1dc2fbaca3193f2d5b707c00edb",
@@ -852,8 +868,8 @@
       "Chinese": "565a665898b0e285e668bd01ae8651ab459f4df3f7e5cc9967230eb7bc4436f1"
     },
     "page-design/app-shell-design/references/foundations.md": {
-      "English": "830f50b142de02525b51267bae62f0759ab295e74f5cdef504b99e1495c0de63",
-      "Chinese": "5b5aa8cf1e9d23b3da867f3dabf1ee381f5ad20175d55eac825413bbba26cbae"
+      "English": "99f7eb8f2bd2aaab02f94291c7224bec3ade1b866bedaf89a8ee5dca33929c19",
+      "Chinese": "a5f352948dd0c1288ec8fff72005e28f23ea1485235353f3e1210a5cdc6fd84d"
     },
     "page-design/app-shell-design/references/frame-decisions.md": {
       "English": "4436d747d5af584c0b3961469976a82e4116aa3f62e6f69890185f2353689a48",
@@ -884,8 +900,8 @@
       "Chinese": "317fd07a97f7ddbf8e404b8ef8a2b209cf9037d199b8f4b569e094ce087b1ebe"
     },
     "page-design/dashboard-design/references/foundations.md": {
-      "English": "c5d3801db918c5e782d64a61db4b63d183f88ce17eefd69b521c3c7e3f3d7e9a",
-      "Chinese": "cef841872f34662d787644da2cb4c774f12dfdff9b3fd9cfbe36666218ad8315"
+      "English": "54cab733c55d4f6a715a0068f3c8d502695eaa39b8060c04fd9488771983c12f",
+      "Chinese": "954946ac49a149460b7006aba32e40d03aa4c3ae92a4a76d276058f152a2c8b8"
     },
     "page-design/dashboard-design/references/interaction-patterns.md": {
       "English": "b93fd18a82e194fba61aa36f5b3023a14e414f88d217f705ef4482aedb75ef72",
@@ -916,8 +932,8 @@
       "Chinese": "1fdd8cb0ffbd3556671b390c364624cee3145231a49f426a90a7f2b1f2840d17"
     },
     "page-design/data-list-design/references/foundations.md": {
-      "English": "900030e612c70cba00adf91297a5df5e8c5eef78af26c0023fd61b65d4863333",
-      "Chinese": "1faf25a67aedb79646beaaf7181823780d914696f717278d66d8210f9c9a0477"
+      "English": "733b8e21e876be708dbea276f40702ee945cbbdf65d2c40a4c0726c12016053f",
+      "Chinese": "c82caf6fe4c27053004b7a0d6cd8b0495da9ddf2b72d886f715a340175fc49d9"
     },
     "page-design/data-list-design/references/layout-and-reference.md": {
       "English": "228673891212f443725fa313dd9d20baea02aba69afbc27854961033ecba9ff5",
@@ -934,6 +950,54 @@
     "page-design/data-list-design/references/verification.md": {
       "English": "df31aa4b3cdfb476ebb473ab48c8b7e833500544121baa1540f0b07701375c38",
       "Chinese": "8807b6e98fbb2b98e8ed6fc4efe47b7b158cf92c902190819a5f43ca201d75a1"
+    },
+    "page-design/detail-page-design/PACKAGE.md": {
+      "English": "0fe110ccc8415ab352d34c4fd4b14d6e18cb7df38492b600747d4dcd8346fe33",
+      "Chinese": "2557ac64ed1b49abd293f80f39da686ebd552e2739c48d6c8d97c92e7c4453dd"
+    },
+    "page-design/detail-page-design/SKILL.md": {
+      "English": "5fd9dda800654119bb5a012f30313aabe8fdf48791dbe5d10e3d0f4a1db2c7be",
+      "Chinese": "56e9b067e13acfbeb833924bcf2b6056075ad1bf08040d8fbd44551eb60e589c"
+    },
+    "page-design/detail-page-design/agents/openai.yaml": {
+      "English": "93a5ae26a5d5725333a75e395daadfff16a5a76d09b1733cab196a8faef48b9a",
+      "Chinese": "f0460440c78ec13ef454b9e6f1354888af3acf78d8881bf15fc357e620aef073"
+    },
+    "page-design/detail-page-design/references/actions-and-continuity.md": {
+      "English": "99b50fad39d28cead2a1725c00fb287c73734779f831fce4e8f5a767af4df2f9",
+      "Chinese": "91bf7909e332db4197fd9d5f2ddcb6e59bb2abf0f11c8e53d8b590bccfce6367"
+    },
+    "page-design/detail-page-design/references/foundations.md": {
+      "English": "9487c97f158686118f64bfa3395ab1bf12a34327d5a92b9548423029475fdab0",
+      "Chinese": "11c1fd288be1ef70edc37d783a77462dc51194adb18fb2a2565289b2a9e68136"
+    },
+    "page-design/detail-page-design/references/layout-and-sections.md": {
+      "English": "90371ee3d01ea5576474538ff4c0f2cebdf770f3c45a073a416d20817845133c",
+      "Chinese": "8be9a9b998b4dacb70349dd7e4b711e150862ff7ab3969a777d0c90967b9b6fb"
+    },
+    "page-design/form-workflow-design/PACKAGE.md": {
+      "English": "287a8f086a1df08c1ed455f796aac46e6b413382d0af0704530489f75970e012",
+      "Chinese": "1045115b3a09d96df8fca5a14c96aa50f5c1158748a98683725a414d6a0f5842"
+    },
+    "page-design/form-workflow-design/SKILL.md": {
+      "English": "7c83fcaa45e6e446f2ebce7046578522f996c4069de72824daea7a0bf6cd98ae",
+      "Chinese": "b7ee7a42f6db479c59484355d81cb60efd37120bab3e7df7863d6f0d0d118cd4"
+    },
+    "page-design/form-workflow-design/agents/openai.yaml": {
+      "English": "c4b602122e43d18698b673b36eb13aa84c7d05a5f27fa4cd72794b612117238c",
+      "Chinese": "fc8c6c0d71093ec6baac7567ddb74aba484eb10f7c5b5159c8691cdb47e474c1"
+    },
+    "page-design/form-workflow-design/references/foundations.md": {
+      "English": "7f597f61e4ae0d13e3855d699e940081c68852490d7b7bcbfd73b3b5ef61fa1d",
+      "Chinese": "e06066c9666822afccbcd547b49efcfd0eda019440b5fc1bf35eb12b5bcaf4c9"
+    },
+    "page-design/form-workflow-design/references/structure-and-flow.md": {
+      "English": "da97f77a9aa522404094a2fe03f85fbbf59f8eec819fdda3f5bdf37515bf0817",
+      "Chinese": "5f283ef318eb8db5a98444db810dc966a41cbb1fbe885f98ad2bbb4c3f18259b"
+    },
+    "page-design/form-workflow-design/references/validation-and-persistence.md": {
+      "English": "0f3f0267392ea6197378ed1dd221ec9da37f27de19d2e0c04940140bbfa80eb6",
+      "Chinese": "f1639de7c18872ca64fc4ea42ed7b04056f44603f05b5484386c00d7fcf12aa0"
     },
     "page-design/taste-skill/LICENSE": {
       "English": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
@@ -7532,8 +7596,8 @@
       "Chinese": "eb0599442b7f667760504bfce47f94e27c96c8f08f359df28c3bf604ec02341b"
     },
     "responsive/responsive-design/SKILL.md": {
-      "English": "600f434f882e5179552de785dfa97dd5cabcb06161c03c41bc08ed0f0feb0df1",
-      "Chinese": "cdb557c9e3051fa1bc71f6426fb673ab282c4c8ac15d98b294b1767a0c667ab5"
+      "English": "ff93b49252a8422081bcc7b28a89517600a9496c4745b605ccf3225ea37076d9",
+      "Chinese": "e623dc75ad228c1c19390355cd8a943fc1a9584721b8038ba44adb512817e5ec"
     },
     "responsive/responsive-design/agents/openai.yaml": {
       "English": "656e1bb953f09480291912382c65f66bedf1334f1337e57f914df8065fad1e4d",
@@ -7544,8 +7608,8 @@
       "Chinese": "7a14d27bcffbd99e3e4257c051c42f9fe0c73329b5d549257f146ff93f745edb"
     },
     "responsive/responsive-design/references/foundations.md": {
-      "English": "420d4245c3544aa65f5cb442dea7f071357c0ffefb623474865273d59b087367",
-      "Chinese": "756f75d26c7b0ca942474529cd2eaf3b91d845b0bec5cd8e4f616b17511ccf72"
+      "English": "60b7987cd8268a97d08d027dd76c37aad09004b3e0576be6e0c45a39df731c2e",
+      "Chinese": "b5a5181658b151788756a61ec81f9faa6d679bfb45a8c25c941674d5a14bfec9"
     },
     "responsive/responsive-design/references/handoff-validation.md": {
       "English": "ab9488c2fc2451529ba27e99b11537f448345f4c4248b32ba6b22c32ff2c1b09",
@@ -7566,6 +7630,10 @@
     "responsive/responsive-design/references/tailwind.md": {
       "English": "fb13d018cfa639ef7da1bf76d82b544737102f72f36fdefabdc162012dc436fd",
       "Chinese": "3dcb3918a2911eb31b6bc3687fd5e0cf6b4c6349ff9c35a60105be17665f53af"
+    },
+    "responsive/responsive-design/scripts/audit_ui.mjs": {
+      "English": "ab22d508eefdbea6206e9d5ee1c386906b0604b9271e19dd46c7dc3ceaec0389",
+      "Chinese": "ab22d508eefdbea6206e9d5ee1c386906b0604b9271e19dd46c7dc3ceaec0389"
     },
     "tool-integrations/stitch-skill/DESIGN.md": {
       "English": "0ab6740c4ebb1966dbceddb823a66d4bf027e960efbd73faca56cbf8370ae2ad",

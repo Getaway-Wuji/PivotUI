@@ -1,13 +1,13 @@
-# Shared-Method Extract
+# Portable Shared Design Foundations — Interaction Design
 
-Read only when the target project lacks corresponding conventions. Distilled for standalone distribution from Interface Design Foundations 0.2 and Authored/External Design Skills Orchestration 0.1 (2026-11-14). It defines no default product brand.
+Synchronized excerpt from *Shared Interface Design Foundations* **0.2** and *Orchestrating Authored and External Design Skills* **0.5.0**. Read only when the target project lacks its own design standards; inside the full cluster, the edition's `design-system/FOUNDATIONS.md` and `design-system/ORCHESTRATION.md` remain authoritative.
 
-- Organize behavior around user tasks; preserve existing components, tokens, tone, and interaction conventions. Temporary local choices do not automatically become product-wide rules.
-- Give each page/region one implementation owner. Detailed interaction owns states, feedback, focus, keyboard input, and recovery. The page lead retains layout/business organization; component capabilities implement behavior, and responsive capabilities address input methods and space.
-- Prefer target-project colors, fonts, radii, shadows, durations, and easing. If absent, add only needed local defaults and mark them provisional. Have orchestration consolidate shared changes into the product's single maintainable source.
-- Add only states applicable to the task's controls. Communicate state through text, shape, or icons as well as color; make focus visible and actions named.
-- Loading, empty data, no matches, request failure, and insufficient permission differ. Preserve input after form failure, provide submission outcomes, and match confirmation/undo to action impact.
-- Main flows must work by keyboard. Touch needs accessible alternatives to hover/drag. Motion clarifies changes and respects reduced-motion preferences.
-- Use `gpt-taste` only in public marketing areas. This boundary permits lightweight task-serving feedback and suitable React Bits components in business interfaces.
-- Complete necessary work when ordinary support modules are absent, describing actual usage. Do not invent skill calls or completed checks.
-- Reference images establish visible styling. Dynamic, device, and request behavior require corresponding evidence. Record rule validation separately from runtime checks.
+## Core invariants
+
+- **Task-first hierarchy:** Organize layout, grouping, alignment, and emphasis around what the user must understand, decide, and do.
+- **One authoritative token source:** Reuse the target product's existing CSS variables, theme objects, or component library configuration. Express region differences as explicit named variants; never maintain two independently editable themes or push client brand defaults back into the skill library.
+- **One owner per region and component:** A named page lead owns region composition; shared components have one integration owner; specialists fill concrete gaps rather than running as a mandatory pipeline.
+- **Realistic content and complete states:** Handle long text, mixed Chinese/Latin copy, tabular numbers, zero vs missing vs unloaded values, loading, empty, error, permission, focus, and keyboard states.
+- **Overlay and safety boundaries:** Tooltip explains briefly; Toast carries lightweight non-error feedback (never errors); Alert persists problems; Modal guards irreversible actions; Popconfirm covers low-risk local confirmation; Drawer preserves editing context without absorbing full-screen workflows. `gpt-taste` is restricted to public marketing and never used in dashboards or business tools.
+- **Responsive and scroll discipline:** Adapt content and controls to available width, height, and input capability without global horizontal clipping or hiding critical business fields. Separate shell scrolling from local table/panel scrolling.
+- **Honest verification:** Distinguish static document inspection, script validation, rendered browser checks, and physical-device testing. Never report unperformed checks as passed.

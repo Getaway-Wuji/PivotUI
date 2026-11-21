@@ -17,7 +17,7 @@ PivotUI is a UI design Skill cluster that connects task routing, visual directio
 
 The management layer interprets the requested result, assigns a lead for each region, adds specialists for concrete gaps, and brings their results into the same product. A complete task can move from business structure to working interface while preserving the project's theme, components, and decisions.
 
-Release **0.4.2** includes **23 packages: 9 authored modules and 14 external packages**, with **27 standard `SKILL.md` entrypoints** including four interaction submodules. The English and Chinese editions are independently usable and independently downloadable (both single-language and deduplicated bilingual tarballs are ~29 MB). External packages retain their original language and notices in both editions.
+Release **0.5.0** includes **25 packages: 11 authored modules and 14 external packages**, with **29 standard `SKILL.md` entrypoints** including four interaction submodules. The English and Chinese editions are independently usable and independently downloadable (both single-language and deduplicated bilingual tarballs are ~29 MB). External packages retain their original language and notices in both editions.
 
 ## What is a Skill cluster?
 
@@ -132,7 +132,7 @@ Internal and external packages share functional categories. Their origin is docu
 
 ## Quick start
 
-Use PivotUI with **Codex, Claude Code, DSH (DeepSeek Harness), Cursor, Antigravity, Gemini CLI, Windsurf, OpenCode, or another compatible Agent**. Choose one of the two installation routes below. Both provide one native **pivotui** entry that reads the complete library's **27 module entrypoints** as needed.
+Use PivotUI with **Codex, Claude Code, DSH (DeepSeek Harness), Cursor, Antigravity, Gemini CLI, Windsurf, OpenCode, or another compatible Agent**. Choose one of the two installation routes below. Both provide one native **pivotui** entry that reads the complete library's **29 module entrypoints** as needed.
 
 The steps below install into one project. To share PivotUI across your projects, go straight to [global installation](#global-install). Both npx and the ZIP support it.
 
@@ -141,27 +141,27 @@ The steps below install into one project. To share PivotUI across your projects,
 With **Node.js 22+ and npm/npx** installed, open a terminal in your target project's root and run (English-only installer tarball, ~29 MB):
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent codex --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent codex --language en
 ```
 
 npx downloads the prepared installation package and runs it. This command does not need Git or Python. Installation is complete when you see **`Installed PivotUI ...`**. A spinner stopping on its own does not confirm success. For another Agent, use the matching command:
 
 ```sh
 # Claude Code
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent claude-code --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent claude-code --language en
 # DSH / DeepSeek Harness
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent dsh --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent dsh --language en
 # Cursor
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent cursor --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent cursor --language en
 # Antigravity / Gemini CLI / Windsurf / OpenCode (swap --agent value)
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent antigravity --language en
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent antigravity --language en
 ```
 
-For Chinese only, use `pivotui-installer-zh-v0.4.2.tgz` with `--language zh`. If you want one tarball that supports switching between English and Chinese without downloading duplicate external packages, use the deduplicated universal tarball `pivotui-installer-v0.4.2.tgz` (~29.6 MB). The default installation stays in this project under `.pivotui/libraries/` and the agent's skills folder (e.g. `.agents/skills/pivotui/`, `.claude/skills/pivotui/`, `.agent/skills/pivotui/`). Supports `--global`, `--status`, `--prune` (clean up unused older managed libraries), and `--uninstall`. [Other Agents, custom paths and preview](docs/INSTALL.en.md#command-install).
+For Chinese only, use `pivotui-installer-zh-v0.5.0.tgz` with `--language zh`. If you want one tarball that supports switching between English and Chinese without downloading duplicate external packages, use the deduplicated universal tarball `pivotui-installer-v0.5.0.tgz` (~29.6 MB). The default installation stays in this project under `.pivotui/libraries/` and the agent's skills folder (e.g. `.agents/skills/pivotui/`, `.claude/skills/pivotui/`, `.agent/skills/pivotui/`). Supports `--global`, `--status`, `--prune` (clean up unused older managed libraries), and `--uninstall`. [Other Agents, custom paths and preview](docs/INSTALL.en.md#command-install).
 
 ### Option 2: Download a ZIP and copy two folders
 
-Download one **installation ZIP**: [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-English-project-v0.4.2-r2.zip) · [Chinese](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-Chinese-project-v0.4.2-r2.zip). The same ZIP works for a single project or [global installation](#global-install).
+Download one **installation ZIP**: [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/PivotUI-English-project-v0.5.0-r2.zip) · [Chinese](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/PivotUI-Chinese-project-v0.5.0-r2.zip). The same ZIP works for a single project or [global installation](#global-install).
 
 For **Codex, DSH or Cursor**:
 
@@ -216,20 +216,20 @@ If folders already exist at the destination, merge their contents and preserve o
 **With npx: add `--global`.** With Node.js 22+ and npm/npx installed, run this from any folder:
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-en-v0.4.2.tgz pivotui --agent codex --language en --global
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-en-v0.5.0.tgz pivotui --agent codex --language en --global
 ```
 
-For other agents, replace `codex` with `claude-code`, `dsh`, `cursor`, `antigravity`, `gemini`, `windsurf`, or `opencode`. For Chinese only, use `pivotui-installer-zh-v0.4.2.tgz` with `--language zh` (or `pivotui-installer-v0.4.2.tgz` for the deduplicated bilingual tarball). The Codex global default is `$CODEX_HOME/skills`, or `~/.codex/skills` when `CODEX_HOME` is not set. If you set `CODEX_HOME`, `CLAUDE_CONFIG_DIR` or `DSH_AGENTS_HOME`, use this command route so the installer can choose the correct paths; an explicit `--skills-dir` overrides the entry directory. See [global paths and custom configuration](docs/INSTALL.en.md#global-zip-install).
+For other agents, replace `codex` with `claude-code`, `dsh`, `cursor`, `antigravity`, `gemini`, `windsurf`, or `opencode`. For Chinese only, use `pivotui-installer-zh-v0.5.0.tgz` with `--language zh` (or `pivotui-installer-v0.5.0.tgz` for the deduplicated bilingual tarball). The Codex global default is `$CODEX_HOME/skills`, or `~/.codex/skills` when `CODEX_HOME` is not set. If you set `CODEX_HOME`, `CLAUDE_CONFIG_DIR` or `DSH_AGENTS_HOME`, use this command route so the installer can choose the correct paths; an explicit `--skills-dir` overrides the entry directory. See [global paths and custom configuration](docs/INSTALL.en.md#global-zip-install).
 
 After either route, open your chosen local Agent and start a new chat in a project to use **pivotui**. This installation serves the current user; other accounts, remote machines and cloud sessions have their own installation locations.
 
-The original complete-edition downloads remain available for raw-file or MCP use: [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-English-v0.4.2.zip) · [Chinese ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-Chinese-v0.4.2.zip). See the [installation guide](docs/INSTALL.en.md) and [verification record](docs/VALIDATION.md) for details.
+The original complete-edition downloads remain available for raw-file or MCP use: [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/PivotUI-English-v0.5.0.zip) · [Chinese ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/PivotUI-Chinese-v0.5.0.zip). See the [installation guide](docs/INSTALL.en.md) and [verification record](docs/VALIDATION.md) for details.
 
 <a id="skills"></a>
 
 ## What each Skill does
 
-All **27 entrypoints** are introduced below: **9 internal packages, 14 external packages, and 4 interaction submodules** included in their parent package. Internal modules are authored by PivotUI; external entries identify their upstream authors and retain their MIT notices. The native `pivotui` entry created during installation is the bootstrap that opens this library, not a 28th library skill. Links open the English source; the Chinese edition uses the same identifiers and directory structure.
+All **29 entrypoints** are introduced below: **11 internal packages, 14 external packages, and 4 interaction submodules** included in their parent package. Internal modules are authored by PivotUI; external entries identify their upstream authors and retain their MIT notices. The native `pivotui` entry created during installation is the bootstrap that opens this library, not a 30th library skill. Links open the English source; the Chinese edition uses the same identifiers and directory structure.
 
 ### Management and visual direction
 
@@ -250,6 +250,14 @@ All **27 entrypoints** are introduced below: **9 internal packages, 14 external 
 #### `data-list-design` — connect finding records with acting on them
 
 **Internal · [Skill entry](English/page-design/data-list-design/SKILL.md).** Owns complete record-management pages: search, applied filters, sorting, pagination, column/view choices, selection, bulk actions, exports, and return from detail. For an order list, it defines which records an action affects, distinguishes selecting this page from all matching results, and restores the user's filters and page after editing. It delivers a coherent list specification or implementation. Reusable Table controls belong to Component System; this skill owns their business meaning and the surrounding workflow.
+
+#### `detail-page-design` — structure entity detail pages and safe actions
+
+**Internal · [Skill entry](English/page-design/detail-page-design/SKILL.md).** Organizes single-record inspection and decision views: identity and status header, scannable attribute groups, related records, isolated destructive actions, 404/403/stale edge states, and return continuity back to the source list. Reuses the product's shell, components, and authoritative tokens.
+
+#### `form-workflow-design` — build full-page forms, wizards, and settings pages
+
+**Internal · [Skill entry](English/page-design/form-workflow-design/SKILL.md).** Covers single-page create/edit forms, sectioned settings pages, and multi-step wizards with isolated draft snapshots, dirty-state leave protection, error summaries, sticky save bars, and explicit cancel scope. Low-level field, IME, and async races stay with `form-interaction`.
 
 #### `app-shell-design` — build the frame shared across application pages
 
@@ -297,7 +305,7 @@ All **27 entrypoints** are introduced below: **9 internal packages, 14 external 
 
 #### `design-reference-research` — learn from named products with traceable evidence
 
-**Internal · [Skill entry](English/design-research/design-reference-research/SKILL.md).** Finds and compares concrete product references, separating source observations from recommendations. It includes attributed metadata from [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md): 84 source records, including eight document-reviewed case cards; the other 76 remain indexed-only. For a request inspired by a named product, it selects relevant cases and explains what can transfer, what needs adaptation, and what remains unchecked. It supplies research to the assigned owner; document review does not establish live-site behavior or authorize replacing the product's theme.
+**Internal · [Skill entry](English/design-research/design-reference-research/SKILL.md).** Finds and compares concrete product references, separating source observations from recommendations. It includes attributed metadata from [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md): 84 source records, including twelve document-reviewed case cards; the other 72 remain indexed-only. For a request inspired by a named product, it selects relevant cases and explains what can transfer, what needs adaptation, and what remains unchecked. It supplies research to the assigned owner; document review does not establish live-site behavior or authorize replacing the product's theme.
 
 #### `ui-ux-pro-max` — search design guidance and compare candidates
 
@@ -375,7 +383,7 @@ The cluster runs in a host with the ability to read instructions and perform the
 
 ## Authorship, external packages, and licenses
 
-PivotUI's cluster organization, management agreement, and nine internal modules are maintained by this project. Original project content is released under the [MIT License](LICENSE), copyright © 2026 Getaway-Wuji. **The 14 external packages were written by their respective upstream authors, not by PivotUI's author.** Their original identities, fixed revisions, copyright notices, and license files are retained.
+PivotUI's cluster organization, management agreement, and eleven internal modules are maintained by this project. Original project content is released under the [MIT License](LICENSE), copyright © 2026 Getaway-Wuji. **The 14 external packages were written by their respective upstream authors, not by PivotUI's author.** Their original identities, fixed revisions, copyright notices, and license files are retained.
 
 | Upstream project | Included contributions |
 | --- | --- |
@@ -391,4 +399,4 @@ Read [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES.md) and each package's `LICENSE` 
 
 This repository publishes the usable cluster and its documentation. Local demos, generated test output, private launch settings, virtual environments, caches, raw research, and intermediate reference images are excluded. Necessary upstream runtime assets and their provenance remain with the package that needs them.
 
-Metadata, resource links, language parity, and archive consistency can be checked independently of design execution. A package's presence does not establish that every image service, browser workflow, or target host has been exercised. The research library contains 84 source records and eight document-reviewed case cards; those cards describe their evidence limits. Global style offers 40 reference cards, loaded only when a direction needs exploring.
+Metadata, resource links, language parity, and archive consistency can be checked independently of design execution. A package's presence does not establish that every image service, browser workflow, or target host has been exercised. The research library contains 84 source records and twelve document-reviewed case cards; those cards describe their evidence limits. Global style offers 40 reference cards, loaded only when a direction needs exploring.

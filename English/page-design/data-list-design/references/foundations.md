@@ -1,10 +1,13 @@
-# Portable conventions
+# Portable Shared Design Foundations — Data List Design
 
-Source versions: Shared Interface Design Foundations 0.2; Authored/External Design Skills Orchestration 0.4.1; interaction-design 1.1.0 overlay conventions (2026-11-14). This is the list-relevant extract for independent use. Current explicit user instructions and target-project conventions take precedence. No original authoring files or other skill installation is required.
+Synchronized excerpt from *Shared Interface Design Foundations* **0.2** and *Orchestrating Authored and External Design Skills* **0.5.0**. Read only when the target project lacks its own design standards; inside the full cluster, the edition's `design-system/FOUNDATIONS.md` and `design-system/ORCHESTRATION.md` remain authoritative.
 
-- Derive information priority and density from users' tasks and references. Inherit the product shell, controls and one authoritative token source. A sample's palette, typography, radii or spacing are not library defaults.
-- Keep component roles, numeric formats and state meaning consistent. Represent status with text or symbols in addition to color. Distinguish zero, absent and pending values; accommodate long text and real volumes.
-- Give one lead ownership of a region and one implementer ownership of a component. Specialists supply gaps and the owner integrates them; existing adequate behavior need not be rebuilt.
-- Make relevant controls keyboard operable, visibly focused and named. Coordinate modal focus entry/containment/return and fixed layers. On narrow screens retain required content and operation paths rather than globally clipping overflow.
-- Use Tooltip for supplemental explanation; Toast for lightweight outcomes, never errors; persistent Alert/inline areas for problems. Modal handles irreversible confirmation/complex information; Popconfirm is for low-risk local confirmation. Drawer supports context-preserving editing, excluding simple forms and full-screen tasks. Ordinary detail navigation can use a page.
-- Prevent duplicate work, preserve input on failure and distinguish loading, empty, no matches, failure and denied access. Record observed reference facts separately from estimates and supplemental design. Runtime claims require actual execution.
+## Core invariants
+
+- **Task-first hierarchy:** Organize layout, grouping, alignment, and emphasis around what the user must understand, decide, and do.
+- **One authoritative token source:** Reuse the target product's existing CSS variables, theme objects, or component library configuration. Express region differences as explicit named variants; never maintain two independently editable themes or push client brand defaults back into the skill library.
+- **One owner per region and component:** A named page lead owns region composition; shared components have one integration owner; specialists fill concrete gaps rather than running as a mandatory pipeline.
+- **Realistic content and complete states:** Handle long text, mixed Chinese/Latin copy, tabular numbers, zero vs missing vs unloaded values, loading, empty, error, permission, focus, and keyboard states.
+- **Overlay and safety boundaries:** Tooltip explains briefly; Toast carries lightweight non-error feedback (never errors); Alert persists problems; Modal guards irreversible actions; Popconfirm covers low-risk local confirmation; Drawer preserves editing context without absorbing full-screen workflows. `gpt-taste` is restricted to public marketing and never used in dashboards or business tools.
+- **Responsive and scroll discipline:** Adapt content and controls to available width, height, and input capability without global horizontal clipping or hiding critical business fields. Separate shell scrolling from local table/panel scrolling.
+- **Honest verification:** Distinguish static document inspection, script validation, rendered browser checks, and physical-device testing. Never report unperformed checks as passed.

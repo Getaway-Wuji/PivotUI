@@ -17,7 +17,7 @@ PivotUI 是一套面向 UI 设计与实现的 **Skill 集群**，把任务分配
 
 管理层先理解你要的结果，为每个区域确定主负责人，再根据具体缺口引入辅助 Skill，并把结果整合到同一个产品中。从业务结构到可运行界面，各模块共享已有主题、组件和设计决策，减少重复选择与来回协调。
 
-当前版本 **0.4.2** 包含 **23 个包：9 个内源模块、14 个外源包**；计入交互模块的 4 个子入口，共有 **27 个标准 `SKILL.md` 入口**。中文与英文版均可独立使用与独立下载（单语言包及去重双语包均约 29 MB）；外源包在两版中保留上游原语言和声明。
+当前版本 **0.5.0** 包含 **25 个包：11 个内源模块、14 个外源包**；计入交互模块的 4 个子入口，共有 **29 个标准 `SKILL.md` 入口**。中文与英文版均可独立使用与独立下载（单语言包及去重双语包均约 29 MB）；外源包在两版中保留上游原语言和声明。
 
 ## 什么是 Skill 集群？
 
@@ -132,7 +132,7 @@ English/ 或 Chinese/
 
 ## 快速开始
 
-支持 **Codex、Claude Code、DSH（DeepSeek Harness）、Cursor、Antigravity、Gemini CLI、Windsurf、OpenCode 和其他兼容 Agent**。选择下面任意一种安装方式即可：两种方式都会提供一个原生 **pivotui** 入口，按任务读取完整集群中的 **27 个模块入口**。
+支持 **Codex、Claude Code、DSH（DeepSeek Harness）、Cursor、Antigravity、Gemini CLI、Windsurf、OpenCode 和其他兼容 Agent**。选择下面任意一种安装方式即可：两种方式都会提供一个原生 **pivotui** 入口，按任务读取完整集群中的 **29 个模块入口**。
 
 下面先介绍只装到一个项目里的方法。如果想让多个项目都能用，直接看[全局安装](#global-install)。npx 和压缩包两种方式都支持。
 
@@ -141,27 +141,27 @@ English/ 或 Chinese/
 准备好 **Node.js 22+ 和 npm/npx**，在目标项目根目录打开终端，执行（中文单语言安装包，仅含中文完整集群，约 29 MB）：
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent codex --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-zh-v0.5.0.tgz pivotui --agent codex --language zh
 ```
 
 npx 会下载打包好的安装包并运行，不需要 Git 或 Python。首次下载请等到出现 **`Installed PivotUI ...`**，才表示安装完成；转圈停止本身不代表成功。其他 Agent 使用对应命令：
 
 ```sh
 # Claude Code
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent claude-code --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-zh-v0.5.0.tgz pivotui --agent claude-code --language zh
 # DSH / DeepSeek Harness
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent dsh --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-zh-v0.5.0.tgz pivotui --agent dsh --language zh
 # Cursor
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent cursor --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-zh-v0.5.0.tgz pivotui --agent cursor --language zh
 # Antigravity / Gemini CLI / Windsurf / OpenCode（替换 --agent 值即可）
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent antigravity --language zh
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-zh-v0.5.0.tgz pivotui --agent antigravity --language zh
 ```
 
-英文单语言安装包使用 `pivotui-installer-en-v0.4.2.tgz` 配合 `--language en`；如果需要在同一份安装包里切换中英文，可使用外源去重后的通用双语包 `pivotui-installer-v0.4.2.tgz`（约 29.6 MB，公共外源只存一份，不重复下载）。默认安装到当前项目：完整集群放在 `.pivotui/libraries/`，原生入口放在对应 Agent 的 skills 目录（如 `.agents/skills/pivotui/`、`.claude/skills/pivotui/`、`.agent/skills/pivotui/`）。支持 `--global`（全局安装）、`--status`（查看当前状态）、`--prune`（升级后清理旧版库目录）和 `--uninstall`（安全卸载）。[其他 Agent、自定义目录和预览](docs/INSTALL.zh-CN.md#command-install)。
+英文单语言安装包使用 `pivotui-installer-en-v0.5.0.tgz` 配合 `--language en`；如果需要在同一份安装包里切换中英文，可使用外源去重后的通用双语包 `pivotui-installer-v0.5.0.tgz`（约 29.6 MB，公共外源只存一份，不重复下载）。默认安装到当前项目：完整集群放在 `.pivotui/libraries/`，原生入口放在对应 Agent 的 skills 目录（如 `.agents/skills/pivotui/`、`.claude/skills/pivotui/`、`.agent/skills/pivotui/`）。支持 `--global`（全局安装）、`--status`（查看当前状态）、`--prune`（升级后清理旧版库目录）和 `--uninstall`（安全卸载）。[其他 Agent、自定义目录和预览](docs/INSTALL.zh-CN.md#command-install)。
 
 ### 方式二：下载 ZIP，复制两个文件夹
 
-下载一套**安装 ZIP**：[中文版](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-Chinese-project-v0.4.2-r2.zip) · [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-English-project-v0.4.2-r2.zip)。同一个 ZIP 既可以只装到一个项目，也可以[全局安装](#global-install)。
+下载一套**安装 ZIP**：[中文版](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/PivotUI-Chinese-project-v0.5.0-r2.zip) · [English](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/PivotUI-English-project-v0.5.0-r2.zip)。同一个 ZIP 既可以只装到一个项目，也可以[全局安装](#global-install)。
 
 如果你用的是 **Codex、DSH 或 Cursor**：
 
@@ -216,20 +216,20 @@ Codex 最后应该放成这样：
 **用 npx：加上 `--global`。** 准备好 Node.js 22+ 和 npm/npx 后，在任意文件夹打开终端，执行：
 
 ```sh
-npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/pivotui-installer-zh-v0.4.2.tgz pivotui --agent codex --language zh --global
+npx --yes --package=https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/pivotui-installer-zh-v0.5.0.tgz pivotui --agent codex --language zh --global
 ```
 
-Claude Code 把 `codex` 换成 `claude-code`，DSH 换成 `dsh`，Cursor 换成 `cursor`，Antigravity 换成 `antigravity`，Gemini CLI 换成 `gemini`，Windsurf 换成 `windsurf`，OpenCode 换成 `opencode`。英文单语言包使用 `pivotui-installer-en-v0.4.2.tgz` 配合 `--language en`（也可使用去重双语包 `pivotui-installer-v0.4.2.tgz`）。Codex 全局默认使用 `$CODEX_HOME/skills`，未设置 `CODEX_HOME` 时使用 `~/.codex/skills`。如果你设置过 `CODEX_HOME`、`CLAUDE_CONFIG_DIR` 或 `DSH_AGENTS_HOME`，使用这条命令路线，让安装器设置对应的路径；显式传入 `--skills-dir` 可以指定入口目录。详见[全局目录与自定义配置](docs/INSTALL.zh-CN.md#global-zip-install)。
+Claude Code 把 `codex` 换成 `claude-code`，DSH 换成 `dsh`，Cursor 换成 `cursor`，Antigravity 换成 `antigravity`，Gemini CLI 换成 `gemini`，Windsurf 换成 `windsurf`，OpenCode 换成 `opencode`。英文单语言包使用 `pivotui-installer-en-v0.5.0.tgz` 配合 `--language en`（也可使用去重双语包 `pivotui-installer-v0.5.0.tgz`）。Codex 全局默认使用 `$CODEX_HOME/skills`，未设置 `CODEX_HOME` 时使用 `~/.codex/skills`。如果你设置过 `CODEX_HOME`、`CLAUDE_CONFIG_DIR` 或 `DSH_AGENTS_HOME`，使用这条命令路线，让安装器设置对应的路径；显式传入 `--skills-dir` 可以指定入口目录。详见[全局目录与自定义配置](docs/INSTALL.zh-CN.md#global-zip-install)。
 
 任意一种方式完成后，在你使用的本地 Agent 中打开一个项目，新建对话即可使用 **pivotui**。这份安装供当前用户使用；其他账号、远程机器或云端会话需要放到它们各自的安装位置。
 
-原来的完整语言版压缩包也保留，供原始文件或 MCP 接入使用：[中文版 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-Chinese-v0.4.2.zip) · [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.4.2/PivotUI-English-v0.4.2.zip)。详见[安装指南](docs/INSTALL.zh-CN.md)和[验证记录](docs/VALIDATION.md)。
+原来的完整语言版压缩包也保留，供原始文件或 MCP 接入使用：[中文版 ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/PivotUI-Chinese-v0.5.0.zip) · [English ZIP](https://github.com/Getaway-Wuji/PivotUI/releases/download/v0.5.0/PivotUI-English-v0.5.0.zip)。详见[安装指南](docs/INSTALL.zh-CN.md)和[验证记录](docs/VALIDATION.md)。
 
 <a id="skills"></a>
 
 ## 每一个 Skill 分别用来做什么？
 
-下面逐项介绍全部 **27 个入口**：**9 个内源包、14 个外源包，以及随交互父包提供的 4 个子模块**。内源模块由 PivotUI 编写；外源模块逐项标注上游作者，并保留 MIT 声明。安装时创建的原生 `pivotui` 入口负责引导读取这套库，不另计为第 28 个设计 Skill。入口链接指向中文版，英文版使用相同的标识和目录结构。
+下面逐项介绍全部 **29 个入口**：**11 个内源包、14 个外源包，以及随交互父包提供的 4 个子模块**。内源模块由 PivotUI 编写；外源模块逐项标注上游作者，并保留 MIT 声明。安装时创建的原生 `pivotui` 入口负责引导读取这套库，不另计为第 30 个设计 Skill。入口链接指向中文版，英文版使用相同的标识和目录结构。
 
 ### 管理层与全局视觉方向
 
@@ -250,6 +250,14 @@ Claude Code 把 `codex` 换成 `claude-code`，DSH 换成 `dsh`，Cursor 换成 
 #### `data-list-design` — 把查找记录与处理记录串成完整流程
 
 **内源 · [Skill 入口](Chinese/page-design/data-list-design/SKILL.md)。** 负责完整业务列表页，包括搜索、已应用筛选、排序、分页、列与视图设置、选择、批量操作、导出和详情返回。例如订单列表需要明确操作影响哪些记录，区分“选择当前页”与“选择全部匹配结果”，并在编辑返回后恢复筛选条件和页码。它交付连贯的列表设计规格或实现。可复用 Table 与控件由组件系统实现；本模块决定这些控件的业务含义及周围的工作流程。
+
+#### `detail-page-design` — 组织业务实体详情页与安全操作
+
+**内源 · [Skill 入口](Chinese/page-design/detail-page-design/SKILL.md)。** 负责单条业务记录的核查与决策界面，包括身份与状态页头、结构化信息分组、关联记录、破坏性操作隔离、404/403/过期等异常状态，以及从详情返回来源列表的连续性。沿用产品既有应用框架、共享组件与权威设计变量。
+
+#### `form-workflow-design` — 搭建整页表单、向导与系统设置页
+
+**内源 · [Skill 入口](Chinese/page-design/form-workflow-design/SKILL.md)。** 负责单页新建/编辑、多分区系统设置与分步向导流程，覆盖草稿与已提交状态隔离、脏状态离开拦截、长表单错误汇总定位、吸底保存栏与清晰取消范围。底层字段/输入法/异步竞态由 `form-interaction` 补充。
 
 #### `app-shell-design` — 搭建多个页面共用的应用框架
 
@@ -297,7 +305,7 @@ Claude Code 把 `codex` 换成 `claude-code`，DSH 换成 `dsh`，Cursor 换成 
 
 #### `design-reference-research` — 有来源地研究具体产品案例
 
-**内源 · [Skill 入口](Chinese/design-research/design-reference-research/SKILL.md)。** 查找与比较具体产品参考，区分来源观察和设计建议。包含署名的 [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) 元数据：84 条来源记录，其中 8 张案例卡经过文档审阅，另外 76 条仅有索引。例如用户希望借鉴某款产品时，它会选择相关案例，说明哪些关系可迁移、哪些需要适配、哪些尚未检查。研究结果交给指定负责人；文档审阅不代表验证了当前网站行为，也不自动授权更换产品主题。
+**内源 · [Skill 入口](Chinese/design-research/design-reference-research/SKILL.md)。** 查找与比较具体产品参考，区分来源观察和设计建议。包含署名的 [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) 元数据：84 条来源记录，其中 12 张案例卡经过文档审阅，另外 72 条仅有索引。例如用户希望借鉴某款产品时，它会选择相关案例，说明哪些关系可迁移、哪些需要适配、哪些尚未检查。研究结果交给指定负责人；文档审阅不代表验证了当前网站行为，也不自动授权更换产品主题。
 
 #### `ui-ux-pro-max` — 检索设计指南，比较候选方案
 
@@ -375,7 +383,7 @@ Claude Code 把 `codex` 换成 `claude-code`，DSH 换成 `dsh`，Cursor 换成 
 
 ## 作者、外源内容与许可证
 
-PivotUI 的集群组织、管理约定及九个内源模块由本项目维护。项目原创内容采用 [MIT 协议](LICENSE)，版权归 © 2026 Getaway-Wuji。**14 个外源包来自各自的上游作者，不是 PivotUI 作者原创。** 发布内容保留它们的原始身份、固定版本、版权声明与许可证文件。
+PivotUI 的集群组织、管理约定及十一个内源模块由本项目维护。项目原创内容采用 [MIT 协议](LICENSE)，版权归 © 2026 Getaway-Wuji。**14 个外源包来自各自的上游作者，不是 PivotUI 作者原创。** 发布内容保留它们的原始身份、固定版本、版权声明与许可证文件。
 
 | 上游项目 | 本集群使用的内容 |
 | --- | --- |
@@ -391,4 +399,4 @@ PivotUI 的集群组织、管理约定及九个内源模块由本项目维护。
 
 本仓库发布可用集群及使用文档，排除本地演示、生成的测试结果、私人启动配置、虚拟环境、缓存、原始调研和中间参考图片。外源工作流实际需要的运行素材及其来源说明随所属包保留。
 
-元数据、资源链接、双语对应和压缩包一致性可单独检查；文件已收录并不代表每个图像服务、浏览器流程或宿主都已执行验证。研究库包含 84 条来源记录与 8 张经过文档审阅的案例卡，各卡明确证据范围；全局风格提供 40 张参考卡，仅在需要探索方向时加载。
+元数据、资源链接、双语对应和压缩包一致性可单独检查；文件已收录并不代表每个图像服务、浏览器流程或宿主都已执行验证。研究库包含 84 条来源记录与 12 张经过文档审阅的案例卡，各卡明确证据范围；全局风格提供 40 张参考卡，仅在需要探索方向时加载。

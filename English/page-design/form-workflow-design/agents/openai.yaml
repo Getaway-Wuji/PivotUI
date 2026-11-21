@@ -1,0 +1,4 @@
+interface:
+  display_name: "Form & Settings Workflow Design"
+  short_description: "Design full-page forms, edit workflows, wizards, and settings pages"
+  default_prompt: "Use $form-workflow-design to design or implement a full-page form, edit workflow, or settings page using my product's shell, components, and tokens, with draft protection and clear save/cancel feedback."
